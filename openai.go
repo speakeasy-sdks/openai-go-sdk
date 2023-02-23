@@ -48,8 +48,8 @@ func WithClient(client HTTPClient) SDKOption {
 func New(opts ...SDKOption) *Openai {
 	sdk := &Openai{
 		_language:   "go",
-		_sdkVersion: "1.2.0",
-		_genVersion: "1.4.6",
+		_sdkVersion: "1.2.1",
+		_genVersion: "1.4.8",
 	}
 	for _, opt := range opts {
 		opt(sdk)
