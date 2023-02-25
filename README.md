@@ -35,6 +35,7 @@ Authorization: Bearer YOUR_API_KEY
 package main
 
 import (
+    "context"
     "log"
     "github.com/speakeasy-sdks/openai-go-sdk"
     "github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
@@ -49,7 +50,8 @@ func main() {
             FineTuneID: "unde",
         },
     }
-    
+
+    ctx := context.Background()
     res, err := s.OpenAI.CancelFineTune(ctx, req)
     if err != nil {
         log.Fatal(err)
@@ -58,6 +60,7 @@ func main() {
     if res.FineTune != nil {
         // handle response
     }
+}
 ```
 <!-- End SDK Example Usage -->
 
