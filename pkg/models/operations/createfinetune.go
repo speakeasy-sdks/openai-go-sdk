@@ -10,6 +10,6 @@ type CreateFineTuneRequest struct {
 
 type CreateFineTuneResponse struct {
 	ContentType string
-	FineTune    *interface{}
+	FineTune    interface{}
 	StatusCode  int
 }

@@ -14,6 +14,7 @@ pkg/utils/utils.go
 strings.go
 pkg/models/operations/cancelfinetune.go
 pkg/models/operations/createanswer.go
+pkg/models/operations/createchatcompletion.go
 pkg/models/operations/createclassification.go
 pkg/models/operations/createcompletion.go
 pkg/models/operations/createedit.go
@@ -25,6 +26,8 @@ pkg/models/operations/createimageedit.go
 pkg/models/operations/createimagevariation.go
 pkg/models/operations/createmoderation.go
 pkg/models/operations/createsearch.go
+pkg/models/operations/createtranscription.go
+pkg/models/operations/createtranslation.go
 pkg/models/operations/deletefile.go
 pkg/models/operations/deletemodel.go
 pkg/models/operations/downloadfile.go
@@ -39,6 +42,10 @@ pkg/models/operations/retrievefinetune.go
 pkg/models/operations/retrievemodel.go
 pkg/models/shared/createanswerresponse.go
 pkg/models/shared/createanswerrequest.go
+pkg/models/shared/createchatcompletionresponse.go
+pkg/models/shared/chatcompletionresponsemessage.go
+pkg/models/shared/createchatcompletionrequest.go
+pkg/models/shared/chatcompletionrequestmessage.go
 pkg/models/shared/createclassificationresponse.go
 pkg/models/shared/createclassificationrequest.go
 pkg/models/shared/createcompletionresponse.go
@@ -56,6 +63,10 @@ pkg/models/shared/createmoderationresponse.go
 pkg/models/shared/createmoderationrequest.go
 pkg/models/shared/createsearchresponse.go
 pkg/models/shared/createsearchrequest.go
+pkg/models/shared/createtranscriptionresponse.go
+pkg/models/shared/createtranscriptionrequest.go
+pkg/models/shared/createtranslationresponse.go
+pkg/models/shared/createtranslationrequest.go
 pkg/models/shared/deletefileresponse.go
 pkg/models/shared/deletemodelresponse.go
 pkg/models/shared/listenginesresponse.go

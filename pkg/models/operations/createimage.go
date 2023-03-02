@@ -10,6 +10,6 @@ type CreateImageRequest struct {
 
 type CreateImageResponse struct {
 	ContentType    string
-	ImagesResponse *interface{}
+	ImagesResponse interface{}
 	StatusCode     int
 }

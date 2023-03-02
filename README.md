@@ -76,6 +76,7 @@ func main() {
 
 The endpoint first [searches](/docs/api-reference/searches) over provided documents or files to find relevant context. The relevant context is combined with the provided examples and question to create the prompt for [completion](/docs/api-reference/completions).
 
+* `CreateChatCompletion` - Creates a completion for the chat message
 * `CreateClassification` - Classifies the specified `query` using provided examples.
 
 The endpoint first [searches](/docs/api-reference/searches) over the labeled examples
@@ -87,7 +88,7 @@ Labeled examples can be provided via an uploaded `file`, or explicitly listed in
 request using the `examples` parameter for quick tests and small scale use cases.
 
 * `CreateCompletion` - Creates a completion for the provided prompt and parameters
-* `CreateEdit` - Creates a new edit for the provided input, instruction, and parameters
+* `CreateEdit` - Creates a new edit for the provided input, instruction, and parameters.
 * `CreateEmbedding` - Creates an embedding vector representing the input text.
 * `CreateFile` - Upload a file that contains document(s) to be used across various endpoints/features. Currently, the size of all the files uploaded by one organization can be up to 1 GB. Please contact us if you need to increase the storage limit.
 
@@ -107,6 +108,8 @@ To go beyond the 200 document limit, documents can be processed offline and then
 
 The similarity score is a positive score that usually ranges from 0 to 300 (but can sometimes go higher), where a score above 200 usually means the document is semantically similar to the query.
 
+* `CreateTranscription` - Transcribes audio into the input language.
+* `CreateTranslation` - Translates audio into into English.
 * `DeleteFile` - Delete a file.
 * `DeleteModel` - Delete a fine-tuned model. You must have the Owner role in your organization.
 * `DownloadFile` - Returns the contents of the specified file

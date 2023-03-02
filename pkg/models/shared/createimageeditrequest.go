@@ -13,9 +13,9 @@ type CreateImageEditRequestMask struct {
 type CreateImageEditRequest struct {
 	Image          CreateImageEditRequestImage `multipartForm:"file"`
 	Mask           *CreateImageEditRequestMask `multipartForm:"file"`
-	N              *interface{}                `multipartForm:"name=n"`
+	N              interface{}                 `multipartForm:"name=n"`
 	Prompt         string                      `multipartForm:"name=prompt"`
-	ResponseFormat *interface{}                `multipartForm:"name=response_format"`
-	Size           *interface{}                `multipartForm:"name=size"`
-	User           *interface{}                `multipartForm:"name=user"`
+	ResponseFormat interface{}                 `multipartForm:"name=response_format"`
+	Size           interface{}                 `multipartForm:"name=size"`
+	User           interface{}                 `multipartForm:"name=user"`
 }

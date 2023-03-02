@@ -10,6 +10,6 @@ type RetrieveEngineRequest struct {
 
 type RetrieveEngineResponse struct {
 	ContentType string
-	Engine      *interface{}
+	Engine      interface{}
 	StatusCode  int
 }
