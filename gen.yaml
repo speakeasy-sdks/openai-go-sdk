@@ -1,11 +1,12 @@
 configVersion: 1.0.0
 management:
-    docChecksum: 9adc53929e5deab0a08ad865f2aef928
-    docVersion: 1.1.0
-    speakeasyVersion: 1.4.6
+  docChecksum: 5399f7767be93d4a4b8cecb9bbc687b3
+  docVersion: 1.2.0
+  speakeasyVersion: 1.7.1
 generation:
-    telemetryEnabled: false
-    sdkClassName: openai
+  telemetryEnabled: false
+  sdkClassName: openai
+  sdkFlattening: false
 go:
-    version: 1.2.0
-    packageName: github.com/speakeasy-sdks/openai-go-sdk
+  version: 1.5.0
+  packageName: github.com/speakeasy-sdks/openai-go-sdk

@@ -23,8 +23,6 @@ type CreateEditResponseUsage struct {
 type CreateEditResponse struct {
 	Choices []CreateEditResponseChoices `json:"choices"`
 	Created int64                       `json:"created"`
-	ID      string                      `json:"id"`
-	Model   string                      `json:"model"`
 	Object  string                      `json:"object"`
 	Usage   CreateEditResponseUsage     `json:"usage"`
 }

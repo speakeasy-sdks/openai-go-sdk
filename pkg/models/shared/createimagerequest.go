@@ -20,5 +20,5 @@ type CreateImageRequest struct {
 	Prompt         string                                `json:"prompt"`
 	ResponseFormat *CreateImageRequestResponseFormatEnum `json:"response_format,omitempty"`
 	Size           *CreateImageRequestSizeEnum           `json:"size,omitempty"`
-	User           *interface{}                          `json:"user,omitempty"`
+	User           interface{}                           `json:"user,omitempty"`
 }

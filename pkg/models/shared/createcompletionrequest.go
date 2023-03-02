@@ -10,8 +10,8 @@ type CreateCompletionRequest struct {
 	Model            string                 `json:"model"`
 	N                *int64                 `json:"n,omitempty"`
 	PresencePenalty  *float64               `json:"presence_penalty,omitempty"`
-	Prompt           *interface{}           `json:"prompt,omitempty"`
-	Stop             *interface{}           `json:"stop,omitempty"`
+	Prompt           interface{}            `json:"prompt,omitempty"`
+	Stop             interface{}            `json:"stop,omitempty"`
 	Stream           *bool                  `json:"stream,omitempty"`
 	Suffix           *string                `json:"suffix,omitempty"`
 	Temperature      *float64               `json:"temperature,omitempty"`

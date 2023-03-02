@@ -10,6 +10,6 @@ type RetrieveModelRequest struct {
 
 type RetrieveModelResponse struct {
 	ContentType string
-	Model       *interface{}
+	Model       interface{}
 	StatusCode  int
 }

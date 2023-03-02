@@ -10,6 +10,6 @@ type CreateFileRequest struct {
 
 type CreateFileResponse struct {
 	ContentType string
-	OpenAIFile  *interface{}
+	OpenAIFile  interface{}
 	StatusCode  int
 }
