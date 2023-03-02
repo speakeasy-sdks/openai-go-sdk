@@ -5,7 +5,7 @@ management:
   speakeasyVersion: 1.7.1
 generation:
   telemetryEnabled: false
-  sdkClassName: sdk
+  sdkClassName: gpt
   sdkFlattening: false
 go:
   version: 1.5.0
