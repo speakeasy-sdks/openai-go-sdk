@@ -2,6 +2,7 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
+	"net/http"
 )
 
 type CreateSearchPathParams struct {
@@ -17,4 +18,5 @@ type CreateSearchResponse struct {
 	ContentType          string
 	CreateSearchResponse *shared.CreateSearchResponse
 	StatusCode           int
+	RawResponse          *http.Response
 }
