@@ -6,7 +6,7 @@ management:
 generation:
   telemetryEnabled: false
   sdkClassName: gpt
-  sdkFlattening: false
+  sdkFlattening: true
 go:
   version: 1.5.3
   packageName: github.com/speakeasy-sdks/openai-go-sdk
