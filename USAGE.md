@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-    s := openai.New()
+    s := gpt.New()
     
     req := operations.CancelFineTuneRequest{
         PathParams: operations.CancelFineTunePathParams{

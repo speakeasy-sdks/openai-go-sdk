@@ -2,6 +2,7 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
+	"net/http"
 )
 
 type ListFineTuneEventsPathParams struct {
@@ -21,4 +22,5 @@ type ListFineTuneEventsResponse struct {
 	ContentType                string
 	ListFineTuneEventsResponse *shared.ListFineTuneEventsResponse
 	StatusCode                 int
+	RawResponse                *http.Response
 }

@@ -2,6 +2,7 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
+	"net/http"
 )
 
 type CreateFileRequest struct {
@@ -12,4 +13,5 @@ type CreateFileResponse struct {
 	ContentType string
 	OpenAIFile  interface{}
 	StatusCode  int
+	RawResponse *http.Response
 }
