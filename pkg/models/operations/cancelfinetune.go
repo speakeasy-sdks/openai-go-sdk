@@ -4,12 +4,8 @@ import (
 	"net/http"
 )
 
-type CancelFineTunePathParams struct {
-	FineTuneID string `pathParam:"style=simple,explode=false,name=fine_tune_id"`
-}
-
 type CancelFineTuneRequest struct {
-	PathParams CancelFineTunePathParams
+	FineTuneID string `pathParam:"style=simple,explode=false,name=fine_tune_id"`
 }
 
 type CancelFineTuneResponse struct {

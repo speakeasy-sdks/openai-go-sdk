@@ -5,10 +5,6 @@ import (
 	"net/http"
 )
 
-type CreateEditRequest struct {
-	Request shared.CreateEditRequest `request:"mediaType=application/json"`
-}
-
 type CreateEditResponse struct {
 	ContentType        string
 	CreateEditResponse *shared.CreateEditResponse

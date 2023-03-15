@@ -5,17 +5,9 @@ import (
 	"net/http"
 )
 
-type ListFineTuneEventsPathParams struct {
-	FineTuneID string `pathParam:"style=simple,explode=false,name=fine_tune_id"`
-}
-
-type ListFineTuneEventsQueryParams struct {
-	Stream *bool `queryParam:"style=form,explode=true,name=stream"`
-}
-
 type ListFineTuneEventsRequest struct {
-	PathParams  ListFineTuneEventsPathParams
-	QueryParams ListFineTuneEventsQueryParams
+	FineTuneID string `pathParam:"style=simple,explode=false,name=fine_tune_id"`
+	Stream     *bool  `queryParam:"style=form,explode=true,name=stream"`
 }
 
 type ListFineTuneEventsResponse struct {

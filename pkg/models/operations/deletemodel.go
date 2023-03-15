@@ -5,12 +5,8 @@ import (
 	"net/http"
 )
 
-type DeleteModelPathParams struct {
-	Model string `pathParam:"style=simple,explode=false,name=model"`
-}
-
 type DeleteModelRequest struct {
-	PathParams DeleteModelPathParams
+	Model string `pathParam:"style=simple,explode=false,name=model"`
 }
 
 type DeleteModelResponse struct {

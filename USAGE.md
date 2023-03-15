@@ -12,11 +12,9 @@ import (
 
 func main() {
     s := gpt.New()
-    
+
     req := operations.CancelFineTuneRequest{
-        PathParams: operations.CancelFineTunePathParams{
-            FineTuneID: "unde",
-        },
+        FineTuneID: "unde",
     }
 
     ctx := context.Background()

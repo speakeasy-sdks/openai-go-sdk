@@ -4,12 +4,8 @@ import (
 	"net/http"
 )
 
-type RetrieveModelPathParams struct {
-	Model string `pathParam:"style=simple,explode=false,name=model"`
-}
-
 type RetrieveModelRequest struct {
-	PathParams RetrieveModelPathParams
+	Model string `pathParam:"style=simple,explode=false,name=model"`
 }
 
 type RetrieveModelResponse struct {

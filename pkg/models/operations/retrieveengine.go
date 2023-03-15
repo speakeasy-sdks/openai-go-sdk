@@ -4,12 +4,8 @@ import (
 	"net/http"
 )
 
-type RetrieveEnginePathParams struct {
-	EngineID string `pathParam:"style=simple,explode=false,name=engine_id"`
-}
-
 type RetrieveEngineRequest struct {
-	PathParams RetrieveEnginePathParams
+	EngineID string `pathParam:"style=simple,explode=false,name=engine_id"`
 }
 
 type RetrieveEngineResponse struct {

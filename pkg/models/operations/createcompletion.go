@@ -5,10 +5,6 @@ import (
 	"net/http"
 )
 
-type CreateCompletionRequest struct {
-	Request shared.CreateCompletionRequest `request:"mediaType=application/json"`
-}
-
 type CreateCompletionResponse struct {
 	ContentType              string
 	CreateCompletionResponse *shared.CreateCompletionResponse
