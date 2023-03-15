@@ -5,12 +5,8 @@ import (
 	"net/http"
 )
 
-type DeleteFilePathParams struct {
-	FileID string `pathParam:"style=simple,explode=false,name=file_id"`
-}
-
 type DeleteFileRequest struct {
-	PathParams DeleteFilePathParams
+	FileID string `pathParam:"style=simple,explode=false,name=file_id"`
 }
 
 type DeleteFileResponse struct {

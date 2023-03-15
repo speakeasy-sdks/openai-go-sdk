@@ -4,12 +4,8 @@ import (
 	"net/http"
 )
 
-type RetrieveFilePathParams struct {
-	FileID string `pathParam:"style=simple,explode=false,name=file_id"`
-}
-
 type RetrieveFileRequest struct {
-	PathParams RetrieveFilePathParams
+	FileID string `pathParam:"style=simple,explode=false,name=file_id"`
 }
 
 type RetrieveFileResponse struct {

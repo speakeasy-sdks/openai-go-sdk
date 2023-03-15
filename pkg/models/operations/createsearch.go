@@ -5,13 +5,9 @@ import (
 	"net/http"
 )
 
-type CreateSearchPathParams struct {
-	EngineID string `pathParam:"style=simple,explode=false,name=engine_id"`
-}
-
 type CreateSearchRequest struct {
-	PathParams CreateSearchPathParams
-	Request    shared.CreateSearchRequest `request:"mediaType=application/json"`
+	CreateSearchRequest shared.CreateSearchRequest `request:"mediaType=application/json"`
+	EngineID            string                     `pathParam:"style=simple,explode=false,name=engine_id"`
 }
 
 type CreateSearchResponse struct {

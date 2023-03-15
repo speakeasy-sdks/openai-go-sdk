@@ -5,10 +5,6 @@ import (
 	"net/http"
 )
 
-type CreateModerationRequest struct {
-	Request shared.CreateModerationRequest `request:"mediaType=application/json"`
-}
-
 type CreateModerationResponse struct {
 	ContentType              string
 	CreateModerationResponse *shared.CreateModerationResponse

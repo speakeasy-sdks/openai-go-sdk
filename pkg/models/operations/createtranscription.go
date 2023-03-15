@@ -5,10 +5,6 @@ import (
 	"net/http"
 )
 
-type CreateTranscriptionRequest struct {
-	Request shared.CreateTranscriptionRequest `request:"mediaType=multipart/form-data"`
-}
-
 type CreateTranscriptionResponse struct {
 	ContentType                 string
 	CreateTranscriptionResponse *shared.CreateTranscriptionResponse

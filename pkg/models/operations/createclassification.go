@@ -5,10 +5,6 @@ import (
 	"net/http"
 )
 
-type CreateClassificationRequest struct {
-	Request shared.CreateClassificationRequest `request:"mediaType=application/json"`
-}
-
 type CreateClassificationResponse struct {
 	ContentType                  string
 	CreateClassificationResponse *shared.CreateClassificationResponse
