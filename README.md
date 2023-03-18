@@ -46,7 +46,7 @@ func main() {
     s := gpt.New()
 
     req := operations.CancelFineTuneRequest{
-        FineTuneID: "unde",
+        FineTuneID: "ft-AF1WoRqd3aJAHsqc9NY7iL8F",
     }
 
     ctx := context.Background()
