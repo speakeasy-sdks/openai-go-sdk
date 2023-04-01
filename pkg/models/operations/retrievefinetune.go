@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
 	"net/http"
 )
 
@@ -15,7 +16,7 @@ type RetrieveFineTuneRequest struct {
 type RetrieveFineTuneResponse struct {
 	ContentType string
 	// OK
-	FineTune    interface{}
+	FineTune    *shared.FineTune
 	StatusCode  int
 	RawResponse *http.Response
 }

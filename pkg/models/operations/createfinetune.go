@@ -3,13 +3,14 @@
 package operations
 
 import (
+	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
 	"net/http"
 )
 
 type CreateFineTuneResponse struct {
 	ContentType string
 	// OK
-	FineTune    interface{}
+	FineTune    *shared.FineTune
 	StatusCode  int
 	RawResponse *http.Response
 }

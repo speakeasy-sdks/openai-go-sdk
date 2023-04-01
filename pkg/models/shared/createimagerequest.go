@@ -2,6 +2,11 @@
 
 package shared
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // CreateImageRequestResponseFormatEnum - The format in which the generated images are returned. Must be one of `url` or `b64_json`.
 type CreateImageRequestResponseFormatEnum string
 
@@ -9,6 +14,22 @@ const (
 	CreateImageRequestResponseFormatEnumURL     CreateImageRequestResponseFormatEnum = "url"
 	CreateImageRequestResponseFormatEnumB64JSON CreateImageRequestResponseFormatEnum = "b64_json"
 )
+
+func (e *CreateImageRequestResponseFormatEnum) UnmarshalJSON(data []byte) error {
+	var s string
+	if err := json.Unmarshal(data, &s); err != nil {
+		return err
+	}
+	switch s {
+	case "url":
+		fallthrough
+	case "b64_json":
+		*e = CreateImageRequestResponseFormatEnum(s)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateImageRequestResponseFormatEnum: %s", s)
+	}
+}
 
 // CreateImageRequestSizeEnum - The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.
 type CreateImageRequestSizeEnum string
@@ -18,6 +39,24 @@ const (
 	CreateImageRequestSizeEnumFiveHundredAndTwelvex512      CreateImageRequestSizeEnum = "512x512"
 	CreateImageRequestSizeEnumOneThousandAndTwentyFourx1024 CreateImageRequestSizeEnum = "1024x1024"
 )
+
+func (e *CreateImageRequestSizeEnum) UnmarshalJSON(data []byte) error {
+	var s string
+	if err := json.Unmarshal(data, &s); err != nil {
+		return err
+	}
+	switch s {
+	case "256x256":
+		fallthrough
+	case "512x512":
+		fallthrough
+	case "1024x1024":
+		*e = CreateImageRequestSizeEnum(s)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateImageRequestSizeEnum: %s", s)
+	}
+}
 
 type CreateImageRequest struct {
 	// The number of images to generate. Must be between 1 and 10.

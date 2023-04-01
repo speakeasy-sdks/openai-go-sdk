@@ -2,6 +2,80 @@
 
 package shared
 
+import (
+	"bytes"
+	"encoding/json"
+	"errors"
+)
+
+type CreateAnswerRequestStopType string
+
+const (
+	CreateAnswerRequestStopTypeStr        CreateAnswerRequestStopType = "str"
+	CreateAnswerRequestStopTypeArrayOfstr CreateAnswerRequestStopType = "arrayOfstr"
+)
+
+type CreateAnswerRequestStop struct {
+	Str        *string
+	ArrayOfstr []string
+
+	Type CreateAnswerRequestStopType
+}
+
+func CreateCreateAnswerRequestStopStr(str string) CreateAnswerRequestStop {
+	typ := CreateAnswerRequestStopTypeStr
+
+	return CreateAnswerRequestStop{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateCreateAnswerRequestStopArrayOfstr(arrayOfstr []string) CreateAnswerRequestStop {
+	typ := CreateAnswerRequestStopTypeArrayOfstr
+
+	return CreateAnswerRequestStop{
+		ArrayOfstr: arrayOfstr,
+		Type:       typ,
+	}
+}
+
+func (u *CreateAnswerRequestStop) UnmarshalJSON(data []byte) error {
+	var d *json.Decoder
+
+	str := new(string)
+	d = json.NewDecoder(bytes.NewReader(data))
+	d.DisallowUnknownFields()
+	if err := d.Decode(&str); err == nil {
+		u.Str = str
+		u.Type = CreateAnswerRequestStopTypeStr
+		return nil
+	}
+
+	arrayOfstr := []string{}
+	d = json.NewDecoder(bytes.NewReader(data))
+	d.DisallowUnknownFields()
+	if err := d.Decode(&arrayOfstr); err == nil {
+		u.ArrayOfstr = arrayOfstr
+		u.Type = CreateAnswerRequestStopTypeArrayOfstr
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u CreateAnswerRequestStop) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return json.Marshal(u.Str)
+	}
+
+	if u.ArrayOfstr != nil {
+		return json.Marshal(u.ArrayOfstr)
+	}
+
+	return nil, nil
+}
+
 type CreateAnswerRequest struct {
 	// List of documents from which the answer for the input `question` should be derived. If this is an empty list, the question will be answered based on the question-answer examples.
 	//
@@ -43,7 +117,7 @@ type CreateAnswerRequest struct {
 	// ID of the model to use for [Search](/docs/api-reference/searches/create). You can select one of `ada`, `babbage`, `curie`, or `davinci`.
 	SearchModel *string `json:"search_model,omitempty"`
 	// completions_stop_description
-	Stop interface{} `json:"stop,omitempty"`
+	Stop *CreateAnswerRequestStop `json:"stop,omitempty"`
 	// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
 	Temperature *float64    `json:"temperature,omitempty"`
 	User        interface{} `json:"user,omitempty"`

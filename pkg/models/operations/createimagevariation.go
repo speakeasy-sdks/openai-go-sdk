@@ -3,13 +3,14 @@
 package operations
 
 import (
+	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
 	"net/http"
 )
 
 type CreateImageVariationResponse struct {
 	ContentType string
 	// OK
-	ImagesResponse interface{}
+	ImagesResponse *shared.ImagesResponse
 	StatusCode     int
 	RawResponse    *http.Response
 }

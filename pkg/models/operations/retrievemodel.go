@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
 	"net/http"
 )
 
@@ -14,7 +15,7 @@ type RetrieveModelRequest struct {
 type RetrieveModelResponse struct {
 	ContentType string
 	// OK
-	Model       interface{}
+	Model       *shared.Model
 	StatusCode  int
 	RawResponse *http.Response
 }

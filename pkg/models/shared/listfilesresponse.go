@@ -4,6 +4,6 @@ package shared
 
 // ListFilesResponse - OK
 type ListFilesResponse struct {
-	Data   []interface{} `json:"data"`
-	Object string        `json:"object"`
+	Data   []OpenAIFile `json:"data"`
+	Object string       `json:"object"`
 }

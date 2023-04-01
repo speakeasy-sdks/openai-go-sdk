@@ -2,6 +2,11 @@
 
 package shared
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // ChatCompletionRequestMessageRoleEnum - The role of the author of this message.
 type ChatCompletionRequestMessageRoleEnum string
 
@@ -10,6 +15,24 @@ const (
 	ChatCompletionRequestMessageRoleEnumUser      ChatCompletionRequestMessageRoleEnum = "user"
 	ChatCompletionRequestMessageRoleEnumAssistant ChatCompletionRequestMessageRoleEnum = "assistant"
 )
+
+func (e *ChatCompletionRequestMessageRoleEnum) UnmarshalJSON(data []byte) error {
+	var s string
+	if err := json.Unmarshal(data, &s); err != nil {
+		return err
+	}
+	switch s {
+	case "system":
+		fallthrough
+	case "user":
+		fallthrough
+	case "assistant":
+		*e = ChatCompletionRequestMessageRoleEnum(s)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ChatCompletionRequestMessageRoleEnum: %s", s)
+	}
+}
 
 type ChatCompletionRequestMessage struct {
 	// The contents of the message

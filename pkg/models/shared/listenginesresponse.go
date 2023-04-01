@@ -4,6 +4,6 @@ package shared
 
 // ListEnginesResponse - OK
 type ListEnginesResponse struct {
-	Data   []interface{} `json:"data"`
-	Object string        `json:"object"`
+	Data   []Engine `json:"data"`
+	Object string   `json:"object"`
 }
