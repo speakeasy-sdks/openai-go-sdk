@@ -2,9 +2,10 @@
 
 package shared
 
-// DeleteFileResponse - OK
-type DeleteFileResponse struct {
-	Deleted bool   `json:"deleted"`
+// Engine - OK
+type Engine struct {
+	Created int64  `json:"created"`
 	ID      string `json:"id"`
 	Object  string `json:"object"`
+	Ready   bool   `json:"ready"`
 }

@@ -46,7 +46,7 @@ func main() {
     s := gpt.New()
 
     req := operations.CancelFineTuneRequest{
-        FineTuneID: "unde",
+        FineTuneID: "ft-AF1WoRqd3aJAHsqc9NY7iL8F",
     }
 
     ctx := context.Background()
@@ -63,7 +63,7 @@ func main() {
 <!-- End SDK Example Usage -->
 
 <!-- Start SDK Available Operations -->
-## SDK Available Operations
+## Available Resources and Operations
 
 
 ### OpenAI

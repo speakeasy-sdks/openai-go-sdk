@@ -2,9 +2,10 @@
 
 package shared
 
-// DeleteFileResponse - OK
-type DeleteFileResponse struct {
-	Deleted bool   `json:"deleted"`
+// Model - OK
+type Model struct {
+	Created int64  `json:"created"`
 	ID      string `json:"id"`
 	Object  string `json:"object"`
+	OwnedBy string `json:"owned_by"`
 }

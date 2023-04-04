@@ -40,6 +40,9 @@ pkg/models/operations/retrieveengine.go
 pkg/models/operations/retrievefile.go
 pkg/models/operations/retrievefinetune.go
 pkg/models/operations/retrievemodel.go
+pkg/models/shared/finetune.go
+pkg/models/shared/openaifile.go
+pkg/models/shared/finetuneevent.go
 pkg/models/shared/createanswerresponse.go
 pkg/models/shared/createanswerrequest.go
 pkg/models/shared/createchatcompletionresponse.go
@@ -56,6 +59,7 @@ pkg/models/shared/createembeddingresponse.go
 pkg/models/shared/createembeddingrequest.go
 pkg/models/shared/createfilerequest.go
 pkg/models/shared/createfinetunerequest.go
+pkg/models/shared/imagesresponse.go
 pkg/models/shared/createimagerequest.go
 pkg/models/shared/createimageeditrequest.go
 pkg/models/shared/createimagevariationrequest.go
@@ -70,8 +74,10 @@ pkg/models/shared/createtranslationrequest.go
 pkg/models/shared/deletefileresponse.go
 pkg/models/shared/deletemodelresponse.go
 pkg/models/shared/listenginesresponse.go
+pkg/models/shared/engine.go
 pkg/models/shared/listfilesresponse.go
 pkg/models/shared/listfinetuneeventsresponse.go
 pkg/models/shared/listfinetunesresponse.go
 pkg/models/shared/listmodelsresponse.go
+pkg/models/shared/model.go
 USAGE.md
