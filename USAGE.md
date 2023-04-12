@@ -13,11 +13,11 @@ import (
 func main() {
     s := gpt.New()
 
+    ctx := context.Background()    
     req := operations.CancelFineTuneRequest{
         FineTuneID: "ft-AF1WoRqd3aJAHsqc9NY7iL8F",
     }
 
-    ctx := context.Background()
     res, err := s.OpenAI.CancelFineTune(ctx, req)
     if err != nil {
         log.Fatal(err)
