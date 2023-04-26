@@ -15,6 +15,10 @@ const (
 	CreateImageRequestResponseFormatEnumB64JSON CreateImageRequestResponseFormatEnum = "b64_json"
 )
 
+func (e CreateImageRequestResponseFormatEnum) ToPointer() *CreateImageRequestResponseFormatEnum {
+	return &e
+}
+
 func (e *CreateImageRequestResponseFormatEnum) UnmarshalJSON(data []byte) error {
 	var s string
 	if err := json.Unmarshal(data, &s); err != nil {
@@ -39,6 +43,10 @@ const (
 	CreateImageRequestSizeEnumFiveHundredAndTwelvex512      CreateImageRequestSizeEnum = "512x512"
 	CreateImageRequestSizeEnumOneThousandAndTwentyFourx1024 CreateImageRequestSizeEnum = "1024x1024"
 )
+
+func (e CreateImageRequestSizeEnum) ToPointer() *CreateImageRequestSizeEnum {
+	return &e
+}
 
 func (e *CreateImageRequestSizeEnum) UnmarshalJSON(data []byte) error {
 	var s string

@@ -37,7 +37,10 @@ func newOpenAI(defaultClient, securityClient HTTPClient, serverURL, language, sd
 // CancelFineTune - Immediately cancel a fine-tune job.
 func (s *openAI) CancelFineTune(ctx context.Context, request operations.CancelFineTuneRequest) (*operations.CancelFineTuneResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/fine-tunes/{fine_tune_id}/cancel", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/fine-tunes/{fine_tune_id}/cancel", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
 	if err != nil {
@@ -747,7 +750,10 @@ func (s *openAI) CreateModeration(ctx context.Context, request shared.CreateMode
 // The similarity score is a positive score that usually ranges from 0 to 300 (but can sometimes go higher), where a score above 200 usually means the document is semantically similar to the query.
 func (s *openAI) CreateSearch(ctx context.Context, request operations.CreateSearchRequest) (*operations.CreateSearchResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/engines/{engine_id}/search", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/engines/{engine_id}/search", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "CreateSearchRequest", "json")
 	if err != nil {
@@ -909,7 +915,10 @@ func (s *openAI) CreateTranslation(ctx context.Context, request shared.CreateTra
 // DeleteFile - Delete a file.
 func (s *openAI) DeleteFile(ctx context.Context, request operations.DeleteFileRequest) (*operations.DeleteFileResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/files/{file_id}", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/files/{file_id}", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
 	if err != nil {
@@ -953,7 +962,10 @@ func (s *openAI) DeleteFile(ctx context.Context, request operations.DeleteFileRe
 // DeleteModel - Delete a fine-tuned model. You must have the Owner role in your organization.
 func (s *openAI) DeleteModel(ctx context.Context, request operations.DeleteModelRequest) (*operations.DeleteModelResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/models/{model}", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/models/{model}", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
 	if err != nil {
@@ -997,7 +1009,10 @@ func (s *openAI) DeleteModel(ctx context.Context, request operations.DeleteModel
 // DownloadFile - Returns the contents of the specified file
 func (s *openAI) DownloadFile(ctx context.Context, request operations.DownloadFileRequest) (*operations.DownloadFileResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/files/{file_id}/content", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/files/{file_id}/content", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -1130,7 +1145,10 @@ func (s *openAI) ListFiles(ctx context.Context) (*operations.ListFilesResponse, 
 // ListFineTuneEvents - Get fine-grained status updates for a fine-tune job.
 func (s *openAI) ListFineTuneEvents(ctx context.Context, request operations.ListFineTuneEventsRequest) (*operations.ListFineTuneEventsResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/fine-tunes/{fine_tune_id}/events", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/fine-tunes/{fine_tune_id}/events", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -1266,7 +1284,10 @@ func (s *openAI) ListModels(ctx context.Context) (*operations.ListModelsResponse
 // RetrieveEngine - Retrieves a model instance, providing basic information about it such as the owner and availability.
 func (s *openAI) RetrieveEngine(ctx context.Context, request operations.RetrieveEngineRequest) (*operations.RetrieveEngineResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/engines/{engine_id}", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/engines/{engine_id}", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -1310,7 +1331,10 @@ func (s *openAI) RetrieveEngine(ctx context.Context, request operations.Retrieve
 // RetrieveFile - Returns information about a specific file.
 func (s *openAI) RetrieveFile(ctx context.Context, request operations.RetrieveFileRequest) (*operations.RetrieveFileResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/files/{file_id}", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/files/{file_id}", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -1356,7 +1380,10 @@ func (s *openAI) RetrieveFile(ctx context.Context, request operations.RetrieveFi
 // [Learn more about Fine-tuning](/docs/guides/fine-tuning)
 func (s *openAI) RetrieveFineTune(ctx context.Context, request operations.RetrieveFineTuneRequest) (*operations.RetrieveFineTuneResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/fine-tunes/{fine_tune_id}", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/fine-tunes/{fine_tune_id}", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -1400,7 +1427,10 @@ func (s *openAI) RetrieveFineTune(ctx context.Context, request operations.Retrie
 // RetrieveModel - Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
 func (s *openAI) RetrieveModel(ctx context.Context, request operations.RetrieveModelRequest) (*operations.RetrieveModelResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/models/{model}", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/models/{model}", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {

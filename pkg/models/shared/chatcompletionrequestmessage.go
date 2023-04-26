@@ -16,6 +16,10 @@ const (
 	ChatCompletionRequestMessageRoleEnumAssistant ChatCompletionRequestMessageRoleEnum = "assistant"
 )
 
+func (e ChatCompletionRequestMessageRoleEnum) ToPointer() *ChatCompletionRequestMessageRoleEnum {
+	return &e
+}
+
 func (e *ChatCompletionRequestMessageRoleEnum) UnmarshalJSON(data []byte) error {
 	var s string
 	if err := json.Unmarshal(data, &s); err != nil {
