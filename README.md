@@ -44,12 +44,10 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := operations.CancelFineTuneRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.CancelFineTune(ctx, operations.CancelFineTuneRequest{
         FineTuneID: "ft-AF1WoRqd3aJAHsqc9NY7iL8F",
-    }
-
-    res, err := s.OpenAI.CancelFineTune(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }

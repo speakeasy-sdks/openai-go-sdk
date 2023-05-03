@@ -159,3 +159,11 @@ Based on:
 - Speakeasy CLI 1.23.1 (2.21.1) https://github.com/speakeasy-api/speakeasy
 ### Releases
 - [Go v1.13.0] https://github.com/speakeasy-sdks/openai-go-sdk/releases/tag/v1.13.0 - .
+
+## 2023-05-03 00:32:40
+### Changes
+Based on:
+- OpenAPI Doc 1.2.0 https://raw.githubusercontent.com/openai/openai-openapi/master/openapi.yaml
+- Speakeasy CLI 1.27.0 (2.24.0) https://github.com/speakeasy-api/speakeasy
+### Releases
+- [Go v1.14.0] https://github.com/speakeasy-sdks/openai-go-sdk/releases/tag/v1.14.0 - .

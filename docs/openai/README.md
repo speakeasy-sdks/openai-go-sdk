@@ -84,12 +84,10 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := operations.CancelFineTuneRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.CancelFineTune(ctx, operations.CancelFineTuneRequest{
         FineTuneID: "ft-AF1WoRqd3aJAHsqc9NY7iL8F",
-    }
-
-    res, err := s.OpenAI.CancelFineTune(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -122,8 +120,8 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := shared.CreateAnswerRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.CreateAnswer(ctx, shared.CreateAnswerRequest{
         Documents: []string{
             "provident",
             "distinctio",
@@ -167,9 +165,7 @@ func main() {
         Stop: &shared.CreateAnswerRequestStop{},
         Temperature: gpt.Float64(6481.72),
         User: gpt.String("perferendis"),
-    }
-
-    res, err := s.OpenAI.CreateAnswer(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -199,8 +195,8 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := shared.CreateChatCompletionRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.CreateChatCompletion(ctx, shared.CreateChatCompletionRequest{
         FrequencyPenalty: gpt.Float64(3682.41),
         LogitBias: map[string]interface{}{
             "sapiente": "quo",
@@ -229,9 +225,7 @@ func main() {
         Temperature: gpt.Float64(1),
         TopP: gpt.Float64(1),
         User: gpt.String("impedit"),
-    }
-
-    res, err := s.OpenAI.CreateChatCompletion(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -270,8 +264,8 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := shared.CreateClassificationRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.CreateClassification(ctx, shared.CreateClassificationRequest{
         Examples: [][]string{
             []string{
                 "ipsum",
@@ -302,9 +296,7 @@ func main() {
         SearchModel: gpt.String("quidem"),
         Temperature: gpt.Float64(992.8),
         User: gpt.String("ipsa"),
-    }
-
-    res, err := s.OpenAI.CreateClassification(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -334,8 +326,8 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := shared.CreateCompletionRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.CreateCompletion(ctx, shared.CreateCompletionRequest{
         BestOf: gpt.Int64(969810),
         Echo: gpt.Bool(false),
         FrequencyPenalty: gpt.Float64(6667.67),
@@ -356,9 +348,7 @@ func main() {
         Temperature: gpt.Float64(1),
         TopP: gpt.Float64(1),
         User: gpt.String("user-1234"),
-    }
-
-    res, err := s.OpenAI.CreateCompletion(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -388,17 +378,15 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := shared.CreateEditRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.CreateEdit(ctx, shared.CreateEditRequest{
         Input: gpt.String("What day of the wek is it?"),
         Instruction: "Fix the spelling mistakes.",
         Model: "minima",
         N: gpt.Int64(1),
         Temperature: gpt.Float64(1),
         TopP: gpt.Float64(1),
-    }
-
-    res, err := s.OpenAI.CreateEdit(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -428,14 +416,12 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := shared.CreateEmbeddingRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.CreateEmbedding(ctx, shared.CreateEmbeddingRequest{
         Input: shared.CreateEmbeddingRequestInput{},
         Model: "excepturi",
         User: gpt.String("accusantium"),
-    }
-
-    res, err := s.OpenAI.CreateEmbedding(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -466,16 +452,14 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := shared.CreateFileRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.CreateFile(ctx, shared.CreateFileRequest{
         File: shared.CreateFileRequestFile{
             Content: []byte("iure"),
             File: "culpa",
         },
         Purpose: "doloribus",
-    }
-
-    res, err := s.OpenAI.CreateFile(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -510,8 +494,8 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := shared.CreateFineTuneRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.CreateFineTune(ctx, shared.CreateFineTuneRequest{
         BatchSize: gpt.Int64(958950),
         ClassificationBetas: []float64{
             6527.9,
@@ -526,9 +510,7 @@ func main() {
         Suffix: gpt.String("numquam"),
         TrainingFile: "file-ajSREls59WBbvgSzJSVWxMCB",
         ValidationFile: gpt.String("file-XjSREls59WBbvgSzJSVWxMCa"),
-    }
-
-    res, err := s.OpenAI.CreateFineTune(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -558,16 +540,14 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := shared.CreateImageRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.CreateImage(ctx, shared.CreateImageRequest{
         N: gpt.Int64(1),
         Prompt: "A cute baby sea otter",
         ResponseFormat: shared.CreateImageRequestResponseFormatEnumURL.ToPointer(),
         Size: shared.CreateImageRequestSizeEnumOneThousandAndTwentyFourx1024.ToPointer(),
         User: gpt.String("commodi"),
-    }
-
-    res, err := s.OpenAI.CreateImage(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -597,8 +577,8 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := shared.CreateImageEditRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.CreateImageEdit(ctx, shared.CreateImageEditRequest{
         Image: shared.CreateImageEditRequestImage{
             Content: []byte("quam"),
             Image: "molestiae",
@@ -612,9 +592,7 @@ func main() {
         ResponseFormat: gpt.String("quis"),
         Size: gpt.String("vitae"),
         User: gpt.String("laborum"),
-    }
-
-    res, err := s.OpenAI.CreateImageEdit(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -644,8 +622,8 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := shared.CreateImageVariationRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.CreateImageVariation(ctx, shared.CreateImageVariationRequest{
         Image: shared.CreateImageVariationRequestImage{
             Content: []byte("animi"),
             Image: "enim",
@@ -654,9 +632,7 @@ func main() {
         ResponseFormat: gpt.String("quo"),
         Size: gpt.String("sequi"),
         User: gpt.String("tenetur"),
-    }
-
-    res, err := s.OpenAI.CreateImageVariation(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -686,13 +662,11 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := shared.CreateModerationRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.CreateModeration(ctx, shared.CreateModerationRequest{
         Input: shared.CreateModerationRequestInput{},
         Model: gpt.String("text-moderation-stable"),
-    }
-
-    res, err := s.OpenAI.CreateModeration(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -728,8 +702,8 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := operations.CreateSearchRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.CreateSearch(ctx, operations.CreateSearchRequest{
         CreateSearchRequest: shared.CreateSearchRequest{
             Documents: []string{
                 "id",
@@ -742,9 +716,7 @@ func main() {
             User: gpt.String("error"),
         },
         EngineID: "davinci",
-    }
-
-    res, err := s.OpenAI.CreateSearch(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -774,8 +746,8 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := shared.CreateTranscriptionRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.CreateTranscription(ctx, shared.CreateTranscriptionRequest{
         File: shared.CreateTranscriptionRequestFile{
             Content: []byte("temporibus"),
             File: "laborum",
@@ -785,9 +757,7 @@ func main() {
         Prompt: gpt.String("voluptatibus"),
         ResponseFormat: gpt.String("vero"),
         Temperature: gpt.Float64(4686.51),
-    }
-
-    res, err := s.OpenAI.CreateTranscription(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -817,8 +787,8 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := shared.CreateTranslationRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.CreateTranslation(ctx, shared.CreateTranslationRequest{
         File: shared.CreateTranslationRequestFile{
             Content: []byte("praesentium"),
             File: "voluptatibus",
@@ -827,9 +797,7 @@ func main() {
         Prompt: gpt.String("omnis"),
         ResponseFormat: gpt.String("voluptate"),
         Temperature: gpt.Float64(7392.64),
-    }
-
-    res, err := s.OpenAI.CreateTranslation(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -859,12 +827,10 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := operations.DeleteFileRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.DeleteFile(ctx, operations.DeleteFileRequest{
         FileID: "perferendis",
-    }
-
-    res, err := s.OpenAI.DeleteFile(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -894,12 +860,10 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := operations.DeleteModelRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.DeleteModel(ctx, operations.DeleteModelRequest{
         Model: "curie:ft-acmeco-2021-03-03-21-44-20",
-    }
-
-    res, err := s.OpenAI.DeleteModel(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -929,12 +893,10 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := operations.DownloadFileRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.DownloadFile(ctx, operations.DownloadFileRequest{
         FileID: "doloremque",
-    }
-
-    res, err := s.OpenAI.DownloadFile(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1025,13 +987,11 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := operations.ListFineTuneEventsRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.ListFineTuneEvents(ctx, operations.ListFineTuneEventsRequest{
         FineTuneID: "ft-AF1WoRqd3aJAHsqc9NY7iL8F",
         Stream: gpt.Bool(false),
-    }
-
-    res, err := s.OpenAI.ListFineTuneEvents(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1122,12 +1082,10 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := operations.RetrieveEngineRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.RetrieveEngine(ctx, operations.RetrieveEngineRequest{
         EngineID: "davinci",
-    }
-
-    res, err := s.OpenAI.RetrieveEngine(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1157,12 +1115,10 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := operations.RetrieveFileRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.RetrieveFile(ctx, operations.RetrieveFileRequest{
         FileID: "reprehenderit",
-    }
-
-    res, err := s.OpenAI.RetrieveFile(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1195,12 +1151,10 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := operations.RetrieveFineTuneRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.RetrieveFineTune(ctx, operations.RetrieveFineTuneRequest{
         FineTuneID: "ft-AF1WoRqd3aJAHsqc9NY7iL8F",
-    }
-
-    res, err := s.OpenAI.RetrieveFineTune(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1230,12 +1184,10 @@ import(
 func main() {
     s := gpt.New()
 
-    ctx := context.Background()    
-    req := operations.RetrieveModelRequest{
+    ctx := context.Background()
+    res, err := s.OpenAI.RetrieveModel(ctx, operations.RetrieveModelRequest{
         Model: "text-davinci-001",
-    }
-
-    res, err := s.OpenAI.RetrieveModel(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
