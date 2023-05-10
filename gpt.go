@@ -82,8 +82,8 @@ func WithClient(client HTTPClient) SDKOption {
 func New(opts ...SDKOption) *Gpt {
 	sdk := &Gpt{
 		_language:   "go",
-		_sdkVersion: "1.14.0",
-		_genVersion: "2.24.0",
+		_sdkVersion: "1.15.0",
+		_genVersion: "2.26.2",
 	}
 	for _, opt := range opts {
 		opt(sdk)
