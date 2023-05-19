@@ -211,12 +211,12 @@ func main() {
             shared.ChatCompletionRequestMessage{
                 Content: "totam",
                 Name: gpt.String("Omar Carroll"),
-                Role: shared.ChatCompletionRequestMessageRoleEnumUser,
+                Role: shared.ChatCompletionRequestMessageRoleUser,
             },
             shared.ChatCompletionRequestMessage{
                 Content: "fugit",
                 Name: gpt.String("Irvin Rosenbaum III"),
-                Role: shared.ChatCompletionRequestMessageRoleEnumUser,
+                Role: shared.ChatCompletionRequestMessageRoleUser,
             },
         },
         Model: "modi",
@@ -548,8 +548,8 @@ func main() {
     res, err := s.OpenAI.CreateImage(ctx, shared.CreateImageRequest{
         N: gpt.Int64(1),
         Prompt: "A cute baby sea otter",
-        ResponseFormat: shared.CreateImageRequestResponseFormatEnumURL.ToPointer(),
-        Size: shared.CreateImageRequestSizeEnumOneThousandAndTwentyFourx1024.ToPointer(),
+        ResponseFormat: shared.CreateImageRequestResponseFormatURL.ToPointer(),
+        Size: shared.CreateImageRequestSizeOneThousandAndTwentyFourx1024.ToPointer(),
         User: gpt.String("commodi"),
     })
     if err != nil {

@@ -7,20 +7,20 @@ import (
 	"fmt"
 )
 
-// ChatCompletionResponseMessageRoleEnum - The role of the author of this message.
-type ChatCompletionResponseMessageRoleEnum string
+// ChatCompletionResponseMessageRole - The role of the author of this message.
+type ChatCompletionResponseMessageRole string
 
 const (
-	ChatCompletionResponseMessageRoleEnumSystem    ChatCompletionResponseMessageRoleEnum = "system"
-	ChatCompletionResponseMessageRoleEnumUser      ChatCompletionResponseMessageRoleEnum = "user"
-	ChatCompletionResponseMessageRoleEnumAssistant ChatCompletionResponseMessageRoleEnum = "assistant"
+	ChatCompletionResponseMessageRoleSystem    ChatCompletionResponseMessageRole = "system"
+	ChatCompletionResponseMessageRoleUser      ChatCompletionResponseMessageRole = "user"
+	ChatCompletionResponseMessageRoleAssistant ChatCompletionResponseMessageRole = "assistant"
 )
 
-func (e ChatCompletionResponseMessageRoleEnum) ToPointer() *ChatCompletionResponseMessageRoleEnum {
+func (e ChatCompletionResponseMessageRole) ToPointer() *ChatCompletionResponseMessageRole {
 	return &e
 }
 
-func (e *ChatCompletionResponseMessageRoleEnum) UnmarshalJSON(data []byte) error {
+func (e *ChatCompletionResponseMessageRole) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -31,10 +31,10 @@ func (e *ChatCompletionResponseMessageRoleEnum) UnmarshalJSON(data []byte) error
 	case "user":
 		fallthrough
 	case "assistant":
-		*e = ChatCompletionResponseMessageRoleEnum(v)
+		*e = ChatCompletionResponseMessageRole(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ChatCompletionResponseMessageRoleEnum: %v", v)
+		return fmt.Errorf("invalid value for ChatCompletionResponseMessageRole: %v", v)
 	}
 }
 
@@ -42,5 +42,5 @@ type ChatCompletionResponseMessage struct {
 	// The contents of the message
 	Content string `json:"content"`
 	// The role of the author of this message.
-	Role ChatCompletionResponseMessageRoleEnum `json:"role"`
+	Role ChatCompletionResponseMessageRole `json:"role"`
 }

@@ -7,20 +7,20 @@ import (
 	"fmt"
 )
 
-// ChatCompletionRequestMessageRoleEnum - The role of the author of this message.
-type ChatCompletionRequestMessageRoleEnum string
+// ChatCompletionRequestMessageRole - The role of the author of this message.
+type ChatCompletionRequestMessageRole string
 
 const (
-	ChatCompletionRequestMessageRoleEnumSystem    ChatCompletionRequestMessageRoleEnum = "system"
-	ChatCompletionRequestMessageRoleEnumUser      ChatCompletionRequestMessageRoleEnum = "user"
-	ChatCompletionRequestMessageRoleEnumAssistant ChatCompletionRequestMessageRoleEnum = "assistant"
+	ChatCompletionRequestMessageRoleSystem    ChatCompletionRequestMessageRole = "system"
+	ChatCompletionRequestMessageRoleUser      ChatCompletionRequestMessageRole = "user"
+	ChatCompletionRequestMessageRoleAssistant ChatCompletionRequestMessageRole = "assistant"
 )
 
-func (e ChatCompletionRequestMessageRoleEnum) ToPointer() *ChatCompletionRequestMessageRoleEnum {
+func (e ChatCompletionRequestMessageRole) ToPointer() *ChatCompletionRequestMessageRole {
 	return &e
 }
 
-func (e *ChatCompletionRequestMessageRoleEnum) UnmarshalJSON(data []byte) error {
+func (e *ChatCompletionRequestMessageRole) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -31,10 +31,10 @@ func (e *ChatCompletionRequestMessageRoleEnum) UnmarshalJSON(data []byte) error 
 	case "user":
 		fallthrough
 	case "assistant":
-		*e = ChatCompletionRequestMessageRoleEnum(v)
+		*e = ChatCompletionRequestMessageRole(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ChatCompletionRequestMessageRoleEnum: %v", v)
+		return fmt.Errorf("invalid value for ChatCompletionRequestMessageRole: %v", v)
 	}
 }
 
@@ -44,5 +44,5 @@ type ChatCompletionRequestMessage struct {
 	// The name of the user in a multi-user chat
 	Name *string `json:"name,omitempty"`
 	// The role of the author of this message.
-	Role ChatCompletionRequestMessageRoleEnum `json:"role"`
+	Role ChatCompletionRequestMessageRole `json:"role"`
 }
