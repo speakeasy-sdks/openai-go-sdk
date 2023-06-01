@@ -3,6 +3,7 @@
 package gpt
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/operations"
@@ -58,7 +59,13 @@ func (s *openAI) CancelFineTune(ctx context.Context, request operations.CancelFi
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -72,7 +79,7 @@ func (s *openAI) CancelFineTune(ctx context.Context, request operations.CancelFi
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.FineTune
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -118,7 +125,13 @@ func (s *openAI) CreateAnswer(ctx context.Context, request shared.CreateAnswerRe
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -132,7 +145,7 @@ func (s *openAI) CreateAnswer(ctx context.Context, request shared.CreateAnswerRe
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.CreateAnswerResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -174,7 +187,13 @@ func (s *openAI) CreateChatCompletion(ctx context.Context, request shared.Create
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -188,7 +207,7 @@ func (s *openAI) CreateChatCompletion(ctx context.Context, request shared.Create
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.CreateChatCompletionResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -240,7 +259,13 @@ func (s *openAI) CreateClassification(ctx context.Context, request shared.Create
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -254,7 +279,7 @@ func (s *openAI) CreateClassification(ctx context.Context, request shared.Create
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.CreateClassificationResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -296,7 +321,13 @@ func (s *openAI) CreateCompletion(ctx context.Context, request shared.CreateComp
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -310,7 +341,7 @@ func (s *openAI) CreateCompletion(ctx context.Context, request shared.CreateComp
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.CreateCompletionResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -352,7 +383,13 @@ func (s *openAI) CreateEdit(ctx context.Context, request shared.CreateEditReques
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -366,7 +403,7 @@ func (s *openAI) CreateEdit(ctx context.Context, request shared.CreateEditReques
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.CreateEditResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -408,7 +445,13 @@ func (s *openAI) CreateEmbedding(ctx context.Context, request shared.CreateEmbed
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -422,7 +465,7 @@ func (s *openAI) CreateEmbedding(ctx context.Context, request shared.CreateEmbed
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.CreateEmbeddingResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -464,7 +507,13 @@ func (s *openAI) CreateFile(ctx context.Context, request shared.CreateFileReques
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -478,7 +527,7 @@ func (s *openAI) CreateFile(ctx context.Context, request shared.CreateFileReques
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.OpenAIFile
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -524,7 +573,13 @@ func (s *openAI) CreateFineTune(ctx context.Context, request shared.CreateFineTu
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -538,7 +593,7 @@ func (s *openAI) CreateFineTune(ctx context.Context, request shared.CreateFineTu
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.FineTune
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -580,7 +635,13 @@ func (s *openAI) CreateImage(ctx context.Context, request shared.CreateImageRequ
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -594,7 +655,7 @@ func (s *openAI) CreateImage(ctx context.Context, request shared.CreateImageRequ
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ImagesResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -636,7 +697,13 @@ func (s *openAI) CreateImageEdit(ctx context.Context, request shared.CreateImage
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -650,7 +717,7 @@ func (s *openAI) CreateImageEdit(ctx context.Context, request shared.CreateImage
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ImagesResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -692,7 +759,13 @@ func (s *openAI) CreateImageVariation(ctx context.Context, request shared.Create
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -706,7 +779,7 @@ func (s *openAI) CreateImageVariation(ctx context.Context, request shared.Create
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ImagesResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -748,7 +821,13 @@ func (s *openAI) CreateModeration(ctx context.Context, request shared.CreateMode
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -762,7 +841,7 @@ func (s *openAI) CreateModeration(ctx context.Context, request shared.CreateMode
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.CreateModerationResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -813,7 +892,13 @@ func (s *openAI) CreateSearch(ctx context.Context, request operations.CreateSear
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -827,7 +912,7 @@ func (s *openAI) CreateSearch(ctx context.Context, request operations.CreateSear
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.CreateSearchResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -869,7 +954,13 @@ func (s *openAI) CreateTranscription(ctx context.Context, request shared.CreateT
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -883,7 +974,7 @@ func (s *openAI) CreateTranscription(ctx context.Context, request shared.CreateT
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.CreateTranscriptionResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -925,7 +1016,13 @@ func (s *openAI) CreateTranslation(ctx context.Context, request shared.CreateTra
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -939,7 +1036,7 @@ func (s *openAI) CreateTranslation(ctx context.Context, request shared.CreateTra
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.CreateTranslationResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -974,7 +1071,13 @@ func (s *openAI) DeleteFile(ctx context.Context, request operations.DeleteFileRe
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -988,7 +1091,7 @@ func (s *openAI) DeleteFile(ctx context.Context, request operations.DeleteFileRe
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.DeleteFileResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -1023,7 +1126,13 @@ func (s *openAI) DeleteModel(ctx context.Context, request operations.DeleteModel
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1037,7 +1146,7 @@ func (s *openAI) DeleteModel(ctx context.Context, request operations.DeleteModel
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.DeleteModelResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -1072,7 +1181,13 @@ func (s *openAI) DownloadFile(ctx context.Context, request operations.DownloadFi
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1085,12 +1200,7 @@ func (s *openAI) DownloadFile(ctx context.Context, request operations.DownloadFi
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
-			out := string(data)
+			out := string(rawBody)
 			res.DownloadFile200ApplicationJSONString = &out
 		}
 	}
@@ -1121,7 +1231,13 @@ func (s *openAI) ListEngines(ctx context.Context) (*operations.ListEnginesRespon
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1135,7 +1251,7 @@ func (s *openAI) ListEngines(ctx context.Context) (*operations.ListEnginesRespon
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ListEnginesResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -1167,7 +1283,13 @@ func (s *openAI) ListFiles(ctx context.Context) (*operations.ListFilesResponse, 
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1181,7 +1303,7 @@ func (s *openAI) ListFiles(ctx context.Context) (*operations.ListFilesResponse, 
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ListFilesResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -1220,7 +1342,13 @@ func (s *openAI) ListFineTuneEvents(ctx context.Context, request operations.List
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1234,7 +1362,7 @@ func (s *openAI) ListFineTuneEvents(ctx context.Context, request operations.List
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ListFineTuneEventsResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -1266,7 +1394,13 @@ func (s *openAI) ListFineTunes(ctx context.Context) (*operations.ListFineTunesRe
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1280,7 +1414,7 @@ func (s *openAI) ListFineTunes(ctx context.Context) (*operations.ListFineTunesRe
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ListFineTunesResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -1312,7 +1446,13 @@ func (s *openAI) ListModels(ctx context.Context) (*operations.ListModelsResponse
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1326,7 +1466,7 @@ func (s *openAI) ListModels(ctx context.Context) (*operations.ListModelsResponse
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ListModelsResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -1363,7 +1503,13 @@ func (s *openAI) RetrieveEngine(ctx context.Context, request operations.Retrieve
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1377,7 +1523,7 @@ func (s *openAI) RetrieveEngine(ctx context.Context, request operations.Retrieve
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Engine
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -1412,7 +1558,13 @@ func (s *openAI) RetrieveFile(ctx context.Context, request operations.RetrieveFi
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1426,7 +1578,7 @@ func (s *openAI) RetrieveFile(ctx context.Context, request operations.RetrieveFi
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.OpenAIFile
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -1463,7 +1615,13 @@ func (s *openAI) RetrieveFineTune(ctx context.Context, request operations.Retrie
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1477,7 +1635,7 @@ func (s *openAI) RetrieveFineTune(ctx context.Context, request operations.Retrie
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.FineTune
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
@@ -1512,7 +1670,13 @@ func (s *openAI) RetrieveModel(ctx context.Context, request operations.RetrieveM
 	if httpRes == nil {
 		return nil, fmt.Errorf("error sending request: no response")
 	}
-	defer httpRes.Body.Close()
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1526,7 +1690,7 @@ func (s *openAI) RetrieveModel(ctx context.Context, request operations.RetrieveM
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Model
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 

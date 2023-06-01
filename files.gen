@@ -1,5 +1,6 @@
 openai.go
 gpt.go
+.gitignore
 go.mod
 go.sum
 pkg/types/bigint.go
