@@ -16,28 +16,18 @@ import (
 
 // openAI - The OpenAI REST API
 type openAI struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
-	language       string
-	sdkVersion     string
-	genVersion     string
+	sdkConfiguration sdkConfiguration
 }
 
-func newOpenAI(defaultClient, securityClient HTTPClient, serverURL, language, sdkVersion, genVersion string) *openAI {
+func newOpenAI(sdkConfig sdkConfiguration) *openAI {
 	return &openAI{
-		defaultClient:  defaultClient,
-		securityClient: securityClient,
-		serverURL:      serverURL,
-		language:       language,
-		sdkVersion:     sdkVersion,
-		genVersion:     genVersion,
+		sdkConfiguration: sdkConfig,
 	}
 }
 
 // CancelFineTune - Immediately cancel a fine-tune job.
 func (s *openAI) CancelFineTune(ctx context.Context, request operations.CancelFineTuneRequest) (*operations.CancelFineTuneResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/fine-tunes/{fine_tune_id}/cancel", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -48,9 +38,9 @@ func (s *openAI) CancelFineTune(ctx context.Context, request operations.CancelFi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -96,7 +86,7 @@ func (s *openAI) CancelFineTune(ctx context.Context, request operations.CancelFi
 //
 // Deprecated: this method will be removed in a future release, please migrate away from it as soon as possible.
 func (s *openAI) CreateAnswer(ctx context.Context, request shared.CreateAnswerRequest) (*operations.CreateAnswerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/answers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
@@ -112,11 +102,11 @@ func (s *openAI) CreateAnswer(ctx context.Context, request shared.CreateAnswerRe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -158,7 +148,7 @@ func (s *openAI) CreateAnswer(ctx context.Context, request shared.CreateAnswerRe
 
 // CreateChatCompletion - Creates a completion for the chat message
 func (s *openAI) CreateChatCompletion(ctx context.Context, request shared.CreateChatCompletionRequest) (*operations.CreateChatCompletionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/chat/completions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
@@ -174,11 +164,11 @@ func (s *openAI) CreateChatCompletion(ctx context.Context, request shared.Create
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -230,7 +220,7 @@ func (s *openAI) CreateChatCompletion(ctx context.Context, request shared.Create
 //
 // Deprecated: this method will be removed in a future release, please migrate away from it as soon as possible.
 func (s *openAI) CreateClassification(ctx context.Context, request shared.CreateClassificationRequest) (*operations.CreateClassificationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/classifications"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
@@ -246,11 +236,11 @@ func (s *openAI) CreateClassification(ctx context.Context, request shared.Create
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -292,7 +282,7 @@ func (s *openAI) CreateClassification(ctx context.Context, request shared.Create
 
 // CreateCompletion - Creates a completion for the provided prompt and parameters
 func (s *openAI) CreateCompletion(ctx context.Context, request shared.CreateCompletionRequest) (*operations.CreateCompletionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/completions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
@@ -308,11 +298,11 @@ func (s *openAI) CreateCompletion(ctx context.Context, request shared.CreateComp
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -354,7 +344,7 @@ func (s *openAI) CreateCompletion(ctx context.Context, request shared.CreateComp
 
 // CreateEdit - Creates a new edit for the provided input, instruction, and parameters.
 func (s *openAI) CreateEdit(ctx context.Context, request shared.CreateEditRequest) (*operations.CreateEditResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/edits"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
@@ -370,11 +360,11 @@ func (s *openAI) CreateEdit(ctx context.Context, request shared.CreateEditReques
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -416,7 +406,7 @@ func (s *openAI) CreateEdit(ctx context.Context, request shared.CreateEditReques
 
 // CreateEmbedding - Creates an embedding vector representing the input text.
 func (s *openAI) CreateEmbedding(ctx context.Context, request shared.CreateEmbeddingRequest) (*operations.CreateEmbeddingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/embeddings"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
@@ -432,11 +422,11 @@ func (s *openAI) CreateEmbedding(ctx context.Context, request shared.CreateEmbed
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -478,7 +468,7 @@ func (s *openAI) CreateEmbedding(ctx context.Context, request shared.CreateEmbed
 
 // CreateFile - Upload a file that contains document(s) to be used across various endpoints/features. Currently, the size of all the files uploaded by one organization can be up to 1 GB. Please contact us if you need to increase the storage limit.
 func (s *openAI) CreateFile(ctx context.Context, request shared.CreateFileRequest) (*operations.CreateFileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/files"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "multipart")
@@ -494,11 +484,11 @@ func (s *openAI) CreateFile(ctx context.Context, request shared.CreateFileReques
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -544,7 +534,7 @@ func (s *openAI) CreateFile(ctx context.Context, request shared.CreateFileReques
 //
 // [Learn more about Fine-tuning](/docs/guides/fine-tuning)
 func (s *openAI) CreateFineTune(ctx context.Context, request shared.CreateFineTuneRequest) (*operations.CreateFineTuneResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/fine-tunes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
@@ -560,11 +550,11 @@ func (s *openAI) CreateFineTune(ctx context.Context, request shared.CreateFineTu
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -606,7 +596,7 @@ func (s *openAI) CreateFineTune(ctx context.Context, request shared.CreateFineTu
 
 // CreateImage - Creates an image given a prompt.
 func (s *openAI) CreateImage(ctx context.Context, request shared.CreateImageRequest) (*operations.CreateImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/images/generations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
@@ -622,11 +612,11 @@ func (s *openAI) CreateImage(ctx context.Context, request shared.CreateImageRequ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -668,7 +658,7 @@ func (s *openAI) CreateImage(ctx context.Context, request shared.CreateImageRequ
 
 // CreateImageEdit - Creates an edited or extended image given an original image and a prompt.
 func (s *openAI) CreateImageEdit(ctx context.Context, request shared.CreateImageEditRequest) (*operations.CreateImageEditResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/images/edits"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "multipart")
@@ -684,11 +674,11 @@ func (s *openAI) CreateImageEdit(ctx context.Context, request shared.CreateImage
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -730,7 +720,7 @@ func (s *openAI) CreateImageEdit(ctx context.Context, request shared.CreateImage
 
 // CreateImageVariation - Creates a variation of a given image.
 func (s *openAI) CreateImageVariation(ctx context.Context, request shared.CreateImageVariationRequest) (*operations.CreateImageVariationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/images/variations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "multipart")
@@ -746,11 +736,11 @@ func (s *openAI) CreateImageVariation(ctx context.Context, request shared.Create
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -792,7 +782,7 @@ func (s *openAI) CreateImageVariation(ctx context.Context, request shared.Create
 
 // CreateModeration - Classifies if text violates OpenAI's Content Policy
 func (s *openAI) CreateModeration(ctx context.Context, request shared.CreateModerationRequest) (*operations.CreateModerationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/moderations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
@@ -808,11 +798,11 @@ func (s *openAI) CreateModeration(ctx context.Context, request shared.CreateMode
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -860,7 +850,7 @@ func (s *openAI) CreateModeration(ctx context.Context, request shared.CreateMode
 //
 // Deprecated: this method will be removed in a future release, please migrate away from it as soon as possible.
 func (s *openAI) CreateSearch(ctx context.Context, request operations.CreateSearchRequest) (*operations.CreateSearchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/engines/{engine_id}/search", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -879,11 +869,11 @@ func (s *openAI) CreateSearch(ctx context.Context, request operations.CreateSear
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -925,7 +915,7 @@ func (s *openAI) CreateSearch(ctx context.Context, request operations.CreateSear
 
 // CreateTranscription - Transcribes audio into the input language.
 func (s *openAI) CreateTranscription(ctx context.Context, request shared.CreateTranscriptionRequest) (*operations.CreateTranscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/audio/transcriptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "multipart")
@@ -941,11 +931,11 @@ func (s *openAI) CreateTranscription(ctx context.Context, request shared.CreateT
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -987,7 +977,7 @@ func (s *openAI) CreateTranscription(ctx context.Context, request shared.CreateT
 
 // CreateTranslation - Translates audio into into English.
 func (s *openAI) CreateTranslation(ctx context.Context, request shared.CreateTranslationRequest) (*operations.CreateTranslationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/audio/translations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "multipart")
@@ -1003,11 +993,11 @@ func (s *openAI) CreateTranslation(ctx context.Context, request shared.CreateTra
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1049,7 +1039,7 @@ func (s *openAI) CreateTranslation(ctx context.Context, request shared.CreateTra
 
 // DeleteFile - Delete a file.
 func (s *openAI) DeleteFile(ctx context.Context, request operations.DeleteFileRequest) (*operations.DeleteFileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/files/{file_id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1060,9 +1050,9 @@ func (s *openAI) DeleteFile(ctx context.Context, request operations.DeleteFileRe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1104,7 +1094,7 @@ func (s *openAI) DeleteFile(ctx context.Context, request operations.DeleteFileRe
 
 // DeleteModel - Delete a fine-tuned model. You must have the Owner role in your organization.
 func (s *openAI) DeleteModel(ctx context.Context, request operations.DeleteModelRequest) (*operations.DeleteModelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/models/{model}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1115,9 +1105,9 @@ func (s *openAI) DeleteModel(ctx context.Context, request operations.DeleteModel
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1159,7 +1149,7 @@ func (s *openAI) DeleteModel(ctx context.Context, request operations.DeleteModel
 
 // DownloadFile - Returns the contents of the specified file
 func (s *openAI) DownloadFile(ctx context.Context, request operations.DownloadFileRequest) (*operations.DownloadFileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/files/{file_id}/content", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1170,9 +1160,9 @@ func (s *openAI) DownloadFile(ctx context.Context, request operations.DownloadFi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1212,7 +1202,7 @@ func (s *openAI) DownloadFile(ctx context.Context, request operations.DownloadFi
 //
 // Deprecated: this method will be removed in a future release, please migrate away from it as soon as possible.
 func (s *openAI) ListEngines(ctx context.Context) (*operations.ListEnginesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/engines"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1220,9 +1210,9 @@ func (s *openAI) ListEngines(ctx context.Context) (*operations.ListEnginesRespon
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1264,7 +1254,7 @@ func (s *openAI) ListEngines(ctx context.Context) (*operations.ListEnginesRespon
 
 // ListFiles - Returns a list of files that belong to the user's organization.
 func (s *openAI) ListFiles(ctx context.Context) (*operations.ListFilesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/files"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1272,9 +1262,9 @@ func (s *openAI) ListFiles(ctx context.Context) (*operations.ListFilesResponse, 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1316,7 +1306,7 @@ func (s *openAI) ListFiles(ctx context.Context) (*operations.ListFilesResponse, 
 
 // ListFineTuneEvents - Get fine-grained status updates for a fine-tune job.
 func (s *openAI) ListFineTuneEvents(ctx context.Context, request operations.ListFineTuneEventsRequest) (*operations.ListFineTuneEventsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/fine-tunes/{fine_tune_id}/events", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1327,13 +1317,13 @@ func (s *openAI) ListFineTuneEvents(ctx context.Context, request operations.List
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1375,7 +1365,7 @@ func (s *openAI) ListFineTuneEvents(ctx context.Context, request operations.List
 
 // ListFineTunes - List your organization's fine-tuning jobs
 func (s *openAI) ListFineTunes(ctx context.Context) (*operations.ListFineTunesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/fine-tunes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1383,9 +1373,9 @@ func (s *openAI) ListFineTunes(ctx context.Context) (*operations.ListFineTunesRe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1427,7 +1417,7 @@ func (s *openAI) ListFineTunes(ctx context.Context) (*operations.ListFineTunesRe
 
 // ListModels - Lists the currently available models, and provides basic information about each one such as the owner and availability.
 func (s *openAI) ListModels(ctx context.Context) (*operations.ListModelsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/models"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1435,9 +1425,9 @@ func (s *openAI) ListModels(ctx context.Context) (*operations.ListModelsResponse
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1481,7 +1471,7 @@ func (s *openAI) ListModels(ctx context.Context) (*operations.ListModelsResponse
 //
 // Deprecated: this method will be removed in a future release, please migrate away from it as soon as possible.
 func (s *openAI) RetrieveEngine(ctx context.Context, request operations.RetrieveEngineRequest) (*operations.RetrieveEngineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/engines/{engine_id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1492,9 +1482,9 @@ func (s *openAI) RetrieveEngine(ctx context.Context, request operations.Retrieve
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1536,7 +1526,7 @@ func (s *openAI) RetrieveEngine(ctx context.Context, request operations.Retrieve
 
 // RetrieveFile - Returns information about a specific file.
 func (s *openAI) RetrieveFile(ctx context.Context, request operations.RetrieveFileRequest) (*operations.RetrieveFileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/files/{file_id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1547,9 +1537,9 @@ func (s *openAI) RetrieveFile(ctx context.Context, request operations.RetrieveFi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1593,7 +1583,7 @@ func (s *openAI) RetrieveFile(ctx context.Context, request operations.RetrieveFi
 //
 // [Learn more about Fine-tuning](/docs/guides/fine-tuning)
 func (s *openAI) RetrieveFineTune(ctx context.Context, request operations.RetrieveFineTuneRequest) (*operations.RetrieveFineTuneResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/fine-tunes/{fine_tune_id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1604,9 +1594,9 @@ func (s *openAI) RetrieveFineTune(ctx context.Context, request operations.Retrie
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1648,7 +1638,7 @@ func (s *openAI) RetrieveFineTune(ctx context.Context, request operations.Retrie
 
 // RetrieveModel - Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
 func (s *openAI) RetrieveModel(ctx context.Context, request operations.RetrieveModelRequest) (*operations.RetrieveModelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/models/{model}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -1659,9 +1649,9 @@ func (s *openAI) RetrieveModel(ctx context.Context, request operations.RetrieveM
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
-	client := s.defaultClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
