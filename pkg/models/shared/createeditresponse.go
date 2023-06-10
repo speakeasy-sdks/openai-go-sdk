@@ -2,11 +2,14 @@
 
 package shared
 
+type CreateEditResponseChoicesLogprobsTopLogprobs struct {
+}
+
 type CreateEditResponseChoicesLogprobs struct {
-	TextOffset    []int64                  `json:"text_offset,omitempty"`
-	TokenLogprobs []float64                `json:"token_logprobs,omitempty"`
-	Tokens        []string                 `json:"tokens,omitempty"`
-	TopLogprobs   []map[string]interface{} `json:"top_logprobs,omitempty"`
+	TextOffset    []int64                                        `json:"text_offset,omitempty"`
+	TokenLogprobs []float64                                      `json:"token_logprobs,omitempty"`
+	Tokens        []string                                       `json:"tokens,omitempty"`
+	TopLogprobs   []CreateEditResponseChoicesLogprobsTopLogprobs `json:"top_logprobs,omitempty"`
 }
 
 type CreateEditResponseChoices struct {
