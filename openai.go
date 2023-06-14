@@ -146,7 +146,7 @@ func (s *openAI) CreateAnswer(ctx context.Context, request shared.CreateAnswerRe
 	return res, nil
 }
 
-// CreateChatCompletion - Creates a completion for the chat message
+// CreateChatCompletion - Creates a model response for the given chat conversation.
 func (s *openAI) CreateChatCompletion(ctx context.Context, request shared.CreateChatCompletionRequest) (*operations.CreateChatCompletionResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/chat/completions"
@@ -280,7 +280,7 @@ func (s *openAI) CreateClassification(ctx context.Context, request shared.Create
 	return res, nil
 }
 
-// CreateCompletion - Creates a completion for the provided prompt and parameters
+// CreateCompletion - Creates a completion for the provided prompt and parameters.
 func (s *openAI) CreateCompletion(ctx context.Context, request shared.CreateCompletionRequest) (*operations.CreateCompletionResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/completions"

@@ -10,3 +10,4 @@ The role of the author of this message.
 | `ChatCompletionResponseMessageRoleSystem`    | system                                       |
 | `ChatCompletionResponseMessageRoleUser`      | user                                         |
 | `ChatCompletionResponseMessageRoleAssistant` | assistant                                    |
+| `ChatCompletionResponseMessageRoleFunction`  | function                                     |

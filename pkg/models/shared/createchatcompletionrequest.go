@@ -6,7 +6,110 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"fmt"
 )
+
+// CreateChatCompletionRequestFunctionCall2 - Controls how the model responds to function calls. "none" means the model does not call a function, and responds to the end-user. "auto" means the model can pick between an end-user or calling a function.  Specifying a particular function via `{"name":\ "my_function"}` forces the model to call that function. "none" is the default when no functions are present. "auto" is the default if functions are present.
+type CreateChatCompletionRequestFunctionCall2 struct {
+	// The name of the function to call.
+	Name string `json:"name"`
+}
+
+// CreateChatCompletionRequestFunctionCall1 - Controls how the model responds to function calls. "none" means the model does not call a function, and responds to the end-user. "auto" means the model can pick between an end-user or calling a function.  Specifying a particular function via `{"name":\ "my_function"}` forces the model to call that function. "none" is the default when no functions are present. "auto" is the default if functions are present.
+type CreateChatCompletionRequestFunctionCall1 string
+
+const (
+	CreateChatCompletionRequestFunctionCall1None CreateChatCompletionRequestFunctionCall1 = "none"
+	CreateChatCompletionRequestFunctionCall1Auto CreateChatCompletionRequestFunctionCall1 = "auto"
+)
+
+func (e CreateChatCompletionRequestFunctionCall1) ToPointer() *CreateChatCompletionRequestFunctionCall1 {
+	return &e
+}
+
+func (e *CreateChatCompletionRequestFunctionCall1) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "none":
+		fallthrough
+	case "auto":
+		*e = CreateChatCompletionRequestFunctionCall1(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateChatCompletionRequestFunctionCall1: %v", v)
+	}
+}
+
+type CreateChatCompletionRequestFunctionCallType string
+
+const (
+	CreateChatCompletionRequestFunctionCallTypeCreateChatCompletionRequestFunctionCall1 CreateChatCompletionRequestFunctionCallType = "CreateChatCompletionRequest_function_call_1"
+	CreateChatCompletionRequestFunctionCallTypeCreateChatCompletionRequestFunctionCall2 CreateChatCompletionRequestFunctionCallType = "CreateChatCompletionRequest_function_call_2"
+)
+
+type CreateChatCompletionRequestFunctionCall struct {
+	CreateChatCompletionRequestFunctionCall1 *CreateChatCompletionRequestFunctionCall1
+	CreateChatCompletionRequestFunctionCall2 *CreateChatCompletionRequestFunctionCall2
+
+	Type CreateChatCompletionRequestFunctionCallType
+}
+
+func CreateCreateChatCompletionRequestFunctionCallCreateChatCompletionRequestFunctionCall1(createChatCompletionRequestFunctionCall1 CreateChatCompletionRequestFunctionCall1) CreateChatCompletionRequestFunctionCall {
+	typ := CreateChatCompletionRequestFunctionCallTypeCreateChatCompletionRequestFunctionCall1
+
+	return CreateChatCompletionRequestFunctionCall{
+		CreateChatCompletionRequestFunctionCall1: &createChatCompletionRequestFunctionCall1,
+		Type:                                     typ,
+	}
+}
+
+func CreateCreateChatCompletionRequestFunctionCallCreateChatCompletionRequestFunctionCall2(createChatCompletionRequestFunctionCall2 CreateChatCompletionRequestFunctionCall2) CreateChatCompletionRequestFunctionCall {
+	typ := CreateChatCompletionRequestFunctionCallTypeCreateChatCompletionRequestFunctionCall2
+
+	return CreateChatCompletionRequestFunctionCall{
+		CreateChatCompletionRequestFunctionCall2: &createChatCompletionRequestFunctionCall2,
+		Type:                                     typ,
+	}
+}
+
+func (u *CreateChatCompletionRequestFunctionCall) UnmarshalJSON(data []byte) error {
+	var d *json.Decoder
+
+	createChatCompletionRequestFunctionCall1 := new(CreateChatCompletionRequestFunctionCall1)
+	d = json.NewDecoder(bytes.NewReader(data))
+	d.DisallowUnknownFields()
+	if err := d.Decode(&createChatCompletionRequestFunctionCall1); err == nil {
+		u.CreateChatCompletionRequestFunctionCall1 = createChatCompletionRequestFunctionCall1
+		u.Type = CreateChatCompletionRequestFunctionCallTypeCreateChatCompletionRequestFunctionCall1
+		return nil
+	}
+
+	createChatCompletionRequestFunctionCall2 := new(CreateChatCompletionRequestFunctionCall2)
+	d = json.NewDecoder(bytes.NewReader(data))
+	d.DisallowUnknownFields()
+	if err := d.Decode(&createChatCompletionRequestFunctionCall2); err == nil {
+		u.CreateChatCompletionRequestFunctionCall2 = createChatCompletionRequestFunctionCall2
+		u.Type = CreateChatCompletionRequestFunctionCallTypeCreateChatCompletionRequestFunctionCall2
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u CreateChatCompletionRequestFunctionCall) MarshalJSON() ([]byte, error) {
+	if u.CreateChatCompletionRequestFunctionCall1 != nil {
+		return json.Marshal(u.CreateChatCompletionRequestFunctionCall1)
+	}
+
+	if u.CreateChatCompletionRequestFunctionCall2 != nil {
+		return json.Marshal(u.CreateChatCompletionRequestFunctionCall2)
+	}
+
+	return nil, nil
+}
 
 // CreateChatCompletionRequestLogitBias - Modify the likelihood of specified tokens appearing in the completion.
 //
@@ -85,17 +188,23 @@ func (u CreateChatCompletionRequestStop) MarshalJSON() ([]byte, error) {
 type CreateChatCompletionRequest struct {
 	// completions_frequency_penalty_description
 	FrequencyPenalty *float64 `json:"frequency_penalty,omitempty"`
+	// Controls how the model responds to function calls. "none" means the model does not call a function, and responds to the end-user. "auto" means the model can pick between an end-user or calling a function.  Specifying a particular function via `{"name":\ "my_function"}` forces the model to call that function. "none" is the default when no functions are present. "auto" is the default if functions are present.
+	FunctionCall *CreateChatCompletionRequestFunctionCall `json:"function_call,omitempty"`
+	// A list of functions the model may generate JSON inputs for.
+	Functions []ChatCompletionFunctions `json:"functions,omitempty"`
 	// Modify the likelihood of specified tokens appearing in the completion.
 	//
 	// Accepts a json object that maps tokens (specified by their token ID in the tokenizer) to an associated bias value from -100 to 100. Mathematically, the bias is added to the logits generated by the model prior to sampling. The exact effect will vary per model, but values between -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100 should result in a ban or exclusive selection of the relevant token.
 	//
 	LogitBias *CreateChatCompletionRequestLogitBias `json:"logit_bias,omitempty"`
-	// The maximum number of tokens allowed for the generated answer. By default, the number of tokens the model can return will be (4096 - prompt tokens).
+	// The maximum number of [tokens](/tokenizer) to generate in the chat completion.
+	//
+	// The total length of input tokens and generated tokens is limited by the model's context length. [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb) for counting tokens.
 	//
 	MaxTokens *int64 `json:"max_tokens,omitempty"`
-	// The messages to generate chat completions for, in the [chat format](/docs/guides/chat/introduction).
+	// A list of messages comprising the conversation so far. [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).
 	Messages []ChatCompletionRequestMessage `json:"messages"`
-	// ID of the model to use. Currently, only `gpt-3.5-turbo` and `gpt-3.5-turbo-0301` are supported.
+	// ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility) table for details on which models work with the Chat API.
 	Model string `json:"model"`
 	// How many chat completion choices to generate for each input message.
 	N *int64 `json:"n,omitempty"`
@@ -104,7 +213,7 @@ type CreateChatCompletionRequest struct {
 	// Up to 4 sequences where the API will stop generating further tokens.
 	//
 	Stop *CreateChatCompletionRequestStop `json:"stop,omitempty"`
-	// If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format) as they become available, with the stream terminated by a `data: [DONE]` message.
+	// If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format) as they become available, with the stream terminated by a `data: [DONE]` message. [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).
 	//
 	Stream *bool `json:"stream,omitempty"`
 	// completions_temperature_description

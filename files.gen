@@ -52,6 +52,7 @@ pkg/models/shared/createchatcompletionresponse.go
 pkg/models/shared/chatcompletionresponsemessage.go
 pkg/models/shared/createchatcompletionrequest.go
 pkg/models/shared/chatcompletionrequestmessage.go
+pkg/models/shared/chatcompletionfunctions.go
 pkg/models/shared/createclassificationresponse.go
 pkg/models/shared/createclassificationrequest.go
 pkg/models/shared/createcompletionresponse.go
@@ -136,13 +137,19 @@ docs/models/shared/createanswerrequest.md
 docs/models/shared/createchatcompletionresponsechoices.md
 docs/models/shared/createchatcompletionresponseusage.md
 docs/models/shared/createchatcompletionresponse.md
+docs/models/shared/chatcompletionresponsemessagefunctioncall.md
 docs/models/shared/chatcompletionresponsemessagerole.md
 docs/models/shared/chatcompletionresponsemessage.md
+docs/models/shared/createchatcompletionrequestfunctioncall2.md
+docs/models/shared/createchatcompletionrequestfunctioncall1.md
+docs/models/shared/createchatcompletionrequestfunctioncall.md
 docs/models/shared/createchatcompletionrequestlogitbias.md
 docs/models/shared/createchatcompletionrequeststop.md
 docs/models/shared/createchatcompletionrequest.md
+docs/models/shared/chatcompletionrequestmessagefunctioncall.md
 docs/models/shared/chatcompletionrequestmessagerole.md
 docs/models/shared/chatcompletionrequestmessage.md
+docs/models/shared/chatcompletionfunctions.md
 docs/models/shared/createclassificationresponseselectedexamples.md
 docs/models/shared/createclassificationresponse.md
 docs/models/shared/createclassificationrequest.md

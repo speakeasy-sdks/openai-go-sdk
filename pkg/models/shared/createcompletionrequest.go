@@ -225,12 +225,12 @@ type CreateCompletionRequest struct {
 	LogitBias *CreateCompletionRequestLogitBias `json:"logit_bias,omitempty"`
 	// Include the log probabilities on the `logprobs` most likely tokens, as well the chosen tokens. For example, if `logprobs` is 5, the API will return a list of the 5 most likely tokens. The API will always return the `logprob` of the sampled token, so there may be up to `logprobs+1` elements in the response.
 	//
-	// The maximum value for `logprobs` is 5. If you need more than this, please contact us through our [Help center](https://help.openai.com) and describe your use case.
+	// The maximum value for `logprobs` is 5.
 	//
 	Logprobs *int64 `json:"logprobs,omitempty"`
 	// The maximum number of [tokens](/tokenizer) to generate in the completion.
 	//
-	// The token count of your prompt plus `max_tokens` cannot exceed the model's context length. Most models have a context length of 2048 tokens (except for the newest models, which support 4096).
+	// The token count of your prompt plus `max_tokens` cannot exceed the model's context length. [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb) for counting tokens.
 	//
 	MaxTokens *int64 `json:"max_tokens,omitempty"`
 	// ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.
@@ -253,7 +253,7 @@ type CreateCompletionRequest struct {
 	// Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
 	//
 	Stop *CreateCompletionRequestStop `json:"stop,omitempty"`
-	// Whether to stream back partial progress. If set, tokens will be sent as data-only [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format) as they become available, with the stream terminated by a `data: [DONE]` message.
+	// Whether to stream back partial progress. If set, tokens will be sent as data-only [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format) as they become available, with the stream terminated by a `data: [DONE]` message. [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).
 	//
 	Stream *bool `json:"stream,omitempty"`
 	// The suffix that comes after a completion of inserted text.

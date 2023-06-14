@@ -108,9 +108,9 @@ func New(opts ...SDKOption) *Gpt {
 	sdk := &Gpt{
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
-			OpenAPIDocVersion: "1.2.0",
-			SDKVersion:        "1.20.0",
-			GenVersion:        "2.39.0",
+			OpenAPIDocVersion: "1.3.0",
+			SDKVersion:        "1.21.0",
+			GenVersion:        "2.40.1",
 		},
 	}
 	for _, opt := range opts {
