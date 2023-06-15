@@ -426,7 +426,7 @@ func main() {
         Model: "id",
         N: gpt.Int64(1),
         PresencePenalty: gpt.Float64(8209.94),
-        Prompt: &shared.CreateCompletionRequestPrompt{},
+        Prompt: shared.CreateCompletionRequestPrompt{},
         Stop: &shared.CreateCompletionRequestStop{},
         Stream: gpt.Bool(false),
         Suffix: gpt.String("test."),
