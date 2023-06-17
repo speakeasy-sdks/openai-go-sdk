@@ -2,6 +2,38 @@
 
 package shared
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type CreateCompletionResponseChoicesFinishReason string
+
+const (
+	CreateCompletionResponseChoicesFinishReasonStop   CreateCompletionResponseChoicesFinishReason = "stop"
+	CreateCompletionResponseChoicesFinishReasonLength CreateCompletionResponseChoicesFinishReason = "length"
+)
+
+func (e CreateCompletionResponseChoicesFinishReason) ToPointer() *CreateCompletionResponseChoicesFinishReason {
+	return &e
+}
+
+func (e *CreateCompletionResponseChoicesFinishReason) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "stop":
+		fallthrough
+	case "length":
+		*e = CreateCompletionResponseChoicesFinishReason(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateCompletionResponseChoicesFinishReason: %v", v)
+	}
+}
+
 type CreateCompletionResponseChoicesLogprobsTopLogprobs struct {
 }
 
@@ -13,10 +45,10 @@ type CreateCompletionResponseChoicesLogprobs struct {
 }
 
 type CreateCompletionResponseChoices struct {
-	FinishReason *string                                  `json:"finish_reason,omitempty"`
-	Index        *int64                                   `json:"index,omitempty"`
-	Logprobs     *CreateCompletionResponseChoicesLogprobs `json:"logprobs,omitempty"`
-	Text         *string                                  `json:"text,omitempty"`
+	FinishReason CreateCompletionResponseChoicesFinishReason `json:"finish_reason"`
+	Index        int64                                       `json:"index"`
+	Logprobs     CreateCompletionResponseChoicesLogprobs     `json:"logprobs"`
+	Text         string                                      `json:"text"`
 }
 
 type CreateCompletionResponseUsage struct {

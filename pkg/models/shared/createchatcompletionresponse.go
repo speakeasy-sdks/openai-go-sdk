@@ -2,10 +2,45 @@
 
 package shared
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type CreateChatCompletionResponseChoicesFinishReason string
+
+const (
+	CreateChatCompletionResponseChoicesFinishReasonStop         CreateChatCompletionResponseChoicesFinishReason = "stop"
+	CreateChatCompletionResponseChoicesFinishReasonLength       CreateChatCompletionResponseChoicesFinishReason = "length"
+	CreateChatCompletionResponseChoicesFinishReasonFunctionCall CreateChatCompletionResponseChoicesFinishReason = "function_call"
+)
+
+func (e CreateChatCompletionResponseChoicesFinishReason) ToPointer() *CreateChatCompletionResponseChoicesFinishReason {
+	return &e
+}
+
+func (e *CreateChatCompletionResponseChoicesFinishReason) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "stop":
+		fallthrough
+	case "length":
+		fallthrough
+	case "function_call":
+		*e = CreateChatCompletionResponseChoicesFinishReason(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateChatCompletionResponseChoicesFinishReason: %v", v)
+	}
+}
+
 type CreateChatCompletionResponseChoices struct {
-	FinishReason *string                        `json:"finish_reason,omitempty"`
-	Index        *int64                         `json:"index,omitempty"`
-	Message      *ChatCompletionResponseMessage `json:"message,omitempty"`
+	FinishReason *CreateChatCompletionResponseChoicesFinishReason `json:"finish_reason,omitempty"`
+	Index        *int64                                           `json:"index,omitempty"`
+	Message      *ChatCompletionResponseMessage                   `json:"message,omitempty"`
 }
 
 type CreateChatCompletionResponseUsage struct {

@@ -2,6 +2,38 @@
 
 package shared
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type CreateEditResponseChoicesFinishReason string
+
+const (
+	CreateEditResponseChoicesFinishReasonStop   CreateEditResponseChoicesFinishReason = "stop"
+	CreateEditResponseChoicesFinishReasonLength CreateEditResponseChoicesFinishReason = "length"
+)
+
+func (e CreateEditResponseChoicesFinishReason) ToPointer() *CreateEditResponseChoicesFinishReason {
+	return &e
+}
+
+func (e *CreateEditResponseChoicesFinishReason) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "stop":
+		fallthrough
+	case "length":
+		*e = CreateEditResponseChoicesFinishReason(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateEditResponseChoicesFinishReason: %v", v)
+	}
+}
+
 type CreateEditResponseChoicesLogprobsTopLogprobs struct {
 }
 
@@ -13,10 +45,10 @@ type CreateEditResponseChoicesLogprobs struct {
 }
 
 type CreateEditResponseChoices struct {
-	FinishReason *string                            `json:"finish_reason,omitempty"`
-	Index        *int64                             `json:"index,omitempty"`
-	Logprobs     *CreateEditResponseChoicesLogprobs `json:"logprobs,omitempty"`
-	Text         *string                            `json:"text,omitempty"`
+	FinishReason *CreateEditResponseChoicesFinishReason `json:"finish_reason,omitempty"`
+	Index        *int64                                 `json:"index,omitempty"`
+	Logprobs     *CreateEditResponseChoicesLogprobs     `json:"logprobs,omitempty"`
+	Text         *string                                `json:"text,omitempty"`
 }
 
 type CreateEditResponseUsage struct {
