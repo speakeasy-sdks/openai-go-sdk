@@ -8,21 +8,7 @@ The OpenAI REST API
 
 * [CancelFineTune](#cancelfinetune) - Immediately cancel a fine-tune job.
 
-* [~~CreateAnswer~~](#createanswer) - Answers the specified question using the provided documents and examples.
-
-The endpoint first [searches](/docs/api-reference/searches) over provided documents or files to find relevant context. The relevant context is combined with the provided examples and question to create the prompt for [completion](/docs/api-reference/completions).
- :warning: **Deprecated**
 * [CreateChatCompletion](#createchatcompletion) - Creates a model response for the given chat conversation.
-* [~~CreateClassification~~](#createclassification) - Classifies the specified `query` using provided examples.
-
-The endpoint first [searches](/docs/api-reference/searches) over the labeled examples
-to select the ones most relevant for the particular query. Then, the relevant examples
-are combined with the query to construct a prompt to produce the final label via the
-[completions](/docs/api-reference/completions) endpoint.
-
-Labeled examples can be provided via an uploaded `file`, or explicitly listed in the
-request using the `examples` parameter for quick tests and small scale use cases.
- :warning: **Deprecated**
 * [CreateCompletion](#createcompletion) - Creates a completion for the provided prompt and parameters.
 * [CreateEdit](#createedit) - Creates a new edit for the provided input, instruction, and parameters.
 * [CreateEmbedding](#createembedding) - Creates an embedding vector representing the input text.
@@ -38,25 +24,17 @@ Response includes details of the enqueued job including job status and the name 
 * [CreateImageEdit](#createimageedit) - Creates an edited or extended image given an original image and a prompt.
 * [CreateImageVariation](#createimagevariation) - Creates a variation of a given image.
 * [CreateModeration](#createmoderation) - Classifies if text violates OpenAI's Content Policy
-* [~~CreateSearch~~](#createsearch) - The search endpoint computes similarity scores between provided query and documents. Documents can be passed directly to the API if there are no more than 200 of them.
-
-To go beyond the 200 document limit, documents can be processed offline and then used for efficient retrieval at query time. When `file` is set, the search endpoint searches over all the documents in the given file and returns up to the `max_rerank` number of documents. These documents will be returned along with their search scores.
-
-The similarity score is a positive score that usually ranges from 0 to 300 (but can sometimes go higher), where a score above 200 usually means the document is semantically similar to the query.
- :warning: **Deprecated**
 * [CreateTranscription](#createtranscription) - Transcribes audio into the input language.
-* [CreateTranslation](#createtranslation) - Translates audio into into English.
+* [CreateTranslation](#createtranslation) - Translates audio into English.
 * [DeleteFile](#deletefile) - Delete a file.
 * [DeleteModel](#deletemodel) - Delete a fine-tuned model. You must have the Owner role in your organization.
 * [DownloadFile](#downloadfile) - Returns the contents of the specified file
-* [~~ListEngines~~](#listengines) - Lists the currently available (non-finetuned) models, and provides basic information about each one such as the owner and availability. :warning: **Deprecated**
 * [ListFiles](#listfiles) - Returns a list of files that belong to the user's organization.
 * [ListFineTuneEvents](#listfinetuneevents) - Get fine-grained status updates for a fine-tune job.
 
 * [ListFineTunes](#listfinetunes) - List your organization's fine-tuning jobs
 
 * [ListModels](#listmodels) - Lists the currently available models, and provides basic information about each one such as the owner and availability.
-* [~~RetrieveEngine~~](#retrieveengine) - Retrieves a model instance, providing basic information about it such as the owner and availability. :warning: **Deprecated**
 * [RetrieveFile](#retrievefile) - Returns information about a specific file.
 * [RetrieveFineTune](#retrievefinetune) - Gets info about the fine-tune job.
 
@@ -78,7 +56,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {
@@ -111,99 +89,6 @@ func main() {
 **[*operations.CancelFineTuneResponse](../../models/operations/cancelfinetuneresponse.md), error**
 
 
-## ~~CreateAnswer~~
-
-Answers the specified question using the provided documents and examples.
-
-The endpoint first [searches](/docs/api-reference/searches) over provided documents or files to find relevant context. The relevant context is combined with the provided examples and question to create the prompt for [completion](/docs/api-reference/completions).
-
-
-> :warning: **DEPRECATED**: this method will be removed in a future release, please migrate away from it as soon as possible.
-
-### Example Usage
-
-```go
-package main
-
-import(
-	"context"
-	"log"
-	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
-)
-
-func main() {
-    s := gpt.New()
-
-    ctx := context.Background()
-    res, err := s.OpenAI.CreateAnswer(ctx, shared.CreateAnswerRequest{
-        Documents: []string{
-            "provident",
-            "distinctio",
-            "quibusdam",
-        },
-        Examples: [][]string{
-            []string{
-                "corrupti",
-                "illum",
-                "vel",
-                "error",
-            },
-            []string{
-                "suscipit",
-                "iure",
-                "magnam",
-            },
-            []string{
-                "ipsa",
-                "delectus",
-                "tempora",
-                "suscipit",
-            },
-        },
-        ExamplesContext: "Ottawa, Canada's capital, is located in the east of southern Ontario, near the city of Montréal and the U.S. border.",
-        Expand: []interface{}{
-            "minus",
-            "placeat",
-        },
-        File: gpt.String("voluptatum"),
-        LogitBias: gpt.String("iusto"),
-        Logprobs: gpt.Int64(568045),
-        MaxRerank: gpt.Int64(392785),
-        MaxTokens: gpt.Int64(925597),
-        Model: "temporibus",
-        N: gpt.Int64(71036),
-        Question: "What is the capital of Japan?",
-        ReturnMetadata: gpt.String("quis"),
-        ReturnPrompt: gpt.Bool(false),
-        SearchModel: gpt.String("veritatis"),
-        Stop: &shared.CreateAnswerRequestStop{},
-        Temperature: gpt.Float64(6481.72),
-        User: gpt.String("perferendis"),
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    if res.CreateAnswerResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
-| `request`                                                                | [shared.CreateAnswerRequest](../../models/shared/createanswerrequest.md) | :heavy_check_mark:                                                       | The request object to use for the request.                               |
-
-
-### Response
-
-**[*operations.CreateAnswerResponse](../../models/operations/createanswerresponse.md), error**
-
-
 ## CreateChatCompletion
 
 Creates a model response for the given chat conversation.
@@ -217,7 +102,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 )
 
 func main() {
@@ -225,69 +110,81 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateChatCompletion(ctx, shared.CreateChatCompletionRequest{
-        FrequencyPenalty: gpt.Float64(3682.41),
+        FrequencyPenalty: gpt.Float64(5488.14),
         FunctionCall: &shared.CreateChatCompletionRequestFunctionCall{},
         Functions: []shared.ChatCompletionFunctions{
             shared.ChatCompletionFunctions{
-                Description: gpt.String("sapiente"),
-                Name: "Fred Strosin",
+                Description: gpt.String("distinctio"),
+                Name: "Stuart Stiedemann",
                 Parameters: map[string]interface{}{
-                    "quod": "quod",
-                    "esse": "totam",
+                    "error": "deserunt",
+                    "suscipit": "iure",
                 },
             },
             shared.ChatCompletionFunctions{
-                Description: gpt.String("porro"),
-                Name: "Samuel Reichel",
+                Description: gpt.String("magnam"),
+                Name: "Larry Windler",
                 Parameters: map[string]interface{}{
-                    "deleniti": "hic",
+                    "minus": "placeat",
+                    "voluptatum": "iusto",
                 },
             },
             shared.ChatCompletionFunctions{
-                Description: gpt.String("optio"),
-                Name: "Jack Johns",
+                Description: gpt.String("excepturi"),
+                Name: "Mrs. Sophie Smith MD",
                 Parameters: map[string]interface{}{
-                    "impedit": "cum",
-                },
-            },
-            shared.ChatCompletionFunctions{
-                Description: gpt.String("esse"),
-                Name: "Mrs. Miriam Collier",
-                Parameters: map[string]interface{}{
-                    "iste": "dolor",
+                    "ipsam": "repellendus",
                 },
             },
         },
         LogitBias: &shared.CreateChatCompletionRequestLogitBias{},
-        MaxTokens: gpt.Int64(616934),
+        MaxTokens: gpt.Int64(957156),
         Messages: []shared.ChatCompletionRequestMessage{
             shared.ChatCompletionRequestMessage{
-                Content: gpt.String("hic"),
+                Content: gpt.String("odit"),
                 FunctionCall: &shared.ChatCompletionRequestMessageFunctionCall{
-                    Arguments: gpt.String("saepe"),
-                    Name: gpt.String("Harvey Hessel"),
+                    Arguments: gpt.String("at"),
+                    Name: gpt.String("Emilio Krajcik"),
                 },
-                Name: gpt.String("Dr. Rickey Boyle"),
+                Name: gpt.String("Deanna Sauer MD"),
                 Role: shared.ChatCompletionRequestMessageRoleAssistant,
             },
             shared.ChatCompletionRequestMessage{
-                Content: gpt.String("laborum"),
+                Content: gpt.String("occaecati"),
                 FunctionCall: &shared.ChatCompletionRequestMessageFunctionCall{
-                    Arguments: gpt.String("dolores"),
-                    Name: gpt.String("Stacy Champlin"),
+                    Arguments: gpt.String("fugit"),
+                    Name: gpt.String("Irvin Rosenbaum III"),
                 },
-                Name: gpt.String("Corey Hane III"),
+                Name: gpt.String("Pauline Dibbert"),
+                Role: shared.ChatCompletionRequestMessageRoleUser,
+            },
+            shared.ChatCompletionRequestMessage{
+                Content: gpt.String("ipsum"),
+                FunctionCall: &shared.ChatCompletionRequestMessageFunctionCall{
+                    Arguments: gpt.String("excepturi"),
+                    Name: gpt.String("Dorothy Hane"),
+                },
+                Name: gpt.String("Curtis Morissette"),
+                Role: shared.ChatCompletionRequestMessageRoleFunction,
+            },
+            shared.ChatCompletionRequestMessage{
+                Content: gpt.String("fuga"),
+                FunctionCall: &shared.ChatCompletionRequestMessageFunctionCall{
+                    Arguments: gpt.String("in"),
+                    Name: gpt.String("Sheryl Kertzmann"),
+                },
+                Name: gpt.String("Brenda Wisozk"),
                 Role: shared.ChatCompletionRequestMessageRoleAssistant,
             },
         },
-        Model: "doloribus",
+        Model: shared.CreateChatCompletionRequestModel{},
         N: gpt.Int64(1),
-        PresencePenalty: gpt.Float64(9589.5),
+        PresencePenalty: gpt.Float64(1709.09),
         Stop: &shared.CreateChatCompletionRequestStop{},
         Stream: gpt.Bool(false),
         Temperature: gpt.Float64(1),
         TopP: gpt.Float64(1),
-        User: gpt.String("architecto"),
+        User: gpt.String("dolorem"),
     })
     if err != nil {
         log.Fatal(err)
@@ -312,90 +209,6 @@ func main() {
 **[*operations.CreateChatCompletionResponse](../../models/operations/createchatcompletionresponse.md), error**
 
 
-## ~~CreateClassification~~
-
-Classifies the specified `query` using provided examples.
-
-The endpoint first [searches](/docs/api-reference/searches) over the labeled examples
-to select the ones most relevant for the particular query. Then, the relevant examples
-are combined with the query to construct a prompt to produce the final label via the
-[completions](/docs/api-reference/completions) endpoint.
-
-Labeled examples can be provided via an uploaded `file`, or explicitly listed in the
-request using the `examples` parameter for quick tests and small scale use cases.
-
-
-> :warning: **DEPRECATED**: this method will be removed in a future release, please migrate away from it as soon as possible.
-
-### Example Usage
-
-```go
-package main
-
-import(
-	"context"
-	"log"
-	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
-)
-
-func main() {
-    s := gpt.New()
-
-    ctx := context.Background()
-    res, err := s.OpenAI.CreateClassification(ctx, shared.CreateClassificationRequest{
-        Examples: [][]string{
-            []string{
-                "culpa",
-            },
-            []string{
-                "repellat",
-            },
-            []string{
-                "occaecati",
-                "numquam",
-                "commodi",
-            },
-        },
-        Expand: gpt.String("quam"),
-        File: gpt.String("molestiae"),
-        Labels: []string{
-            "error",
-        },
-        LogitBias: gpt.String("quia"),
-        Logprobs: gpt.String("quis"),
-        MaxExamples: gpt.Int64(110375),
-        Model: "laborum",
-        Query: "The plot is not very attractive.",
-        ReturnMetadata: gpt.String("animi"),
-        ReturnPrompt: gpt.String("enim"),
-        SearchModel: gpt.String("odit"),
-        Temperature: gpt.Float64(0),
-        User: gpt.String("quo"),
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    if res.CreateClassificationResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `request`                                                                                | [shared.CreateClassificationRequest](../../models/shared/createclassificationrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
-
-
-### Response
-
-**[*operations.CreateClassificationResponse](../../models/operations/createclassificationresponse.md), error**
-
-
 ## CreateCompletion
 
 Creates a completion for the provided prompt and parameters.
@@ -409,7 +222,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 )
 
 func main() {
@@ -417,15 +230,15 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateCompletion(ctx, shared.CreateCompletionRequest{
-        BestOf: gpt.Int64(196582),
+        BestOf: gpt.Int64(358152),
         Echo: gpt.Bool(false),
-        FrequencyPenalty: gpt.Float64(9495.72),
+        FrequencyPenalty: gpt.Float64(1289.26),
         LogitBias: &shared.CreateCompletionRequestLogitBias{},
-        Logprobs: gpt.Int64(368725),
+        Logprobs: gpt.Int64(750686),
         MaxTokens: gpt.Int64(16),
-        Model: "id",
+        Model: shared.CreateCompletionRequestModel{},
         N: gpt.Int64(1),
-        PresencePenalty: gpt.Float64(8209.94),
+        PresencePenalty: gpt.Float64(3154.28),
         Prompt: shared.CreateCompletionRequestPrompt{},
         Stop: &shared.CreateCompletionRequestStop{},
         Stream: gpt.Bool(false),
@@ -470,7 +283,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 )
 
 func main() {
@@ -480,7 +293,7 @@ func main() {
     res, err := s.OpenAI.CreateEdit(ctx, shared.CreateEditRequest{
         Input: gpt.String("What day of the wek is it?"),
         Instruction: "Fix the spelling mistakes.",
-        Model: "aut",
+        Model: shared.CreateEditRequestModel{},
         N: gpt.Int64(1),
         Temperature: gpt.Float64(1),
         TopP: gpt.Float64(1),
@@ -521,7 +334,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 )
 
 func main() {
@@ -530,8 +343,8 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateEmbedding(ctx, shared.CreateEmbeddingRequest{
         Input: shared.CreateEmbeddingRequestInput{},
-        Model: "quasi",
-        User: gpt.String("error"),
+        Model: shared.CreateEmbeddingRequestModel{},
+        User: gpt.String("omnis"),
     })
     if err != nil {
         log.Fatal(err)
@@ -570,7 +383,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 )
 
 func main() {
@@ -579,10 +392,10 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateFile(ctx, shared.CreateFileRequest{
         File: shared.CreateFileRequestFile{
-            Content: []byte("temporibus"),
-            File: "laborum",
+            Content: []byte("nemo"),
+            File: "minima",
         },
-        Purpose: "quasi",
+        Purpose: "excepturi",
     })
     if err != nil {
         log.Fatal(err)
@@ -625,7 +438,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 )
 
 func main() {
@@ -633,21 +446,19 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateFineTune(ctx, shared.CreateFineTuneRequest{
-        BatchSize: gpt.Int64(971945),
+        BatchSize: gpt.Int64(38425),
         ClassificationBetas: []float64{
-            8781.94,
-            4686.51,
-            5096.24,
-            9767.62,
+            6342.74,
+            9883.74,
         },
-        ClassificationNClasses: gpt.Int64(55714),
-        ClassificationPositiveClass: gpt.String("omnis"),
+        ClassificationNClasses: gpt.Int64(958950),
+        ClassificationPositiveClass: gpt.String("architecto"),
         ComputeClassificationMetrics: gpt.Bool(false),
-        LearningRateMultiplier: gpt.Float64(4511.59),
-        Model: gpt.String("cum"),
-        NEpochs: gpt.Int64(19987),
-        PromptLossWeight: gpt.Float64(391.87),
-        Suffix: gpt.String("reprehenderit"),
+        LearningRateMultiplier: gpt.Float64(6527.9),
+        Model: &shared.CreateFineTuneRequestModel{},
+        NEpochs: gpt.Int64(208876),
+        PromptLossWeight: gpt.Float64(6350.59),
+        Suffix: gpt.String("consequuntur"),
         TrainingFile: "file-ajSREls59WBbvgSzJSVWxMCB",
         ValidationFile: gpt.String("file-XjSREls59WBbvgSzJSVWxMCa"),
     })
@@ -687,7 +498,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 )
 
 func main() {
@@ -699,7 +510,7 @@ func main() {
         Prompt: "A cute baby sea otter",
         ResponseFormat: shared.CreateImageRequestResponseFormatURL.ToPointer(),
         Size: shared.CreateImageRequestSizeOneThousandAndTwentyFourx1024.ToPointer(),
-        User: gpt.String("ut"),
+        User: gpt.String("repellat"),
     })
     if err != nil {
         log.Fatal(err)
@@ -737,7 +548,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 )
 
 func main() {
@@ -746,18 +557,18 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateImageEdit(ctx, shared.CreateImageEditRequest{
         Image: shared.CreateImageEditRequestImage{
-            Content: []byte("maiores"),
-            Image: "dicta",
+            Content: []byte("mollitia"),
+            Image: "occaecati",
         },
         Mask: &shared.CreateImageEditRequestMask{
-            Content: []byte("corporis"),
-            Mask: "dolore",
+            Content: []byte("numquam"),
+            Mask: "commodi",
         },
-        N: gpt.String("iusto"),
+        N: gpt.String("quam"),
         Prompt: "A cute baby sea otter wearing a beret",
-        ResponseFormat: gpt.String("dicta"),
-        Size: gpt.String("harum"),
-        User: gpt.String("enim"),
+        ResponseFormat: gpt.String("molestiae"),
+        Size: gpt.String("velit"),
+        User: gpt.String("error"),
     })
     if err != nil {
         log.Fatal(err)
@@ -795,7 +606,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 )
 
 func main() {
@@ -804,13 +615,13 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateImageVariation(ctx, shared.CreateImageVariationRequest{
         Image: shared.CreateImageVariationRequestImage{
-            Content: []byte("accusamus"),
-            Image: "commodi",
+            Content: []byte("quia"),
+            Image: "quis",
         },
-        N: gpt.String("repudiandae"),
-        ResponseFormat: gpt.String("quae"),
-        Size: gpt.String("ipsum"),
-        User: gpt.String("quidem"),
+        N: gpt.String("vitae"),
+        ResponseFormat: gpt.String("laborum"),
+        Size: gpt.String("animi"),
+        User: gpt.String("enim"),
     })
     if err != nil {
         log.Fatal(err)
@@ -848,7 +659,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 )
 
 func main() {
@@ -857,7 +668,7 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateModeration(ctx, shared.CreateModerationRequest{
         Input: shared.CreateModerationRequestInput{},
-        Model: gpt.String("text-moderation-stable"),
+        Model: &shared.CreateModerationRequestModel{},
     })
     if err != nil {
         log.Fatal(err)
@@ -882,72 +693,6 @@ func main() {
 **[*operations.CreateModerationResponse](../../models/operations/createmoderationresponse.md), error**
 
 
-## ~~CreateSearch~~
-
-The search endpoint computes similarity scores between provided query and documents. Documents can be passed directly to the API if there are no more than 200 of them.
-
-To go beyond the 200 document limit, documents can be processed offline and then used for efficient retrieval at query time. When `file` is set, the search endpoint searches over all the documents in the given file and returns up to the `max_rerank` number of documents. These documents will be returned along with their search scores.
-
-The similarity score is a positive score that usually ranges from 0 to 300 (but can sometimes go higher), where a score above 200 usually means the document is semantically similar to the query.
-
-
-> :warning: **DEPRECATED**: this method will be removed in a future release, please migrate away from it as soon as possible.
-
-### Example Usage
-
-```go
-package main
-
-import(
-	"context"
-	"log"
-	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/operations"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
-)
-
-func main() {
-    s := gpt.New()
-
-    ctx := context.Background()
-    res, err := s.OpenAI.CreateSearch(ctx, operations.CreateSearchRequest{
-        CreateSearchRequest: shared.CreateSearchRequest{
-            Documents: []string{
-                "excepturi",
-                "pariatur",
-                "modi",
-            },
-            File: gpt.String("praesentium"),
-            MaxRerank: gpt.Int64(523248),
-            Query: "the president",
-            ReturnMetadata: gpt.Bool(false),
-            User: gpt.String("voluptates"),
-        },
-        EngineID: "davinci",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    if res.CreateSearchResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
-| `request`                                                                        | [operations.CreateSearchRequest](../../models/operations/createsearchrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
-
-
-### Response
-
-**[*operations.CreateSearchResponse](../../models/operations/createsearchresponse.md), error**
-
-
 ## CreateTranscription
 
 Transcribes audio into the input language.
@@ -961,7 +706,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 )
 
 func main() {
@@ -970,14 +715,14 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateTranscription(ctx, shared.CreateTranscriptionRequest{
         File: shared.CreateTranscriptionRequestFile{
-            Content: []byte("quasi"),
-            File: "repudiandae",
+            Content: []byte("odit"),
+            File: "quo",
         },
-        Language: gpt.String("sint"),
-        Model: "veritatis",
-        Prompt: gpt.String("itaque"),
-        ResponseFormat: gpt.String("incidunt"),
-        Temperature: gpt.Float64(3185.69),
+        Language: gpt.String("sequi"),
+        Model: shared.CreateTranscriptionRequestModel{},
+        Prompt: gpt.String("tenetur"),
+        ResponseFormat: gpt.String("ipsam"),
+        Temperature: gpt.Float64(6625.27),
     })
     if err != nil {
         log.Fatal(err)
@@ -1004,7 +749,7 @@ func main() {
 
 ## CreateTranslation
 
-Translates audio into into English.
+Translates audio into English.
 
 ### Example Usage
 
@@ -1015,7 +760,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 )
 
 func main() {
@@ -1024,13 +769,13 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateTranslation(ctx, shared.CreateTranslationRequest{
         File: shared.CreateTranslationRequestFile{
-            Content: []byte("consequatur"),
-            File: "est",
+            Content: []byte("possimus"),
+            File: "aut",
         },
-        Model: "quibusdam",
-        Prompt: gpt.String("explicabo"),
-        ResponseFormat: gpt.String("deserunt"),
-        Temperature: gpt.Float64(7163.27),
+        Model: shared.CreateTranslationRequestModel{},
+        Prompt: gpt.String("quasi"),
+        ResponseFormat: gpt.String("error"),
+        Temperature: gpt.Float64(8379.45),
     })
     if err != nil {
         log.Fatal(err)
@@ -1068,7 +813,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {
@@ -1076,7 +821,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.DeleteFile(ctx, operations.DeleteFileRequest{
-        FileID: "quibusdam",
+        FileID: "laborum",
     })
     if err != nil {
         log.Fatal(err)
@@ -1114,7 +859,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {
@@ -1160,7 +905,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {
@@ -1168,7 +913,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.DownloadFile(ctx, operations.DownloadFileRequest{
-        FileID: "labore",
+        FileID: "quasi",
     })
     if err != nil {
         log.Fatal(err)
@@ -1191,50 +936,6 @@ func main() {
 ### Response
 
 **[*operations.DownloadFileResponse](../../models/operations/downloadfileresponse.md), error**
-
-
-## ~~ListEngines~~
-
-Lists the currently available (non-finetuned) models, and provides basic information about each one such as the owner and availability.
-
-> :warning: **DEPRECATED**: this method will be removed in a future release, please migrate away from it as soon as possible.
-
-### Example Usage
-
-```go
-package main
-
-import(
-	"context"
-	"log"
-	"github.com/speakeasy-sdks/openai-go-sdk"
-)
-
-func main() {
-    s := gpt.New()
-
-    ctx := context.Background()
-    res, err := s.OpenAI.ListEngines(ctx)
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    if res.ListEnginesResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                             | Type                                                  | Required                                              | Description                                           |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
-
-
-### Response
-
-**[*operations.ListEnginesResponse](../../models/operations/listenginesresponse.md), error**
 
 
 ## ListFiles
@@ -1293,7 +994,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {
@@ -1412,54 +1113,6 @@ func main() {
 **[*operations.ListModelsResponse](../../models/operations/listmodelsresponse.md), error**
 
 
-## ~~RetrieveEngine~~
-
-Retrieves a model instance, providing basic information about it such as the owner and availability.
-
-> :warning: **DEPRECATED**: this method will be removed in a future release, please migrate away from it as soon as possible.
-
-### Example Usage
-
-```go
-package main
-
-import(
-	"context"
-	"log"
-	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/operations"
-)
-
-func main() {
-    s := gpt.New()
-
-    ctx := context.Background()
-    res, err := s.OpenAI.RetrieveEngine(ctx, operations.RetrieveEngineRequest{
-        EngineID: "davinci",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    if res.Engine != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
-| `request`                                                                            | [operations.RetrieveEngineRequest](../../models/operations/retrieveenginerequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
-
-
-### Response
-
-**[*operations.RetrieveEngineResponse](../../models/operations/retrieveengineresponse.md), error**
-
-
 ## RetrieveFile
 
 Returns information about a specific file.
@@ -1473,7 +1126,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {
@@ -1481,7 +1134,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.RetrieveFile(ctx, operations.RetrieveFileRequest{
-        FileID: "modi",
+        FileID: "reiciendis",
     })
     if err != nil {
         log.Fatal(err)
@@ -1522,7 +1175,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {
@@ -1568,7 +1221,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {

@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/types"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/types"
 )
 
 const (

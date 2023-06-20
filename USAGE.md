@@ -6,7 +6,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {

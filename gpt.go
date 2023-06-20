@@ -4,7 +4,7 @@ package gpt
 
 import (
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
 	"net/http"
 	"time"
 )
@@ -108,9 +108,9 @@ func New(opts ...SDKOption) *Gpt {
 	sdk := &Gpt{
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
-			OpenAPIDocVersion: "1.3.0",
-			SDKVersion:        "1.22.0",
-			GenVersion:        "2.41.1",
+			OpenAPIDocVersion: "2.0.0",
+			SDKVersion:        "2.0.0",
+			GenVersion:        "2.41.4",
 		},
 	}
 	for _, opt := range opts {

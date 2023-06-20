@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"fmt"
 )
 
 // CreateCompletionRequestLogitBias - Modify the likelihood of specified tokens appearing in the completion.
@@ -14,6 +15,117 @@ import (
 //
 // As an example, you can pass `{"50256": -100}` to prevent the <|endoftext|> token from being generated.
 type CreateCompletionRequestLogitBias struct {
+}
+
+// CreateCompletionRequestModel2 - ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.
+type CreateCompletionRequestModel2 string
+
+const (
+	CreateCompletionRequestModel2TextDavinci003 CreateCompletionRequestModel2 = "text-davinci-003"
+	CreateCompletionRequestModel2TextDavinci002 CreateCompletionRequestModel2 = "text-davinci-002"
+	CreateCompletionRequestModel2TextDavinci001 CreateCompletionRequestModel2 = "text-davinci-001"
+	CreateCompletionRequestModel2CodeDavinci002 CreateCompletionRequestModel2 = "code-davinci-002"
+	CreateCompletionRequestModel2TextCurie001   CreateCompletionRequestModel2 = "text-curie-001"
+	CreateCompletionRequestModel2TextBabbage001 CreateCompletionRequestModel2 = "text-babbage-001"
+	CreateCompletionRequestModel2TextAda001     CreateCompletionRequestModel2 = "text-ada-001"
+)
+
+func (e CreateCompletionRequestModel2) ToPointer() *CreateCompletionRequestModel2 {
+	return &e
+}
+
+func (e *CreateCompletionRequestModel2) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "text-davinci-003":
+		fallthrough
+	case "text-davinci-002":
+		fallthrough
+	case "text-davinci-001":
+		fallthrough
+	case "code-davinci-002":
+		fallthrough
+	case "text-curie-001":
+		fallthrough
+	case "text-babbage-001":
+		fallthrough
+	case "text-ada-001":
+		*e = CreateCompletionRequestModel2(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateCompletionRequestModel2: %v", v)
+	}
+}
+
+type CreateCompletionRequestModelType string
+
+const (
+	CreateCompletionRequestModelTypeStr                           CreateCompletionRequestModelType = "str"
+	CreateCompletionRequestModelTypeCreateCompletionRequestModel2 CreateCompletionRequestModelType = "CreateCompletionRequest_model_2"
+)
+
+type CreateCompletionRequestModel struct {
+	Str                           *string
+	CreateCompletionRequestModel2 *CreateCompletionRequestModel2
+
+	Type CreateCompletionRequestModelType
+}
+
+func CreateCreateCompletionRequestModelStr(str string) CreateCompletionRequestModel {
+	typ := CreateCompletionRequestModelTypeStr
+
+	return CreateCompletionRequestModel{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateCreateCompletionRequestModelCreateCompletionRequestModel2(createCompletionRequestModel2 CreateCompletionRequestModel2) CreateCompletionRequestModel {
+	typ := CreateCompletionRequestModelTypeCreateCompletionRequestModel2
+
+	return CreateCompletionRequestModel{
+		CreateCompletionRequestModel2: &createCompletionRequestModel2,
+		Type:                          typ,
+	}
+}
+
+func (u *CreateCompletionRequestModel) UnmarshalJSON(data []byte) error {
+	var d *json.Decoder
+
+	str := new(string)
+	d = json.NewDecoder(bytes.NewReader(data))
+	d.DisallowUnknownFields()
+	if err := d.Decode(&str); err == nil {
+		u.Str = str
+		u.Type = CreateCompletionRequestModelTypeStr
+		return nil
+	}
+
+	createCompletionRequestModel2 := new(CreateCompletionRequestModel2)
+	d = json.NewDecoder(bytes.NewReader(data))
+	d.DisallowUnknownFields()
+	if err := d.Decode(&createCompletionRequestModel2); err == nil {
+		u.CreateCompletionRequestModel2 = createCompletionRequestModel2
+		u.Type = CreateCompletionRequestModelTypeCreateCompletionRequestModel2
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u CreateCompletionRequestModel) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return json.Marshal(u.Str)
+	}
+
+	if u.CreateCompletionRequestModel2 != nil {
+		return json.Marshal(u.CreateCompletionRequestModel2)
+	}
+
+	return nil, nil
 }
 
 type CreateCompletionRequestPromptType string
@@ -234,7 +346,8 @@ type CreateCompletionRequest struct {
 	//
 	MaxTokens *int64 `json:"max_tokens,omitempty"`
 	// ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.
-	Model string `json:"model"`
+	//
+	Model CreateCompletionRequestModel `json:"model"`
 	// How many completions to generate for each prompt.
 	//
 	// **Note:** Because this parameter generates many completions, it can quickly consume your token quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.

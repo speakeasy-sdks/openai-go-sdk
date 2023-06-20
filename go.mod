@@ -1,4 +1,4 @@
-module github.com/speakeasy-sdks/openai-go-sdk
+module github.com/speakeasy-sdks/openai-go-sdk/v2
 
 go 1.14
 
