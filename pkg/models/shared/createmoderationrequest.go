@@ -107,74 +107,6 @@ func (e *CreateModerationRequestModel2) UnmarshalJSON(data []byte) error {
 	}
 }
 
-type CreateModerationRequestModelType string
-
-const (
-	CreateModerationRequestModelTypeStr                           CreateModerationRequestModelType = "str"
-	CreateModerationRequestModelTypeCreateModerationRequestModel2 CreateModerationRequestModelType = "CreateModerationRequest_model_2"
-)
-
-type CreateModerationRequestModel struct {
-	Str                           *string
-	CreateModerationRequestModel2 *CreateModerationRequestModel2
-
-	Type CreateModerationRequestModelType
-}
-
-func CreateCreateModerationRequestModelStr(str string) CreateModerationRequestModel {
-	typ := CreateModerationRequestModelTypeStr
-
-	return CreateModerationRequestModel{
-		Str:  &str,
-		Type: typ,
-	}
-}
-
-func CreateCreateModerationRequestModelCreateModerationRequestModel2(createModerationRequestModel2 CreateModerationRequestModel2) CreateModerationRequestModel {
-	typ := CreateModerationRequestModelTypeCreateModerationRequestModel2
-
-	return CreateModerationRequestModel{
-		CreateModerationRequestModel2: &createModerationRequestModel2,
-		Type:                          typ,
-	}
-}
-
-func (u *CreateModerationRequestModel) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
-
-	str := new(string)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&str); err == nil {
-		u.Str = str
-		u.Type = CreateModerationRequestModelTypeStr
-		return nil
-	}
-
-	createModerationRequestModel2 := new(CreateModerationRequestModel2)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&createModerationRequestModel2); err == nil {
-		u.CreateModerationRequestModel2 = createModerationRequestModel2
-		u.Type = CreateModerationRequestModelTypeCreateModerationRequestModel2
-		return nil
-	}
-
-	return errors.New("could not unmarshal into supported union types")
-}
-
-func (u CreateModerationRequestModel) MarshalJSON() ([]byte, error) {
-	if u.Str != nil {
-		return json.Marshal(u.Str)
-	}
-
-	if u.CreateModerationRequestModel2 != nil {
-		return json.Marshal(u.CreateModerationRequestModel2)
-	}
-
-	return nil, nil
-}
-
 type CreateModerationRequest struct {
 	// The input text to classify
 	Input CreateModerationRequestInput `json:"input"`
@@ -182,5 +114,5 @@ type CreateModerationRequest struct {
 	//
 	// The default is `text-moderation-latest` which will be automatically upgraded over time. This ensures you are always using our most accurate model. If you use `text-moderation-stable`, we will provide advanced notice before updating the model. Accuracy of `text-moderation-stable` may be slightly lower than for `text-moderation-latest`.
 	//
-	Model *CreateModerationRequestModel `json:"model,omitempty"`
+	Model interface{} `json:"model,omitempty"`
 }

@@ -141,50 +141,50 @@ func main() {
         MaxTokens: gpt.Int64(957156),
         Messages: []shared.ChatCompletionRequestMessage{
             shared.ChatCompletionRequestMessage{
-                Content: gpt.String("odit"),
+                Content: "odit",
                 FunctionCall: &shared.ChatCompletionRequestMessageFunctionCall{
-                    Arguments: gpt.String("at"),
-                    Name: gpt.String("Emilio Krajcik"),
+                    Arguments: "at",
+                    Name: "Emilio Krajcik",
                 },
                 Name: gpt.String("Deanna Sauer MD"),
                 Role: shared.ChatCompletionRequestMessageRoleAssistant,
             },
             shared.ChatCompletionRequestMessage{
-                Content: gpt.String("occaecati"),
+                Content: "occaecati",
                 FunctionCall: &shared.ChatCompletionRequestMessageFunctionCall{
-                    Arguments: gpt.String("fugit"),
-                    Name: gpt.String("Irvin Rosenbaum III"),
+                    Arguments: "fugit",
+                    Name: "Irvin Rosenbaum III",
                 },
                 Name: gpt.String("Pauline Dibbert"),
                 Role: shared.ChatCompletionRequestMessageRoleUser,
             },
             shared.ChatCompletionRequestMessage{
-                Content: gpt.String("ipsum"),
+                Content: "ipsum",
                 FunctionCall: &shared.ChatCompletionRequestMessageFunctionCall{
-                    Arguments: gpt.String("excepturi"),
-                    Name: gpt.String("Dorothy Hane"),
+                    Arguments: "excepturi",
+                    Name: "Dorothy Hane",
                 },
                 Name: gpt.String("Curtis Morissette"),
                 Role: shared.ChatCompletionRequestMessageRoleFunction,
             },
             shared.ChatCompletionRequestMessage{
-                Content: gpt.String("fuga"),
+                Content: "fuga",
                 FunctionCall: &shared.ChatCompletionRequestMessageFunctionCall{
-                    Arguments: gpt.String("in"),
-                    Name: gpt.String("Sheryl Kertzmann"),
+                    Arguments: "in",
+                    Name: "Sheryl Kertzmann",
                 },
                 Name: gpt.String("Brenda Wisozk"),
                 Role: shared.ChatCompletionRequestMessageRoleAssistant,
             },
         },
-        Model: shared.CreateChatCompletionRequestModel{},
+        Model: "gpt-3.5-turbo",
         N: gpt.Int64(1),
-        PresencePenalty: gpt.Float64(1709.09),
+        PresencePenalty: gpt.Float64(2103.82),
         Stop: &shared.CreateChatCompletionRequestStop{},
         Stream: gpt.Bool(false),
         Temperature: gpt.Float64(1),
         TopP: gpt.Float64(1),
-        User: gpt.String("dolorem"),
+        User: gpt.String("corporis"),
     })
     if err != nil {
         log.Fatal(err)
@@ -230,15 +230,15 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateCompletion(ctx, shared.CreateCompletionRequest{
-        BestOf: gpt.Int64(358152),
+        BestOf: gpt.Int64(128926),
         Echo: gpt.Bool(false),
-        FrequencyPenalty: gpt.Float64(1289.26),
+        FrequencyPenalty: gpt.Float64(7506.86),
         LogitBias: &shared.CreateCompletionRequestLogitBias{},
-        Logprobs: gpt.Int64(750686),
+        Logprobs: gpt.Int64(315428),
         MaxTokens: gpt.Int64(16),
-        Model: shared.CreateCompletionRequestModel{},
+        Model: shared.CreateCompletionRequestModel2TextDavinci001,
         N: gpt.Int64(1),
-        PresencePenalty: gpt.Float64(3154.28),
+        PresencePenalty: gpt.Float64(3250.47),
         Prompt: shared.CreateCompletionRequestPrompt{},
         Stop: &shared.CreateCompletionRequestStop{},
         Stream: gpt.Bool(false),
@@ -293,7 +293,7 @@ func main() {
     res, err := s.OpenAI.CreateEdit(ctx, shared.CreateEditRequest{
         Input: gpt.String("What day of the wek is it?"),
         Instruction: "Fix the spelling mistakes.",
-        Model: shared.CreateEditRequestModel{},
+        Model: shared.CreateEditRequestModel2TextDavinciEdit001,
         N: gpt.Int64(1),
         Temperature: gpt.Float64(1),
         TopP: gpt.Float64(1),
@@ -343,8 +343,8 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateEmbedding(ctx, shared.CreateEmbeddingRequest{
         Input: shared.CreateEmbeddingRequestInput{},
-        Model: shared.CreateEmbeddingRequestModel{},
-        User: gpt.String("omnis"),
+        Model: "text-embedding-ada-002",
+        User: gpt.String("iure"),
     })
     if err != nil {
         log.Fatal(err)
@@ -392,10 +392,10 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateFile(ctx, shared.CreateFileRequest{
         File: shared.CreateFileRequestFile{
-            Content: []byte("nemo"),
-            File: "minima",
+            Content: []byte("culpa"),
+            File: "doloribus",
         },
-        Purpose: "excepturi",
+        Purpose: "sapiente",
     })
     if err != nil {
         log.Fatal(err)
@@ -446,19 +446,20 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateFineTune(ctx, shared.CreateFineTuneRequest{
-        BatchSize: gpt.Int64(38425),
+        BatchSize: gpt.Int64(102044),
         ClassificationBetas: []float64{
-            6342.74,
-            9883.74,
+            2088.76,
+            6350.59,
+            1613.09,
         },
-        ClassificationNClasses: gpt.Int64(958950),
-        ClassificationPositiveClass: gpt.String("architecto"),
+        ClassificationNClasses: gpt.Int64(995300),
+        ClassificationPositiveClass: gpt.String("mollitia"),
         ComputeClassificationMetrics: gpt.Bool(false),
-        LearningRateMultiplier: gpt.Float64(6527.9),
-        Model: &shared.CreateFineTuneRequestModel{},
-        NEpochs: gpt.Int64(208876),
-        PromptLossWeight: gpt.Float64(6350.59),
-        Suffix: gpt.String("consequuntur"),
+        LearningRateMultiplier: gpt.Float64(5818.5),
+        Model: gpt.String("curie"),
+        NEpochs: gpt.Int64(414369),
+        PromptLossWeight: gpt.Float64(4663.11),
+        Suffix: gpt.String("molestiae"),
         TrainingFile: "file-ajSREls59WBbvgSzJSVWxMCB",
         ValidationFile: gpt.String("file-XjSREls59WBbvgSzJSVWxMCa"),
     })
@@ -510,7 +511,7 @@ func main() {
         Prompt: "A cute baby sea otter",
         ResponseFormat: shared.CreateImageRequestResponseFormatURL.ToPointer(),
         Size: shared.CreateImageRequestSizeOneThousandAndTwentyFourx1024.ToPointer(),
-        User: gpt.String("repellat"),
+        User: gpt.String("velit"),
     })
     if err != nil {
         log.Fatal(err)
@@ -557,18 +558,18 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateImageEdit(ctx, shared.CreateImageEditRequest{
         Image: shared.CreateImageEditRequestImage{
-            Content: []byte("mollitia"),
-            Image: "occaecati",
+            Content: []byte("error"),
+            Image: "quia",
         },
         Mask: &shared.CreateImageEditRequestMask{
-            Content: []byte("numquam"),
-            Mask: "commodi",
+            Content: []byte("quis"),
+            Mask: "vitae",
         },
-        N: gpt.String("quam"),
+        N: gpt.String("laborum"),
         Prompt: "A cute baby sea otter wearing a beret",
-        ResponseFormat: gpt.String("molestiae"),
-        Size: gpt.String("velit"),
-        User: gpt.String("error"),
+        ResponseFormat: gpt.String("animi"),
+        Size: gpt.String("enim"),
+        User: gpt.String("odit"),
     })
     if err != nil {
         log.Fatal(err)
@@ -615,13 +616,13 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateImageVariation(ctx, shared.CreateImageVariationRequest{
         Image: shared.CreateImageVariationRequestImage{
-            Content: []byte("quia"),
-            Image: "quis",
+            Content: []byte("quo"),
+            Image: "sequi",
         },
-        N: gpt.String("vitae"),
-        ResponseFormat: gpt.String("laborum"),
-        Size: gpt.String("animi"),
-        User: gpt.String("enim"),
+        N: gpt.String("tenetur"),
+        ResponseFormat: gpt.String("ipsam"),
+        Size: gpt.String("id"),
+        User: gpt.String("possimus"),
     })
     if err != nil {
         log.Fatal(err)
@@ -668,7 +669,7 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateModeration(ctx, shared.CreateModerationRequest{
         Input: shared.CreateModerationRequestInput{},
-        Model: &shared.CreateModerationRequestModel{},
+        Model: gpt.String("text-moderation-stable"),
     })
     if err != nil {
         log.Fatal(err)
@@ -715,14 +716,14 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateTranscription(ctx, shared.CreateTranscriptionRequest{
         File: shared.CreateTranscriptionRequestFile{
-            Content: []byte("odit"),
-            File: "quo",
+            Content: []byte("quasi"),
+            File: "error",
         },
-        Language: gpt.String("sequi"),
-        Model: shared.CreateTranscriptionRequestModel{},
-        Prompt: gpt.String("tenetur"),
-        ResponseFormat: gpt.String("ipsam"),
-        Temperature: gpt.Float64(6625.27),
+        Language: gpt.String("temporibus"),
+        Model: shared.CreateTranscriptionRequestModel2Whisper1,
+        Prompt: gpt.String("quasi"),
+        ResponseFormat: gpt.String("reiciendis"),
+        Temperature: gpt.Float64(9764.6),
     })
     if err != nil {
         log.Fatal(err)
@@ -769,13 +770,13 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateTranslation(ctx, shared.CreateTranslationRequest{
         File: shared.CreateTranslationRequestFile{
-            Content: []byte("possimus"),
-            File: "aut",
+            Content: []byte("vero"),
+            File: "nihil",
         },
-        Model: shared.CreateTranslationRequestModel{},
-        Prompt: gpt.String("quasi"),
-        ResponseFormat: gpt.String("error"),
-        Temperature: gpt.Float64(8379.45),
+        Model: shared.CreateTranslationRequestModel2Whisper1,
+        Prompt: gpt.String("voluptatibus"),
+        ResponseFormat: gpt.String("ipsa"),
+        Temperature: gpt.Float64(6048.46),
     })
     if err != nil {
         log.Fatal(err)
@@ -821,7 +822,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.DeleteFile(ctx, operations.DeleteFileRequest{
-        FileID: "laborum",
+        FileID: "voluptate",
     })
     if err != nil {
         log.Fatal(err)
@@ -913,7 +914,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.DownloadFile(ctx, operations.DownloadFileRequest{
-        FileID: "quasi",
+        FileID: "cum",
     })
     if err != nil {
         log.Fatal(err)
@@ -1134,7 +1135,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.RetrieveFile(ctx, operations.RetrieveFileRequest{
-        FileID: "reiciendis",
+        FileID: "perferendis",
     })
     if err != nil {
         log.Fatal(err)

@@ -3,9 +3,7 @@
 package shared
 
 import (
-	"bytes"
 	"encoding/json"
-	"errors"
 	"fmt"
 )
 
@@ -39,81 +37,13 @@ func (e *CreateTranslationRequestModel2) UnmarshalJSON(data []byte) error {
 	}
 }
 
-type CreateTranslationRequestModelType string
-
-const (
-	CreateTranslationRequestModelTypeStr                            CreateTranslationRequestModelType = "str"
-	CreateTranslationRequestModelTypeCreateTranslationRequestModel2 CreateTranslationRequestModelType = "CreateTranslationRequest_model_2"
-)
-
-type CreateTranslationRequestModel struct {
-	Str                            *string
-	CreateTranslationRequestModel2 *CreateTranslationRequestModel2
-
-	Type CreateTranslationRequestModelType
-}
-
-func CreateCreateTranslationRequestModelStr(str string) CreateTranslationRequestModel {
-	typ := CreateTranslationRequestModelTypeStr
-
-	return CreateTranslationRequestModel{
-		Str:  &str,
-		Type: typ,
-	}
-}
-
-func CreateCreateTranslationRequestModelCreateTranslationRequestModel2(createTranslationRequestModel2 CreateTranslationRequestModel2) CreateTranslationRequestModel {
-	typ := CreateTranslationRequestModelTypeCreateTranslationRequestModel2
-
-	return CreateTranslationRequestModel{
-		CreateTranslationRequestModel2: &createTranslationRequestModel2,
-		Type:                           typ,
-	}
-}
-
-func (u *CreateTranslationRequestModel) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
-
-	str := new(string)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&str); err == nil {
-		u.Str = str
-		u.Type = CreateTranslationRequestModelTypeStr
-		return nil
-	}
-
-	createTranslationRequestModel2 := new(CreateTranslationRequestModel2)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&createTranslationRequestModel2); err == nil {
-		u.CreateTranslationRequestModel2 = createTranslationRequestModel2
-		u.Type = CreateTranslationRequestModelTypeCreateTranslationRequestModel2
-		return nil
-	}
-
-	return errors.New("could not unmarshal into supported union types")
-}
-
-func (u CreateTranslationRequestModel) MarshalJSON() ([]byte, error) {
-	if u.Str != nil {
-		return json.Marshal(u.Str)
-	}
-
-	if u.CreateTranslationRequestModel2 != nil {
-		return json.Marshal(u.CreateTranslationRequestModel2)
-	}
-
-	return nil, nil
-}
-
 type CreateTranslationRequest struct {
 	// The audio file object (not file name) translate, in one of these formats: mp3, mp4, mpeg, mpga, m4a, wav, or webm.
 	//
 	File CreateTranslationRequestFile `multipartForm:"file"`
 	// ID of the model to use. Only `whisper-1` is currently available.
 	//
-	Model CreateTranslationRequestModel `multipartForm:"name=model"`
+	Model interface{} `multipartForm:"name=model,json"`
 	// An optional text to guide the model's style or continue a previous audio segment. The [prompt](/docs/guides/speech-to-text/prompting) should be in English.
 	//
 	Prompt *string `multipartForm:"name=prompt"`

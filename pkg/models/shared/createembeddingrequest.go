@@ -150,79 +150,11 @@ func (e *CreateEmbeddingRequestModel2) UnmarshalJSON(data []byte) error {
 	}
 }
 
-type CreateEmbeddingRequestModelType string
-
-const (
-	CreateEmbeddingRequestModelTypeStr                          CreateEmbeddingRequestModelType = "str"
-	CreateEmbeddingRequestModelTypeCreateEmbeddingRequestModel2 CreateEmbeddingRequestModelType = "CreateEmbeddingRequest_model_2"
-)
-
-type CreateEmbeddingRequestModel struct {
-	Str                          *string
-	CreateEmbeddingRequestModel2 *CreateEmbeddingRequestModel2
-
-	Type CreateEmbeddingRequestModelType
-}
-
-func CreateCreateEmbeddingRequestModelStr(str string) CreateEmbeddingRequestModel {
-	typ := CreateEmbeddingRequestModelTypeStr
-
-	return CreateEmbeddingRequestModel{
-		Str:  &str,
-		Type: typ,
-	}
-}
-
-func CreateCreateEmbeddingRequestModelCreateEmbeddingRequestModel2(createEmbeddingRequestModel2 CreateEmbeddingRequestModel2) CreateEmbeddingRequestModel {
-	typ := CreateEmbeddingRequestModelTypeCreateEmbeddingRequestModel2
-
-	return CreateEmbeddingRequestModel{
-		CreateEmbeddingRequestModel2: &createEmbeddingRequestModel2,
-		Type:                         typ,
-	}
-}
-
-func (u *CreateEmbeddingRequestModel) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
-
-	str := new(string)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&str); err == nil {
-		u.Str = str
-		u.Type = CreateEmbeddingRequestModelTypeStr
-		return nil
-	}
-
-	createEmbeddingRequestModel2 := new(CreateEmbeddingRequestModel2)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&createEmbeddingRequestModel2); err == nil {
-		u.CreateEmbeddingRequestModel2 = createEmbeddingRequestModel2
-		u.Type = CreateEmbeddingRequestModelTypeCreateEmbeddingRequestModel2
-		return nil
-	}
-
-	return errors.New("could not unmarshal into supported union types")
-}
-
-func (u CreateEmbeddingRequestModel) MarshalJSON() ([]byte, error) {
-	if u.Str != nil {
-		return json.Marshal(u.Str)
-	}
-
-	if u.CreateEmbeddingRequestModel2 != nil {
-		return json.Marshal(u.CreateEmbeddingRequestModel2)
-	}
-
-	return nil, nil
-}
-
 type CreateEmbeddingRequest struct {
 	// Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays. Each input must not exceed the max input tokens for the model (8191 tokens for `text-embedding-ada-002`). [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb) for counting tokens.
 	//
 	Input CreateEmbeddingRequestInput `json:"input"`
 	// model_description
-	Model CreateEmbeddingRequestModel `json:"model"`
-	User  interface{}                 `json:"user,omitempty"`
+	Model interface{} `json:"model"`
+	User  interface{} `json:"user,omitempty"`
 }

@@ -3,9 +3,7 @@
 package shared
 
 import (
-	"bytes"
 	"encoding/json"
-	"errors"
 	"fmt"
 )
 
@@ -37,81 +35,13 @@ func (e *CreateEditRequestModel2) UnmarshalJSON(data []byte) error {
 	}
 }
 
-type CreateEditRequestModelType string
-
-const (
-	CreateEditRequestModelTypeStr                     CreateEditRequestModelType = "str"
-	CreateEditRequestModelTypeCreateEditRequestModel2 CreateEditRequestModelType = "CreateEditRequest_model_2"
-)
-
-type CreateEditRequestModel struct {
-	Str                     *string
-	CreateEditRequestModel2 *CreateEditRequestModel2
-
-	Type CreateEditRequestModelType
-}
-
-func CreateCreateEditRequestModelStr(str string) CreateEditRequestModel {
-	typ := CreateEditRequestModelTypeStr
-
-	return CreateEditRequestModel{
-		Str:  &str,
-		Type: typ,
-	}
-}
-
-func CreateCreateEditRequestModelCreateEditRequestModel2(createEditRequestModel2 CreateEditRequestModel2) CreateEditRequestModel {
-	typ := CreateEditRequestModelTypeCreateEditRequestModel2
-
-	return CreateEditRequestModel{
-		CreateEditRequestModel2: &createEditRequestModel2,
-		Type:                    typ,
-	}
-}
-
-func (u *CreateEditRequestModel) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
-
-	str := new(string)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&str); err == nil {
-		u.Str = str
-		u.Type = CreateEditRequestModelTypeStr
-		return nil
-	}
-
-	createEditRequestModel2 := new(CreateEditRequestModel2)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&createEditRequestModel2); err == nil {
-		u.CreateEditRequestModel2 = createEditRequestModel2
-		u.Type = CreateEditRequestModelTypeCreateEditRequestModel2
-		return nil
-	}
-
-	return errors.New("could not unmarshal into supported union types")
-}
-
-func (u CreateEditRequestModel) MarshalJSON() ([]byte, error) {
-	if u.Str != nil {
-		return json.Marshal(u.Str)
-	}
-
-	if u.CreateEditRequestModel2 != nil {
-		return json.Marshal(u.CreateEditRequestModel2)
-	}
-
-	return nil, nil
-}
-
 type CreateEditRequest struct {
 	// The input text to use as a starting point for the edit.
 	Input *string `json:"input,omitempty"`
 	// The instruction that tells the model how to edit the prompt.
 	Instruction string `json:"instruction"`
 	// ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001` model with this endpoint.
-	Model CreateEditRequestModel `json:"model"`
+	Model interface{} `json:"model"`
 	// How many edits to generate for the input and instruction.
 	N *int64 `json:"n,omitempty"`
 	// completions_temperature_description

@@ -3,9 +3,7 @@
 package shared
 
 import (
-	"bytes"
 	"encoding/json"
-	"errors"
 	"fmt"
 )
 
@@ -44,74 +42,6 @@ func (e *CreateFineTuneRequestModel2) UnmarshalJSON(data []byte) error {
 	default:
 		return fmt.Errorf("invalid value for CreateFineTuneRequestModel2: %v", v)
 	}
-}
-
-type CreateFineTuneRequestModelType string
-
-const (
-	CreateFineTuneRequestModelTypeStr                         CreateFineTuneRequestModelType = "str"
-	CreateFineTuneRequestModelTypeCreateFineTuneRequestModel2 CreateFineTuneRequestModelType = "CreateFineTuneRequest_model_2"
-)
-
-type CreateFineTuneRequestModel struct {
-	Str                         *string
-	CreateFineTuneRequestModel2 *CreateFineTuneRequestModel2
-
-	Type CreateFineTuneRequestModelType
-}
-
-func CreateCreateFineTuneRequestModelStr(str string) CreateFineTuneRequestModel {
-	typ := CreateFineTuneRequestModelTypeStr
-
-	return CreateFineTuneRequestModel{
-		Str:  &str,
-		Type: typ,
-	}
-}
-
-func CreateCreateFineTuneRequestModelCreateFineTuneRequestModel2(createFineTuneRequestModel2 CreateFineTuneRequestModel2) CreateFineTuneRequestModel {
-	typ := CreateFineTuneRequestModelTypeCreateFineTuneRequestModel2
-
-	return CreateFineTuneRequestModel{
-		CreateFineTuneRequestModel2: &createFineTuneRequestModel2,
-		Type:                        typ,
-	}
-}
-
-func (u *CreateFineTuneRequestModel) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
-
-	str := new(string)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&str); err == nil {
-		u.Str = str
-		u.Type = CreateFineTuneRequestModelTypeStr
-		return nil
-	}
-
-	createFineTuneRequestModel2 := new(CreateFineTuneRequestModel2)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&createFineTuneRequestModel2); err == nil {
-		u.CreateFineTuneRequestModel2 = createFineTuneRequestModel2
-		u.Type = CreateFineTuneRequestModelTypeCreateFineTuneRequestModel2
-		return nil
-	}
-
-	return errors.New("could not unmarshal into supported union types")
-}
-
-func (u CreateFineTuneRequestModel) MarshalJSON() ([]byte, error) {
-	if u.Str != nil {
-		return json.Marshal(u.Str)
-	}
-
-	if u.CreateFineTuneRequestModel2 != nil {
-		return json.Marshal(u.CreateFineTuneRequestModel2)
-	}
-
-	return nil, nil
 }
 
 type CreateFineTuneRequest struct {
@@ -171,7 +101,7 @@ type CreateFineTuneRequest struct {
 	// To learn more about these models, see the
 	// [Models](https://platform.openai.com/docs/models) documentation.
 	//
-	Model *CreateFineTuneRequestModel `json:"model,omitempty"`
+	Model interface{} `json:"model,omitempty"`
 	// The number of epochs to train the model for. An epoch refers to one
 	// full cycle through the training dataset.
 	//
