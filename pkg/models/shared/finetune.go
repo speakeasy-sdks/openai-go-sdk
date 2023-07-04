@@ -3,6 +3,13 @@
 package shared
 
 type FineTuneHyperparams struct {
+	BatchSize                    int64   `json:"batch_size"`
+	ClassificationNClasses       *int64  `json:"classification_n_classes,omitempty"`
+	ClassificationPositiveClass  *string `json:"classification_positive_class,omitempty"`
+	ComputeClassificationMetrics *bool   `json:"compute_classification_metrics,omitempty"`
+	LearningRateMultiplier       float64 `json:"learning_rate_multiplier"`
+	NEpochs                      int64   `json:"n_epochs"`
+	PromptLossWeight             float64 `json:"prompt_loss_weight"`
 }
 
 // FineTune - OK
