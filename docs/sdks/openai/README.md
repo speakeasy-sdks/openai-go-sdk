@@ -10,7 +10,7 @@ The OpenAI REST API
 
 * [CreateChatCompletion](#createchatcompletion) - Creates a model response for the given chat conversation.
 * [CreateCompletion](#createcompletion) - Creates a completion for the provided prompt and parameters.
-* [CreateEdit](#createedit) - Creates a new edit for the provided input, instruction, and parameters.
+* [~~CreateEdit~~](#createedit) - Creates a new edit for the provided input, instruction, and parameters. :warning: **Deprecated**
 * [CreateEmbedding](#createembedding) - Creates an embedding vector representing the input text.
 * [CreateFile](#createfile) - Upload a file that contains document(s) to be used across various endpoints/features. Currently, the size of all the files uploaded by one organization can be up to 1 GB. Please contact us if you need to increase the storage limit.
 
@@ -268,9 +268,11 @@ func main() {
 **[*operations.CreateCompletionResponse](../../models/operations/createcompletionresponse.md), error**
 
 
-## CreateEdit
+## ~~CreateEdit~~
 
 Creates a new edit for the provided input, instruction, and parameters.
+
+> :warning: **DEPRECATED**: this method will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -713,7 +715,7 @@ func main() {
     s := gpt.New()
 
     ctx := context.Background()
-    res, err := s.OpenAI.CreateTranscription(ctx, shared.CreateTranscriptionRequest{
+    res, err := s.OpenAI.CreateTranscription(ctx, shared.CreateTranscriptionRequest1{
         File: shared.CreateTranscriptionRequestFile{
             Content: []byte("aut"),
             File: "quasi",
@@ -721,7 +723,7 @@ func main() {
         Language: gpt.String("error"),
         Model: shared.CreateTranscriptionRequestModel2Whisper1,
         Prompt: gpt.String("laborum"),
-        ResponseFormat: gpt.String("quasi"),
+        ResponseFormat: shared.CreateTranscriptionRequestResponseFormatJSON.ToPointer(),
         Temperature: gpt.Float64(9719.45),
     })
     if err != nil {
@@ -736,10 +738,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
-| `request`                                                                              | [shared.CreateTranscriptionRequest](../../models/shared/createtranscriptionrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `request`                                                                                | [shared.CreateTranscriptionRequest1](../../models/shared/createtranscriptionrequest1.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 
 
 ### Response

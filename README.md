@@ -31,6 +31,8 @@ Authorization: Bearer YOUR_API_KEY
 
 ## SDK Example Usage
 <!-- Start SDK Example Usage -->
+
+
 ```go
 package main
 
@@ -69,7 +71,7 @@ func main() {
 
 * [CreateChatCompletion](docs/sdks/openai/README.md#createchatcompletion) - Creates a model response for the given chat conversation.
 * [CreateCompletion](docs/sdks/openai/README.md#createcompletion) - Creates a completion for the provided prompt and parameters.
-* [CreateEdit](docs/sdks/openai/README.md#createedit) - Creates a new edit for the provided input, instruction, and parameters.
+* [~~CreateEdit~~](docs/sdks/openai/README.md#createedit) - Creates a new edit for the provided input, instruction, and parameters. :warning: **Deprecated**
 * [CreateEmbedding](docs/sdks/openai/README.md#createembedding) - Creates an embedding vector representing the input text.
 * [CreateFile](docs/sdks/openai/README.md#createfile) - Upload a file that contains document(s) to be used across various endpoints/features. Currently, the size of all the files uploaded by one organization can be up to 1 GB. Please contact us if you need to increase the storage limit.
 
