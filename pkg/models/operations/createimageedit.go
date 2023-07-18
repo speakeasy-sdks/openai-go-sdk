@@ -14,3 +14,31 @@ type CreateImageEditResponse struct {
 	StatusCode     int
 	RawResponse    *http.Response
 }
+
+func (o *CreateImageEditResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *CreateImageEditResponse) GetImagesResponse() *shared.ImagesResponse {
+	if o == nil {
+		return nil
+	}
+	return o.ImagesResponse
+}
+
+func (o *CreateImageEditResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *CreateImageEditResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}

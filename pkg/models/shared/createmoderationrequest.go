@@ -116,3 +116,17 @@ type CreateModerationRequest struct {
 	//
 	Model interface{} `json:"model,omitempty"`
 }
+
+func (o *CreateModerationRequest) GetInput() CreateModerationRequestInput {
+	if o == nil {
+		return CreateModerationRequestInput{}
+	}
+	return o.Input
+}
+
+func (o *CreateModerationRequest) GetModel() interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Model
+}

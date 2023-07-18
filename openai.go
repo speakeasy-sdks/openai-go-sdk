@@ -7,6 +7,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/sdkerrors"
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
 	"io"
@@ -74,6 +75,8 @@ func (s *openAI) CancelFineTune(ctx context.Context, request operations.CancelFi
 			}
 
 			res.FineTune = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -136,6 +139,8 @@ func (s *openAI) CreateChatCompletion(ctx context.Context, request shared.Create
 			}
 
 			res.CreateChatCompletionResponse = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -198,6 +203,8 @@ func (s *openAI) CreateCompletion(ctx context.Context, request shared.CreateComp
 			}
 
 			res.CreateCompletionResponse = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -262,6 +269,8 @@ func (s *openAI) CreateEdit(ctx context.Context, request shared.CreateEditReques
 			}
 
 			res.CreateEditResponse = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -324,6 +333,8 @@ func (s *openAI) CreateEmbedding(ctx context.Context, request shared.CreateEmbed
 			}
 
 			res.CreateEmbeddingResponse = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -386,6 +397,8 @@ func (s *openAI) CreateFile(ctx context.Context, request shared.CreateFileReques
 			}
 
 			res.OpenAIFile = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -452,6 +465,8 @@ func (s *openAI) CreateFineTune(ctx context.Context, request shared.CreateFineTu
 			}
 
 			res.FineTune = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -514,6 +529,8 @@ func (s *openAI) CreateImage(ctx context.Context, request shared.CreateImageRequ
 			}
 
 			res.ImagesResponse = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -521,7 +538,7 @@ func (s *openAI) CreateImage(ctx context.Context, request shared.CreateImageRequ
 }
 
 // CreateImageEdit - Creates an edited or extended image given an original image and a prompt.
-func (s *openAI) CreateImageEdit(ctx context.Context, request shared.CreateImageEditRequest) (*operations.CreateImageEditResponse, error) {
+func (s *openAI) CreateImageEdit(ctx context.Context, request shared.CreateImageEditRequest2) (*operations.CreateImageEditResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/images/edits"
 
@@ -576,6 +593,8 @@ func (s *openAI) CreateImageEdit(ctx context.Context, request shared.CreateImage
 			}
 
 			res.ImagesResponse = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -583,7 +602,7 @@ func (s *openAI) CreateImageEdit(ctx context.Context, request shared.CreateImage
 }
 
 // CreateImageVariation - Creates a variation of a given image.
-func (s *openAI) CreateImageVariation(ctx context.Context, request shared.CreateImageVariationRequest) (*operations.CreateImageVariationResponse, error) {
+func (s *openAI) CreateImageVariation(ctx context.Context, request shared.CreateImageVariationRequest2) (*operations.CreateImageVariationResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/images/variations"
 
@@ -638,6 +657,8 @@ func (s *openAI) CreateImageVariation(ctx context.Context, request shared.Create
 			}
 
 			res.ImagesResponse = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -700,6 +721,8 @@ func (s *openAI) CreateModeration(ctx context.Context, request shared.CreateMode
 			}
 
 			res.CreateModerationResponse = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -762,6 +785,8 @@ func (s *openAI) CreateTranscription(ctx context.Context, request shared.CreateT
 			}
 
 			res.CreateTranscriptionResponse = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -824,6 +849,8 @@ func (s *openAI) CreateTranslation(ctx context.Context, request shared.CreateTra
 			}
 
 			res.CreateTranslationResponse = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -879,6 +906,8 @@ func (s *openAI) DeleteFile(ctx context.Context, request operations.DeleteFileRe
 			}
 
 			res.DeleteFileResponse = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -934,6 +963,8 @@ func (s *openAI) DeleteModel(ctx context.Context, request operations.DeleteModel
 			}
 
 			res.DeleteModelResponse = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -985,6 +1016,8 @@ func (s *openAI) DownloadFile(ctx context.Context, request operations.DownloadFi
 		case utils.MatchContentType(contentType, `application/json`):
 			out := string(rawBody)
 			res.DownloadFile200ApplicationJSONString = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -1037,6 +1070,8 @@ func (s *openAI) ListFiles(ctx context.Context) (*operations.ListFilesResponse, 
 			}
 
 			res.ListFilesResponse = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -1096,6 +1131,8 @@ func (s *openAI) ListFineTuneEvents(ctx context.Context, request operations.List
 			}
 
 			res.ListFineTuneEventsResponse = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -1148,6 +1185,8 @@ func (s *openAI) ListFineTunes(ctx context.Context) (*operations.ListFineTunesRe
 			}
 
 			res.ListFineTunesResponse = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -1200,6 +1239,8 @@ func (s *openAI) ListModels(ctx context.Context) (*operations.ListModelsResponse
 			}
 
 			res.ListModelsResponse = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -1255,6 +1296,8 @@ func (s *openAI) RetrieveFile(ctx context.Context, request operations.RetrieveFi
 			}
 
 			res.OpenAIFile = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -1312,6 +1355,8 @@ func (s *openAI) RetrieveFineTune(ctx context.Context, request operations.Retrie
 			}
 
 			res.FineTune = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -1367,6 +1412,8 @@ func (s *openAI) RetrieveModel(ctx context.Context, request operations.RetrieveM
 			}
 
 			res.Model = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

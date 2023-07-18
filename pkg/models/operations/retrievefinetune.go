@@ -13,10 +13,45 @@ type RetrieveFineTuneRequest struct {
 	FineTuneID string `pathParam:"style=simple,explode=false,name=fine_tune_id"`
 }
 
+func (o *RetrieveFineTuneRequest) GetFineTuneID() string {
+	if o == nil {
+		return ""
+	}
+	return o.FineTuneID
+}
+
 type RetrieveFineTuneResponse struct {
 	ContentType string
 	// OK
 	FineTune    *shared.FineTune
 	StatusCode  int
 	RawResponse *http.Response
+}
+
+func (o *RetrieveFineTuneResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *RetrieveFineTuneResponse) GetFineTune() *shared.FineTune {
+	if o == nil {
+		return nil
+	}
+	return o.FineTune
+}
+
+func (o *RetrieveFineTuneResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *RetrieveFineTuneResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

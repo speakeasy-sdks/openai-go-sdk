@@ -12,10 +12,45 @@ type DeleteFileRequest struct {
 	FileID string `pathParam:"style=simple,explode=false,name=file_id"`
 }
 
+func (o *DeleteFileRequest) GetFileID() string {
+	if o == nil {
+		return ""
+	}
+	return o.FileID
+}
+
 type DeleteFileResponse struct {
 	ContentType string
 	// OK
 	DeleteFileResponse *shared.DeleteFileResponse
 	StatusCode         int
 	RawResponse        *http.Response
+}
+
+func (o *DeleteFileResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *DeleteFileResponse) GetDeleteFileResponse() *shared.DeleteFileResponse {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteFileResponse
+}
+
+func (o *DeleteFileResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *DeleteFileResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

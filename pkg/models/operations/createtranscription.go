@@ -14,3 +14,31 @@ type CreateTranscriptionResponse struct {
 	StatusCode                  int
 	RawResponse                 *http.Response
 }
+
+func (o *CreateTranscriptionResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *CreateTranscriptionResponse) GetCreateTranscriptionResponse() *shared.CreateTranscriptionResponse {
+	if o == nil {
+		return nil
+	}
+	return o.CreateTranscriptionResponse
+}
+
+func (o *CreateTranscriptionResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *CreateTranscriptionResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}

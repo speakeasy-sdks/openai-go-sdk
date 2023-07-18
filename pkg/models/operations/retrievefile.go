@@ -12,10 +12,45 @@ type RetrieveFileRequest struct {
 	FileID string `pathParam:"style=simple,explode=false,name=file_id"`
 }
 
+func (o *RetrieveFileRequest) GetFileID() string {
+	if o == nil {
+		return ""
+	}
+	return o.FileID
+}
+
 type RetrieveFileResponse struct {
 	ContentType string
 	// OK
 	OpenAIFile  *shared.OpenAIFile
 	StatusCode  int
 	RawResponse *http.Response
+}
+
+func (o *RetrieveFileResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *RetrieveFileResponse) GetOpenAIFile() *shared.OpenAIFile {
+	if o == nil {
+		return nil
+	}
+	return o.OpenAIFile
+}
+
+func (o *RetrieveFileResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *RetrieveFileResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

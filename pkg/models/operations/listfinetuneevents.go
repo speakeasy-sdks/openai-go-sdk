@@ -23,10 +23,52 @@ type ListFineTuneEventsRequest struct {
 	Stream *bool `queryParam:"style=form,explode=true,name=stream"`
 }
 
+func (o *ListFineTuneEventsRequest) GetFineTuneID() string {
+	if o == nil {
+		return ""
+	}
+	return o.FineTuneID
+}
+
+func (o *ListFineTuneEventsRequest) GetStream() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Stream
+}
+
 type ListFineTuneEventsResponse struct {
 	ContentType string
 	// OK
 	ListFineTuneEventsResponse *shared.ListFineTuneEventsResponse
 	StatusCode                 int
 	RawResponse                *http.Response
+}
+
+func (o *ListFineTuneEventsResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListFineTuneEventsResponse) GetListFineTuneEventsResponse() *shared.ListFineTuneEventsResponse {
+	if o == nil {
+		return nil
+	}
+	return o.ListFineTuneEventsResponse
+}
+
+func (o *ListFineTuneEventsResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListFineTuneEventsResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

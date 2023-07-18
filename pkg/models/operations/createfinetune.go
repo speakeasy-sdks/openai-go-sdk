@@ -14,3 +14,31 @@ type CreateFineTuneResponse struct {
 	StatusCode  int
 	RawResponse *http.Response
 }
+
+func (o *CreateFineTuneResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *CreateFineTuneResponse) GetFineTune() *shared.FineTune {
+	if o == nil {
+		return nil
+	}
+	return o.FineTune
+}
+
+func (o *CreateFineTuneResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *CreateFineTuneResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}

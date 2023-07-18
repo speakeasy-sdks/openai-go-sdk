@@ -2,6 +2,7 @@ openai.go
 gpt.go
 go.mod
 go.sum
+pkg/models/sdkerrors/sdkerror.go
 pkg/types/bigint.go
 pkg/types/date.go
 pkg/types/datetime.go
@@ -55,8 +56,8 @@ pkg/models/shared/createfilerequest.go
 pkg/models/shared/createfinetunerequest.go
 pkg/models/shared/imagesresponse.go
 pkg/models/shared/createimagerequest.go
-pkg/models/shared/createimageeditrequest.go
-pkg/models/shared/createimagevariationrequest.go
+pkg/models/shared/createimageeditrequest2.go
+pkg/models/shared/createimagevariationrequest2.go
 pkg/models/shared/createmoderationresponse.go
 pkg/models/shared/createmoderationrequest.go
 pkg/models/shared/createtranscriptionresponse.go
@@ -157,9 +158,13 @@ docs/models/shared/createimagerequestsize.md
 docs/models/shared/createimagerequest.md
 docs/models/shared/createimageeditrequestimage.md
 docs/models/shared/createimageeditrequestmask.md
-docs/models/shared/createimageeditrequest.md
+docs/models/shared/createimageeditrequestresponseformat.md
+docs/models/shared/createimageeditrequestsize.md
+docs/models/shared/createimageeditrequest2.md
 docs/models/shared/createimagevariationrequestimage.md
-docs/models/shared/createimagevariationrequest.md
+docs/models/shared/createimagevariationrequestresponseformat.md
+docs/models/shared/createimagevariationrequestsize.md
+docs/models/shared/createimagevariationrequest2.md
 docs/models/shared/createmoderationresponseresultscategories.md
 docs/models/shared/createmoderationresponseresultscategoryscores.md
 docs/models/shared/createmoderationresponseresults.md

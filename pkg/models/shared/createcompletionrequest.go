@@ -309,3 +309,115 @@ type CreateCompletionRequest struct {
 	//
 	User *string `json:"user,omitempty"`
 }
+
+func (o *CreateCompletionRequest) GetBestOf() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.BestOf
+}
+
+func (o *CreateCompletionRequest) GetEcho() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Echo
+}
+
+func (o *CreateCompletionRequest) GetFrequencyPenalty() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.FrequencyPenalty
+}
+
+func (o *CreateCompletionRequest) GetLogitBias() map[string]int64 {
+	if o == nil {
+		return nil
+	}
+	return o.LogitBias
+}
+
+func (o *CreateCompletionRequest) GetLogprobs() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Logprobs
+}
+
+func (o *CreateCompletionRequest) GetMaxTokens() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.MaxTokens
+}
+
+func (o *CreateCompletionRequest) GetModel() interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Model
+}
+
+func (o *CreateCompletionRequest) GetN() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.N
+}
+
+func (o *CreateCompletionRequest) GetPresencePenalty() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.PresencePenalty
+}
+
+func (o *CreateCompletionRequest) GetPrompt() CreateCompletionRequestPrompt {
+	if o == nil {
+		return CreateCompletionRequestPrompt{}
+	}
+	return o.Prompt
+}
+
+func (o *CreateCompletionRequest) GetStop() *CreateCompletionRequestStop {
+	if o == nil {
+		return nil
+	}
+	return o.Stop
+}
+
+func (o *CreateCompletionRequest) GetStream() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Stream
+}
+
+func (o *CreateCompletionRequest) GetSuffix() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Suffix
+}
+
+func (o *CreateCompletionRequest) GetTemperature() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Temperature
+}
+
+func (o *CreateCompletionRequest) GetTopP() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TopP
+}
+
+func (o *CreateCompletionRequest) GetUser() *string {
+	if o == nil {
+		return nil
+	}
+	return o.User
+}

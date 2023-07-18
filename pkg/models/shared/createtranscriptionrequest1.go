@@ -12,6 +12,20 @@ type CreateTranscriptionRequestFile struct {
 	File    string `multipartForm:"name=file"`
 }
 
+func (o *CreateTranscriptionRequestFile) GetContent() []byte {
+	if o == nil {
+		return []byte{}
+	}
+	return o.Content
+}
+
+func (o *CreateTranscriptionRequestFile) GetFile() string {
+	if o == nil {
+		return ""
+	}
+	return o.File
+}
+
 // CreateTranscriptionRequestModel2 - ID of the model to use. Only `whisper-1` is currently available.
 type CreateTranscriptionRequestModel2 string
 
@@ -93,4 +107,46 @@ type CreateTranscriptionRequest1 struct {
 	// The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to automatically increase the temperature until certain thresholds are hit.
 	//
 	Temperature *float64 `multipartForm:"name=temperature"`
+}
+
+func (o *CreateTranscriptionRequest1) GetFile() CreateTranscriptionRequestFile {
+	if o == nil {
+		return CreateTranscriptionRequestFile{}
+	}
+	return o.File
+}
+
+func (o *CreateTranscriptionRequest1) GetLanguage() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Language
+}
+
+func (o *CreateTranscriptionRequest1) GetModel() interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Model
+}
+
+func (o *CreateTranscriptionRequest1) GetPrompt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Prompt
+}
+
+func (o *CreateTranscriptionRequest1) GetResponseFormat() *CreateTranscriptionRequestResponseFormat {
+	if o == nil {
+		return nil
+	}
+	return o.ResponseFormat
+}
+
+func (o *CreateTranscriptionRequest1) GetTemperature() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Temperature
 }

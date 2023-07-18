@@ -147,3 +147,87 @@ type CreateFineTuneRequest struct {
 	//
 	ValidationFile *string `json:"validation_file,omitempty"`
 }
+
+func (o *CreateFineTuneRequest) GetBatchSize() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.BatchSize
+}
+
+func (o *CreateFineTuneRequest) GetClassificationBetas() []float64 {
+	if o == nil {
+		return nil
+	}
+	return o.ClassificationBetas
+}
+
+func (o *CreateFineTuneRequest) GetClassificationNClasses() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ClassificationNClasses
+}
+
+func (o *CreateFineTuneRequest) GetClassificationPositiveClass() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ClassificationPositiveClass
+}
+
+func (o *CreateFineTuneRequest) GetComputeClassificationMetrics() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.ComputeClassificationMetrics
+}
+
+func (o *CreateFineTuneRequest) GetLearningRateMultiplier() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.LearningRateMultiplier
+}
+
+func (o *CreateFineTuneRequest) GetModel() interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.Model
+}
+
+func (o *CreateFineTuneRequest) GetNEpochs() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.NEpochs
+}
+
+func (o *CreateFineTuneRequest) GetPromptLossWeight() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.PromptLossWeight
+}
+
+func (o *CreateFineTuneRequest) GetSuffix() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Suffix
+}
+
+func (o *CreateFineTuneRequest) GetTrainingFile() string {
+	if o == nil {
+		return ""
+	}
+	return o.TrainingFile
+}
+
+func (o *CreateFineTuneRequest) GetValidationFile() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ValidationFile
+}

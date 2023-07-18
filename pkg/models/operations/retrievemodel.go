@@ -12,10 +12,45 @@ type RetrieveModelRequest struct {
 	Model string `pathParam:"style=simple,explode=false,name=model"`
 }
 
+func (o *RetrieveModelRequest) GetModel() string {
+	if o == nil {
+		return ""
+	}
+	return o.Model
+}
+
 type RetrieveModelResponse struct {
 	ContentType string
 	// OK
 	Model       *shared.Model
 	StatusCode  int
 	RawResponse *http.Response
+}
+
+func (o *RetrieveModelResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *RetrieveModelResponse) GetModel() *shared.Model {
+	if o == nil {
+		return nil
+	}
+	return o.Model
+}
+
+func (o *RetrieveModelResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *RetrieveModelResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

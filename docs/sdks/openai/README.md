@@ -180,7 +180,7 @@ func main() {
         Stream: gpt.Bool(false),
         Temperature: gpt.Float64(1),
         TopP: gpt.Float64(1),
-        User: gpt.String("est"),
+        User: gpt.String("user-1234"),
     })
     if err != nil {
         log.Fatal(err)
@@ -226,17 +226,19 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateCompletion(ctx, shared.CreateCompletionRequest{
-        BestOf: gpt.Int64(653140),
+        BestOf: gpt.Int64(666767),
         Echo: gpt.Bool(false),
-        FrequencyPenalty: gpt.Float64(6706.38),
+        FrequencyPenalty: gpt.Float64(6531.4),
         LogitBias: map[string]int64{
-            "dolorem": 358152,
+            "dolores": 210382,
+            "corporis": 128926,
+            "nobis": 315428,
         },
-        Logprobs: gpt.Int64(128926),
+        Logprobs: gpt.Int64(607831),
         MaxTokens: gpt.Int64(16),
-        Model: shared.CreateCompletionRequestModel2TextDavinci001,
+        Model: "minima",
         N: gpt.Int64(1),
-        PresencePenalty: gpt.Float64(6078.31),
+        PresencePenalty: gpt.Float64(5701.97),
         Prompt: shared.CreateCompletionRequestPrompt{},
         Stop: &shared.CreateCompletionRequestStop{},
         Stream: gpt.Bool(false),
@@ -344,7 +346,7 @@ func main() {
     res, err := s.OpenAI.CreateEmbedding(ctx, shared.CreateEmbeddingRequest{
         Input: shared.CreateEmbeddingRequestInput{},
         Model: "text-embedding-ada-002",
-        User: gpt.String("excepturi"),
+        User: gpt.String("user-1234"),
     })
     if err != nil {
         log.Fatal(err)
@@ -392,10 +394,10 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateFile(ctx, shared.CreateFileRequest{
         File: shared.CreateFileRequestFile{
-            Content: []byte("accusantium"),
-            File: "iure",
+            Content: []byte("culpa"),
+            File: "doloribus",
         },
-        Purpose: "culpa",
+        Purpose: "sapiente",
     })
     if err != nil {
         log.Fatal(err)
@@ -446,21 +448,20 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateFineTune(ctx, shared.CreateFineTuneRequest{
-        BatchSize: gpt.Int64(988374),
+        BatchSize: gpt.Int64(102044),
         ClassificationBetas: []float64{
-            1020.44,
-            6527.9,
             2088.76,
             6350.59,
+            1613.09,
         },
-        ClassificationNClasses: gpt.Int64(161309),
-        ClassificationPositiveClass: gpt.String("repellat"),
+        ClassificationNClasses: gpt.Int64(995300),
+        ClassificationPositiveClass: gpt.String("mollitia"),
         ComputeClassificationMetrics: gpt.Bool(false),
-        LearningRateMultiplier: gpt.Float64(6531.08),
-        Model: shared.CreateFineTuneRequestModel2Curie.ToPointer(),
-        NEpochs: gpt.Int64(253291),
-        PromptLossWeight: gpt.Float64(4143.69),
-        Suffix: gpt.String("quam"),
+        LearningRateMultiplier: gpt.Float64(5818.5),
+        Model: gpt.String("curie"),
+        NEpochs: gpt.Int64(414369),
+        PromptLossWeight: gpt.Float64(4663.11),
+        Suffix: gpt.String("molestiae"),
         TrainingFile: "file-ajSREls59WBbvgSzJSVWxMCB",
         ValidationFile: gpt.String("file-XjSREls59WBbvgSzJSVWxMCa"),
     })
@@ -512,7 +513,7 @@ func main() {
         Prompt: "A cute baby sea otter",
         ResponseFormat: shared.CreateImageRequestResponseFormatURL.ToPointer(),
         Size: shared.CreateImageRequestSizeOneThousandAndTwentyFourx1024.ToPointer(),
-        User: gpt.String("molestiae"),
+        User: gpt.String("user-1234"),
     })
     if err != nil {
         log.Fatal(err)
@@ -557,7 +558,7 @@ func main() {
     s := gpt.New()
 
     ctx := context.Background()
-    res, err := s.OpenAI.CreateImageEdit(ctx, shared.CreateImageEditRequest{
+    res, err := s.OpenAI.CreateImageEdit(ctx, shared.CreateImageEditRequest2{
         Image: shared.CreateImageEditRequestImage{
             Content: []byte("velit"),
             Image: "error",
@@ -566,11 +567,11 @@ func main() {
             Content: []byte("quia"),
             Mask: "quis",
         },
-        N: gpt.String("vitae"),
+        N: gpt.Int64(1),
         Prompt: "A cute baby sea otter wearing a beret",
-        ResponseFormat: gpt.String("laborum"),
-        Size: gpt.String("animi"),
-        User: gpt.String("enim"),
+        ResponseFormat: shared.CreateImageEditRequestResponseFormatURL.ToPointer(),
+        Size: shared.CreateImageEditRequestSizeOneThousandAndTwentyFourx1024.ToPointer(),
+        User: gpt.String("user-1234"),
     })
     if err != nil {
         log.Fatal(err)
@@ -584,10 +585,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
-| `request`                                                                      | [shared.CreateImageEditRequest](../../models/shared/createimageeditrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
+| `request`                                                                        | [shared.CreateImageEditRequest2](../../models/shared/createimageeditrequest2.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 
 
 ### Response
@@ -615,15 +616,15 @@ func main() {
     s := gpt.New()
 
     ctx := context.Background()
-    res, err := s.OpenAI.CreateImageVariation(ctx, shared.CreateImageVariationRequest{
+    res, err := s.OpenAI.CreateImageVariation(ctx, shared.CreateImageVariationRequest2{
         Image: shared.CreateImageVariationRequestImage{
-            Content: []byte("odit"),
-            Image: "quo",
+            Content: []byte("vitae"),
+            Image: "laborum",
         },
-        N: gpt.String("sequi"),
-        ResponseFormat: gpt.String("tenetur"),
-        Size: gpt.String("ipsam"),
-        User: gpt.String("id"),
+        N: gpt.Int64(1),
+        ResponseFormat: shared.CreateImageVariationRequestResponseFormatURL.ToPointer(),
+        Size: shared.CreateImageVariationRequestSizeOneThousandAndTwentyFourx1024.ToPointer(),
+        User: gpt.String("user-1234"),
     })
     if err != nil {
         log.Fatal(err)
@@ -637,10 +638,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `request`                                                                                | [shared.CreateImageVariationRequest](../../models/shared/createimagevariationrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
+| `request`                                                                                  | [shared.CreateImageVariationRequest2](../../models/shared/createimagevariationrequest2.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 
 
 ### Response
@@ -717,14 +718,14 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateTranscription(ctx, shared.CreateTranscriptionRequest1{
         File: shared.CreateTranscriptionRequestFile{
-            Content: []byte("aut"),
-            File: "quasi",
+            Content: []byte("enim"),
+            File: "odit",
         },
-        Language: gpt.String("error"),
-        Model: shared.CreateTranscriptionRequestModel2Whisper1,
-        Prompt: gpt.String("laborum"),
-        ResponseFormat: shared.CreateTranscriptionRequestResponseFormatJSON.ToPointer(),
-        Temperature: gpt.Float64(9719.45),
+        Language: gpt.String("quo"),
+        Model: "whisper-1",
+        Prompt: gpt.String("tenetur"),
+        ResponseFormat: shared.CreateTranscriptionRequestResponseFormatText.ToPointer(),
+        Temperature: gpt.Float64(6625.27),
     })
     if err != nil {
         log.Fatal(err)
@@ -771,13 +772,13 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateTranslation(ctx, shared.CreateTranslationRequest{
         File: shared.CreateTranslationRequestFile{
-            Content: []byte("voluptatibus"),
-            File: "vero",
+            Content: []byte("possimus"),
+            File: "aut",
         },
         Model: "whisper-1",
-        Prompt: gpt.String("praesentium"),
-        ResponseFormat: gpt.String("voluptatibus"),
-        Temperature: gpt.Float64(557.14),
+        Prompt: gpt.String("error"),
+        ResponseFormat: gpt.String("temporibus"),
+        Temperature: gpt.Float64(6736.6),
     })
     if err != nil {
         log.Fatal(err)
@@ -823,7 +824,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.DeleteFile(ctx, operations.DeleteFileRequest{
-        FileID: "omnis",
+        FileID: "quasi",
     })
     if err != nil {
         log.Fatal(err)
@@ -915,7 +916,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.DownloadFile(ctx, operations.DownloadFileRequest{
-        FileID: "voluptate",
+        FileID: "reiciendis",
     })
     if err != nil {
         log.Fatal(err)
@@ -1136,7 +1137,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.RetrieveFile(ctx, operations.RetrieveFileRequest{
-        FileID: "cum",
+        FileID: "voluptatibus",
     })
     if err != nil {
         log.Fatal(err)
