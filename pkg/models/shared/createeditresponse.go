@@ -7,6 +7,8 @@ import (
 	"fmt"
 )
 
+// CreateEditResponseChoicesFinishReason - The reason the model stopped generating tokens. This will be `stop` if the model hit a natural stop point or a provided stop sequence,
+// or `length` if the maximum number of tokens specified in the request was reached.
 type CreateEditResponseChoicesFinishReason string
 
 const (
@@ -35,9 +37,14 @@ func (e *CreateEditResponseChoicesFinishReason) UnmarshalJSON(data []byte) error
 }
 
 type CreateEditResponseChoices struct {
+	// The reason the model stopped generating tokens. This will be `stop` if the model hit a natural stop point or a provided stop sequence,
+	// or `length` if the maximum number of tokens specified in the request was reached.
+	//
 	FinishReason CreateEditResponseChoicesFinishReason `json:"finish_reason"`
-	Index        int64                                 `json:"index"`
-	Text         string                                `json:"text"`
+	// The index of the choice in the list of choices.
+	Index int64 `json:"index"`
+	// The edited result.
+	Text string `json:"text"`
 }
 
 func (o *CreateEditResponseChoices) GetFinishReason() CreateEditResponseChoicesFinishReason {
@@ -61,39 +68,16 @@ func (o *CreateEditResponseChoices) GetText() string {
 	return o.Text
 }
 
-type CreateEditResponseUsage struct {
-	CompletionTokens int64 `json:"completion_tokens"`
-	PromptTokens     int64 `json:"prompt_tokens"`
-	TotalTokens      int64 `json:"total_tokens"`
-}
-
-func (o *CreateEditResponseUsage) GetCompletionTokens() int64 {
-	if o == nil {
-		return 0
-	}
-	return o.CompletionTokens
-}
-
-func (o *CreateEditResponseUsage) GetPromptTokens() int64 {
-	if o == nil {
-		return 0
-	}
-	return o.PromptTokens
-}
-
-func (o *CreateEditResponseUsage) GetTotalTokens() int64 {
-	if o == nil {
-		return 0
-	}
-	return o.TotalTokens
-}
-
 // CreateEditResponse - OK
 type CreateEditResponse struct {
+	// A list of edit choices. Can be more than one if `n` is greater than 1.
 	Choices []CreateEditResponseChoices `json:"choices"`
-	Created int64                       `json:"created"`
-	Object  string                      `json:"object"`
-	Usage   CreateEditResponseUsage     `json:"usage"`
+	// A unix timestamp of when the edit was created.
+	Created int64 `json:"created"`
+	// The object type, which is always `edit`.
+	Object string `json:"object"`
+	// Usage statistics for the completion request.
+	Usage CompletionUsage `json:"usage"`
 }
 
 func (o *CreateEditResponse) GetChoices() []CreateEditResponseChoices {
@@ -117,9 +101,9 @@ func (o *CreateEditResponse) GetObject() string {
 	return o.Object
 }
 
-func (o *CreateEditResponse) GetUsage() CreateEditResponseUsage {
+func (o *CreateEditResponse) GetUsage() CompletionUsage {
 	if o == nil {
-		return CreateEditResponseUsage{}
+		return CompletionUsage{}
 	}
 	return o.Usage
 }
