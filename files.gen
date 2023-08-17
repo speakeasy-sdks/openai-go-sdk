@@ -47,6 +47,7 @@ pkg/models/shared/chatcompletionresponsemessage.go
 pkg/models/shared/createchatcompletionrequest.go
 pkg/models/shared/chatcompletionrequestmessage.go
 pkg/models/shared/chatcompletionfunctions.go
+pkg/models/shared/chatcompletionfunctioncalloption.go
 pkg/models/shared/createcompletionresponse.go
 pkg/models/shared/createcompletionrequest.go
 pkg/models/shared/createeditresponse.go
@@ -119,7 +120,6 @@ docs/models/shared/completionusage.md
 docs/models/shared/chatcompletionresponsemessagefunctioncall.md
 docs/models/shared/chatcompletionresponsemessagerole.md
 docs/models/shared/chatcompletionresponsemessage.md
-docs/models/shared/createchatcompletionrequestfunctioncall2.md
 docs/models/shared/createchatcompletionrequestfunctioncall1.md
 docs/models/shared/createchatcompletionrequestfunctioncall.md
 docs/models/shared/createchatcompletionrequestmodel2.md
@@ -129,6 +129,7 @@ docs/models/shared/chatcompletionrequestmessagefunctioncall.md
 docs/models/shared/chatcompletionrequestmessagerole.md
 docs/models/shared/chatcompletionrequestmessage.md
 docs/models/shared/chatcompletionfunctions.md
+docs/models/shared/chatcompletionfunctioncalloption.md
 docs/models/shared/createcompletionresponsechoicesfinishreason.md
 docs/models/shared/createcompletionresponsechoiceslogprobs.md
 docs/models/shared/createcompletionresponsechoices.md

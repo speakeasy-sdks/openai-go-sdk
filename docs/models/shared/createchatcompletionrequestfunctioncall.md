@@ -9,9 +9,9 @@
 createChatCompletionRequestFunctionCall := shared.CreateCreateChatCompletionRequestFunctionCallCreateChatCompletionRequestFunctionCall1(shared.CreateChatCompletionRequestFunctionCall1{/* values here */})
 ```
 
-### CreateChatCompletionRequestFunctionCall2
+### ChatCompletionFunctionCallOption
 
 ```go
-createChatCompletionRequestFunctionCall := shared.CreateCreateChatCompletionRequestFunctionCallCreateChatCompletionRequestFunctionCall2(shared.CreateChatCompletionRequestFunctionCall2{/* values here */})
+createChatCompletionRequestFunctionCall := shared.CreateCreateChatCompletionRequestFunctionCallChatCompletionFunctionCallOption(shared.ChatCompletionFunctionCallOption{/* values here */})
 ```
 
