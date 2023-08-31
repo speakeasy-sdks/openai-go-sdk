@@ -4,20 +4,42 @@ package shared
 
 // CreateModerationResponseResultsCategories - A list of the categories, and whether they are flagged or not.
 type CreateModerationResponseResultsCategories struct {
-	// Whether the content was flagged as 'hate'.
+	// Content that expresses, incites, or promotes harassing language towards any target.
+	Harassment bool `json:"harassment"`
+	// Harassment content that also includes violence or serious harm towards any target.
+	HarassmentThreatening bool `json:"harassment/threatening"`
+	// Content that expresses, incites, or promotes hate based on race, gender, ethnicity, religion, nationality, sexual orientation, disability status, or caste. Hateful content aimed at non-protected groups (e.g., chess players) is harrassment.
 	Hate bool `json:"hate"`
-	// Whether the content was flagged as 'hate/threatening'.
+	// Hateful content that also includes violence or serious harm towards the targeted group based on race, gender, ethnicity, religion, nationality, sexual orientation, disability status, or caste.
 	HateThreatening bool `json:"hate/threatening"`
-	// Whether the content was flagged as 'self-harm'.
+	// Content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting, and eating disorders.
 	SelfHarm bool `json:"self-harm"`
-	// Whether the content was flagged as 'sexual'.
+	// Content that encourages performing acts of self-harm, such as suicide, cutting, and eating disorders, or that gives instructions or advice on how to commit such acts.
+	SelfHarmInstructions bool `json:"self-harm/instructions"`
+	// Content where the speaker expresses that they are engaging or intend to engage in acts of self-harm, such as suicide, cutting, and eating disorders.
+	SelfHarmIntent bool `json:"self-harm/intent"`
+	// Content meant to arouse sexual excitement, such as the description of sexual activity, or that promotes sexual services (excluding sex education and wellness).
 	Sexual bool `json:"sexual"`
-	// Whether the content was flagged as 'sexual/minors'.
+	// Sexual content that includes an individual who is under 18 years old.
 	SexualMinors bool `json:"sexual/minors"`
-	// Whether the content was flagged as 'violence'.
+	// Content that depicts death, violence, or physical injury.
 	Violence bool `json:"violence"`
-	// Whether the content was flagged as 'violence/graphic'.
+	// Content that depicts death, violence, or physical injury in graphic detail.
 	ViolenceGraphic bool `json:"violence/graphic"`
+}
+
+func (o *CreateModerationResponseResultsCategories) GetHarassment() bool {
+	if o == nil {
+		return false
+	}
+	return o.Harassment
+}
+
+func (o *CreateModerationResponseResultsCategories) GetHarassmentThreatening() bool {
+	if o == nil {
+		return false
+	}
+	return o.HarassmentThreatening
 }
 
 func (o *CreateModerationResponseResultsCategories) GetHate() bool {
@@ -39,6 +61,20 @@ func (o *CreateModerationResponseResultsCategories) GetSelfHarm() bool {
 		return false
 	}
 	return o.SelfHarm
+}
+
+func (o *CreateModerationResponseResultsCategories) GetSelfHarmInstructions() bool {
+	if o == nil {
+		return false
+	}
+	return o.SelfHarmInstructions
+}
+
+func (o *CreateModerationResponseResultsCategories) GetSelfHarmIntent() bool {
+	if o == nil {
+		return false
+	}
+	return o.SelfHarmIntent
 }
 
 func (o *CreateModerationResponseResultsCategories) GetSexual() bool {
@@ -71,12 +107,20 @@ func (o *CreateModerationResponseResultsCategories) GetViolenceGraphic() bool {
 
 // CreateModerationResponseResultsCategoryScores - A list of the categories along with their scores as predicted by model.
 type CreateModerationResponseResultsCategoryScores struct {
+	// The score for the category 'harassment'.
+	Harassment float64 `json:"harassment"`
+	// The score for the category 'harassment/threatening'.
+	HarassmentThreatening float64 `json:"harassment/threatening"`
 	// The score for the category 'hate'.
 	Hate float64 `json:"hate"`
 	// The score for the category 'hate/threatening'.
 	HateThreatening float64 `json:"hate/threatening"`
 	// The score for the category 'self-harm'.
 	SelfHarm float64 `json:"self-harm"`
+	// The score for the category 'self-harm/instructions'.
+	SelfHarmInstructions float64 `json:"self-harm/instructions"`
+	// The score for the category 'self-harm/intent'.
+	SelfHarmIntent float64 `json:"self-harm/intent"`
 	// The score for the category 'sexual'.
 	Sexual float64 `json:"sexual"`
 	// The score for the category 'sexual/minors'.
@@ -85,6 +129,20 @@ type CreateModerationResponseResultsCategoryScores struct {
 	Violence float64 `json:"violence"`
 	// The score for the category 'violence/graphic'.
 	ViolenceGraphic float64 `json:"violence/graphic"`
+}
+
+func (o *CreateModerationResponseResultsCategoryScores) GetHarassment() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Harassment
+}
+
+func (o *CreateModerationResponseResultsCategoryScores) GetHarassmentThreatening() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.HarassmentThreatening
 }
 
 func (o *CreateModerationResponseResultsCategoryScores) GetHate() float64 {
@@ -106,6 +164,20 @@ func (o *CreateModerationResponseResultsCategoryScores) GetSelfHarm() float64 {
 		return 0.0
 	}
 	return o.SelfHarm
+}
+
+func (o *CreateModerationResponseResultsCategoryScores) GetSelfHarmInstructions() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.SelfHarmInstructions
+}
+
+func (o *CreateModerationResponseResultsCategoryScores) GetSelfHarmIntent() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.SelfHarmIntent
 }
 
 func (o *CreateModerationResponseResultsCategoryScores) GetSexual() float64 {
