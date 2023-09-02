@@ -6,7 +6,7 @@ package shared
 type OpenAIFile struct {
 	// The size of the file in bytes.
 	Bytes int64 `json:"bytes"`
-	// The unix timestamp for when the file was created.
+	// The Unix timestamp (in seconds) for when the file was created.
 	CreatedAt int64 `json:"created_at"`
 	// The name of the file.
 	Filename string `json:"filename"`

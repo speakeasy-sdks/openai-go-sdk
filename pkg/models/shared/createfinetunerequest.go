@@ -8,9 +8,9 @@ import (
 )
 
 // CreateFineTuneRequestModel2 - The name of the base model to fine-tune. You can select one of "ada",
-// "babbage", "curie", "davinci", or a fine-tuned model created after 2022-04-21.
+// "babbage", "curie", "davinci", or a fine-tuned model created after 2022-04-21 and before 2023-08-22.
 // To learn more about these models, see the
-// [Models](https://platform.openai.com/docs/models) documentation.
+// [Models](/docs/models) documentation.
 type CreateFineTuneRequestModel2 string
 
 const (
@@ -77,7 +77,7 @@ type CreateFineTuneRequest struct {
 	ClassificationPositiveClass *string `json:"classification_positive_class,omitempty"`
 	// If set, we calculate classification-specific metrics such as accuracy
 	// and F-1 score using the validation set at the end of every epoch.
-	// These metrics can be viewed in the [results file](/docs/guides/fine-tuning/analyzing-your-fine-tuned-model).
+	// These metrics can be viewed in the [results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).
 	//
 	// In order to compute classification metrics, you must provide a
 	// `validation_file`. Additionally, you must
@@ -97,9 +97,9 @@ type CreateFineTuneRequest struct {
 	//
 	LearningRateMultiplier *float64 `json:"learning_rate_multiplier,omitempty"`
 	// The name of the base model to fine-tune. You can select one of "ada",
-	// "babbage", "curie", "davinci", or a fine-tuned model created after 2022-04-21.
+	// "babbage", "curie", "davinci", or a fine-tuned model created after 2022-04-21 and before 2023-08-22.
 	// To learn more about these models, see the
-	// [Models](https://platform.openai.com/docs/models) documentation.
+	// [Models](/docs/models) documentation.
 	//
 	Model interface{} `json:"model,omitempty"`
 	// The number of epochs to train the model for. An epoch refers to one
@@ -129,21 +129,21 @@ type CreateFineTuneRequest struct {
 	// example is a JSON object with the keys "prompt" and "completion".
 	// Additionally, you must upload your file with the purpose `fine-tune`.
 	//
-	// See the [fine-tuning guide](/docs/guides/fine-tuning/creating-training-data) for more details.
+	// See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more details.
 	//
 	TrainingFile string `json:"training_file"`
 	// The ID of an uploaded file that contains validation data.
 	//
 	// If you provide this file, the data is used to generate validation
 	// metrics periodically during fine-tuning. These metrics can be viewed in
-	// the [fine-tuning results file](/docs/guides/fine-tuning/analyzing-your-fine-tuned-model).
+	// the [fine-tuning results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).
 	// Your train and validation data should be mutually exclusive.
 	//
 	// Your dataset must be formatted as a JSONL file, where each validation
 	// example is a JSON object with the keys "prompt" and "completion".
 	// Additionally, you must upload your file with the purpose `fine-tune`.
 	//
-	// See the [fine-tuning guide](/docs/guides/fine-tuning/creating-training-data) for more details.
+	// See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more details.
 	//
 	ValidationFile *string `json:"validation_file,omitempty"`
 }

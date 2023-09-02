@@ -13,6 +13,8 @@ import (
 type CreateCompletionRequestModel2 string
 
 const (
+	CreateCompletionRequestModel2Babbage002     CreateCompletionRequestModel2 = "babbage-002"
+	CreateCompletionRequestModel2Davinci002     CreateCompletionRequestModel2 = "davinci-002"
 	CreateCompletionRequestModel2TextDavinci003 CreateCompletionRequestModel2 = "text-davinci-003"
 	CreateCompletionRequestModel2TextDavinci002 CreateCompletionRequestModel2 = "text-davinci-002"
 	CreateCompletionRequestModel2TextDavinci001 CreateCompletionRequestModel2 = "text-davinci-001"
@@ -32,6 +34,10 @@ func (e *CreateCompletionRequestModel2) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
+	case "babbage-002":
+		fallthrough
+	case "davinci-002":
+		fallthrough
 	case "text-davinci-003":
 		fallthrough
 	case "text-davinci-002":
@@ -249,7 +255,7 @@ type CreateCompletionRequest struct {
 	Echo *bool `json:"echo,omitempty"`
 	// Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
 	//
-	// [See more information about frequency and presence penalties.](/docs/api-reference/parameter-details)
+	// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
 	//
 	FrequencyPenalty *float64 `json:"frequency_penalty,omitempty"`
 	// Modify the likelihood of specified tokens appearing in the completion.
@@ -279,7 +285,7 @@ type CreateCompletionRequest struct {
 	N *int64 `json:"n,omitempty"`
 	// Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
 	//
-	// [See more information about frequency and presence penalties.](/docs/api-reference/parameter-details)
+	// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
 	//
 	PresencePenalty *float64 `json:"presence_penalty,omitempty"`
 	// The prompt(s) to generate completions for, encoded as a string, array of strings, array of tokens, or array of token arrays.

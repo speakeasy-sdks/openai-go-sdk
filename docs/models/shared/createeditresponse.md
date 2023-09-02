@@ -1,6 +1,8 @@
-# CreateEditResponse
+# ~~CreateEditResponse~~
 
 OK
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 
 ## Fields
@@ -8,6 +10,6 @@ OK
 | Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     |
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
 | `Choices`                                                                       | [][CreateEditResponseChoices](../../models/shared/createeditresponsechoices.md) | :heavy_check_mark:                                                              | A list of edit choices. Can be more than one if `n` is greater than 1.          |
-| `Created`                                                                       | *int64*                                                                         | :heavy_check_mark:                                                              | A unix timestamp of when the edit was created.                                  |
+| `Created`                                                                       | *int64*                                                                         | :heavy_check_mark:                                                              | The Unix timestamp (in seconds) of when the edit was created.                   |
 | `Object`                                                                        | *string*                                                                        | :heavy_check_mark:                                                              | The object type, which is always `edit`.                                        |
 | `Usage`                                                                         | [CompletionUsage](../../models/shared/completionusage.md)                       | :heavy_check_mark:                                                              | Usage statistics for the completion request.                                    |

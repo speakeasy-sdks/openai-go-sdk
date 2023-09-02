@@ -75,7 +75,7 @@ func (o *CreateChatCompletionResponseChoices) GetMessage() ChatCompletionRespons
 type CreateChatCompletionResponse struct {
 	// A list of chat completion choices. Can be more than one if `n` is greater than 1.
 	Choices []CreateChatCompletionResponseChoices `json:"choices"`
-	// A unix timestamp of when the chat completion was created.
+	// The Unix timestamp (in seconds) of when the chat completion was created.
 	Created int64 `json:"created"`
 	// A unique identifier for the chat completion.
 	ID string `json:"id"`

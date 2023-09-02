@@ -113,7 +113,7 @@ func (o *CreateCompletionResponseChoices) GetText() string {
 type CreateCompletionResponse struct {
 	// The list of completion choices the model generated for the input prompt.
 	Choices []CreateCompletionResponseChoices `json:"choices"`
-	// The Unix timestamp of when the completion was created.
+	// The Unix timestamp (in seconds) of when the completion was created.
 	Created int64 `json:"created"`
 	// A unique identifier for the completion.
 	ID string `json:"id"`

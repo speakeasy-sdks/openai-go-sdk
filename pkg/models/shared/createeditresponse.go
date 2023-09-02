@@ -69,10 +69,12 @@ func (o *CreateEditResponseChoices) GetText() string {
 }
 
 // CreateEditResponse - OK
+//
+// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
 type CreateEditResponse struct {
 	// A list of edit choices. Can be more than one if `n` is greater than 1.
 	Choices []CreateEditResponseChoices `json:"choices"`
-	// A unix timestamp of when the edit was created.
+	// The Unix timestamp (in seconds) of when the edit was created.
 	Created int64 `json:"created"`
 	// The object type, which is always `edit`.
 	Object string `json:"object"`

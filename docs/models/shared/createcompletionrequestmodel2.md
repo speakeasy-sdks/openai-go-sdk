@@ -8,6 +8,8 @@ ID of the model to use. You can use the [List models](/docs/api-reference/models
 
 | Name                                          | Value                                         |
 | --------------------------------------------- | --------------------------------------------- |
+| `CreateCompletionRequestModel2Babbage002`     | babbage-002                                   |
+| `CreateCompletionRequestModel2Davinci002`     | davinci-002                                   |
 | `CreateCompletionRequestModel2TextDavinci003` | text-davinci-003                              |
 | `CreateCompletionRequestModel2TextDavinci002` | text-davinci-002                              |
 | `CreateCompletionRequestModel2TextDavinci001` | text-davinci-001                              |

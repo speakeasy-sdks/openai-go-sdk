@@ -4,7 +4,7 @@ package shared
 
 // Model - Describes an OpenAI model offering that can be used with the API.
 type Model struct {
-	// The date and time when the model was created.
+	// The Unix timestamp (in seconds) when the model was created.
 	Created int64 `json:"created"`
 	// The model identifier, which can be referenced in the API endpoints.
 	ID string `json:"id"`

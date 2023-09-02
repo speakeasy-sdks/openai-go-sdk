@@ -6,7 +6,9 @@ The OpenAI REST API
 
 ### Available Operations
 
-* [CancelFineTune](#cancelfinetune) - Immediately cancel a fine-tune job.
+* [~~CancelFineTune~~](#cancelfinetune) - Immediately cancel a fine-tune job.
+ :warning: **Deprecated**
+* [CancelFineTuningJob](#cancelfinetuningjob) - Immediately cancel a fine-tune job.
 
 * [CreateChatCompletion](#createchatcompletion) - Creates a model response for the given chat conversation.
 * [CreateCompletion](#createcompletion) - Creates a completion for the provided prompt and parameters.
@@ -14,11 +16,17 @@ The OpenAI REST API
 * [CreateEmbedding](#createembedding) - Creates an embedding vector representing the input text.
 * [CreateFile](#createfile) - Upload a file that contains document(s) to be used across various endpoints/features. Currently, the size of all the files uploaded by one organization can be up to 1 GB. Please contact us if you need to increase the storage limit.
 
-* [CreateFineTune](#createfinetune) - Creates a job that fine-tunes a specified model from a given dataset.
+* [~~CreateFineTune~~](#createfinetune) - Creates a job that fine-tunes a specified model from a given dataset.
 
 Response includes details of the enqueued job including job status and the name of the fine-tuned models once complete.
 
-[Learn more about Fine-tuning](/docs/guides/fine-tuning)
+[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)
+ :warning: **Deprecated**
+* [CreateFineTuningJob](#createfinetuningjob) - Creates a job that fine-tunes a specified model from a given dataset.
+
+Response includes details of the enqueued job including job status and the name of the fine-tuned models once complete.
+
+[Learn more about fine-tuning](/docs/guides/fine-tuning)
 
 * [CreateImage](#createimage) - Creates an image given a prompt.
 * [CreateImageEdit](#createimageedit) - Creates an edited or extended image given an original image and a prompt.
@@ -27,25 +35,35 @@ Response includes details of the enqueued job including job status and the name 
 * [CreateTranscription](#createtranscription) - Transcribes audio into the input language.
 * [CreateTranslation](#createtranslation) - Translates audio into English.
 * [DeleteFile](#deletefile) - Delete a file.
-* [DeleteModel](#deletemodel) - Delete a fine-tuned model. You must have the Owner role in your organization.
+* [DeleteModel](#deletemodel) - Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.
 * [DownloadFile](#downloadfile) - Returns the contents of the specified file
 * [ListFiles](#listfiles) - Returns a list of files that belong to the user's organization.
-* [ListFineTuneEvents](#listfinetuneevents) - Get fine-grained status updates for a fine-tune job.
-
-* [ListFineTunes](#listfinetunes) - List your organization's fine-tuning jobs
+* [~~ListFineTuneEvents~~](#listfinetuneevents) - Get fine-grained status updates for a fine-tune job.
+ :warning: **Deprecated**
+* [~~ListFineTunes~~](#listfinetunes) - List your organization's fine-tuning jobs
+ :warning: **Deprecated**
+* [ListFineTuningEvents](#listfinetuningevents) - Get status updates for a fine-tuning job.
 
 * [ListModels](#listmodels) - Lists the currently available models, and provides basic information about each one such as the owner and availability.
-* [RetrieveFile](#retrievefile) - Returns information about a specific file.
-* [RetrieveFineTune](#retrievefinetune) - Gets info about the fine-tune job.
+* [ListPaginatedFineTuningJobs](#listpaginatedfinetuningjobs) - List your organization's fine-tuning jobs
 
-[Learn more about Fine-tuning](/docs/guides/fine-tuning)
+* [RetrieveFile](#retrievefile) - Returns information about a specific file.
+* [~~RetrieveFineTune~~](#retrievefinetune) - Gets info about the fine-tune job.
+
+[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)
+ :warning: **Deprecated**
+* [RetrieveFineTuningJob](#retrievefinetuningjob) - Get info about a fine-tuning job.
+
+[Learn more about fine-tuning](/docs/guides/fine-tuning)
 
 * [RetrieveModel](#retrievemodel) - Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
 
-## CancelFineTune
+## ~~CancelFineTune~~
 
 Immediately cancel a fine-tune job.
 
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -87,6 +105,53 @@ func main() {
 ### Response
 
 **[*operations.CancelFineTuneResponse](../../models/operations/cancelfinetuneresponse.md), error**
+
+
+## CancelFineTuningJob
+
+Immediately cancel a fine-tune job.
+
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	"log"
+	"github.com/speakeasy-sdks/openai-go-sdk"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
+)
+
+func main() {
+    s := gpt.New()
+
+    ctx := context.Background()
+    res, err := s.OpenAI.CancelFineTuningJob(ctx, operations.CancelFineTuningJobRequest{
+        FineTuningJobID: "ft-AF1WoRqd3aJAHsqc9NY7iL8F",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.FineTuningJob != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
+| `request`                                                                                      | [operations.CancelFineTuningJobRequest](../../models/operations/cancelfinetuningjobrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+
+
+### Response
+
+**[*operations.CancelFineTuningJobResponse](../../models/operations/cancelfinetuningjobresponse.md), error**
 
 
 ## CreateChatCompletion
@@ -422,14 +487,16 @@ func main() {
 **[*operations.CreateFileResponse](../../models/operations/createfileresponse.md), error**
 
 
-## CreateFineTune
+## ~~CreateFineTune~~
 
 Creates a job that fine-tunes a specified model from a given dataset.
 
 Response includes details of the enqueued job including job status and the name of the fine-tuned models once complete.
 
-[Learn more about Fine-tuning](/docs/guides/fine-tuning)
+[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)
 
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -462,8 +529,8 @@ func main() {
         NEpochs: gpt.Int64(414369),
         PromptLossWeight: gpt.Float64(4663.11),
         Suffix: gpt.String("molestiae"),
-        TrainingFile: "file-ajSREls59WBbvgSzJSVWxMCB",
-        ValidationFile: gpt.String("file-XjSREls59WBbvgSzJSVWxMCa"),
+        TrainingFile: "file-abc123",
+        ValidationFile: gpt.String("file-abc123"),
     })
     if err != nil {
         log.Fatal(err)
@@ -486,6 +553,63 @@ func main() {
 ### Response
 
 **[*operations.CreateFineTuneResponse](../../models/operations/createfinetuneresponse.md), error**
+
+
+## CreateFineTuningJob
+
+Creates a job that fine-tunes a specified model from a given dataset.
+
+Response includes details of the enqueued job including job status and the name of the fine-tuned models once complete.
+
+[Learn more about fine-tuning](/docs/guides/fine-tuning)
+
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	"log"
+	"github.com/speakeasy-sdks/openai-go-sdk"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+)
+
+func main() {
+    s := gpt.New()
+
+    ctx := context.Background()
+    res, err := s.OpenAI.CreateFineTuningJob(ctx, shared.CreateFineTuningJobRequest{
+        Hyperparameters: &shared.CreateFineTuningJobRequestHyperparameters{
+            NEpochs: &shared.CreateFineTuningJobRequestHyperparametersNEpochs{},
+        },
+        Model: "gpt-3.5-turbo",
+        Suffix: gpt.String("error"),
+        TrainingFile: "file-abc123",
+        ValidationFile: gpt.String("file-abc123"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.FineTuningJob != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
+| `request`                                                                              | [shared.CreateFineTuningJobRequest](../../models/shared/createfinetuningjobrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+
+
+### Response
+
+**[*operations.CreateFineTuningJobResponse](../../models/operations/createfinetuningjobresponse.md), error**
 
 
 ## CreateImage
@@ -560,12 +684,12 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateImageEdit(ctx, shared.CreateImageEditRequest2{
         Image: shared.CreateImageEditRequestImage{
-            Content: []byte("velit"),
-            Image: "error",
+            Content: []byte("quia"),
+            Image: "quis",
         },
         Mask: &shared.CreateImageEditRequestMask{
-            Content: []byte("quia"),
-            Mask: "quis",
+            Content: []byte("vitae"),
+            Mask: "laborum",
         },
         N: gpt.Int64(1),
         Prompt: "A cute baby sea otter wearing a beret",
@@ -618,8 +742,8 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateImageVariation(ctx, shared.CreateImageVariationRequest2{
         Image: shared.CreateImageVariationRequestImage{
-            Content: []byte("vitae"),
-            Image: "laborum",
+            Content: []byte("animi"),
+            Image: "enim",
         },
         N: gpt.Int64(1),
         ResponseFormat: shared.CreateImageVariationRequestResponseFormatURL.ToPointer(),
@@ -671,7 +795,7 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateModeration(ctx, shared.CreateModerationRequest{
         Input: shared.CreateModerationRequestInput{},
-        Model: shared.CreateModerationRequestModel2TextModerationStable.ToPointer(),
+        Model: gpt.String("text-moderation-stable"),
     })
     if err != nil {
         log.Fatal(err)
@@ -718,14 +842,14 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateTranscription(ctx, shared.CreateTranscriptionRequest1{
         File: shared.CreateTranscriptionRequestFile{
-            Content: []byte("enim"),
-            File: "odit",
+            Content: []byte("quo"),
+            File: "sequi",
         },
-        Language: gpt.String("quo"),
+        Language: gpt.String("tenetur"),
         Model: "whisper-1",
-        Prompt: gpt.String("tenetur"),
-        ResponseFormat: shared.CreateTranscriptionRequestResponseFormatText.ToPointer(),
-        Temperature: gpt.Float64(6625.27),
+        Prompt: gpt.String("id"),
+        ResponseFormat: shared.CreateTranscriptionRequestResponseFormatVtt.ToPointer(),
+        Temperature: gpt.Float64(135.71),
     })
     if err != nil {
         log.Fatal(err)
@@ -772,13 +896,13 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateTranslation(ctx, shared.CreateTranslationRequest{
         File: shared.CreateTranslationRequestFile{
-            Content: []byte("possimus"),
-            File: "aut",
+            Content: []byte("quasi"),
+            File: "error",
         },
-        Model: "whisper-1",
-        Prompt: gpt.String("error"),
-        ResponseFormat: gpt.String("temporibus"),
-        Temperature: gpt.Float64(6736.6),
+        Model: shared.CreateTranslationRequestModel2Whisper1,
+        Prompt: gpt.String("laborum"),
+        ResponseFormat: gpt.String("quasi"),
+        Temperature: gpt.Float64(9719.45),
     })
     if err != nil {
         log.Fatal(err)
@@ -824,7 +948,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.DeleteFile(ctx, operations.DeleteFileRequest{
-        FileID: "quasi",
+        FileID: "voluptatibus",
     })
     if err != nil {
         log.Fatal(err)
@@ -851,7 +975,7 @@ func main() {
 
 ## DeleteModel
 
-Delete a fine-tuned model. You must have the Owner role in your organization.
+Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.
 
 ### Example Usage
 
@@ -870,7 +994,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.DeleteModel(ctx, operations.DeleteModelRequest{
-        Model: "curie:ft-acmeco-2021-03-03-21-44-20",
+        Model: "ft:gpt-3.5-turbo:acemeco:suffix:abc123",
     })
     if err != nil {
         log.Fatal(err)
@@ -916,7 +1040,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.DownloadFile(ctx, operations.DownloadFileRequest{
-        FileID: "reiciendis",
+        FileID: "vero",
     })
     if err != nil {
         log.Fatal(err)
@@ -983,10 +1107,12 @@ func main() {
 **[*operations.ListFilesResponse](../../models/operations/listfilesresponse.md), error**
 
 
-## ListFineTuneEvents
+## ~~ListFineTuneEvents~~
 
 Get fine-grained status updates for a fine-tune job.
 
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -1031,10 +1157,12 @@ func main() {
 **[*operations.ListFineTuneEventsResponse](../../models/operations/listfinetuneeventsresponse.md), error**
 
 
-## ListFineTunes
+## ~~ListFineTunes~~
 
 List your organization's fine-tuning jobs
 
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -1072,6 +1200,55 @@ func main() {
 ### Response
 
 **[*operations.ListFineTunesResponse](../../models/operations/listfinetunesresponse.md), error**
+
+
+## ListFineTuningEvents
+
+Get status updates for a fine-tuning job.
+
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	"log"
+	"github.com/speakeasy-sdks/openai-go-sdk"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
+)
+
+func main() {
+    s := gpt.New()
+
+    ctx := context.Background()
+    res, err := s.OpenAI.ListFineTuningEvents(ctx, operations.ListFineTuningEventsRequest{
+        After: gpt.String("nihil"),
+        FineTuningJobID: "ft-AF1WoRqd3aJAHsqc9NY7iL8F",
+        Limit: gpt.Int64(509624),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.ListFineTuningJobEventsResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
+| `request`                                                                                        | [operations.ListFineTuningEventsRequest](../../models/operations/listfinetuningeventsrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
+
+
+### Response
+
+**[*operations.ListFineTuningEventsResponse](../../models/operations/listfinetuningeventsresponse.md), error**
 
 
 ## ListModels
@@ -1116,6 +1293,54 @@ func main() {
 **[*operations.ListModelsResponse](../../models/operations/listmodelsresponse.md), error**
 
 
+## ListPaginatedFineTuningJobs
+
+List your organization's fine-tuning jobs
+
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	"log"
+	"github.com/speakeasy-sdks/openai-go-sdk"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
+)
+
+func main() {
+    s := gpt.New()
+
+    ctx := context.Background()
+    res, err := s.OpenAI.ListPaginatedFineTuningJobs(ctx, operations.ListPaginatedFineTuningJobsRequest{
+        After: gpt.String("voluptatibus"),
+        Limit: gpt.Int64(55714),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.ListPaginatedFineTuningJobsResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                          | :heavy_check_mark:                                                                                             | The context to use for the request.                                                                            |
+| `request`                                                                                                      | [operations.ListPaginatedFineTuningJobsRequest](../../models/operations/listpaginatedfinetuningjobsrequest.md) | :heavy_check_mark:                                                                                             | The request object to use for the request.                                                                     |
+
+
+### Response
+
+**[*operations.ListPaginatedFineTuningJobsResponse](../../models/operations/listpaginatedfinetuningjobsresponse.md), error**
+
+
 ## RetrieveFile
 
 Returns information about a specific file.
@@ -1137,7 +1362,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.RetrieveFile(ctx, operations.RetrieveFileRequest{
-        FileID: "voluptatibus",
+        FileID: "omnis",
     })
     if err != nil {
         log.Fatal(err)
@@ -1162,12 +1387,14 @@ func main() {
 **[*operations.RetrieveFileResponse](../../models/operations/retrievefileresponse.md), error**
 
 
-## RetrieveFineTune
+## ~~RetrieveFineTune~~
 
 Gets info about the fine-tune job.
 
-[Learn more about Fine-tuning](/docs/guides/fine-tuning)
+[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)
 
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -1211,6 +1438,55 @@ func main() {
 **[*operations.RetrieveFineTuneResponse](../../models/operations/retrievefinetuneresponse.md), error**
 
 
+## RetrieveFineTuningJob
+
+Get info about a fine-tuning job.
+
+[Learn more about fine-tuning](/docs/guides/fine-tuning)
+
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	"log"
+	"github.com/speakeasy-sdks/openai-go-sdk"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
+)
+
+func main() {
+    s := gpt.New()
+
+    ctx := context.Background()
+    res, err := s.OpenAI.RetrieveFineTuningJob(ctx, operations.RetrieveFineTuningJobRequest{
+        FineTuningJobID: "ft-AF1WoRqd3aJAHsqc9NY7iL8F",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.FineTuningJob != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
+| `request`                                                                                          | [operations.RetrieveFineTuningJobRequest](../../models/operations/retrievefinetuningjobrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
+
+
+### Response
+
+**[*operations.RetrieveFineTuningJobResponse](../../models/operations/retrievefinetuningjobresponse.md), error**
+
+
 ## RetrieveModel
 
 Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
@@ -1232,7 +1508,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.RetrieveModel(ctx, operations.RetrieveModelRequest{
-        Model: "text-davinci-001",
+        Model: "gpt-3.5-turbo",
     })
     if err != nil {
         log.Fatal(err)

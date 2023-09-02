@@ -2,7 +2,7 @@
 
 package shared
 
-// FineTuneHyperparams - The hyperparameters used for the fine-tuning job. See the [Fine-tuning Guide](/docs/guides/fine-tuning/hyperparameters) for more details.
+// FineTuneHyperparams - The hyperparameters used for the fine-tuning job. See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/hyperparameters) for more details.
 type FineTuneHyperparams struct {
 	// The batch size to use for training. The batch size is the number of
 	// training examples used to train a single forward and backward pass.
@@ -78,15 +78,17 @@ func (o *FineTuneHyperparams) GetPromptLossWeight() float64 {
 	return o.PromptLossWeight
 }
 
-// FineTune - The `FineTune` object represents a fine-tuning job that has been created through the API.
+// FineTune - The `FineTune` object represents a legacy fine-tune job that has been created through the API.
+//
+// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
 type FineTune struct {
-	// The unix timestamp for when the fine-tuning job was created.
+	// The Unix timestamp (in seconds) for when the fine-tuning job was created.
 	CreatedAt int64 `json:"created_at"`
 	// The list of events that have been observed in the lifecycle of the FineTune job.
 	Events []FineTuneEvent `json:"events,omitempty"`
 	// The name of the fine-tuned model that is being created.
 	FineTunedModel string `json:"fine_tuned_model"`
-	// The hyperparameters used for the fine-tuning job. See the [Fine-tuning Guide](/docs/guides/fine-tuning/hyperparameters) for more details.
+	// The hyperparameters used for the fine-tuning job. See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/hyperparameters) for more details.
 	Hyperparams FineTuneHyperparams `json:"hyperparams"`
 	// The object identifier, which can be referenced in the API endpoints.
 	ID string `json:"id"`
@@ -98,11 +100,11 @@ type FineTune struct {
 	OrganizationID string `json:"organization_id"`
 	// The compiled results files for the fine-tuning job.
 	ResultFiles []OpenAIFile `json:"result_files"`
-	// The current status of the fine-tuning job, which can be either `created`, `pending`, `running`, `succeeded`, `failed`, or `cancelled`.
+	// The current status of the fine-tuning job, which can be either `created`, `running`, `succeeded`, `failed`, or `cancelled`.
 	Status string `json:"status"`
 	// The list of files used for training.
 	TrainingFiles []OpenAIFile `json:"training_files"`
-	// The unix timestamp for when the fine-tuning job was last updated.
+	// The Unix timestamp (in seconds) for when the fine-tuning job was last updated.
 	UpdatedAt int64 `json:"updated_at"`
 	// The list of files used for validation.
 	ValidationFiles []OpenAIFile `json:"validation_files"`
