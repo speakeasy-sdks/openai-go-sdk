@@ -7,7 +7,7 @@ import (
 )
 
 type DownloadFileRequest struct {
-	// The ID of the file to use for this request
+	// The ID of the file to use for this request.
 	FileID string `pathParam:"style=simple,explode=false,name=file_id"`
 }
 

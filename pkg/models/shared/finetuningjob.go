@@ -135,15 +135,15 @@ type FineTuningJob struct {
 	Object string `json:"object"`
 	// The organization that owns the fine-tuning job.
 	OrganizationID string `json:"organization_id"`
-	// The compiled results files for the fine-tuning job.
+	// The compiled results file ID(s) for the fine-tuning job. You can retrieve the results with the [Files API](/docs/api-reference/files/retrieve-contents).
 	ResultFiles []OpenAIFile `json:"result_files"`
 	// The current status of the fine-tuning job, which can be either `created`, `pending`, `running`, `succeeded`, `failed`, or `cancelled`.
 	Status string `json:"status"`
-	// The total number of billable tokens processed by this fine tuning job.
+	// The total number of billable tokens processed by this fine-tuning job.
 	TrainedTokens int64 `json:"trained_tokens"`
-	// The file ID used for training.
+	// The file ID used for training. You can retrieve the training data with the [Files API](/docs/api-reference/files/retrieve-contents).
 	TrainingFile string `json:"training_file"`
-	// The file ID used for validation.
+	// The file ID used for validation. You can retrieve the validation results with the [Files API](/docs/api-reference/files/retrieve-contents).
 	ValidationFile string `json:"validation_file"`
 }
 

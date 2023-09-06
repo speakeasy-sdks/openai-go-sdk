@@ -40,11 +40,16 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.CancelFineTune(ctx, operations.CancelFineTuneRequest{
@@ -97,7 +102,7 @@ Response includes details of the enqueued job including job status and the name 
 * [CreateTranslation](docs/sdks/openai/README.md#createtranslation) - Translates audio into English.
 * [DeleteFile](docs/sdks/openai/README.md#deletefile) - Delete a file.
 * [DeleteModel](docs/sdks/openai/README.md#deletemodel) - Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.
-* [DownloadFile](docs/sdks/openai/README.md#downloadfile) - Returns the contents of the specified file
+* [DownloadFile](docs/sdks/openai/README.md#downloadfile) - Returns the contents of the specified file.
 * [ListFiles](docs/sdks/openai/README.md#listfiles) - Returns a list of files that belong to the user's organization.
 * [~~ListFineTuneEvents~~](docs/sdks/openai/README.md#listfinetuneevents) - Get fine-grained status updates for a fine-tune job.
  :warning: **Deprecated**

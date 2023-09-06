@@ -39,6 +39,7 @@ func (e *FineTuningJobEventLevel) UnmarshalJSON(data []byte) error {
 
 type FineTuningJobEvent struct {
 	CreatedAt int64                   `json:"created_at"`
+	ID        string                  `json:"id"`
 	Level     FineTuningJobEventLevel `json:"level"`
 	Message   string                  `json:"message"`
 	Object    string                  `json:"object"`
@@ -49,6 +50,13 @@ func (o *FineTuningJobEvent) GetCreatedAt() int64 {
 		return 0
 	}
 	return o.CreatedAt
+}
+
+func (o *FineTuningJobEvent) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
 }
 
 func (o *FineTuningJobEvent) GetLevel() FineTuningJobEventLevel {

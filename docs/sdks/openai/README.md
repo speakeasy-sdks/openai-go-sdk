@@ -36,7 +36,7 @@ Response includes details of the enqueued job including job status and the name 
 * [CreateTranslation](#createtranslation) - Translates audio into English.
 * [DeleteFile](#deletefile) - Delete a file.
 * [DeleteModel](#deletemodel) - Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.
-* [DownloadFile](#downloadfile) - Returns the contents of the specified file
+* [DownloadFile](#downloadfile) - Returns the contents of the specified file.
 * [ListFiles](#listfiles) - Returns a list of files that belong to the user's organization.
 * [~~ListFineTuneEvents~~](#listfinetuneevents) - Get fine-grained status updates for a fine-tune job.
  :warning: **Deprecated**
@@ -74,11 +74,16 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.CancelFineTune(ctx, operations.CancelFineTuneRequest{
@@ -121,11 +126,16 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.CancelFineTuningJob(ctx, operations.CancelFineTuningJobRequest{
@@ -171,7 +181,11 @@ import(
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateChatCompletion(ctx, shared.CreateChatCompletionRequest{
@@ -287,7 +301,11 @@ import(
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateCompletion(ctx, shared.CreateCompletionRequest{
@@ -354,7 +372,11 @@ import(
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateEdit(ctx, shared.CreateEditRequest{
@@ -405,7 +427,11 @@ import(
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateEmbedding(ctx, shared.CreateEmbeddingRequest{
@@ -454,7 +480,11 @@ import(
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateFile(ctx, shared.CreateFileRequest{
@@ -511,7 +541,11 @@ import(
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateFineTune(ctx, shared.CreateFineTuneRequest{
@@ -577,7 +611,11 @@ import(
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateFineTuningJob(ctx, shared.CreateFineTuningJobRequest{
@@ -629,7 +667,11 @@ import(
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateImage(ctx, shared.CreateImageRequest{
@@ -679,7 +721,11 @@ import(
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateImageEdit(ctx, shared.CreateImageEditRequest2{
@@ -737,7 +783,11 @@ import(
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateImageVariation(ctx, shared.CreateImageVariationRequest2{
@@ -790,7 +840,11 @@ import(
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateModeration(ctx, shared.CreateModerationRequest{
@@ -837,7 +891,11 @@ import(
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateTranscription(ctx, shared.CreateTranscriptionRequest1{
@@ -891,7 +949,11 @@ import(
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateTranslation(ctx, shared.CreateTranslationRequest{
@@ -940,11 +1002,16 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.DeleteFile(ctx, operations.DeleteFileRequest{
@@ -986,11 +1053,16 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.DeleteModel(ctx, operations.DeleteModelRequest{
@@ -1021,7 +1093,7 @@ func main() {
 
 ## DownloadFile
 
-Returns the contents of the specified file
+Returns the contents of the specified file.
 
 ### Example Usage
 
@@ -1032,11 +1104,16 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.DownloadFile(ctx, operations.DownloadFileRequest{
@@ -1078,10 +1155,15 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.ListFiles(ctx)
@@ -1123,11 +1205,16 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.ListFineTuneEvents(ctx, operations.ListFineTuneEventsRequest{
@@ -1173,10 +1260,15 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.ListFineTunes(ctx)
@@ -1216,11 +1308,16 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.ListFineTuningEvents(ctx, operations.ListFineTuningEventsRequest{
@@ -1264,10 +1361,15 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.ListModels(ctx)
@@ -1307,11 +1409,16 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.ListPaginatedFineTuningJobs(ctx, operations.ListPaginatedFineTuningJobsRequest{
@@ -1354,11 +1461,16 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.RetrieveFile(ctx, operations.RetrieveFileRequest{
@@ -1405,11 +1517,16 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.RetrieveFineTune(ctx, operations.RetrieveFineTuneRequest{
@@ -1454,11 +1571,16 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.RetrieveFineTuningJob(ctx, operations.RetrieveFineTuningJobRequest{
@@ -1500,11 +1622,16 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/openai-go-sdk"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
 )
 
 func main() {
-    s := gpt.New()
+    s := gpt.New(
+        gpt.WithSecurity(shared.Security{
+            APIKeyAuth: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.OpenAI.RetrieveModel(ctx, operations.RetrieveModelRequest{

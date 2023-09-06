@@ -8,7 +8,7 @@ import (
 )
 
 type CancelFineTuningJobRequest struct {
-	// The ID of the fine-tuning job to cancel
+	// The ID of the fine-tuning job to cancel.
 	//
 	FineTuningJobID string `pathParam:"style=simple,explode=false,name=fine_tuning_job_id"`
 }

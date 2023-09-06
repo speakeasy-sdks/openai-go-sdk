@@ -8,7 +8,7 @@ import (
 )
 
 type RetrieveFineTuningJobRequest struct {
-	// The ID of the fine-tuning job
+	// The ID of the fine-tuning job.
 	//
 	FineTuningJobID string `pathParam:"style=simple,explode=false,name=fine_tuning_job_id"`
 }
