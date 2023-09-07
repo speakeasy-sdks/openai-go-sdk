@@ -60,7 +60,7 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 
 // Gpt - OpenAI API: The OpenAI REST API. Please see https://platform.openai.com/docs/api-reference for more details.
 type Gpt struct {
-	// OpenAI - The OpenAI REST API
+	// The OpenAI REST API
 	OpenAI *openAI
 
 	sdkConfiguration sdkConfiguration
@@ -117,8 +117,8 @@ func New(opts ...SDKOption) *Gpt {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2.0.0",
-			SDKVersion:        "2.8.1",
-			GenVersion:        "2.96.6",
+			SDKVersion:        "2.9.0",
+			GenVersion:        "2.101.0",
 		},
 	}
 	for _, opt := range opts {
