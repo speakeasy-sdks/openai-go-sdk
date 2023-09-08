@@ -2,7 +2,6 @@
 
 package shared
 
-// ListFineTuningJobEventsResponse - OK
 type ListFineTuningJobEventsResponse struct {
 	Data   []FineTuningJobEvent `json:"data"`
 	Object string               `json:"object"`

@@ -2,7 +2,6 @@
 
 package shared
 
-// ListPaginatedFineTuningJobsResponse - OK
 type ListPaginatedFineTuningJobsResponse struct {
 	Data    []FineTuningJob `json:"data"`
 	HasMore bool            `json:"has_more"`

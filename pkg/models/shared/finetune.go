@@ -87,7 +87,7 @@ type FineTune struct {
 	// The list of events that have been observed in the lifecycle of the FineTune job.
 	Events []FineTuneEvent `json:"events,omitempty"`
 	// The name of the fine-tuned model that is being created.
-	FineTunedModel string `json:"fine_tuned_model"`
+	FineTunedModel *string `json:"fine_tuned_model"`
 	// The hyperparameters used for the fine-tuning job. See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/hyperparameters) for more details.
 	Hyperparams FineTuneHyperparams `json:"hyperparams"`
 	// The object identifier, which can be referenced in the API endpoints.
@@ -124,9 +124,9 @@ func (o *FineTune) GetEvents() []FineTuneEvent {
 	return o.Events
 }
 
-func (o *FineTune) GetFineTunedModel() string {
+func (o *FineTune) GetFineTunedModel() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.FineTunedModel
 }

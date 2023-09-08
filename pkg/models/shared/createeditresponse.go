@@ -68,7 +68,7 @@ func (o *CreateEditResponseChoices) GetText() string {
 	return o.Text
 }
 
-// CreateEditResponse - OK
+// CreateEditResponse
 //
 // Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
 type CreateEditResponse struct {

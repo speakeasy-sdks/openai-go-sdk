@@ -2,7 +2,6 @@
 
 package shared
 
-// ImagesResponse - OK
 type ImagesResponse struct {
 	Created int64   `json:"created"`
 	Data    []Image `json:"data"`

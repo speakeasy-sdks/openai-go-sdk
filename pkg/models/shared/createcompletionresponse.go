@@ -77,7 +77,7 @@ type CreateCompletionResponseChoices struct {
 	//
 	FinishReason CreateCompletionResponseChoicesFinishReason `json:"finish_reason"`
 	Index        int64                                       `json:"index"`
-	Logprobs     CreateCompletionResponseChoicesLogprobs     `json:"logprobs"`
+	Logprobs     *CreateCompletionResponseChoicesLogprobs    `json:"logprobs"`
 	Text         string                                      `json:"text"`
 }
 
@@ -95,9 +95,9 @@ func (o *CreateCompletionResponseChoices) GetIndex() int64 {
 	return o.Index
 }
 
-func (o *CreateCompletionResponseChoices) GetLogprobs() CreateCompletionResponseChoicesLogprobs {
+func (o *CreateCompletionResponseChoices) GetLogprobs() *CreateCompletionResponseChoicesLogprobs {
 	if o == nil {
-		return CreateCompletionResponseChoicesLogprobs{}
+		return nil
 	}
 	return o.Logprobs
 }

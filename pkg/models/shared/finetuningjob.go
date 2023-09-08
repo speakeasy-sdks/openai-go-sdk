@@ -121,9 +121,9 @@ func (o *FineTuningJobHyperparameters) GetNEpochs() *FineTuningJobHyperparameter
 type FineTuningJob struct {
 	// The Unix timestamp (in seconds) for when the fine-tuning job was created.
 	CreatedAt int64 `json:"created_at"`
-	// The name of the fine-tuned model that is being created.
-	FineTunedModel string `json:"fine_tuned_model"`
-	// The Unix timestamp (in seconds) for when the fine-tuning job was finished.
+	// The name of the fine-tuned model that is being created. The value will be null if the fine-tuning job is still running.
+	FineTunedModel *string `json:"fine_tuned_model"`
+	// The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be null if the fine-tuning job is still running.
 	FinishedAt *int64 `json:"finished_at,omitempty"`
 	// The hyperparameters used for the fine-tuning job. See the [fine-tuning guide](/docs/guides/fine-tuning) for more details.
 	Hyperparameters FineTuningJobHyperparameters `json:"hyperparameters"`
@@ -136,15 +136,15 @@ type FineTuningJob struct {
 	// The organization that owns the fine-tuning job.
 	OrganizationID string `json:"organization_id"`
 	// The compiled results file ID(s) for the fine-tuning job. You can retrieve the results with the [Files API](/docs/api-reference/files/retrieve-contents).
-	ResultFiles []OpenAIFile `json:"result_files"`
+	ResultFiles []string `json:"result_files"`
 	// The current status of the fine-tuning job, which can be either `created`, `pending`, `running`, `succeeded`, `failed`, or `cancelled`.
 	Status string `json:"status"`
-	// The total number of billable tokens processed by this fine-tuning job.
-	TrainedTokens int64 `json:"trained_tokens"`
+	// The total number of billable tokens processed by this fine-tuning job. The value will be null if the fine-tuning job is still running.
+	TrainedTokens *int64 `json:"trained_tokens"`
 	// The file ID used for training. You can retrieve the training data with the [Files API](/docs/api-reference/files/retrieve-contents).
 	TrainingFile string `json:"training_file"`
 	// The file ID used for validation. You can retrieve the validation results with the [Files API](/docs/api-reference/files/retrieve-contents).
-	ValidationFile string `json:"validation_file"`
+	ValidationFile *string `json:"validation_file"`
 }
 
 func (o *FineTuningJob) GetCreatedAt() int64 {
@@ -154,9 +154,9 @@ func (o *FineTuningJob) GetCreatedAt() int64 {
 	return o.CreatedAt
 }
 
-func (o *FineTuningJob) GetFineTunedModel() string {
+func (o *FineTuningJob) GetFineTunedModel() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.FineTunedModel
 }
@@ -203,9 +203,9 @@ func (o *FineTuningJob) GetOrganizationID() string {
 	return o.OrganizationID
 }
 
-func (o *FineTuningJob) GetResultFiles() []OpenAIFile {
+func (o *FineTuningJob) GetResultFiles() []string {
 	if o == nil {
-		return []OpenAIFile{}
+		return []string{}
 	}
 	return o.ResultFiles
 }
@@ -217,9 +217,9 @@ func (o *FineTuningJob) GetStatus() string {
 	return o.Status
 }
 
-func (o *FineTuningJob) GetTrainedTokens() int64 {
+func (o *FineTuningJob) GetTrainedTokens() *int64 {
 	if o == nil {
-		return 0
+		return nil
 	}
 	return o.TrainedTokens
 }
@@ -231,9 +231,9 @@ func (o *FineTuningJob) GetTrainingFile() string {
 	return o.TrainingFile
 }
 
-func (o *FineTuningJob) GetValidationFile() string {
+func (o *FineTuningJob) GetValidationFile() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.ValidationFile
 }
