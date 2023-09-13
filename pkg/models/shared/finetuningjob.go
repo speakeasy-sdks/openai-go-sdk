@@ -9,6 +9,37 @@ import (
 	"fmt"
 )
 
+// FineTuningJobError - For fine-tuning jobs that have `failed`, this will contain more information on the cause of the failure.
+type FineTuningJobError struct {
+	// A machine-readable error code.
+	Code *string `json:"code,omitempty"`
+	// A human-readable error message.
+	Message *string `json:"message,omitempty"`
+	// The parameter that was invalid, usually `training_file` or `validation_file`. This field will be null if the failure was not parameter-specific.
+	Param *string `json:"param,omitempty"`
+}
+
+func (o *FineTuningJobError) GetCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Code
+}
+
+func (o *FineTuningJobError) GetMessage() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Message
+}
+
+func (o *FineTuningJobError) GetParam() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Param
+}
+
 // FineTuningJobHyperparametersNEpochs1 - The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
 // "Auto" decides the optimal number of epochs based on the size of the dataset. If setting the number manually, we support any number between 1 and 50 epochs.
 type FineTuningJobHyperparametersNEpochs1 string
@@ -121,6 +152,8 @@ func (o *FineTuningJobHyperparameters) GetNEpochs() *FineTuningJobHyperparameter
 type FineTuningJob struct {
 	// The Unix timestamp (in seconds) for when the fine-tuning job was created.
 	CreatedAt int64 `json:"created_at"`
+	// For fine-tuning jobs that have `failed`, this will contain more information on the cause of the failure.
+	Error *FineTuningJobError `json:"error"`
 	// The name of the fine-tuned model that is being created. The value will be null if the fine-tuning job is still running.
 	FineTunedModel *string `json:"fine_tuned_model"`
 	// The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be null if the fine-tuning job is still running.
@@ -152,6 +185,13 @@ func (o *FineTuningJob) GetCreatedAt() int64 {
 		return 0
 	}
 	return o.CreatedAt
+}
+
+func (o *FineTuningJob) GetError() *FineTuningJobError {
+	if o == nil {
+		return nil
+	}
+	return o.Error
 }
 
 func (o *FineTuningJob) GetFineTunedModel() *string {

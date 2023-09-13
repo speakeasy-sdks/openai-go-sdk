@@ -9,7 +9,7 @@ import (
 	"fmt"
 )
 
-// CreateChatCompletionRequestFunctionCall1 - Controls how the model responds to function calls. "none" means the model does not call a function, and responds to the end-user. "auto" means the model can pick between an end-user or calling a function.  Specifying a particular function via `{"name":\ "my_function"}` forces the model to call that function. "none" is the default when no functions are present. "auto" is the default if functions are present.
+// CreateChatCompletionRequestFunctionCall1 - Controls how the model responds to function calls. `none` means the model does not call a function, and responds to the end-user. `auto` means the model can pick between an end-user or calling a function.  Specifying a particular function via `{"name": "my_function"}` forces the model to call that function. `none` is the default when no functions are present. `auto` is the default if functions are present.
 type CreateChatCompletionRequestFunctionCall1 string
 
 const (
@@ -234,7 +234,7 @@ type CreateChatCompletionRequest struct {
 	// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
 	//
 	FrequencyPenalty *float64 `json:"frequency_penalty,omitempty"`
-	// Controls how the model responds to function calls. "none" means the model does not call a function, and responds to the end-user. "auto" means the model can pick between an end-user or calling a function.  Specifying a particular function via `{"name":\ "my_function"}` forces the model to call that function. "none" is the default when no functions are present. "auto" is the default if functions are present.
+	// Controls how the model responds to function calls. `none` means the model does not call a function, and responds to the end-user. `auto` means the model can pick between an end-user or calling a function.  Specifying a particular function via `{"name": "my_function"}` forces the model to call that function. `none` is the default when no functions are present. `auto` is the default if functions are present.
 	FunctionCall *CreateChatCompletionRequestFunctionCall `json:"function_call,omitempty"`
 	// A list of functions the model may generate JSON inputs for.
 	Functions []ChatCompletionFunctions `json:"functions,omitempty"`

@@ -157,7 +157,7 @@ type CreateFineTuningJobRequest struct {
 	// [supported models](/docs/guides/fine-tuning/what-models-can-be-fine-tuned).
 	//
 	Model interface{} `json:"model"`
-	// A string of up to 40 characters that will be added to your fine-tuned model name.
+	// A string of up to 18 characters that will be added to your fine-tuned model name.
 	//
 	// For example, a `suffix` of "custom-model-name" would produce a model name like `ft:gpt-3.5-turbo:openai:custom-model-name:7p4lURel`.
 	//
