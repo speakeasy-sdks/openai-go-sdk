@@ -2,30 +2,112 @@
 
 package shared
 
-type CreateEditResponseChoicesLogprobs struct {
-	TextOffset    []int64                  `json:"text_offset,omitempty"`
-	TokenLogprobs []float64                `json:"token_logprobs,omitempty"`
-	Tokens        []string                 `json:"tokens,omitempty"`
-	TopLogprobs   []map[string]interface{} `json:"top_logprobs,omitempty"`
+import (
+	"encoding/json"
+	"fmt"
+)
+
+// CreateEditResponseChoicesFinishReason - The reason the model stopped generating tokens. This will be `stop` if the model hit a natural stop point or a provided stop sequence,
+// `length` if the maximum number of tokens specified in the request was reached,
+// or `content_filter` if content was omitted due to a flag from our content filters.
+type CreateEditResponseChoicesFinishReason string
+
+const (
+	CreateEditResponseChoicesFinishReasonStop   CreateEditResponseChoicesFinishReason = "stop"
+	CreateEditResponseChoicesFinishReasonLength CreateEditResponseChoicesFinishReason = "length"
+)
+
+func (e CreateEditResponseChoicesFinishReason) ToPointer() *CreateEditResponseChoicesFinishReason {
+	return &e
+}
+
+func (e *CreateEditResponseChoicesFinishReason) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "stop":
+		fallthrough
+	case "length":
+		*e = CreateEditResponseChoicesFinishReason(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateEditResponseChoicesFinishReason: %v", v)
+	}
 }
 
 type CreateEditResponseChoices struct {
-	FinishReason *string                            `json:"finish_reason,omitempty"`
-	Index        *int64                             `json:"index,omitempty"`
-	Logprobs     *CreateEditResponseChoicesLogprobs `json:"logprobs,omitempty"`
-	Text         *string                            `json:"text,omitempty"`
+	// The reason the model stopped generating tokens. This will be `stop` if the model hit a natural stop point or a provided stop sequence,
+	// `length` if the maximum number of tokens specified in the request was reached,
+	// or `content_filter` if content was omitted due to a flag from our content filters.
+	//
+	FinishReason CreateEditResponseChoicesFinishReason `json:"finish_reason"`
+	// The index of the choice in the list of choices.
+	Index int64 `json:"index"`
+	// The edited result.
+	Text string `json:"text"`
 }
 
-type CreateEditResponseUsage struct {
-	CompletionTokens int64 `json:"completion_tokens"`
-	PromptTokens     int64 `json:"prompt_tokens"`
-	TotalTokens      int64 `json:"total_tokens"`
+func (o *CreateEditResponseChoices) GetFinishReason() CreateEditResponseChoicesFinishReason {
+	if o == nil {
+		return CreateEditResponseChoicesFinishReason("")
+	}
+	return o.FinishReason
 }
 
-// CreateEditResponse - OK
+func (o *CreateEditResponseChoices) GetIndex() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Index
+}
+
+func (o *CreateEditResponseChoices) GetText() string {
+	if o == nil {
+		return ""
+	}
+	return o.Text
+}
+
+// CreateEditResponse
+//
+// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
 type CreateEditResponse struct {
+	// A list of edit choices. Can be more than one if `n` is greater than 1.
 	Choices []CreateEditResponseChoices `json:"choices"`
-	Created int64                       `json:"created"`
-	Object  string                      `json:"object"`
-	Usage   CreateEditResponseUsage     `json:"usage"`
+	// The Unix timestamp (in seconds) of when the edit was created.
+	Created int64 `json:"created"`
+	// The object type, which is always `edit`.
+	Object string `json:"object"`
+	// Usage statistics for the completion request.
+	Usage CompletionUsage `json:"usage"`
+}
+
+func (o *CreateEditResponse) GetChoices() []CreateEditResponseChoices {
+	if o == nil {
+		return []CreateEditResponseChoices{}
+	}
+	return o.Choices
+}
+
+func (o *CreateEditResponse) GetCreated() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Created
+}
+
+func (o *CreateEditResponse) GetObject() string {
+	if o == nil {
+		return ""
+	}
+	return o.Object
+}
+
+func (o *CreateEditResponse) GetUsage() CompletionUsage {
+	if o == nil {
+		return CompletionUsage{}
+	}
+	return o.Usage
 }

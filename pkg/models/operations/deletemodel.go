@@ -3,7 +3,7 @@
 package operations
 
 import (
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 	"net/http"
 )
 
@@ -12,10 +12,45 @@ type DeleteModelRequest struct {
 	Model string `pathParam:"style=simple,explode=false,name=model"`
 }
 
+func (o *DeleteModelRequest) GetModel() string {
+	if o == nil {
+		return ""
+	}
+	return o.Model
+}
+
 type DeleteModelResponse struct {
 	ContentType string
 	// OK
 	DeleteModelResponse *shared.DeleteModelResponse
 	StatusCode          int
 	RawResponse         *http.Response
+}
+
+func (o *DeleteModelResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *DeleteModelResponse) GetDeleteModelResponse() *shared.DeleteModelResponse {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteModelResponse
+}
+
+func (o *DeleteModelResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *DeleteModelResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

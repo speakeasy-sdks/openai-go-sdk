@@ -3,13 +3,20 @@
 package operations
 
 import (
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 	"net/http"
 )
 
 type DeleteFileRequest struct {
-	// The ID of the file to use for this request
+	// The ID of the file to use for this request.
 	FileID string `pathParam:"style=simple,explode=false,name=file_id"`
+}
+
+func (o *DeleteFileRequest) GetFileID() string {
+	if o == nil {
+		return ""
+	}
+	return o.FileID
 }
 
 type DeleteFileResponse struct {
@@ -18,4 +25,32 @@ type DeleteFileResponse struct {
 	DeleteFileResponse *shared.DeleteFileResponse
 	StatusCode         int
 	RawResponse        *http.Response
+}
+
+func (o *DeleteFileResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *DeleteFileResponse) GetDeleteFileResponse() *shared.DeleteFileResponse {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteFileResponse
+}
+
+func (o *DeleteFileResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *DeleteFileResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

@@ -2,19 +2,201 @@
 
 package shared
 
-// FineTune - OK
+// FineTuneHyperparams - The hyperparameters used for the fine-tuning job. See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/hyperparameters) for more details.
+type FineTuneHyperparams struct {
+	// The batch size to use for training. The batch size is the number of
+	// training examples used to train a single forward and backward pass.
+	//
+	BatchSize int64 `json:"batch_size"`
+	// The number of classes to use for computing classification metrics.
+	//
+	ClassificationNClasses *int64 `json:"classification_n_classes,omitempty"`
+	// The positive class to use for computing classification metrics.
+	//
+	ClassificationPositiveClass *string `json:"classification_positive_class,omitempty"`
+	// The classification metrics to compute using the validation dataset at the end of every epoch.
+	//
+	ComputeClassificationMetrics *bool `json:"compute_classification_metrics,omitempty"`
+	// The learning rate multiplier to use for training.
+	//
+	LearningRateMultiplier float64 `json:"learning_rate_multiplier"`
+	// The number of epochs to train the model for. An epoch refers to one
+	// full cycle through the training dataset.
+	//
+	NEpochs int64 `json:"n_epochs"`
+	// The weight to use for loss on the prompt tokens.
+	//
+	PromptLossWeight float64 `json:"prompt_loss_weight"`
+}
+
+func (o *FineTuneHyperparams) GetBatchSize() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.BatchSize
+}
+
+func (o *FineTuneHyperparams) GetClassificationNClasses() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ClassificationNClasses
+}
+
+func (o *FineTuneHyperparams) GetClassificationPositiveClass() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ClassificationPositiveClass
+}
+
+func (o *FineTuneHyperparams) GetComputeClassificationMetrics() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.ComputeClassificationMetrics
+}
+
+func (o *FineTuneHyperparams) GetLearningRateMultiplier() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.LearningRateMultiplier
+}
+
+func (o *FineTuneHyperparams) GetNEpochs() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.NEpochs
+}
+
+func (o *FineTuneHyperparams) GetPromptLossWeight() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.PromptLossWeight
+}
+
+// FineTune - The `FineTune` object represents a legacy fine-tune job that has been created through the API.
+//
+// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
 type FineTune struct {
-	CreatedAt       int64                  `json:"created_at"`
-	Events          []FineTuneEvent        `json:"events,omitempty"`
-	FineTunedModel  string                 `json:"fine_tuned_model"`
-	Hyperparams     map[string]interface{} `json:"hyperparams"`
-	ID              string                 `json:"id"`
-	Model           string                 `json:"model"`
-	Object          string                 `json:"object"`
-	OrganizationID  string                 `json:"organization_id"`
-	ResultFiles     []OpenAIFile           `json:"result_files"`
-	Status          string                 `json:"status"`
-	TrainingFiles   []OpenAIFile           `json:"training_files"`
-	UpdatedAt       int64                  `json:"updated_at"`
-	ValidationFiles []OpenAIFile           `json:"validation_files"`
+	// The Unix timestamp (in seconds) for when the fine-tuning job was created.
+	CreatedAt int64 `json:"created_at"`
+	// The list of events that have been observed in the lifecycle of the FineTune job.
+	Events []FineTuneEvent `json:"events,omitempty"`
+	// The name of the fine-tuned model that is being created.
+	FineTunedModel *string `json:"fine_tuned_model"`
+	// The hyperparameters used for the fine-tuning job. See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/hyperparameters) for more details.
+	Hyperparams FineTuneHyperparams `json:"hyperparams"`
+	// The object identifier, which can be referenced in the API endpoints.
+	ID string `json:"id"`
+	// The base model that is being fine-tuned.
+	Model string `json:"model"`
+	// The object type, which is always "fine-tune".
+	Object string `json:"object"`
+	// The organization that owns the fine-tuning job.
+	OrganizationID string `json:"organization_id"`
+	// The compiled results files for the fine-tuning job.
+	ResultFiles []OpenAIFile `json:"result_files"`
+	// The current status of the fine-tuning job, which can be either `created`, `running`, `succeeded`, `failed`, or `cancelled`.
+	Status string `json:"status"`
+	// The list of files used for training.
+	TrainingFiles []OpenAIFile `json:"training_files"`
+	// The Unix timestamp (in seconds) for when the fine-tuning job was last updated.
+	UpdatedAt int64 `json:"updated_at"`
+	// The list of files used for validation.
+	ValidationFiles []OpenAIFile `json:"validation_files"`
+}
+
+func (o *FineTune) GetCreatedAt() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.CreatedAt
+}
+
+func (o *FineTune) GetEvents() []FineTuneEvent {
+	if o == nil {
+		return nil
+	}
+	return o.Events
+}
+
+func (o *FineTune) GetFineTunedModel() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FineTunedModel
+}
+
+func (o *FineTune) GetHyperparams() FineTuneHyperparams {
+	if o == nil {
+		return FineTuneHyperparams{}
+	}
+	return o.Hyperparams
+}
+
+func (o *FineTune) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *FineTune) GetModel() string {
+	if o == nil {
+		return ""
+	}
+	return o.Model
+}
+
+func (o *FineTune) GetObject() string {
+	if o == nil {
+		return ""
+	}
+	return o.Object
+}
+
+func (o *FineTune) GetOrganizationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.OrganizationID
+}
+
+func (o *FineTune) GetResultFiles() []OpenAIFile {
+	if o == nil {
+		return []OpenAIFile{}
+	}
+	return o.ResultFiles
+}
+
+func (o *FineTune) GetStatus() string {
+	if o == nil {
+		return ""
+	}
+	return o.Status
+}
+
+func (o *FineTune) GetTrainingFiles() []OpenAIFile {
+	if o == nil {
+		return []OpenAIFile{}
+	}
+	return o.TrainingFiles
+}
+
+func (o *FineTune) GetUpdatedAt() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.UpdatedAt
+}
+
+func (o *FineTune) GetValidationFiles() []OpenAIFile {
+	if o == nil {
+		return []OpenAIFile{}
+	}
+	return o.ValidationFiles
 }

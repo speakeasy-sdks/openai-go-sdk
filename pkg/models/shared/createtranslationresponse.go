@@ -2,7 +2,13 @@
 
 package shared
 
-// CreateTranslationResponse - OK
 type CreateTranslationResponse struct {
 	Text string `json:"text"`
+}
+
+func (o *CreateTranslationResponse) GetText() string {
+	if o == nil {
+		return ""
+	}
+	return o.Text
 }

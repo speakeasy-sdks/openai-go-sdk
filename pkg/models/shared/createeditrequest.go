@@ -2,17 +2,174 @@
 
 package shared
 
+import (
+	"encoding/json"
+	"errors"
+	"fmt"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+)
+
+// CreateEditRequestModel2 - ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001` model with this endpoint.
+type CreateEditRequestModel2 string
+
+const (
+	CreateEditRequestModel2TextDavinciEdit001 CreateEditRequestModel2 = "text-davinci-edit-001"
+	CreateEditRequestModel2CodeDavinciEdit001 CreateEditRequestModel2 = "code-davinci-edit-001"
+)
+
+func (e CreateEditRequestModel2) ToPointer() *CreateEditRequestModel2 {
+	return &e
+}
+
+func (e *CreateEditRequestModel2) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "text-davinci-edit-001":
+		fallthrough
+	case "code-davinci-edit-001":
+		*e = CreateEditRequestModel2(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateEditRequestModel2: %v", v)
+	}
+}
+
+type CreateEditRequestModelType string
+
+const (
+	CreateEditRequestModelTypeStr                     CreateEditRequestModelType = "str"
+	CreateEditRequestModelTypeCreateEditRequestModel2 CreateEditRequestModelType = "CreateEditRequest_model_2"
+)
+
+type CreateEditRequestModel struct {
+	Str                     *string
+	CreateEditRequestModel2 *CreateEditRequestModel2
+
+	Type CreateEditRequestModelType
+}
+
+func CreateCreateEditRequestModelStr(str string) CreateEditRequestModel {
+	typ := CreateEditRequestModelTypeStr
+
+	return CreateEditRequestModel{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateCreateEditRequestModelCreateEditRequestModel2(createEditRequestModel2 CreateEditRequestModel2) CreateEditRequestModel {
+	typ := CreateEditRequestModelTypeCreateEditRequestModel2
+
+	return CreateEditRequestModel{
+		CreateEditRequestModel2: &createEditRequestModel2,
+		Type:                    typ,
+	}
+}
+
+func (u *CreateEditRequestModel) UnmarshalJSON(data []byte) error {
+
+	str := new(string)
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = str
+		u.Type = CreateEditRequestModelTypeStr
+		return nil
+	}
+
+	createEditRequestModel2 := new(CreateEditRequestModel2)
+	if err := utils.UnmarshalJSON(data, &createEditRequestModel2, "", true, true); err == nil {
+		u.CreateEditRequestModel2 = createEditRequestModel2
+		u.Type = CreateEditRequestModelTypeCreateEditRequestModel2
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u CreateEditRequestModel) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.CreateEditRequestModel2 != nil {
+		return utils.MarshalJSON(u.CreateEditRequestModel2, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
+}
+
 type CreateEditRequest struct {
 	// The input text to use as a starting point for the edit.
-	Input *string `json:"input,omitempty"`
+	Input *string `default:"" json:"input"`
 	// The instruction that tells the model how to edit the prompt.
 	Instruction string `json:"instruction"`
 	// ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001` model with this endpoint.
-	Model string `json:"model"`
+	Model CreateEditRequestModel `json:"model"`
 	// How many edits to generate for the input and instruction.
-	N *int64 `json:"n,omitempty"`
-	// completions_temperature_description
-	Temperature *float64 `json:"temperature,omitempty"`
-	// completions_top_p_description
-	TopP *float64 `json:"top_p,omitempty"`
+	N *int64 `default:"1" json:"n"`
+	// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+	//
+	// We generally recommend altering this or `top_p` but not both.
+	//
+	Temperature *float64 `default:"1" json:"temperature"`
+	// An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.
+	//
+	// We generally recommend altering this or `temperature` but not both.
+	//
+	TopP *float64 `default:"1" json:"top_p"`
+}
+
+func (c CreateEditRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreateEditRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *CreateEditRequest) GetInput() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Input
+}
+
+func (o *CreateEditRequest) GetInstruction() string {
+	if o == nil {
+		return ""
+	}
+	return o.Instruction
+}
+
+func (o *CreateEditRequest) GetModel() CreateEditRequestModel {
+	if o == nil {
+		return CreateEditRequestModel{}
+	}
+	return o.Model
+}
+
+func (o *CreateEditRequest) GetN() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.N
+}
+
+func (o *CreateEditRequest) GetTemperature() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Temperature
+}
+
+func (o *CreateEditRequest) GetTopP() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TopP
 }

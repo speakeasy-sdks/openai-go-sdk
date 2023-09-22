@@ -1,14 +1,23 @@
 configVersion: 1.0.0
 management:
-  docChecksum: 5399f7767be93d4a4b8cecb9bbc687b3
-  docVersion: 1.2.0
-  speakeasyVersion: 1.19.3
-  generationVersion: 2.16.7
+  docChecksum: ad804f44b6fe212c8ed113a0291ffdaf
+  docVersion: 2.0.0
+  speakeasyVersion: 1.89.0
+  generationVersion: 2.125.1
 generation:
-  telemetryEnabled: false
   sdkClassName: gpt
   sdkFlattening: true
   singleTagPerOp: false
+  telemetryEnabled: false
+features:
+  go:
+    constsAndDefaults: 0.1.0
+    core: 2.88.4
+    deprecations: 2.81.1
+    globalSecurity: 2.81.1
+    globalServerURLs: 2.82.0
+    unions: 2.83.0
 go:
-  version: 1.11.0
+  version: 2.0.0
+  maxMethodParams: 0
   packageName: github.com/speakeasy-sdks/openai-go-sdk

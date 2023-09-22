@@ -3,10 +3,220 @@
 package shared
 
 import (
-	"bytes"
 	"encoding/json"
 	"errors"
+	"fmt"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
 )
+
+// CreateChatCompletionRequestFunctionCall1 - Controls how the model responds to function calls. `none` means the model does not call a function, and responds to the end-user. `auto` means the model can pick between an end-user or calling a function.  Specifying a particular function via `{"name": "my_function"}` forces the model to call that function. `none` is the default when no functions are present. `auto` is the default if functions are present.
+type CreateChatCompletionRequestFunctionCall1 string
+
+const (
+	CreateChatCompletionRequestFunctionCall1None CreateChatCompletionRequestFunctionCall1 = "none"
+	CreateChatCompletionRequestFunctionCall1Auto CreateChatCompletionRequestFunctionCall1 = "auto"
+)
+
+func (e CreateChatCompletionRequestFunctionCall1) ToPointer() *CreateChatCompletionRequestFunctionCall1 {
+	return &e
+}
+
+func (e *CreateChatCompletionRequestFunctionCall1) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "none":
+		fallthrough
+	case "auto":
+		*e = CreateChatCompletionRequestFunctionCall1(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateChatCompletionRequestFunctionCall1: %v", v)
+	}
+}
+
+type CreateChatCompletionRequestFunctionCallType string
+
+const (
+	CreateChatCompletionRequestFunctionCallTypeCreateChatCompletionRequestFunctionCall1 CreateChatCompletionRequestFunctionCallType = "CreateChatCompletionRequest_function_call_1"
+	CreateChatCompletionRequestFunctionCallTypeChatCompletionFunctionCallOption         CreateChatCompletionRequestFunctionCallType = "ChatCompletionFunctionCallOption"
+)
+
+type CreateChatCompletionRequestFunctionCall struct {
+	CreateChatCompletionRequestFunctionCall1 *CreateChatCompletionRequestFunctionCall1
+	ChatCompletionFunctionCallOption         *ChatCompletionFunctionCallOption
+
+	Type CreateChatCompletionRequestFunctionCallType
+}
+
+func CreateCreateChatCompletionRequestFunctionCallCreateChatCompletionRequestFunctionCall1(createChatCompletionRequestFunctionCall1 CreateChatCompletionRequestFunctionCall1) CreateChatCompletionRequestFunctionCall {
+	typ := CreateChatCompletionRequestFunctionCallTypeCreateChatCompletionRequestFunctionCall1
+
+	return CreateChatCompletionRequestFunctionCall{
+		CreateChatCompletionRequestFunctionCall1: &createChatCompletionRequestFunctionCall1,
+		Type:                                     typ,
+	}
+}
+
+func CreateCreateChatCompletionRequestFunctionCallChatCompletionFunctionCallOption(chatCompletionFunctionCallOption ChatCompletionFunctionCallOption) CreateChatCompletionRequestFunctionCall {
+	typ := CreateChatCompletionRequestFunctionCallTypeChatCompletionFunctionCallOption
+
+	return CreateChatCompletionRequestFunctionCall{
+		ChatCompletionFunctionCallOption: &chatCompletionFunctionCallOption,
+		Type:                             typ,
+	}
+}
+
+func (u *CreateChatCompletionRequestFunctionCall) UnmarshalJSON(data []byte) error {
+
+	chatCompletionFunctionCallOption := new(ChatCompletionFunctionCallOption)
+	if err := utils.UnmarshalJSON(data, &chatCompletionFunctionCallOption, "", true, true); err == nil {
+		u.ChatCompletionFunctionCallOption = chatCompletionFunctionCallOption
+		u.Type = CreateChatCompletionRequestFunctionCallTypeChatCompletionFunctionCallOption
+		return nil
+	}
+
+	createChatCompletionRequestFunctionCall1 := new(CreateChatCompletionRequestFunctionCall1)
+	if err := utils.UnmarshalJSON(data, &createChatCompletionRequestFunctionCall1, "", true, true); err == nil {
+		u.CreateChatCompletionRequestFunctionCall1 = createChatCompletionRequestFunctionCall1
+		u.Type = CreateChatCompletionRequestFunctionCallTypeCreateChatCompletionRequestFunctionCall1
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u CreateChatCompletionRequestFunctionCall) MarshalJSON() ([]byte, error) {
+	if u.CreateChatCompletionRequestFunctionCall1 != nil {
+		return utils.MarshalJSON(u.CreateChatCompletionRequestFunctionCall1, "", true)
+	}
+
+	if u.ChatCompletionFunctionCallOption != nil {
+		return utils.MarshalJSON(u.ChatCompletionFunctionCallOption, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
+}
+
+// CreateChatCompletionRequestModel2 - ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility) table for details on which models work with the Chat API.
+type CreateChatCompletionRequestModel2 string
+
+const (
+	CreateChatCompletionRequestModel2Gpt4              CreateChatCompletionRequestModel2 = "gpt-4"
+	CreateChatCompletionRequestModel2Gpt40314          CreateChatCompletionRequestModel2 = "gpt-4-0314"
+	CreateChatCompletionRequestModel2Gpt40613          CreateChatCompletionRequestModel2 = "gpt-4-0613"
+	CreateChatCompletionRequestModel2Gpt432k           CreateChatCompletionRequestModel2 = "gpt-4-32k"
+	CreateChatCompletionRequestModel2Gpt432k0314       CreateChatCompletionRequestModel2 = "gpt-4-32k-0314"
+	CreateChatCompletionRequestModel2Gpt432k0613       CreateChatCompletionRequestModel2 = "gpt-4-32k-0613"
+	CreateChatCompletionRequestModel2Gpt35Turbo        CreateChatCompletionRequestModel2 = "gpt-3.5-turbo"
+	CreateChatCompletionRequestModel2Gpt35Turbo16k     CreateChatCompletionRequestModel2 = "gpt-3.5-turbo-16k"
+	CreateChatCompletionRequestModel2Gpt35Turbo0301    CreateChatCompletionRequestModel2 = "gpt-3.5-turbo-0301"
+	CreateChatCompletionRequestModel2Gpt35Turbo0613    CreateChatCompletionRequestModel2 = "gpt-3.5-turbo-0613"
+	CreateChatCompletionRequestModel2Gpt35Turbo16k0613 CreateChatCompletionRequestModel2 = "gpt-3.5-turbo-16k-0613"
+)
+
+func (e CreateChatCompletionRequestModel2) ToPointer() *CreateChatCompletionRequestModel2 {
+	return &e
+}
+
+func (e *CreateChatCompletionRequestModel2) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "gpt-4":
+		fallthrough
+	case "gpt-4-0314":
+		fallthrough
+	case "gpt-4-0613":
+		fallthrough
+	case "gpt-4-32k":
+		fallthrough
+	case "gpt-4-32k-0314":
+		fallthrough
+	case "gpt-4-32k-0613":
+		fallthrough
+	case "gpt-3.5-turbo":
+		fallthrough
+	case "gpt-3.5-turbo-16k":
+		fallthrough
+	case "gpt-3.5-turbo-0301":
+		fallthrough
+	case "gpt-3.5-turbo-0613":
+		fallthrough
+	case "gpt-3.5-turbo-16k-0613":
+		*e = CreateChatCompletionRequestModel2(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateChatCompletionRequestModel2: %v", v)
+	}
+}
+
+type CreateChatCompletionRequestModelType string
+
+const (
+	CreateChatCompletionRequestModelTypeStr                               CreateChatCompletionRequestModelType = "str"
+	CreateChatCompletionRequestModelTypeCreateChatCompletionRequestModel2 CreateChatCompletionRequestModelType = "CreateChatCompletionRequest_model_2"
+)
+
+type CreateChatCompletionRequestModel struct {
+	Str                               *string
+	CreateChatCompletionRequestModel2 *CreateChatCompletionRequestModel2
+
+	Type CreateChatCompletionRequestModelType
+}
+
+func CreateCreateChatCompletionRequestModelStr(str string) CreateChatCompletionRequestModel {
+	typ := CreateChatCompletionRequestModelTypeStr
+
+	return CreateChatCompletionRequestModel{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateCreateChatCompletionRequestModelCreateChatCompletionRequestModel2(createChatCompletionRequestModel2 CreateChatCompletionRequestModel2) CreateChatCompletionRequestModel {
+	typ := CreateChatCompletionRequestModelTypeCreateChatCompletionRequestModel2
+
+	return CreateChatCompletionRequestModel{
+		CreateChatCompletionRequestModel2: &createChatCompletionRequestModel2,
+		Type:                              typ,
+	}
+}
+
+func (u *CreateChatCompletionRequestModel) UnmarshalJSON(data []byte) error {
+
+	str := new(string)
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = str
+		u.Type = CreateChatCompletionRequestModelTypeStr
+		return nil
+	}
+
+	createChatCompletionRequestModel2 := new(CreateChatCompletionRequestModel2)
+	if err := utils.UnmarshalJSON(data, &createChatCompletionRequestModel2, "", true, true); err == nil {
+		u.CreateChatCompletionRequestModel2 = createChatCompletionRequestModel2
+		u.Type = CreateChatCompletionRequestModelTypeCreateChatCompletionRequestModel2
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u CreateChatCompletionRequestModel) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.CreateChatCompletionRequestModel2 != nil {
+		return utils.MarshalJSON(u.CreateChatCompletionRequestModel2, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
+}
 
 type CreateChatCompletionRequestStopType string
 
@@ -41,21 +251,16 @@ func CreateCreateChatCompletionRequestStopArrayOfstr(arrayOfstr []string) Create
 }
 
 func (u *CreateChatCompletionRequestStop) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	str := new(string)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&str); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
 		u.Str = str
 		u.Type = CreateChatCompletionRequestStopTypeStr
 		return nil
 	}
 
 	arrayOfstr := []string{}
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&arrayOfstr); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfstr, "", true, true); err == nil {
 		u.ArrayOfstr = arrayOfstr
 		u.Type = CreateChatCompletionRequestStopTypeArrayOfstr
 		return nil
@@ -66,44 +271,173 @@ func (u *CreateChatCompletionRequestStop) UnmarshalJSON(data []byte) error {
 
 func (u CreateChatCompletionRequestStop) MarshalJSON() ([]byte, error) {
 	if u.Str != nil {
-		return json.Marshal(u.Str)
+		return utils.MarshalJSON(u.Str, "", true)
 	}
 
 	if u.ArrayOfstr != nil {
-		return json.Marshal(u.ArrayOfstr)
+		return utils.MarshalJSON(u.ArrayOfstr, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 type CreateChatCompletionRequest struct {
-	// completions_frequency_penalty_description
-	FrequencyPenalty *float64 `json:"frequency_penalty,omitempty"`
+	// Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
+	//
+	// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
+	//
+	FrequencyPenalty *float64 `default:"0" json:"frequency_penalty"`
+	// Controls how the model responds to function calls. `none` means the model does not call a function, and responds to the end-user. `auto` means the model can pick between an end-user or calling a function.  Specifying a particular function via `{"name": "my_function"}` forces the model to call that function. `none` is the default when no functions are present. `auto` is the default if functions are present.
+	FunctionCall *CreateChatCompletionRequestFunctionCall `json:"function_call,omitempty"`
+	// A list of functions the model may generate JSON inputs for.
+	Functions []ChatCompletionFunctions `json:"functions,omitempty"`
 	// Modify the likelihood of specified tokens appearing in the completion.
 	//
 	// Accepts a json object that maps tokens (specified by their token ID in the tokenizer) to an associated bias value from -100 to 100. Mathematically, the bias is added to the logits generated by the model prior to sampling. The exact effect will vary per model, but values between -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100 should result in a ban or exclusive selection of the relevant token.
 	//
-	LogitBias map[string]interface{} `json:"logit_bias,omitempty"`
-	// The maximum number of tokens allowed for the generated answer. By default, the number of tokens the model can return will be (4096 - prompt tokens).
+	LogitBias map[string]int64 `json:"logit_bias,omitempty"`
+	// The maximum number of [tokens](/tokenizer) to generate in the chat completion.
 	//
-	MaxTokens *int64 `json:"max_tokens,omitempty"`
-	// The messages to generate chat completions for, in the [chat format](/docs/guides/chat/introduction).
+	// The total length of input tokens and generated tokens is limited by the model's context length. [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb) for counting tokens.
+	//
+	MaxTokens *int64 `default:"inf" json:"max_tokens"`
+	// A list of messages comprising the conversation so far. [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).
 	Messages []ChatCompletionRequestMessage `json:"messages"`
-	// ID of the model to use. Currently, only `gpt-3.5-turbo` and `gpt-3.5-turbo-0301` are supported.
-	Model string `json:"model"`
+	// ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility) table for details on which models work with the Chat API.
+	Model CreateChatCompletionRequestModel `json:"model"`
 	// How many chat completion choices to generate for each input message.
-	N *int64 `json:"n,omitempty"`
-	// completions_presence_penalty_description
-	PresencePenalty *float64 `json:"presence_penalty,omitempty"`
+	N *int64 `default:"1" json:"n"`
+	// Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+	//
+	// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
+	//
+	PresencePenalty *float64 `default:"0" json:"presence_penalty"`
 	// Up to 4 sequences where the API will stop generating further tokens.
 	//
 	Stop *CreateChatCompletionRequestStop `json:"stop,omitempty"`
-	// If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format) as they become available, with the stream terminated by a `data: [DONE]` message.
+	// If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format) as they become available, with the stream terminated by a `data: [DONE]` message. [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).
 	//
-	Stream *bool `json:"stream,omitempty"`
-	// completions_temperature_description
-	Temperature *float64 `json:"temperature,omitempty"`
-	// completions_top_p_description
-	TopP *float64    `json:"top_p,omitempty"`
-	User interface{} `json:"user,omitempty"`
+	Stream *bool `default:"false" json:"stream"`
+	// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+	//
+	// We generally recommend altering this or `top_p` but not both.
+	//
+	Temperature *float64 `default:"1" json:"temperature"`
+	// An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.
+	//
+	// We generally recommend altering this or `temperature` but not both.
+	//
+	TopP *float64 `default:"1" json:"top_p"`
+	// A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).
+	//
+	User *string `json:"user,omitempty"`
+}
+
+func (c CreateChatCompletionRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreateChatCompletionRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *CreateChatCompletionRequest) GetFrequencyPenalty() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.FrequencyPenalty
+}
+
+func (o *CreateChatCompletionRequest) GetFunctionCall() *CreateChatCompletionRequestFunctionCall {
+	if o == nil {
+		return nil
+	}
+	return o.FunctionCall
+}
+
+func (o *CreateChatCompletionRequest) GetFunctions() []ChatCompletionFunctions {
+	if o == nil {
+		return nil
+	}
+	return o.Functions
+}
+
+func (o *CreateChatCompletionRequest) GetLogitBias() map[string]int64 {
+	if o == nil {
+		return nil
+	}
+	return o.LogitBias
+}
+
+func (o *CreateChatCompletionRequest) GetMaxTokens() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.MaxTokens
+}
+
+func (o *CreateChatCompletionRequest) GetMessages() []ChatCompletionRequestMessage {
+	if o == nil {
+		return []ChatCompletionRequestMessage{}
+	}
+	return o.Messages
+}
+
+func (o *CreateChatCompletionRequest) GetModel() CreateChatCompletionRequestModel {
+	if o == nil {
+		return CreateChatCompletionRequestModel{}
+	}
+	return o.Model
+}
+
+func (o *CreateChatCompletionRequest) GetN() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.N
+}
+
+func (o *CreateChatCompletionRequest) GetPresencePenalty() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.PresencePenalty
+}
+
+func (o *CreateChatCompletionRequest) GetStop() *CreateChatCompletionRequestStop {
+	if o == nil {
+		return nil
+	}
+	return o.Stop
+}
+
+func (o *CreateChatCompletionRequest) GetStream() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Stream
+}
+
+func (o *CreateChatCompletionRequest) GetTemperature() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Temperature
+}
+
+func (o *CreateChatCompletionRequest) GetTopP() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TopP
+}
+
+func (o *CreateChatCompletionRequest) GetUser() *string {
+	if o == nil {
+		return nil
+	}
+	return o.User
 }

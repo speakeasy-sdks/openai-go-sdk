@@ -3,7 +3,7 @@
 package operations
 
 import (
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 	"net/http"
 )
 
@@ -13,4 +13,32 @@ type ListFilesResponse struct {
 	ListFilesResponse *shared.ListFilesResponse
 	StatusCode        int
 	RawResponse       *http.Response
+}
+
+func (o *ListFilesResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListFilesResponse) GetListFilesResponse() *shared.ListFilesResponse {
+	if o == nil {
+		return nil
+	}
+	return o.ListFilesResponse
+}
+
+func (o *ListFilesResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListFilesResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }
