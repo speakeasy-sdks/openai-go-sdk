@@ -64,7 +64,7 @@ func (e *CreateTranscriptionRequestResponseFormat) UnmarshalJSON(data []byte) er
 	}
 }
 
-type CreateTranscriptionRequest1 struct {
+type CreateTranscriptionRequest struct {
 	// The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
 	//
 	File CreateTranscriptionRequestFile `multipartForm:"file"`
@@ -85,53 +85,53 @@ type CreateTranscriptionRequest1 struct {
 	Temperature *float64 `default:"0" multipartForm:"name=temperature"`
 }
 
-func (c CreateTranscriptionRequest1) MarshalJSON() ([]byte, error) {
+func (c CreateTranscriptionRequest) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(c, "", false)
 }
 
-func (c *CreateTranscriptionRequest1) UnmarshalJSON(data []byte) error {
+func (c *CreateTranscriptionRequest) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *CreateTranscriptionRequest1) GetFile() CreateTranscriptionRequestFile {
+func (o *CreateTranscriptionRequest) GetFile() CreateTranscriptionRequestFile {
 	if o == nil {
 		return CreateTranscriptionRequestFile{}
 	}
 	return o.File
 }
 
-func (o *CreateTranscriptionRequest1) GetLanguage() *string {
+func (o *CreateTranscriptionRequest) GetLanguage() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Language
 }
 
-func (o *CreateTranscriptionRequest1) GetModel() interface{} {
+func (o *CreateTranscriptionRequest) GetModel() interface{} {
 	if o == nil {
 		return nil
 	}
 	return o.Model
 }
 
-func (o *CreateTranscriptionRequest1) GetPrompt() *string {
+func (o *CreateTranscriptionRequest) GetPrompt() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Prompt
 }
 
-func (o *CreateTranscriptionRequest1) GetResponseFormat() *CreateTranscriptionRequestResponseFormat {
+func (o *CreateTranscriptionRequest) GetResponseFormat() *CreateTranscriptionRequestResponseFormat {
 	if o == nil {
 		return nil
 	}
 	return o.ResponseFormat
 }
 
-func (o *CreateTranscriptionRequest1) GetTemperature() *float64 {
+func (o *CreateTranscriptionRequest) GetTemperature() *float64 {
 	if o == nil {
 		return nil
 	}

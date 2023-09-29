@@ -105,7 +105,7 @@ func (e *CreateImageEditRequestSize) UnmarshalJSON(data []byte) error {
 	}
 }
 
-type CreateImageEditRequest2 struct {
+type CreateImageEditRequest struct {
 	// The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not provided, image must have transparency, which will be used as the mask.
 	Image CreateImageEditRequestImage `multipartForm:"file"`
 	// An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where `image` should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions as `image`.
@@ -123,60 +123,60 @@ type CreateImageEditRequest2 struct {
 	User *string `multipartForm:"name=user"`
 }
 
-func (c CreateImageEditRequest2) MarshalJSON() ([]byte, error) {
+func (c CreateImageEditRequest) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(c, "", false)
 }
 
-func (c *CreateImageEditRequest2) UnmarshalJSON(data []byte) error {
+func (c *CreateImageEditRequest) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *CreateImageEditRequest2) GetImage() CreateImageEditRequestImage {
+func (o *CreateImageEditRequest) GetImage() CreateImageEditRequestImage {
 	if o == nil {
 		return CreateImageEditRequestImage{}
 	}
 	return o.Image
 }
 
-func (o *CreateImageEditRequest2) GetMask() *CreateImageEditRequestMask {
+func (o *CreateImageEditRequest) GetMask() *CreateImageEditRequestMask {
 	if o == nil {
 		return nil
 	}
 	return o.Mask
 }
 
-func (o *CreateImageEditRequest2) GetN() *int64 {
+func (o *CreateImageEditRequest) GetN() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.N
 }
 
-func (o *CreateImageEditRequest2) GetPrompt() string {
+func (o *CreateImageEditRequest) GetPrompt() string {
 	if o == nil {
 		return ""
 	}
 	return o.Prompt
 }
 
-func (o *CreateImageEditRequest2) GetResponseFormat() *CreateImageEditRequestResponseFormat {
+func (o *CreateImageEditRequest) GetResponseFormat() *CreateImageEditRequestResponseFormat {
 	if o == nil {
 		return nil
 	}
 	return o.ResponseFormat
 }
 
-func (o *CreateImageEditRequest2) GetSize() *CreateImageEditRequestSize {
+func (o *CreateImageEditRequest) GetSize() *CreateImageEditRequestSize {
 	if o == nil {
 		return nil
 	}
 	return o.Size
 }
 
-func (o *CreateImageEditRequest2) GetUser() *string {
+func (o *CreateImageEditRequest) GetUser() *string {
 	if o == nil {
 		return nil
 	}

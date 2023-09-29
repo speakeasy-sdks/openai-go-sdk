@@ -86,7 +86,7 @@ func (e *CreateImageVariationRequestSize) UnmarshalJSON(data []byte) error {
 	}
 }
 
-type CreateImageVariationRequest2 struct {
+type CreateImageVariationRequest struct {
 	// The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB, and square.
 	Image CreateImageVariationRequestImage `multipartForm:"file"`
 	// The number of images to generate. Must be between 1 and 10.
@@ -100,46 +100,46 @@ type CreateImageVariationRequest2 struct {
 	User *string `multipartForm:"name=user"`
 }
 
-func (c CreateImageVariationRequest2) MarshalJSON() ([]byte, error) {
+func (c CreateImageVariationRequest) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(c, "", false)
 }
 
-func (c *CreateImageVariationRequest2) UnmarshalJSON(data []byte) error {
+func (c *CreateImageVariationRequest) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *CreateImageVariationRequest2) GetImage() CreateImageVariationRequestImage {
+func (o *CreateImageVariationRequest) GetImage() CreateImageVariationRequestImage {
 	if o == nil {
 		return CreateImageVariationRequestImage{}
 	}
 	return o.Image
 }
 
-func (o *CreateImageVariationRequest2) GetN() *int64 {
+func (o *CreateImageVariationRequest) GetN() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.N
 }
 
-func (o *CreateImageVariationRequest2) GetResponseFormat() *CreateImageVariationRequestResponseFormat {
+func (o *CreateImageVariationRequest) GetResponseFormat() *CreateImageVariationRequestResponseFormat {
 	if o == nil {
 		return nil
 	}
 	return o.ResponseFormat
 }
 
-func (o *CreateImageVariationRequest2) GetSize() *CreateImageVariationRequestSize {
+func (o *CreateImageVariationRequest) GetSize() *CreateImageVariationRequestSize {
 	if o == nil {
 		return nil
 	}
 	return o.Size
 }
 
-func (o *CreateImageVariationRequest2) GetUser() *string {
+func (o *CreateImageVariationRequest) GetUser() *string {
 	if o == nil {
 		return nil
 	}

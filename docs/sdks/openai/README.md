@@ -1,4 +1,5 @@
 # OpenAI
+(*OpenAI*)
 
 ## Overview
 
@@ -189,35 +190,35 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateChatCompletion(ctx, shared.CreateChatCompletionRequest{
-        FrequencyPenalty: openaigosdk.Float64(5488.14),
+        FrequencyPenalty: openaigosdk.Float64(7707.26),
         FunctionCall: &shared.CreateChatCompletionRequestFunctionCall{},
         Functions: []shared.ChatCompletionFunctions{
             shared.ChatCompletionFunctions{
-                Description: openaigosdk.String("provident"),
-                Name: "Ellis Mitchell",
+                Description: openaigosdk.String("Optimized exuding secured line"),
+                Name: "Money",
                 Parameters: map[string]interface{}{
-                    "illum": "vel",
+                    "dolorum": "lumen",
                 },
             },
         },
         LogitBias: map[string]int64{
-            "error": 645894,
+            "quod": 401600,
         },
-        MaxTokens: openaigosdk.Int64(384382),
+        MaxTokens: openaigosdk.Int64(90770),
         Messages: []shared.ChatCompletionRequestMessage{
             shared.ChatCompletionRequestMessage{
-                Content: "iure",
+                Content: "International incidunt Franc",
                 FunctionCall: &shared.ChatCompletionRequestMessageFunctionCall{
-                    Arguments: "magnam",
-                    Name: "Larry Windler",
+                    Arguments: "alarm",
+                    Name: "Chair",
                 },
-                Name: openaigosdk.String("Alexandra Schulist"),
+                Name: openaigosdk.String("Northeast frictionless Park"),
                 Role: shared.ChatCompletionRequestMessageRoleAssistant,
             },
         },
         Model: shared.CreateChatCompletionRequestModel{},
         N: openaigosdk.Int64(1),
-        PresencePenalty: openaigosdk.Float64(3927.85),
+        PresencePenalty: openaigosdk.Float64(6542.93),
         Stop: &shared.CreateChatCompletionRequestStop{},
         Stream: openaigosdk.Bool(false),
         Temperature: openaigosdk.Float64(1),
@@ -272,17 +273,17 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateCompletion(ctx, shared.CreateCompletionRequest{
-        BestOf: openaigosdk.Int64(925597),
+        BestOf: openaigosdk.Int64(160667),
         Echo: openaigosdk.Bool(false),
-        FrequencyPenalty: openaigosdk.Float64(8360.79),
+        FrequencyPenalty: openaigosdk.Float64(141.61),
         LogitBias: map[string]int64{
-            "ab": 337396,
+            "velit": 254881,
         },
-        Logprobs: openaigosdk.Int64(87129),
+        Logprobs: openaigosdk.Int64(877910),
         MaxTokens: openaigosdk.Int64(16),
         Model: shared.CreateCompletionRequestModel{},
         N: openaigosdk.Int64(1),
-        PresencePenalty: openaigosdk.Float64(6481.72),
+        PresencePenalty: openaigosdk.Float64(5915.62),
         Prompt: &shared.CreateCompletionRequestPrompt{},
         Stop: &shared.CreateCompletionRequestStop{},
         Stream: openaigosdk.Bool(false),
@@ -450,10 +451,10 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateFile(ctx, shared.CreateFileRequest{
         File: shared.CreateFileRequestFile{
-            Content: []byte("ipsam"),
-            File: "repellendus",
+            Content: []byte("`'$Z`(L/RH"),
+            File: "Rap National",
         },
-        Purpose: "sapiente",
+        Purpose: "Female synergistic Maine",
     })
     if err != nil {
         log.Fatal(err)
@@ -510,18 +511,18 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateFineTune(ctx, shared.CreateFineTuneRequest{
-        BatchSize: openaigosdk.Int64(778157),
+        BatchSize: openaigosdk.Int64(763928),
         ClassificationBetas: []float64{
-            1403.5,
+            3993.02,
         },
-        ClassificationNClasses: openaigosdk.Int64(870013),
-        ClassificationPositiveClass: openaigosdk.String("at"),
+        ClassificationNClasses: openaigosdk.Int64(172686),
+        ClassificationPositiveClass: openaigosdk.String("male Buckinghamshire"),
         ComputeClassificationMetrics: openaigosdk.Bool(false),
-        LearningRateMultiplier: openaigosdk.Float64(9786.19),
+        LearningRateMultiplier: openaigosdk.Float64(4447.26),
         Model: &shared.CreateFineTuneRequestModel{},
-        NEpochs: openaigosdk.Int64(473608),
-        PromptLossWeight: openaigosdk.Float64(7991.59),
-        Suffix: openaigosdk.String("quod"),
+        NEpochs: openaigosdk.Int64(592749),
+        PromptLossWeight: openaigosdk.Float64(4413.8),
+        Suffix: openaigosdk.String("next"),
         TrainingFile: "file-abc123",
         ValidationFile: openaigosdk.String("file-abc123"),
     })
@@ -582,7 +583,7 @@ func main() {
             NEpochs: &shared.CreateFineTuningJobRequestHyperparametersNEpochs{},
         },
         Model: shared.CreateFineTuningJobRequestModel{},
-        Suffix: openaigosdk.String("esse"),
+        Suffix: openaigosdk.String("Thallium"),
         TrainingFile: "file-abc123",
         ValidationFile: openaigosdk.String("file-abc123"),
     })
@@ -687,14 +688,14 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.OpenAI.CreateImageEdit(ctx, shared.CreateImageEditRequest2{
+    res, err := s.OpenAI.CreateImageEdit(ctx, shared.CreateImageEditRequest{
         Image: shared.CreateImageEditRequestImage{
-            Content: []byte("totam"),
-            Image: "porro",
+            Content: []byte("0]/(|3W_T9"),
+            Image: "https://loremflickr.com/640/480",
         },
         Mask: &shared.CreateImageEditRequestMask{
-            Content: []byte("dolorum"),
-            Mask: "dicta",
+            Content: []byte("`^YjrpxopK"),
+            Mask: "Rap Dodge Incredible",
         },
         N: openaigosdk.Int64(1),
         Prompt: "A cute baby sea otter wearing a beret",
@@ -714,10 +715,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
-| `request`                                                                        | [shared.CreateImageEditRequest2](../../models/shared/createimageeditrequest2.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
+| `request`                                                                      | [shared.CreateImageEditRequest](../../models/shared/createimageeditrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 
 
 ### Response
@@ -749,10 +750,10 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.OpenAI.CreateImageVariation(ctx, shared.CreateImageVariationRequest2{
+    res, err := s.OpenAI.CreateImageVariation(ctx, shared.CreateImageVariationRequest{
         Image: shared.CreateImageVariationRequestImage{
-            Content: []byte("nam"),
-            Image: "officia",
+            Content: []byte("`YY7PCrWuK"),
+            Image: "https://loremflickr.com/640/480",
         },
         N: openaigosdk.Int64(1),
         ResponseFormat: shared.CreateImageVariationRequestResponseFormatURL.ToPointer(),
@@ -771,10 +772,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
-| `request`                                                                                  | [shared.CreateImageVariationRequest2](../../models/shared/createimagevariationrequest2.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `request`                                                                                | [shared.CreateImageVariationRequest](../../models/shared/createimagevariationrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 
 
 ### Response
@@ -857,16 +858,16 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.OpenAI.CreateTranscription(ctx, shared.CreateTranscriptionRequest1{
+    res, err := s.OpenAI.CreateTranscription(ctx, shared.CreateTranscriptionRequest{
         File: shared.CreateTranscriptionRequestFile{
-            Content: []byte("occaecati"),
-            File: "fugit",
+            Content: []byte("\#BbTW'zX9"),
+            File: "Buckinghamshire",
         },
-        Language: openaigosdk.String("deleniti"),
+        Language: openaigosdk.String("teal Titanium"),
         Model: "whisper-1",
-        Prompt: openaigosdk.String("optio"),
-        ResponseFormat: shared.CreateTranscriptionRequestResponseFormatSrt.ToPointer(),
-        Temperature: openaigosdk.Float64(1059.07),
+        Prompt: openaigosdk.String("Mendelevium Kansas behind"),
+        ResponseFormat: shared.CreateTranscriptionRequestResponseFormatJSON.ToPointer(),
+        Temperature: openaigosdk.Float64(3694.44),
     })
     if err != nil {
         log.Fatal(err)
@@ -880,10 +881,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `request`                                                                                | [shared.CreateTranscriptionRequest1](../../models/shared/createtranscriptionrequest1.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
+| `request`                                                                              | [shared.CreateTranscriptionRequest](../../models/shared/createtranscriptionrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 
 
 ### Response
@@ -917,13 +918,13 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateTranslation(ctx, shared.CreateTranslationRequest{
         File: shared.CreateTranslationRequestFile{
-            Content: []byte("commodi"),
-            File: "molestiae",
+            Content: []byte("M57UL;W3rx"),
+            File: "Reggae Toys silver",
         },
         Model: "whisper-1",
-        Prompt: openaigosdk.String("qui"),
-        ResponseFormat: openaigosdk.String("impedit"),
-        Temperature: openaigosdk.Float64(7369.18),
+        Prompt: openaigosdk.String("Soft East Frozen"),
+        ResponseFormat: openaigosdk.String("Analyst aboard relocate"),
+        Temperature: openaigosdk.Float64(6003.73),
     })
     if err != nil {
         log.Fatal(err)
@@ -974,7 +975,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.DeleteFile(ctx, operations.DeleteFileRequest{
-        FileID: "esse",
+        FileID: "yellow kiddingly white",
     })
     if err != nil {
         log.Fatal(err)
@@ -1076,7 +1077,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.DownloadFile(ctx, operations.DownloadFileRequest{
-        FileID: "ipsum",
+        FileID: "Maserati Bronze Audi",
     })
     if err != nil {
         log.Fatal(err)
@@ -1280,9 +1281,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.ListFineTuningEvents(ctx, operations.ListFineTuningEventsRequest{
-        After: openaigosdk.String("excepturi"),
+        After: openaigosdk.String("phew silver Consultant"),
         FineTuningJobID: "ft-AF1WoRqd3aJAHsqc9NY7iL8F",
-        Limit: openaigosdk.Int64(135218),
+        Limit: openaigosdk.Int64(104325),
     })
     if err != nil {
         log.Fatal(err)
@@ -1381,8 +1382,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.ListPaginatedFineTuningJobs(ctx, operations.ListPaginatedFineTuningJobsRequest{
-        After: openaigosdk.String("perferendis"),
-        Limit: openaigosdk.Int64(324141),
+        After: openaigosdk.String("GB voluptate"),
+        Limit: openaigosdk.Int64(374490),
     })
     if err != nil {
         log.Fatal(err)
@@ -1433,7 +1434,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.RetrieveFile(ctx, operations.RetrieveFileRequest{
-        FileID: "natus",
+        FileID: "online Facilitator enfold",
     })
     if err != nil {
         log.Fatal(err)
