@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### 
+### CreateFineTuningJobRequestHyperparametersNEpochs1
 
 ```go
-createFineTuningJobRequestHyperparametersNEpochs := shared.CreateCreateFineTuningJobRequestHyperparametersNEpochsStr(string{/* values here */})
+createFineTuningJobRequestHyperparametersNEpochs := shared.CreateCreateFineTuningJobRequestHyperparametersNEpochsCreateFineTuningJobRequestHyperparametersNEpochs1(shared.CreateFineTuningJobRequestHyperparametersNEpochs1{/* values here */})
 ```
 
 ### 

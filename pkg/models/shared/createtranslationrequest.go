@@ -3,6 +3,9 @@
 package shared
 
 import (
+	"encoding/json"
+	"errors"
+	"fmt"
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
 )
 
@@ -25,13 +28,101 @@ func (o *CreateTranslationRequestFile) GetFile() string {
 	return o.File
 }
 
+// CreateTranslationRequestModel2 - ID of the model to use. Only `whisper-1` is currently available.
+type CreateTranslationRequestModel2 string
+
+const (
+	CreateTranslationRequestModel2Whisper1 CreateTranslationRequestModel2 = "whisper-1"
+)
+
+func (e CreateTranslationRequestModel2) ToPointer() *CreateTranslationRequestModel2 {
+	return &e
+}
+
+func (e *CreateTranslationRequestModel2) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "whisper-1":
+		*e = CreateTranslationRequestModel2(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateTranslationRequestModel2: %v", v)
+	}
+}
+
+type CreateTranslationRequestModelType string
+
+const (
+	CreateTranslationRequestModelTypeStr                            CreateTranslationRequestModelType = "str"
+	CreateTranslationRequestModelTypeCreateTranslationRequestModel2 CreateTranslationRequestModelType = "CreateTranslationRequest_model_2"
+)
+
+type CreateTranslationRequestModel struct {
+	Str                            *string
+	CreateTranslationRequestModel2 *CreateTranslationRequestModel2
+
+	Type CreateTranslationRequestModelType
+}
+
+func CreateCreateTranslationRequestModelStr(str string) CreateTranslationRequestModel {
+	typ := CreateTranslationRequestModelTypeStr
+
+	return CreateTranslationRequestModel{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateCreateTranslationRequestModelCreateTranslationRequestModel2(createTranslationRequestModel2 CreateTranslationRequestModel2) CreateTranslationRequestModel {
+	typ := CreateTranslationRequestModelTypeCreateTranslationRequestModel2
+
+	return CreateTranslationRequestModel{
+		CreateTranslationRequestModel2: &createTranslationRequestModel2,
+		Type:                           typ,
+	}
+}
+
+func (u *CreateTranslationRequestModel) UnmarshalJSON(data []byte) error {
+
+	str := new(string)
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = str
+		u.Type = CreateTranslationRequestModelTypeStr
+		return nil
+	}
+
+	createTranslationRequestModel2 := new(CreateTranslationRequestModel2)
+	if err := utils.UnmarshalJSON(data, &createTranslationRequestModel2, "", true, true); err == nil {
+		u.CreateTranslationRequestModel2 = createTranslationRequestModel2
+		u.Type = CreateTranslationRequestModelTypeCreateTranslationRequestModel2
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u CreateTranslationRequestModel) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.CreateTranslationRequestModel2 != nil {
+		return utils.MarshalJSON(u.CreateTranslationRequestModel2, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
+}
+
 type CreateTranslationRequest struct {
 	// The audio file object (not file name) translate, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
 	//
 	File CreateTranslationRequestFile `multipartForm:"file"`
 	// ID of the model to use. Only `whisper-1` is currently available.
 	//
-	Model interface{} `multipartForm:"name=model,json"`
+	Model CreateTranslationRequestModel `multipartForm:"name=model"`
 	// An optional text to guide the model's style or continue a previous audio segment. The [prompt](/docs/guides/speech-to-text/prompting) should be in English.
 	//
 	Prompt *string `multipartForm:"name=prompt"`
@@ -61,9 +152,9 @@ func (o *CreateTranslationRequest) GetFile() CreateTranslationRequestFile {
 	return o.File
 }
 
-func (o *CreateTranslationRequest) GetModel() interface{} {
+func (o *CreateTranslationRequest) GetModel() CreateTranslationRequestModel {
 	if o == nil {
-		return nil
+		return CreateTranslationRequestModel{}
 	}
 	return o.Model
 }

@@ -400,7 +400,7 @@ func (s *openAI) CreateEmbedding(ctx context.Context, request shared.CreateEmbed
 	return res, nil
 }
 
-// CreateFile - Upload a file that contains document(s) to be used across various endpoints/features. Currently, the size of all the files uploaded by one organization can be up to 1 GB. Please contact us if you need to increase the storage limit.
+// CreateFile - Upload a file that can be used across various endpoints/features. Currently, the size of all the files uploaded by one organization can be up to 1 GB. Please [contact us](https://help.openai.com/) if you need to increase the storage limit.
 func (s *openAI) CreateFile(ctx context.Context, request shared.CreateFileRequest) (*operations.CreateFileResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/files"

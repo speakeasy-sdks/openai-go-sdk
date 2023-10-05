@@ -9,25 +9,51 @@ import (
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
 )
 
+// CreateFineTuningJobRequestHyperparametersNEpochs1 - The number of epochs to train the model for. An epoch refers to one
+// full cycle through the training dataset.
+type CreateFineTuningJobRequestHyperparametersNEpochs1 string
+
+const (
+	CreateFineTuningJobRequestHyperparametersNEpochs1Auto CreateFineTuningJobRequestHyperparametersNEpochs1 = "auto"
+)
+
+func (e CreateFineTuningJobRequestHyperparametersNEpochs1) ToPointer() *CreateFineTuningJobRequestHyperparametersNEpochs1 {
+	return &e
+}
+
+func (e *CreateFineTuningJobRequestHyperparametersNEpochs1) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "auto":
+		*e = CreateFineTuningJobRequestHyperparametersNEpochs1(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateFineTuningJobRequestHyperparametersNEpochs1: %v", v)
+	}
+}
+
 type CreateFineTuningJobRequestHyperparametersNEpochsType string
 
 const (
-	CreateFineTuningJobRequestHyperparametersNEpochsTypeStr     CreateFineTuningJobRequestHyperparametersNEpochsType = "str"
-	CreateFineTuningJobRequestHyperparametersNEpochsTypeInteger CreateFineTuningJobRequestHyperparametersNEpochsType = "integer"
+	CreateFineTuningJobRequestHyperparametersNEpochsTypeCreateFineTuningJobRequestHyperparametersNEpochs1 CreateFineTuningJobRequestHyperparametersNEpochsType = "CreateFineTuningJobRequest_hyperparameters_n_epochs_1"
+	CreateFineTuningJobRequestHyperparametersNEpochsTypeInteger                                           CreateFineTuningJobRequestHyperparametersNEpochsType = "integer"
 )
 
 type CreateFineTuningJobRequestHyperparametersNEpochs struct {
-	Str     *string
-	Integer *int64
+	CreateFineTuningJobRequestHyperparametersNEpochs1 *CreateFineTuningJobRequestHyperparametersNEpochs1
+	Integer                                           *int64
 
 	Type CreateFineTuningJobRequestHyperparametersNEpochsType
 }
 
-func CreateCreateFineTuningJobRequestHyperparametersNEpochsStr(str string) CreateFineTuningJobRequestHyperparametersNEpochs {
-	typ := CreateFineTuningJobRequestHyperparametersNEpochsTypeStr
+func CreateCreateFineTuningJobRequestHyperparametersNEpochsCreateFineTuningJobRequestHyperparametersNEpochs1(createFineTuningJobRequestHyperparametersNEpochs1 CreateFineTuningJobRequestHyperparametersNEpochs1) CreateFineTuningJobRequestHyperparametersNEpochs {
+	typ := CreateFineTuningJobRequestHyperparametersNEpochsTypeCreateFineTuningJobRequestHyperparametersNEpochs1
 
 	return CreateFineTuningJobRequestHyperparametersNEpochs{
-		Str:  &str,
+		CreateFineTuningJobRequestHyperparametersNEpochs1: &createFineTuningJobRequestHyperparametersNEpochs1,
 		Type: typ,
 	}
 }
@@ -43,10 +69,10 @@ func CreateCreateFineTuningJobRequestHyperparametersNEpochsInteger(integer int64
 
 func (u *CreateFineTuningJobRequestHyperparametersNEpochs) UnmarshalJSON(data []byte) error {
 
-	str := new(string)
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
-		u.Str = str
-		u.Type = CreateFineTuningJobRequestHyperparametersNEpochsTypeStr
+	createFineTuningJobRequestHyperparametersNEpochs1 := new(CreateFineTuningJobRequestHyperparametersNEpochs1)
+	if err := utils.UnmarshalJSON(data, &createFineTuningJobRequestHyperparametersNEpochs1, "", true, true); err == nil {
+		u.CreateFineTuningJobRequestHyperparametersNEpochs1 = createFineTuningJobRequestHyperparametersNEpochs1
+		u.Type = CreateFineTuningJobRequestHyperparametersNEpochsTypeCreateFineTuningJobRequestHyperparametersNEpochs1
 		return nil
 	}
 
@@ -61,8 +87,8 @@ func (u *CreateFineTuningJobRequestHyperparametersNEpochs) UnmarshalJSON(data []
 }
 
 func (u CreateFineTuningJobRequestHyperparametersNEpochs) MarshalJSON() ([]byte, error) {
-	if u.Str != nil {
-		return utils.MarshalJSON(u.Str, "", true)
+	if u.CreateFineTuningJobRequestHyperparametersNEpochs1 != nil {
+		return utils.MarshalJSON(u.CreateFineTuningJobRequestHyperparametersNEpochs1, "", true)
 	}
 
 	if u.Integer != nil {

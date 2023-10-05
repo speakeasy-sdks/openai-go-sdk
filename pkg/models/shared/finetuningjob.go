@@ -3,7 +3,9 @@
 package shared
 
 import (
+	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
 )
 
@@ -38,26 +40,52 @@ func (o *FineTuningJobError) GetParam() *string {
 	return o.Param
 }
 
+// FineTuningJobHyperparametersNEpochs1 - The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
+// "auto" decides the optimal number of epochs based on the size of the dataset. If setting the number manually, we support any number between 1 and 50 epochs.
+type FineTuningJobHyperparametersNEpochs1 string
+
+const (
+	FineTuningJobHyperparametersNEpochs1Auto FineTuningJobHyperparametersNEpochs1 = "auto"
+)
+
+func (e FineTuningJobHyperparametersNEpochs1) ToPointer() *FineTuningJobHyperparametersNEpochs1 {
+	return &e
+}
+
+func (e *FineTuningJobHyperparametersNEpochs1) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "auto":
+		*e = FineTuningJobHyperparametersNEpochs1(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for FineTuningJobHyperparametersNEpochs1: %v", v)
+	}
+}
+
 type FineTuningJobHyperparametersNEpochsType string
 
 const (
-	FineTuningJobHyperparametersNEpochsTypeStr     FineTuningJobHyperparametersNEpochsType = "str"
-	FineTuningJobHyperparametersNEpochsTypeInteger FineTuningJobHyperparametersNEpochsType = "integer"
+	FineTuningJobHyperparametersNEpochsTypeFineTuningJobHyperparametersNEpochs1 FineTuningJobHyperparametersNEpochsType = "FineTuningJob_hyperparameters_n_epochs_1"
+	FineTuningJobHyperparametersNEpochsTypeInteger                              FineTuningJobHyperparametersNEpochsType = "integer"
 )
 
 type FineTuningJobHyperparametersNEpochs struct {
-	Str     *string
-	Integer *int64
+	FineTuningJobHyperparametersNEpochs1 *FineTuningJobHyperparametersNEpochs1
+	Integer                              *int64
 
 	Type FineTuningJobHyperparametersNEpochsType
 }
 
-func CreateFineTuningJobHyperparametersNEpochsStr(str string) FineTuningJobHyperparametersNEpochs {
-	typ := FineTuningJobHyperparametersNEpochsTypeStr
+func CreateFineTuningJobHyperparametersNEpochsFineTuningJobHyperparametersNEpochs1(fineTuningJobHyperparametersNEpochs1 FineTuningJobHyperparametersNEpochs1) FineTuningJobHyperparametersNEpochs {
+	typ := FineTuningJobHyperparametersNEpochsTypeFineTuningJobHyperparametersNEpochs1
 
 	return FineTuningJobHyperparametersNEpochs{
-		Str:  &str,
-		Type: typ,
+		FineTuningJobHyperparametersNEpochs1: &fineTuningJobHyperparametersNEpochs1,
+		Type:                                 typ,
 	}
 }
 
@@ -72,10 +100,10 @@ func CreateFineTuningJobHyperparametersNEpochsInteger(integer int64) FineTuningJ
 
 func (u *FineTuningJobHyperparametersNEpochs) UnmarshalJSON(data []byte) error {
 
-	str := new(string)
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
-		u.Str = str
-		u.Type = FineTuningJobHyperparametersNEpochsTypeStr
+	fineTuningJobHyperparametersNEpochs1 := new(FineTuningJobHyperparametersNEpochs1)
+	if err := utils.UnmarshalJSON(data, &fineTuningJobHyperparametersNEpochs1, "", true, true); err == nil {
+		u.FineTuningJobHyperparametersNEpochs1 = fineTuningJobHyperparametersNEpochs1
+		u.Type = FineTuningJobHyperparametersNEpochsTypeFineTuningJobHyperparametersNEpochs1
 		return nil
 	}
 
@@ -90,8 +118,8 @@ func (u *FineTuningJobHyperparametersNEpochs) UnmarshalJSON(data []byte) error {
 }
 
 func (u FineTuningJobHyperparametersNEpochs) MarshalJSON() ([]byte, error) {
-	if u.Str != nil {
-		return utils.MarshalJSON(u.Str, "", true)
+	if u.FineTuningJobHyperparametersNEpochs1 != nil {
+		return utils.MarshalJSON(u.FineTuningJobHyperparametersNEpochs1, "", true)
 	}
 
 	if u.Integer != nil {

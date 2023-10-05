@@ -3,7 +3,9 @@
 package shared
 
 import (
+	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
 )
 
@@ -114,13 +116,101 @@ func (u CreateEmbeddingRequestInput) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
+// CreateEmbeddingRequestModel2 - ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.
+type CreateEmbeddingRequestModel2 string
+
+const (
+	CreateEmbeddingRequestModel2TextEmbeddingAda002 CreateEmbeddingRequestModel2 = "text-embedding-ada-002"
+)
+
+func (e CreateEmbeddingRequestModel2) ToPointer() *CreateEmbeddingRequestModel2 {
+	return &e
+}
+
+func (e *CreateEmbeddingRequestModel2) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "text-embedding-ada-002":
+		*e = CreateEmbeddingRequestModel2(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateEmbeddingRequestModel2: %v", v)
+	}
+}
+
+type CreateEmbeddingRequestModelType string
+
+const (
+	CreateEmbeddingRequestModelTypeStr                          CreateEmbeddingRequestModelType = "str"
+	CreateEmbeddingRequestModelTypeCreateEmbeddingRequestModel2 CreateEmbeddingRequestModelType = "CreateEmbeddingRequest_model_2"
+)
+
+type CreateEmbeddingRequestModel struct {
+	Str                          *string
+	CreateEmbeddingRequestModel2 *CreateEmbeddingRequestModel2
+
+	Type CreateEmbeddingRequestModelType
+}
+
+func CreateCreateEmbeddingRequestModelStr(str string) CreateEmbeddingRequestModel {
+	typ := CreateEmbeddingRequestModelTypeStr
+
+	return CreateEmbeddingRequestModel{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateCreateEmbeddingRequestModelCreateEmbeddingRequestModel2(createEmbeddingRequestModel2 CreateEmbeddingRequestModel2) CreateEmbeddingRequestModel {
+	typ := CreateEmbeddingRequestModelTypeCreateEmbeddingRequestModel2
+
+	return CreateEmbeddingRequestModel{
+		CreateEmbeddingRequestModel2: &createEmbeddingRequestModel2,
+		Type:                         typ,
+	}
+}
+
+func (u *CreateEmbeddingRequestModel) UnmarshalJSON(data []byte) error {
+
+	str := new(string)
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = str
+		u.Type = CreateEmbeddingRequestModelTypeStr
+		return nil
+	}
+
+	createEmbeddingRequestModel2 := new(CreateEmbeddingRequestModel2)
+	if err := utils.UnmarshalJSON(data, &createEmbeddingRequestModel2, "", true, true); err == nil {
+		u.CreateEmbeddingRequestModel2 = createEmbeddingRequestModel2
+		u.Type = CreateEmbeddingRequestModelTypeCreateEmbeddingRequestModel2
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u CreateEmbeddingRequestModel) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.CreateEmbeddingRequestModel2 != nil {
+		return utils.MarshalJSON(u.CreateEmbeddingRequestModel2, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
+}
+
 type CreateEmbeddingRequest struct {
-	// Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays. Each input must not exceed the max input tokens for the model (8191 tokens for `text-embedding-ada-002`) and cannot be an empty string. [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb) for counting tokens.
+	// Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays. Each input must not exceed the max input tokens for the model (8191 tokens for `text-embedding-ada-002`) and cannot be an empty string. [Example Python code](https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken) for counting tokens.
 	//
 	Input CreateEmbeddingRequestInput `json:"input"`
 	// ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.
 	//
-	Model interface{} `json:"model"`
+	Model CreateEmbeddingRequestModel `json:"model"`
 	// A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).
 	//
 	User *string `json:"user,omitempty"`
@@ -133,9 +223,9 @@ func (o *CreateEmbeddingRequest) GetInput() CreateEmbeddingRequestInput {
 	return o.Input
 }
 
-func (o *CreateEmbeddingRequest) GetModel() interface{} {
+func (o *CreateEmbeddingRequest) GetModel() CreateEmbeddingRequestModel {
 	if o == nil {
-		return nil
+		return CreateEmbeddingRequestModel{}
 	}
 	return o.Model
 }

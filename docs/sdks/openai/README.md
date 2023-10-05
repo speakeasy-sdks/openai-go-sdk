@@ -15,7 +15,7 @@ The OpenAI REST API
 * [CreateCompletion](#createcompletion) - Creates a completion for the provided prompt and parameters.
 * [~~CreateEdit~~](#createedit) - Creates a new edit for the provided input, instruction, and parameters. :warning: **Deprecated**
 * [CreateEmbedding](#createembedding) - Creates an embedding vector representing the input text.
-* [CreateFile](#createfile) - Upload a file that contains document(s) to be used across various endpoints/features. Currently, the size of all the files uploaded by one organization can be up to 1 GB. Please contact us if you need to increase the storage limit.
+* [CreateFile](#createfile) - Upload a file that can be used across various endpoints/features. Currently, the size of all the files uploaded by one organization can be up to 1 GB. Please [contact us](https://help.openai.com/) if you need to increase the storage limit.
 
 * [~~CreateFineTune~~](#createfinetune) - Creates a job that fine-tunes a specified model from a given dataset.
 
@@ -398,7 +398,7 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateEmbedding(ctx, shared.CreateEmbeddingRequest{
         Input: shared.CreateEmbeddingRequestInput{},
-        Model: "text-embedding-ada-002",
+        Model: shared.CreateEmbeddingRequestModel{},
         User: openaigosdk.String("user-1234"),
     })
     if err != nil {
@@ -426,7 +426,7 @@ func main() {
 
 ## CreateFile
 
-Upload a file that contains document(s) to be used across various endpoints/features. Currently, the size of all the files uploaded by one organization can be up to 1 GB. Please contact us if you need to increase the storage limit.
+Upload a file that can be used across various endpoints/features. Currently, the size of all the files uploaded by one organization can be up to 1 GB. Please [contact us](https://help.openai.com/) if you need to increase the storage limit.
 
 
 ### Example Usage
@@ -864,10 +864,10 @@ func main() {
             File: "Buckinghamshire",
         },
         Language: openaigosdk.String("teal Titanium"),
-        Model: "whisper-1",
-        Prompt: openaigosdk.String("Mendelevium Kansas behind"),
-        ResponseFormat: shared.CreateTranscriptionRequestResponseFormatJSON.ToPointer(),
-        Temperature: openaigosdk.Float64(3694.44),
+        Model: shared.CreateTranscriptionRequestModel{},
+        Prompt: openaigosdk.String("Configuration invoice"),
+        ResponseFormat: shared.CreateTranscriptionRequestResponseFormatText.ToPointer(),
+        Temperature: openaigosdk.Float64(1473.99),
     })
     if err != nil {
         log.Fatal(err)
@@ -921,10 +921,10 @@ func main() {
             Content: []byte("M57UL;W3rx"),
             File: "Reggae Toys silver",
         },
-        Model: "whisper-1",
-        Prompt: openaigosdk.String("Soft East Frozen"),
-        ResponseFormat: openaigosdk.String("Analyst aboard relocate"),
-        Temperature: openaigosdk.Float64(6003.73),
+        Model: shared.CreateTranslationRequestModel{},
+        Prompt: openaigosdk.String("foolishly Diesel"),
+        ResponseFormat: openaigosdk.String("Frozen Passenger"),
+        Temperature: openaigosdk.Float64(4850.17),
     })
     if err != nil {
         log.Fatal(err)

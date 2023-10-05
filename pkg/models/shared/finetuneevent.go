@@ -2,6 +2,9 @@
 
 package shared
 
+// FineTuneEvent - Fine-tune event object
+//
+// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
 type FineTuneEvent struct {
 	CreatedAt int64  `json:"created_at"`
 	Level     string `json:"level"`

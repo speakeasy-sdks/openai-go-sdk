@@ -4,6 +4,7 @@ package shared
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
 )
@@ -25,6 +26,94 @@ func (o *CreateTranscriptionRequestFile) GetFile() string {
 		return ""
 	}
 	return o.File
+}
+
+// CreateTranscriptionRequestModel2 - ID of the model to use. Only `whisper-1` is currently available.
+type CreateTranscriptionRequestModel2 string
+
+const (
+	CreateTranscriptionRequestModel2Whisper1 CreateTranscriptionRequestModel2 = "whisper-1"
+)
+
+func (e CreateTranscriptionRequestModel2) ToPointer() *CreateTranscriptionRequestModel2 {
+	return &e
+}
+
+func (e *CreateTranscriptionRequestModel2) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "whisper-1":
+		*e = CreateTranscriptionRequestModel2(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateTranscriptionRequestModel2: %v", v)
+	}
+}
+
+type CreateTranscriptionRequestModelType string
+
+const (
+	CreateTranscriptionRequestModelTypeStr                              CreateTranscriptionRequestModelType = "str"
+	CreateTranscriptionRequestModelTypeCreateTranscriptionRequestModel2 CreateTranscriptionRequestModelType = "CreateTranscriptionRequest_model_2"
+)
+
+type CreateTranscriptionRequestModel struct {
+	Str                              *string
+	CreateTranscriptionRequestModel2 *CreateTranscriptionRequestModel2
+
+	Type CreateTranscriptionRequestModelType
+}
+
+func CreateCreateTranscriptionRequestModelStr(str string) CreateTranscriptionRequestModel {
+	typ := CreateTranscriptionRequestModelTypeStr
+
+	return CreateTranscriptionRequestModel{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateCreateTranscriptionRequestModelCreateTranscriptionRequestModel2(createTranscriptionRequestModel2 CreateTranscriptionRequestModel2) CreateTranscriptionRequestModel {
+	typ := CreateTranscriptionRequestModelTypeCreateTranscriptionRequestModel2
+
+	return CreateTranscriptionRequestModel{
+		CreateTranscriptionRequestModel2: &createTranscriptionRequestModel2,
+		Type:                             typ,
+	}
+}
+
+func (u *CreateTranscriptionRequestModel) UnmarshalJSON(data []byte) error {
+
+	str := new(string)
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = str
+		u.Type = CreateTranscriptionRequestModelTypeStr
+		return nil
+	}
+
+	createTranscriptionRequestModel2 := new(CreateTranscriptionRequestModel2)
+	if err := utils.UnmarshalJSON(data, &createTranscriptionRequestModel2, "", true, true); err == nil {
+		u.CreateTranscriptionRequestModel2 = createTranscriptionRequestModel2
+		u.Type = CreateTranscriptionRequestModelTypeCreateTranscriptionRequestModel2
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u CreateTranscriptionRequestModel) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.CreateTranscriptionRequestModel2 != nil {
+		return utils.MarshalJSON(u.CreateTranscriptionRequestModel2, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 // CreateTranscriptionRequestResponseFormat - The format of the transcript output, in one of these options: json, text, srt, verbose_json, or vtt.
@@ -73,7 +162,7 @@ type CreateTranscriptionRequest struct {
 	Language *string `multipartForm:"name=language"`
 	// ID of the model to use. Only `whisper-1` is currently available.
 	//
-	Model interface{} `multipartForm:"name=model,json"`
+	Model CreateTranscriptionRequestModel `multipartForm:"name=model"`
 	// An optional text to guide the model's style or continue a previous audio segment. The [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.
 	//
 	Prompt *string `multipartForm:"name=prompt"`
@@ -110,9 +199,9 @@ func (o *CreateTranscriptionRequest) GetLanguage() *string {
 	return o.Language
 }
 
-func (o *CreateTranscriptionRequest) GetModel() interface{} {
+func (o *CreateTranscriptionRequest) GetModel() CreateTranscriptionRequestModel {
 	if o == nil {
-		return nil
+		return CreateTranscriptionRequestModel{}
 	}
 	return o.Model
 }

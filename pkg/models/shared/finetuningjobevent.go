@@ -37,6 +37,7 @@ func (e *FineTuningJobEventLevel) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// FineTuningJobEvent - Fine-tuning job event object
 type FineTuningJobEvent struct {
 	CreatedAt int64                   `json:"created_at"`
 	ID        string                  `json:"id"`

@@ -22,14 +22,14 @@ func (o *CreateFileRequestFile) GetFile() string {
 }
 
 type CreateFileRequest struct {
-	// Name of the [JSON Lines](https://jsonlines.readthedocs.io/en/latest/) file to be uploaded.
+	// The file object (not file name) to be uploaded.
 	//
 	// If the `purpose` is set to "fine-tune", the file will be used for fine-tuning.
 	//
 	File CreateFileRequestFile `multipartForm:"file"`
-	// The intended purpose of the uploaded documents.
+	// The intended purpose of the uploaded file.
 	//
-	// Use "fine-tune" for [fine-tuning](/docs/api-reference/fine-tuning). This allows us to validate the format of the uploaded file.
+	// Use "fine-tune" for [fine-tuning](/docs/api-reference/fine-tuning). This allows us to validate the format of the uploaded file is correct for fine-tuning.
 	//
 	Purpose string `multipartForm:"name=purpose"`
 }
