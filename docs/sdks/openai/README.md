@@ -190,37 +190,39 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateChatCompletion(ctx, shared.CreateChatCompletionRequest{
-        FrequencyPenalty: openaigosdk.Float64(7707.26),
-        FunctionCall: &shared.CreateChatCompletionRequestFunctionCall{},
+        FunctionCall: shared.CreateCreateChatCompletionRequestFunctionCallChatCompletionFunctionCallOption(
+                shared.ChatCompletionFunctionCallOption{
+                    Name: "secondary Hoboken",
+                },
+        ),
         Functions: []shared.ChatCompletionFunctions{
             shared.ChatCompletionFunctions{
-                Description: openaigosdk.String("Optimized exuding secured line"),
-                Name: "Money",
+                Name: "Baby",
                 Parameters: map[string]interface{}{
-                    "dolorum": "lumen",
+                    "lumen": "maroon",
                 },
             },
         },
         LogitBias: map[string]int64{
-            "quod": 401600,
+            "Southeast": 652538,
         },
-        MaxTokens: openaigosdk.Int64(90770),
         Messages: []shared.ChatCompletionRequestMessage{
             shared.ChatCompletionRequestMessage{
-                Content: "International incidunt Franc",
+                Content: "incidunt Franc South",
                 FunctionCall: &shared.ChatCompletionRequestMessageFunctionCall{
-                    Arguments: "alarm",
-                    Name: "Chair",
+                    Arguments: "teal Yucaipa",
+                    Name: "Response",
                 },
-                Name: openaigosdk.String("Northeast frictionless Park"),
-                Role: shared.ChatCompletionRequestMessageRoleAssistant,
+                Role: shared.ChatCompletionRequestMessageRoleUser,
             },
         },
-        Model: shared.CreateChatCompletionRequestModel{},
+        Model: shared.CreateCreateChatCompletionRequestModelCreateChatCompletionRequestModel2(
+        shared.CreateChatCompletionRequestModel2Gpt35Turbo,
+        ),
         N: openaigosdk.Int64(1),
-        PresencePenalty: openaigosdk.Float64(6542.93),
-        Stop: &shared.CreateChatCompletionRequestStop{},
-        Stream: openaigosdk.Bool(false),
+        Stop: shared.CreateCreateChatCompletionRequestStopStr(
+        "Muller",
+        ),
         Temperature: openaigosdk.Float64(1),
         TopP: openaigosdk.Float64(1),
         User: openaigosdk.String("user-1234"),
@@ -273,20 +275,54 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateCompletion(ctx, shared.CreateCompletionRequest{
-        BestOf: openaigosdk.Int64(160667),
-        Echo: openaigosdk.Bool(false),
-        FrequencyPenalty: openaigosdk.Float64(141.61),
         LogitBias: map[string]int64{
-            "velit": 254881,
+            "red": 242695,
         },
-        Logprobs: openaigosdk.Int64(877910),
         MaxTokens: openaigosdk.Int64(16),
-        Model: shared.CreateCompletionRequestModel{},
+        Model: shared.CreateCreateCompletionRequestModelStr(
+        "optimistic",
+        ),
         N: openaigosdk.Int64(1),
-        PresencePenalty: openaigosdk.Float64(5915.62),
-        Prompt: &shared.CreateCompletionRequestPrompt{},
-        Stop: &shared.CreateCompletionRequestStop{},
-        Stream: openaigosdk.Bool(false),
+        Prompt: shared.CreateCreateCompletionRequestPromptArrayOfinteger(
+                []int64{
+                    [,
+                    1,
+                    2,
+                    1,
+                    2,
+                    ,,
+                     ,
+                    3,
+                    1,
+                    8,
+                    ,,
+                     ,
+                    2,
+                    5,
+                    7,
+                    ,,
+                     ,
+                    1,
+                    3,
+                    3,
+                    2,
+                    ,,
+                     ,
+                    1,
+                    3,
+                    ],
+                },
+        ),
+        Stop: shared.CreateCreateCompletionRequestStopArrayOfstr(
+                []string{
+                    "[",
+                    "\"",
+                    "\",
+                    "n",
+                    "\"",
+                    "]",
+                },
+        ),
         Suffix: openaigosdk.String("test."),
         Temperature: openaigosdk.Float64(1),
         TopP: openaigosdk.Float64(1),
@@ -344,7 +380,9 @@ func main() {
     res, err := s.OpenAI.CreateEdit(ctx, shared.CreateEditRequest{
         Input: openaigosdk.String("What day of the wek is it?"),
         Instruction: "Fix the spelling mistakes.",
-        Model: shared.CreateEditRequestModel{},
+        Model: shared.CreateCreateEditRequestModelCreateEditRequestModel2(
+        shared.CreateEditRequestModel2TextDavinciEdit001,
+        ),
         N: openaigosdk.Int64(1),
         Temperature: openaigosdk.Float64(1),
         TopP: openaigosdk.Float64(1),
@@ -397,8 +435,15 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateEmbedding(ctx, shared.CreateEmbeddingRequest{
-        Input: shared.CreateEmbeddingRequestInput{},
-        Model: shared.CreateEmbeddingRequestModel{},
+        AdditionalProperties: map[string]interface{}{
+            "chief": "compressing",
+        },
+        Input: shared.CreateCreateEmbeddingRequestInputStr(
+        "The quick brown fox jumped over the lazy dog",
+        ),
+        Model: shared.CreateCreateEmbeddingRequestModelCreateEmbeddingRequestModel2(
+        shared.CreateEmbeddingRequestModel2TextEmbeddingAda002,
+        ),
         User: openaigosdk.String("user-1234"),
     })
     if err != nil {
@@ -450,11 +495,14 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateFile(ctx, shared.CreateFileRequest{
-        File: shared.CreateFileRequestFile{
-            Content: []byte("`'$Z`(L/RH"),
-            File: "Rap National",
+        AdditionalProperties: map[string]interface{}{
+            "Associate": "Miami",
         },
-        Purpose: "Female synergistic Maine",
+        File: shared.CreateFileRequestFile{
+            Content: []byte("(L/RHAW|^A"),
+            File: "Female synergistic Maine",
+        },
+        Purpose: "bidder",
     })
     if err != nil {
         log.Fatal(err)
@@ -511,18 +559,15 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateFineTune(ctx, shared.CreateFineTuneRequest{
-        BatchSize: openaigosdk.Int64(763928),
         ClassificationBetas: []float64{
-            3993.02,
+            0.6,
+            1,
+            1.5,
+            2,
         },
-        ClassificationNClasses: openaigosdk.Int64(172686),
-        ClassificationPositiveClass: openaigosdk.String("male Buckinghamshire"),
-        ComputeClassificationMetrics: openaigosdk.Bool(false),
-        LearningRateMultiplier: openaigosdk.Float64(4447.26),
-        Model: &shared.CreateFineTuneRequestModel{},
-        NEpochs: openaigosdk.Int64(592749),
-        PromptLossWeight: openaigosdk.Float64(4413.8),
-        Suffix: openaigosdk.String("next"),
+        Model: shared.CreateCreateFineTuneRequestModelCreateFineTuneRequestModel2(
+        shared.CreateFineTuneRequestModel2Curie,
+        ),
         TrainingFile: "file-abc123",
         ValidationFile: openaigosdk.String("file-abc123"),
     })
@@ -580,10 +625,13 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.CreateFineTuningJob(ctx, shared.CreateFineTuningJobRequest{
         Hyperparameters: &shared.CreateFineTuningJobRequestHyperparameters{
-            NEpochs: &shared.CreateFineTuningJobRequestHyperparametersNEpochs{},
+            NEpochs: shared.CreateCreateFineTuningJobRequestHyperparametersNEpochsCreateFineTuningJobRequestHyperparametersNEpochs1(
+            shared.CreateFineTuningJobRequestHyperparametersNEpochs1Auto,
+            ),
         },
-        Model: shared.CreateFineTuningJobRequestModel{},
-        Suffix: openaigosdk.String("Thallium"),
+        Model: shared.CreateCreateFineTuningJobRequestModelCreateFineTuningJobRequestModel2(
+        shared.CreateFineTuningJobRequestModel2Gpt35Turbo,
+        ),
         TrainingFile: "file-abc123",
         ValidationFile: openaigosdk.String("file-abc123"),
     })
@@ -808,8 +856,33 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateModeration(ctx, shared.CreateModerationRequest{
-        Input: shared.CreateModerationRequestInput{},
-        Model: &shared.CreateModerationRequestModel{},
+        Input: shared.CreateCreateModerationRequestInputArrayOfstr(
+                []string{
+                    "I",
+                    " ",
+                    "w",
+                    "a",
+                    "n",
+                    "t",
+                    " ",
+                    "t",
+                    "o",
+                    " ",
+                    "k",
+                    "i",
+                    "l",
+                    "l",
+                    " ",
+                    "t",
+                    "h",
+                    "e",
+                    "m",
+                    ".",
+                },
+        ),
+        Model: shared.CreateCreateModerationRequestModelCreateModerationRequestModel2(
+        shared.CreateModerationRequestModel2TextModerationStable,
+        ),
     })
     if err != nil {
         log.Fatal(err)
@@ -859,15 +932,16 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateTranscription(ctx, shared.CreateTranscriptionRequest{
-        File: shared.CreateTranscriptionRequestFile{
-            Content: []byte("\#BbTW'zX9"),
-            File: "Buckinghamshire",
+        AdditionalProperties: map[string]interface{}{
+            "Lead": "neutral",
         },
-        Language: openaigosdk.String("teal Titanium"),
-        Model: shared.CreateTranscriptionRequestModel{},
-        Prompt: openaigosdk.String("Configuration invoice"),
-        ResponseFormat: shared.CreateTranscriptionRequestResponseFormatText.ToPointer(),
-        Temperature: openaigosdk.Float64(1473.99),
+        File: shared.CreateTranscriptionRequestFile{
+            Content: []byte("TW'zX90&_Y"),
+            File: "Shoes Garden Configuration",
+        },
+        Model: shared.CreateCreateTranscriptionRequestModelCreateTranscriptionRequestModel2(
+        shared.CreateTranscriptionRequestModel2Whisper1,
+        ),
     })
     if err != nil {
         log.Fatal(err)
@@ -917,14 +991,16 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.CreateTranslation(ctx, shared.CreateTranslationRequest{
-        File: shared.CreateTranslationRequestFile{
-            Content: []byte("M57UL;W3rx"),
-            File: "Reggae Toys silver",
+        AdditionalProperties: map[string]interface{}{
+            "DRAM": "Granite",
         },
-        Model: shared.CreateTranslationRequestModel{},
-        Prompt: openaigosdk.String("foolishly Diesel"),
-        ResponseFormat: openaigosdk.String("Frozen Passenger"),
-        Temperature: openaigosdk.Float64(4850.17),
+        File: shared.CreateTranslationRequestFile{
+            Content: []byte("L;W3rxiWe3"),
+            File: "silver Transgender",
+        },
+        Model: shared.CreateCreateTranslationRequestModelCreateTranslationRequestModel2(
+        shared.CreateTranslationRequestModel2Whisper1,
+        ),
     })
     if err != nil {
         log.Fatal(err)
@@ -1179,7 +1255,6 @@ func main() {
     ctx := context.Background()
     res, err := s.OpenAI.ListFineTuneEvents(ctx, operations.ListFineTuneEventsRequest{
         FineTuneID: "ft-AF1WoRqd3aJAHsqc9NY7iL8F",
-        Stream: openaigosdk.Bool(false),
     })
     if err != nil {
         log.Fatal(err)
@@ -1281,9 +1356,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.OpenAI.ListFineTuningEvents(ctx, operations.ListFineTuningEventsRequest{
-        After: openaigosdk.String("phew silver Consultant"),
         FineTuningJobID: "ft-AF1WoRqd3aJAHsqc9NY7iL8F",
-        Limit: openaigosdk.Int64(104325),
     })
     if err != nil {
         log.Fatal(err)
@@ -1381,10 +1454,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.OpenAI.ListPaginatedFineTuningJobs(ctx, operations.ListPaginatedFineTuningJobsRequest{
-        After: openaigosdk.String("GB voluptate"),
-        Limit: openaigosdk.Int64(374490),
-    })
+    res, err := s.OpenAI.ListPaginatedFineTuningJobs(ctx, operations.ListPaginatedFineTuningJobsRequest{})
     if err != nil {
         log.Fatal(err)
     }

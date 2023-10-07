@@ -2,6 +2,10 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+)
+
 type CreateFileRequestFile struct {
 	Content []byte `multipartForm:"content"`
 	File    string `multipartForm:"name=file"`
@@ -22,6 +26,7 @@ func (o *CreateFileRequestFile) GetFile() string {
 }
 
 type CreateFileRequest struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// The file object (not file name) to be uploaded.
 	//
 	// If the `purpose` is set to "fine-tune", the file will be used for fine-tuning.
@@ -32,6 +37,24 @@ type CreateFileRequest struct {
 	// Use "fine-tune" for [fine-tuning](/docs/api-reference/fine-tuning). This allows us to validate the format of the uploaded file is correct for fine-tuning.
 	//
 	Purpose string `multipartForm:"name=purpose"`
+}
+
+func (c CreateFileRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreateFileRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *CreateFileRequest) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *CreateFileRequest) GetFile() CreateFileRequestFile {
