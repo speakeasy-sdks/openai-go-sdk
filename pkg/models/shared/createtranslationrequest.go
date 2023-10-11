@@ -117,7 +117,6 @@ func (u CreateTranslationRequestModel) MarshalJSON() ([]byte, error) {
 }
 
 type CreateTranslationRequest struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// The audio file object (not file name) translate, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
 	//
 	File CreateTranslationRequestFile `multipartForm:"file"`
@@ -144,13 +143,6 @@ func (c *CreateTranslationRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (o *CreateTranslationRequest) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CreateTranslationRequest) GetFile() CreateTranslationRequestFile {

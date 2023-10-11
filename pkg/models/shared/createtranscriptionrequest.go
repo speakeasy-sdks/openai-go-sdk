@@ -154,7 +154,6 @@ func (e *CreateTranscriptionRequestResponseFormat) UnmarshalJSON(data []byte) er
 }
 
 type CreateTranscriptionRequest struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
 	//
 	File CreateTranscriptionRequestFile `multipartForm:"file"`
@@ -184,13 +183,6 @@ func (c *CreateTranscriptionRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (o *CreateTranscriptionRequest) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CreateTranscriptionRequest) GetFile() CreateTranscriptionRequestFile {

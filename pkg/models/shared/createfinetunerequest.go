@@ -9,6 +9,110 @@ import (
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
 )
 
+// CreateFineTuneRequestHyperparametersNEpochs1 - The number of epochs to train the model for. An epoch refers to one
+// full cycle through the training dataset.
+type CreateFineTuneRequestHyperparametersNEpochs1 string
+
+const (
+	CreateFineTuneRequestHyperparametersNEpochs1Auto CreateFineTuneRequestHyperparametersNEpochs1 = "auto"
+)
+
+func (e CreateFineTuneRequestHyperparametersNEpochs1) ToPointer() *CreateFineTuneRequestHyperparametersNEpochs1 {
+	return &e
+}
+
+func (e *CreateFineTuneRequestHyperparametersNEpochs1) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "auto":
+		*e = CreateFineTuneRequestHyperparametersNEpochs1(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateFineTuneRequestHyperparametersNEpochs1: %v", v)
+	}
+}
+
+type CreateFineTuneRequestHyperparametersNEpochsType string
+
+const (
+	CreateFineTuneRequestHyperparametersNEpochsTypeCreateFineTuneRequestHyperparametersNEpochs1 CreateFineTuneRequestHyperparametersNEpochsType = "CreateFineTuneRequest_hyperparameters_n_epochs_1"
+	CreateFineTuneRequestHyperparametersNEpochsTypeInteger                                      CreateFineTuneRequestHyperparametersNEpochsType = "integer"
+)
+
+type CreateFineTuneRequestHyperparametersNEpochs struct {
+	CreateFineTuneRequestHyperparametersNEpochs1 *CreateFineTuneRequestHyperparametersNEpochs1
+	Integer                                      *int64
+
+	Type CreateFineTuneRequestHyperparametersNEpochsType
+}
+
+func CreateCreateFineTuneRequestHyperparametersNEpochsCreateFineTuneRequestHyperparametersNEpochs1(createFineTuneRequestHyperparametersNEpochs1 CreateFineTuneRequestHyperparametersNEpochs1) CreateFineTuneRequestHyperparametersNEpochs {
+	typ := CreateFineTuneRequestHyperparametersNEpochsTypeCreateFineTuneRequestHyperparametersNEpochs1
+
+	return CreateFineTuneRequestHyperparametersNEpochs{
+		CreateFineTuneRequestHyperparametersNEpochs1: &createFineTuneRequestHyperparametersNEpochs1,
+		Type: typ,
+	}
+}
+
+func CreateCreateFineTuneRequestHyperparametersNEpochsInteger(integer int64) CreateFineTuneRequestHyperparametersNEpochs {
+	typ := CreateFineTuneRequestHyperparametersNEpochsTypeInteger
+
+	return CreateFineTuneRequestHyperparametersNEpochs{
+		Integer: &integer,
+		Type:    typ,
+	}
+}
+
+func (u *CreateFineTuneRequestHyperparametersNEpochs) UnmarshalJSON(data []byte) error {
+
+	createFineTuneRequestHyperparametersNEpochs1 := new(CreateFineTuneRequestHyperparametersNEpochs1)
+	if err := utils.UnmarshalJSON(data, &createFineTuneRequestHyperparametersNEpochs1, "", true, true); err == nil {
+		u.CreateFineTuneRequestHyperparametersNEpochs1 = createFineTuneRequestHyperparametersNEpochs1
+		u.Type = CreateFineTuneRequestHyperparametersNEpochsTypeCreateFineTuneRequestHyperparametersNEpochs1
+		return nil
+	}
+
+	integer := new(int64)
+	if err := utils.UnmarshalJSON(data, &integer, "", true, true); err == nil {
+		u.Integer = integer
+		u.Type = CreateFineTuneRequestHyperparametersNEpochsTypeInteger
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u CreateFineTuneRequestHyperparametersNEpochs) MarshalJSON() ([]byte, error) {
+	if u.CreateFineTuneRequestHyperparametersNEpochs1 != nil {
+		return utils.MarshalJSON(u.CreateFineTuneRequestHyperparametersNEpochs1, "", true)
+	}
+
+	if u.Integer != nil {
+		return utils.MarshalJSON(u.Integer, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
+}
+
+// CreateFineTuneRequestHyperparameters - The hyperparameters used for the fine-tuning job.
+type CreateFineTuneRequestHyperparameters struct {
+	// The number of epochs to train the model for. An epoch refers to one
+	// full cycle through the training dataset.
+	//
+	NEpochs *CreateFineTuneRequestHyperparametersNEpochs `json:"n_epochs,omitempty"`
+}
+
+func (o *CreateFineTuneRequestHyperparameters) GetNEpochs() *CreateFineTuneRequestHyperparametersNEpochs {
+	if o == nil {
+		return nil
+	}
+	return o.NEpochs
+}
+
 // CreateFineTuneRequestModel2 - The name of the base model to fine-tune. You can select one of "ada",
 // "babbage", "curie", "davinci", or a fine-tuned model created after 2022-04-21 and before 2023-08-22.
 // To learn more about these models, see the
@@ -150,6 +254,8 @@ type CreateFineTuneRequest struct {
 	// `classification_positive_class` for binary classification.
 	//
 	ComputeClassificationMetrics *bool `default:"false" json:"compute_classification_metrics"`
+	// The hyperparameters used for the fine-tuning job.
+	Hyperparameters *CreateFineTuneRequestHyperparameters `json:"hyperparameters,omitempty"`
 	// The learning rate multiplier to use for training.
 	// The fine-tuning learning rate is the original learning rate used for
 	// pretraining multiplied by this value.
@@ -167,10 +273,6 @@ type CreateFineTuneRequest struct {
 	// [Models](/docs/models) documentation.
 	//
 	Model *CreateFineTuneRequestModel `json:"model,omitempty"`
-	// The number of epochs to train the model for. An epoch refers to one
-	// full cycle through the training dataset.
-	//
-	NEpochs *int64 `default:"4" json:"n_epochs"`
 	// The weight to use for loss on the prompt tokens. This controls how
 	// much the model tries to learn to generate the prompt (as compared
 	// to the completion which always has a weight of 1.0), and can add
@@ -259,6 +361,13 @@ func (o *CreateFineTuneRequest) GetComputeClassificationMetrics() *bool {
 	return o.ComputeClassificationMetrics
 }
 
+func (o *CreateFineTuneRequest) GetHyperparameters() *CreateFineTuneRequestHyperparameters {
+	if o == nil {
+		return nil
+	}
+	return o.Hyperparameters
+}
+
 func (o *CreateFineTuneRequest) GetLearningRateMultiplier() *float64 {
 	if o == nil {
 		return nil
@@ -271,13 +380,6 @@ func (o *CreateFineTuneRequest) GetModel() *CreateFineTuneRequestModel {
 		return nil
 	}
 	return o.Model
-}
-
-func (o *CreateFineTuneRequest) GetNEpochs() *int64 {
-	if o == nil {
-		return nil
-	}
-	return o.NEpochs
 }
 
 func (o *CreateFineTuneRequest) GetPromptLossWeight() *float64 {

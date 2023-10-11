@@ -63,8 +63,28 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 
 // Gpt - OpenAI API: The OpenAI REST API. Please see https://platform.openai.com/docs/api-reference for more details.
 type Gpt struct {
-	// The OpenAI REST API
-	OpenAI *openAI
+	// Learn how to turn audio into text.
+	Audio *audio
+	// Given a list of messages comprising a conversation, the model will return a response.
+	Chat *chat
+	// Given a prompt, the model will return one or more predicted completions, and can also return the probabilities of alternative tokens at each position.
+	Completions *completions
+	// Given a prompt and an instruction, the model will return an edited version of the prompt.
+	Edits *edits
+	// Get a vector representation of a given input that can be easily consumed by machine learning models and algorithms.
+	Embeddings *embeddings
+	// Files are used to upload documents that can be used with features like fine-tuning.
+	Files *files
+	// Manage legacy fine-tuning jobs to tailor a model to your specific training data.
+	FineTunes *fineTunes
+	// Manage fine-tuning jobs to tailor a model to your specific training data.
+	FineTuning *fineTuning
+	// Given a prompt and/or an input image, the model will generate a new image.
+	Images *images
+	// List and describe the various models available in the API.
+	Models *models
+	// Given a input text, outputs if the model classifies it as violating OpenAI's content policy.
+	Moderations *moderations
 
 	sdkConfiguration sdkConfiguration
 }
@@ -134,9 +154,9 @@ func New(opts ...SDKOption) *Gpt {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2.0.0",
-			SDKVersion:        "2.2.1",
-			GenVersion:        "2.150.0",
-			UserAgent:         "speakeasy-sdk/go 2.2.1 2.150.0 2.0.0 github.com/speakeasy-sdks/openai-go-sdk",
+			SDKVersion:        "2.2.2",
+			GenVersion:        "2.152.1",
+			UserAgent:         "speakeasy-sdk/go 2.2.2 2.152.1 2.0.0 github.com/speakeasy-sdks/openai-go-sdk",
 		},
 	}
 	for _, opt := range opts {
@@ -155,7 +175,27 @@ func New(opts ...SDKOption) *Gpt {
 		}
 	}
 
-	sdk.OpenAI = newOpenAI(sdk.sdkConfiguration)
+	sdk.Audio = newAudio(sdk.sdkConfiguration)
+
+	sdk.Chat = newChat(sdk.sdkConfiguration)
+
+	sdk.Completions = newCompletions(sdk.sdkConfiguration)
+
+	sdk.Edits = newEdits(sdk.sdkConfiguration)
+
+	sdk.Embeddings = newEmbeddings(sdk.sdkConfiguration)
+
+	sdk.Files = newFiles(sdk.sdkConfiguration)
+
+	sdk.FineTunes = newFineTunes(sdk.sdkConfiguration)
+
+	sdk.FineTuning = newFineTuning(sdk.sdkConfiguration)
+
+	sdk.Images = newImages(sdk.sdkConfiguration)
+
+	sdk.Models = newModels(sdk.sdkConfiguration)
+
+	sdk.Moderations = newModerations(sdk.sdkConfiguration)
 
 	return sdk
 }
