@@ -34,14 +34,14 @@ func main() {
     res, err := s.Chat.CreateChatCompletion(ctx, shared.CreateChatCompletionRequest{
         FunctionCall: shared.CreateCreateChatCompletionRequestFunctionCallChatCompletionFunctionCallOption(
                 shared.ChatCompletionFunctionCallOption{
-                    Name: "secondary Hoboken",
+                    Name: "navigate",
                 },
         ),
         Functions: []shared.ChatCompletionFunctions{
             shared.ChatCompletionFunctions{
-                Name: "Baby",
+                Name: "Diesel",
                 Parameters: map[string]interface{}{
-                    "lumen": "maroon",
+                    "Money": "Web",
                 },
             },
         },
@@ -50,12 +50,12 @@ func main() {
         },
         Messages: []shared.ChatCompletionRequestMessage{
             shared.ChatCompletionRequestMessage{
-                Content: "incidunt Franc South",
+                Content: "Planner",
                 FunctionCall: &shared.ChatCompletionRequestMessageFunctionCall{
-                    Arguments: "teal Yucaipa",
-                    Name: "Response",
+                    Arguments: "Modern",
+                    Name: "alarm",
                 },
-                Role: shared.ChatCompletionRequestMessageRoleUser,
+                Role: shared.ChatCompletionRequestMessageRoleSystem,
             },
         },
         Model: shared.CreateCreateChatCompletionRequestModelCreateChatCompletionRequestModel2(
@@ -63,7 +63,7 @@ func main() {
         ),
         N: openaigosdk.Int64(1),
         Stop: shared.CreateCreateChatCompletionRequestStopStr(
-        "Muller",
+        "Yucaipa",
         ),
         Temperature: openaigosdk.Float64(1),
         TopP: openaigosdk.Float64(1),

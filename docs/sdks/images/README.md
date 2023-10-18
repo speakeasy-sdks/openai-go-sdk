@@ -92,7 +92,7 @@ func main() {
         },
         Mask: &shared.CreateImageEditRequestMask{
             Content: []byte("`^YjrpxopK"),
-            Mask: "Rap Dodge Incredible",
+            Mask: "plum",
         },
         N: openaigosdk.Int64(1),
         Prompt: "A cute baby sea otter wearing a beret",
