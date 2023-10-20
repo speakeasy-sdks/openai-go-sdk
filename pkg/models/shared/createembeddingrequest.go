@@ -9,6 +9,34 @@ import (
 	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
 )
 
+// CreateEmbeddingRequestEncodingFormat - The format to return the embeddings in. Can be either `float` or [`base64`](https://pypi.org/project/pybase64/).
+type CreateEmbeddingRequestEncodingFormat string
+
+const (
+	CreateEmbeddingRequestEncodingFormatFloat  CreateEmbeddingRequestEncodingFormat = "float"
+	CreateEmbeddingRequestEncodingFormatBase64 CreateEmbeddingRequestEncodingFormat = "base64"
+)
+
+func (e CreateEmbeddingRequestEncodingFormat) ToPointer() *CreateEmbeddingRequestEncodingFormat {
+	return &e
+}
+
+func (e *CreateEmbeddingRequestEncodingFormat) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "float":
+		fallthrough
+	case "base64":
+		*e = CreateEmbeddingRequestEncodingFormat(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateEmbeddingRequestEncodingFormat: %v", v)
+	}
+}
+
 type CreateEmbeddingRequestInputType string
 
 const (
@@ -205,6 +233,8 @@ func (u CreateEmbeddingRequestModel) MarshalJSON() ([]byte, error) {
 }
 
 type CreateEmbeddingRequest struct {
+	// The format to return the embeddings in. Can be either `float` or [`base64`](https://pypi.org/project/pybase64/).
+	EncodingFormat *CreateEmbeddingRequestEncodingFormat `default:"float" json:"encoding_format"`
 	// Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays. The input must not exceed the max input tokens for the model (8192 tokens for `text-embedding-ada-002`) and cannot be an empty string. [Example Python code](https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken) for counting tokens.
 	//
 	Input CreateEmbeddingRequestInput `json:"input"`
@@ -214,6 +244,24 @@ type CreateEmbeddingRequest struct {
 	// A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).
 	//
 	User *string `json:"user,omitempty"`
+}
+
+func (c CreateEmbeddingRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreateEmbeddingRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *CreateEmbeddingRequest) GetEncodingFormat() *CreateEmbeddingRequestEncodingFormat {
+	if o == nil {
+		return nil
+	}
+	return o.EncodingFormat
 }
 
 func (o *CreateEmbeddingRequest) GetInput() CreateEmbeddingRequestInput {

@@ -32,6 +32,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Embeddings.CreateEmbedding(ctx, shared.CreateEmbeddingRequest{
+        EncodingFormat: shared.CreateEmbeddingRequestEncodingFormatFloat.ToPointer(),
         Input: shared.CreateCreateEmbeddingRequestInputStr(
         "The quick brown fox jumped over the lazy dog",
         ),

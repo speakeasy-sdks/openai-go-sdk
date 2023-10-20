@@ -188,6 +188,7 @@ docs/models/shared/createeditrequest.md
 docs/models/shared/createembeddingresponseusage.md
 docs/models/shared/createembeddingresponse.md
 docs/models/shared/embedding.md
+docs/models/shared/createembeddingrequestencodingformat.md
 docs/models/shared/createembeddingrequestinput.md
 docs/models/shared/createembeddingrequestmodel2.md
 docs/models/shared/createembeddingrequestmodel.md
