@@ -35,7 +35,7 @@ func main() {
     res, err := s.Audio.CreateTranscription(ctx, shared.CreateTranscriptionRequest{
         File: shared.CreateTranscriptionRequestFile{
             Content: []byte("\#BbTW'zX9"),
-            File: "green",
+            File: "string",
         },
         Model: shared.CreateCreateTranscriptionRequestModelCreateTranscriptionRequestModel2(
         shared.CreateTranscriptionRequestModel2Whisper1,
@@ -89,7 +89,7 @@ func main() {
     res, err := s.Audio.CreateTranslation(ctx, shared.CreateTranslationRequest{
         File: shared.CreateTranslationRequestFile{
             Content: []byte("M57UL;W3rx"),
-            File: "Bicycle",
+            File: "string",
         },
         Model: shared.CreateCreateTranslationRequestModelCreateTranslationRequestModel2(
         shared.CreateTranslationRequestModel2Whisper1,

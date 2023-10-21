@@ -20,7 +20,7 @@ func main() {
     res, err := s.Audio.CreateTranscription(ctx, shared.CreateTranscriptionRequest{
         File: shared.CreateTranscriptionRequestFile{
             Content: []byte("\#BbTW'zX9"),
-            File: "green",
+            File: "string",
         },
         Model: shared.CreateCreateTranscriptionRequestModelCreateTranscriptionRequestModel2(
         shared.CreateTranscriptionRequestModel2Whisper1,

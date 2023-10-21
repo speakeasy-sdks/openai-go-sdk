@@ -40,9 +40,9 @@ func main() {
     res, err := s.Files.CreateFile(ctx, shared.CreateFileRequest{
         File: shared.CreateFileRequestFile{
             Content: []byte("`'$Z`(L/RH"),
-            File: "Persevering",
+            File: "string",
         },
-        Purpose: "produce",
+        Purpose: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -91,7 +91,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Files.DeleteFile(ctx, operations.DeleteFileRequest{
-        FileID: "Porsche",
+        FileID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -140,7 +140,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Files.DownloadFile(ctx, operations.DownloadFileRequest{
-        FileID: "gosh",
+        FileID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -234,7 +234,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Files.RetrieveFile(ctx, operations.RetrieveFileRequest{
-        FileID: "Developer",
+        FileID: "string",
     })
     if err != nil {
         log.Fatal(err)
