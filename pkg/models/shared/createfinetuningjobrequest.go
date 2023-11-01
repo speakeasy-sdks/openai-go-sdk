@@ -69,16 +69,16 @@ func CreateCreateFineTuningJobRequestHyperparametersNEpochsInteger(integer int64
 
 func (u *CreateFineTuningJobRequestHyperparametersNEpochs) UnmarshalJSON(data []byte) error {
 
-	createFineTuningJobRequestHyperparametersNEpochs1 := new(CreateFineTuningJobRequestHyperparametersNEpochs1)
+	createFineTuningJobRequestHyperparametersNEpochs1 := CreateFineTuningJobRequestHyperparametersNEpochs1("")
 	if err := utils.UnmarshalJSON(data, &createFineTuningJobRequestHyperparametersNEpochs1, "", true, true); err == nil {
-		u.CreateFineTuningJobRequestHyperparametersNEpochs1 = createFineTuningJobRequestHyperparametersNEpochs1
+		u.CreateFineTuningJobRequestHyperparametersNEpochs1 = &createFineTuningJobRequestHyperparametersNEpochs1
 		u.Type = CreateFineTuningJobRequestHyperparametersNEpochsTypeCreateFineTuningJobRequestHyperparametersNEpochs1
 		return nil
 	}
 
-	integer := new(int64)
+	integer := int64(0)
 	if err := utils.UnmarshalJSON(data, &integer, "", true, true); err == nil {
-		u.Integer = integer
+		u.Integer = &integer
 		u.Type = CreateFineTuningJobRequestHyperparametersNEpochsTypeInteger
 		return nil
 	}
@@ -179,16 +179,16 @@ func CreateCreateFineTuningJobRequestModelCreateFineTuningJobRequestModel2(creat
 
 func (u *CreateFineTuningJobRequestModel) UnmarshalJSON(data []byte) error {
 
-	str := new(string)
+	str := ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
-		u.Str = str
+		u.Str = &str
 		u.Type = CreateFineTuningJobRequestModelTypeStr
 		return nil
 	}
 
-	createFineTuningJobRequestModel2 := new(CreateFineTuningJobRequestModel2)
+	createFineTuningJobRequestModel2 := CreateFineTuningJobRequestModel2("")
 	if err := utils.UnmarshalJSON(data, &createFineTuningJobRequestModel2, "", true, true); err == nil {
-		u.CreateFineTuningJobRequestModel2 = createFineTuningJobRequestModel2
+		u.CreateFineTuningJobRequestModel2 = &createFineTuningJobRequestModel2
 		u.Type = CreateFineTuningJobRequestModelTypeCreateFineTuningJobRequestModel2
 		return nil
 	}

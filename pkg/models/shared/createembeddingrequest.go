@@ -93,9 +93,9 @@ func CreateCreateEmbeddingRequestInputArrayOfarrayOfinteger(arrayOfarrayOfintege
 
 func (u *CreateEmbeddingRequestInput) UnmarshalJSON(data []byte) error {
 
-	str := new(string)
+	str := ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
-		u.Str = str
+		u.Str = &str
 		u.Type = CreateEmbeddingRequestInputTypeStr
 		return nil
 	}
@@ -203,16 +203,16 @@ func CreateCreateEmbeddingRequestModelCreateEmbeddingRequestModel2(createEmbeddi
 
 func (u *CreateEmbeddingRequestModel) UnmarshalJSON(data []byte) error {
 
-	str := new(string)
+	str := ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
-		u.Str = str
+		u.Str = &str
 		u.Type = CreateEmbeddingRequestModelTypeStr
 		return nil
 	}
 
-	createEmbeddingRequestModel2 := new(CreateEmbeddingRequestModel2)
+	createEmbeddingRequestModel2 := CreateEmbeddingRequestModel2("")
 	if err := utils.UnmarshalJSON(data, &createEmbeddingRequestModel2, "", true, true); err == nil {
-		u.CreateEmbeddingRequestModel2 = createEmbeddingRequestModel2
+		u.CreateEmbeddingRequestModel2 = &createEmbeddingRequestModel2
 		u.Type = CreateEmbeddingRequestModelTypeCreateEmbeddingRequestModel2
 		return nil
 	}

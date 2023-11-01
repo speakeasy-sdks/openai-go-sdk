@@ -71,16 +71,16 @@ func CreateCreateChatCompletionRequestFunctionCallChatCompletionFunctionCallOpti
 
 func (u *CreateChatCompletionRequestFunctionCall) UnmarshalJSON(data []byte) error {
 
-	chatCompletionFunctionCallOption := new(ChatCompletionFunctionCallOption)
+	chatCompletionFunctionCallOption := ChatCompletionFunctionCallOption{}
 	if err := utils.UnmarshalJSON(data, &chatCompletionFunctionCallOption, "", true, true); err == nil {
-		u.ChatCompletionFunctionCallOption = chatCompletionFunctionCallOption
+		u.ChatCompletionFunctionCallOption = &chatCompletionFunctionCallOption
 		u.Type = CreateChatCompletionRequestFunctionCallTypeChatCompletionFunctionCallOption
 		return nil
 	}
 
-	createChatCompletionRequestFunctionCall1 := new(CreateChatCompletionRequestFunctionCall1)
+	createChatCompletionRequestFunctionCall1 := CreateChatCompletionRequestFunctionCall1("")
 	if err := utils.UnmarshalJSON(data, &createChatCompletionRequestFunctionCall1, "", true, true); err == nil {
-		u.CreateChatCompletionRequestFunctionCall1 = createChatCompletionRequestFunctionCall1
+		u.CreateChatCompletionRequestFunctionCall1 = &createChatCompletionRequestFunctionCall1
 		u.Type = CreateChatCompletionRequestFunctionCallTypeCreateChatCompletionRequestFunctionCall1
 		return nil
 	}
@@ -189,16 +189,16 @@ func CreateCreateChatCompletionRequestModelCreateChatCompletionRequestModel2(cre
 
 func (u *CreateChatCompletionRequestModel) UnmarshalJSON(data []byte) error {
 
-	str := new(string)
+	str := ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
-		u.Str = str
+		u.Str = &str
 		u.Type = CreateChatCompletionRequestModelTypeStr
 		return nil
 	}
 
-	createChatCompletionRequestModel2 := new(CreateChatCompletionRequestModel2)
+	createChatCompletionRequestModel2 := CreateChatCompletionRequestModel2("")
 	if err := utils.UnmarshalJSON(data, &createChatCompletionRequestModel2, "", true, true); err == nil {
-		u.CreateChatCompletionRequestModel2 = createChatCompletionRequestModel2
+		u.CreateChatCompletionRequestModel2 = &createChatCompletionRequestModel2
 		u.Type = CreateChatCompletionRequestModelTypeCreateChatCompletionRequestModel2
 		return nil
 	}
@@ -252,9 +252,9 @@ func CreateCreateChatCompletionRequestStopArrayOfstr(arrayOfstr []string) Create
 
 func (u *CreateChatCompletionRequestStop) UnmarshalJSON(data []byte) error {
 
-	str := new(string)
+	str := ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
-		u.Str = str
+		u.Str = &str
 		u.Type = CreateChatCompletionRequestStopTypeStr
 		return nil
 	}

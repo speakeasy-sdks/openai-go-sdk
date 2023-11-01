@@ -69,16 +69,16 @@ func CreateCreateFineTuneRequestHyperparametersNEpochsInteger(integer int64) Cre
 
 func (u *CreateFineTuneRequestHyperparametersNEpochs) UnmarshalJSON(data []byte) error {
 
-	createFineTuneRequestHyperparametersNEpochs1 := new(CreateFineTuneRequestHyperparametersNEpochs1)
+	createFineTuneRequestHyperparametersNEpochs1 := CreateFineTuneRequestHyperparametersNEpochs1("")
 	if err := utils.UnmarshalJSON(data, &createFineTuneRequestHyperparametersNEpochs1, "", true, true); err == nil {
-		u.CreateFineTuneRequestHyperparametersNEpochs1 = createFineTuneRequestHyperparametersNEpochs1
+		u.CreateFineTuneRequestHyperparametersNEpochs1 = &createFineTuneRequestHyperparametersNEpochs1
 		u.Type = CreateFineTuneRequestHyperparametersNEpochsTypeCreateFineTuneRequestHyperparametersNEpochs1
 		return nil
 	}
 
-	integer := new(int64)
+	integer := int64(0)
 	if err := utils.UnmarshalJSON(data, &integer, "", true, true); err == nil {
-		u.Integer = integer
+		u.Integer = &integer
 		u.Type = CreateFineTuneRequestHyperparametersNEpochsTypeInteger
 		return nil
 	}
@@ -184,16 +184,16 @@ func CreateCreateFineTuneRequestModelCreateFineTuneRequestModel2(createFineTuneR
 
 func (u *CreateFineTuneRequestModel) UnmarshalJSON(data []byte) error {
 
-	str := new(string)
+	str := ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
-		u.Str = str
+		u.Str = &str
 		u.Type = CreateFineTuneRequestModelTypeStr
 		return nil
 	}
 
-	createFineTuneRequestModel2 := new(CreateFineTuneRequestModel2)
+	createFineTuneRequestModel2 := CreateFineTuneRequestModel2("")
 	if err := utils.UnmarshalJSON(data, &createFineTuneRequestModel2, "", true, true); err == nil {
-		u.CreateFineTuneRequestModel2 = createFineTuneRequestModel2
+		u.CreateFineTuneRequestModel2 = &createFineTuneRequestModel2
 		u.Type = CreateFineTuneRequestModelTypeCreateFineTuneRequestModel2
 		return nil
 	}

@@ -87,16 +87,16 @@ func CreateCreateTranscriptionRequestModelCreateTranscriptionRequestModel2(creat
 
 func (u *CreateTranscriptionRequestModel) UnmarshalJSON(data []byte) error {
 
-	str := new(string)
+	str := ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
-		u.Str = str
+		u.Str = &str
 		u.Type = CreateTranscriptionRequestModelTypeStr
 		return nil
 	}
 
-	createTranscriptionRequestModel2 := new(CreateTranscriptionRequestModel2)
+	createTranscriptionRequestModel2 := CreateTranscriptionRequestModel2("")
 	if err := utils.UnmarshalJSON(data, &createTranscriptionRequestModel2, "", true, true); err == nil {
-		u.CreateTranscriptionRequestModel2 = createTranscriptionRequestModel2
+		u.CreateTranscriptionRequestModel2 = &createTranscriptionRequestModel2
 		u.Type = CreateTranscriptionRequestModelTypeCreateTranscriptionRequestModel2
 		return nil
 	}

@@ -43,9 +43,9 @@ func CreateCreateModerationRequestInputArrayOfstr(arrayOfstr []string) CreateMod
 
 func (u *CreateModerationRequestInput) UnmarshalJSON(data []byte) error {
 
-	str := new(string)
+	str := ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
-		u.Str = str
+		u.Str = &str
 		u.Type = CreateModerationRequestInputTypeStr
 		return nil
 	}
@@ -136,16 +136,16 @@ func CreateCreateModerationRequestModelCreateModerationRequestModel2(createModer
 
 func (u *CreateModerationRequestModel) UnmarshalJSON(data []byte) error {
 
-	str := new(string)
+	str := ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
-		u.Str = str
+		u.Str = &str
 		u.Type = CreateModerationRequestModelTypeStr
 		return nil
 	}
 
-	createModerationRequestModel2 := new(CreateModerationRequestModel2)
+	createModerationRequestModel2 := CreateModerationRequestModel2("")
 	if err := utils.UnmarshalJSON(data, &createModerationRequestModel2, "", true, true); err == nil {
-		u.CreateModerationRequestModel2 = createModerationRequestModel2
+		u.CreateModerationRequestModel2 = &createModerationRequestModel2
 		u.Type = CreateModerationRequestModelTypeCreateModerationRequestModel2
 		return nil
 	}

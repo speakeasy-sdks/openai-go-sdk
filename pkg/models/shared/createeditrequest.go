@@ -71,16 +71,16 @@ func CreateCreateEditRequestModelCreateEditRequestModel2(createEditRequestModel2
 
 func (u *CreateEditRequestModel) UnmarshalJSON(data []byte) error {
 
-	str := new(string)
+	str := ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
-		u.Str = str
+		u.Str = &str
 		u.Type = CreateEditRequestModelTypeStr
 		return nil
 	}
 
-	createEditRequestModel2 := new(CreateEditRequestModel2)
+	createEditRequestModel2 := CreateEditRequestModel2("")
 	if err := utils.UnmarshalJSON(data, &createEditRequestModel2, "", true, true); err == nil {
-		u.CreateEditRequestModel2 = createEditRequestModel2
+		u.CreateEditRequestModel2 = &createEditRequestModel2
 		u.Type = CreateEditRequestModelTypeCreateEditRequestModel2
 		return nil
 	}

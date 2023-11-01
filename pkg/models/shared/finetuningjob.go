@@ -100,16 +100,16 @@ func CreateFineTuningJobHyperparametersNEpochsInteger(integer int64) FineTuningJ
 
 func (u *FineTuningJobHyperparametersNEpochs) UnmarshalJSON(data []byte) error {
 
-	fineTuningJobHyperparametersNEpochs1 := new(FineTuningJobHyperparametersNEpochs1)
+	fineTuningJobHyperparametersNEpochs1 := FineTuningJobHyperparametersNEpochs1("")
 	if err := utils.UnmarshalJSON(data, &fineTuningJobHyperparametersNEpochs1, "", true, true); err == nil {
-		u.FineTuningJobHyperparametersNEpochs1 = fineTuningJobHyperparametersNEpochs1
+		u.FineTuningJobHyperparametersNEpochs1 = &fineTuningJobHyperparametersNEpochs1
 		u.Type = FineTuningJobHyperparametersNEpochsTypeFineTuningJobHyperparametersNEpochs1
 		return nil
 	}
 
-	integer := new(int64)
+	integer := int64(0)
 	if err := utils.UnmarshalJSON(data, &integer, "", true, true); err == nil {
-		u.Integer = integer
+		u.Integer = &integer
 		u.Type = FineTuningJobHyperparametersNEpochsTypeInteger
 		return nil
 	}

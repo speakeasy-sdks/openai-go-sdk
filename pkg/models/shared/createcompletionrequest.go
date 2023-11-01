@@ -95,16 +95,16 @@ func CreateCreateCompletionRequestModelCreateCompletionRequestModel2(createCompl
 
 func (u *CreateCompletionRequestModel) UnmarshalJSON(data []byte) error {
 
-	str := new(string)
+	str := ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
-		u.Str = str
+		u.Str = &str
 		u.Type = CreateCompletionRequestModelTypeStr
 		return nil
 	}
 
-	createCompletionRequestModel2 := new(CreateCompletionRequestModel2)
+	createCompletionRequestModel2 := CreateCompletionRequestModel2("")
 	if err := utils.UnmarshalJSON(data, &createCompletionRequestModel2, "", true, true); err == nil {
-		u.CreateCompletionRequestModel2 = createCompletionRequestModel2
+		u.CreateCompletionRequestModel2 = &createCompletionRequestModel2
 		u.Type = CreateCompletionRequestModelTypeCreateCompletionRequestModel2
 		return nil
 	}
@@ -180,9 +180,9 @@ func CreateCreateCompletionRequestPromptArrayOfarrayOfinteger(arrayOfarrayOfinte
 
 func (u *CreateCompletionRequestPrompt) UnmarshalJSON(data []byte) error {
 
-	str := new(string)
+	str := ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
-		u.Str = str
+		u.Str = &str
 		u.Type = CreateCompletionRequestPromptTypeStr
 		return nil
 	}
@@ -265,9 +265,9 @@ func CreateCreateCompletionRequestStopArrayOfstr(arrayOfstr []string) CreateComp
 
 func (u *CreateCompletionRequestStop) UnmarshalJSON(data []byte) error {
 
-	str := new(string)
+	str := ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
-		u.Str = str
+		u.Str = &str
 		u.Type = CreateCompletionRequestStopTypeStr
 		return nil
 	}

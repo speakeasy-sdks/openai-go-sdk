@@ -87,16 +87,16 @@ func CreateCreateTranslationRequestModelCreateTranslationRequestModel2(createTra
 
 func (u *CreateTranslationRequestModel) UnmarshalJSON(data []byte) error {
 
-	str := new(string)
+	str := ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
-		u.Str = str
+		u.Str = &str
 		u.Type = CreateTranslationRequestModelTypeStr
 		return nil
 	}
 
-	createTranslationRequestModel2 := new(CreateTranslationRequestModel2)
+	createTranslationRequestModel2 := CreateTranslationRequestModel2("")
 	if err := utils.UnmarshalJSON(data, &createTranslationRequestModel2, "", true, true); err == nil {
-		u.CreateTranslationRequestModel2 = createTranslationRequestModel2
+		u.CreateTranslationRequestModel2 = &createTranslationRequestModel2
 		u.Type = CreateTranslationRequestModelTypeCreateTranslationRequestModel2
 		return nil
 	}
