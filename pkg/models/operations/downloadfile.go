@@ -7,14 +7,52 @@ import (
 )
 
 type DownloadFileRequest struct {
-	// The ID of the file to use for this request
+	// The ID of the file to use for this request.
 	FileID string `pathParam:"style=simple,explode=false,name=file_id"`
 }
 
+func (o *DownloadFileRequest) GetFileID() string {
+	if o == nil {
+		return ""
+	}
+	return o.FileID
+}
+
 type DownloadFileResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
 	DownloadFile200ApplicationJSONString *string
+}
+
+func (o *DownloadFileResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *DownloadFileResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *DownloadFileResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *DownloadFileResponse) GetDownloadFile200ApplicationJSONString() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DownloadFile200ApplicationJSONString
 }

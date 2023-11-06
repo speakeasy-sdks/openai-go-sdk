@@ -3,10 +3,39 @@
 package shared
 
 import (
-	"bytes"
 	"encoding/json"
 	"errors"
+	"fmt"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
 )
+
+// CreateEmbeddingRequestEncodingFormat - The format to return the embeddings in. Can be either `float` or [`base64`](https://pypi.org/project/pybase64/).
+type CreateEmbeddingRequestEncodingFormat string
+
+const (
+	CreateEmbeddingRequestEncodingFormatFloat  CreateEmbeddingRequestEncodingFormat = "float"
+	CreateEmbeddingRequestEncodingFormatBase64 CreateEmbeddingRequestEncodingFormat = "base64"
+)
+
+func (e CreateEmbeddingRequestEncodingFormat) ToPointer() *CreateEmbeddingRequestEncodingFormat {
+	return &e
+}
+
+func (e *CreateEmbeddingRequestEncodingFormat) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "float":
+		fallthrough
+	case "base64":
+		*e = CreateEmbeddingRequestEncodingFormat(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateEmbeddingRequestEncodingFormat: %v", v)
+	}
+}
 
 type CreateEmbeddingRequestInputType string
 
@@ -63,39 +92,30 @@ func CreateCreateEmbeddingRequestInputArrayOfarrayOfinteger(arrayOfarrayOfintege
 }
 
 func (u *CreateEmbeddingRequestInput) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
-	str := new(string)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&str); err == nil {
-		u.Str = str
+	str := ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = &str
 		u.Type = CreateEmbeddingRequestInputTypeStr
 		return nil
 	}
 
 	arrayOfstr := []string{}
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&arrayOfstr); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfstr, "", true, true); err == nil {
 		u.ArrayOfstr = arrayOfstr
 		u.Type = CreateEmbeddingRequestInputTypeArrayOfstr
 		return nil
 	}
 
 	arrayOfinteger := []int64{}
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&arrayOfinteger); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfinteger, "", true, true); err == nil {
 		u.ArrayOfinteger = arrayOfinteger
 		u.Type = CreateEmbeddingRequestInputTypeArrayOfinteger
 		return nil
 	}
 
 	arrayOfarrayOfinteger := [][]int64{}
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&arrayOfarrayOfinteger); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfarrayOfinteger, "", true, true); err == nil {
 		u.ArrayOfarrayOfinteger = arrayOfarrayOfinteger
 		u.Type = CreateEmbeddingRequestInputTypeArrayOfarrayOfinteger
 		return nil
@@ -106,28 +126,161 @@ func (u *CreateEmbeddingRequestInput) UnmarshalJSON(data []byte) error {
 
 func (u CreateEmbeddingRequestInput) MarshalJSON() ([]byte, error) {
 	if u.Str != nil {
-		return json.Marshal(u.Str)
+		return utils.MarshalJSON(u.Str, "", true)
 	}
 
 	if u.ArrayOfstr != nil {
-		return json.Marshal(u.ArrayOfstr)
+		return utils.MarshalJSON(u.ArrayOfstr, "", true)
 	}
 
 	if u.ArrayOfinteger != nil {
-		return json.Marshal(u.ArrayOfinteger)
+		return utils.MarshalJSON(u.ArrayOfinteger, "", true)
 	}
 
 	if u.ArrayOfarrayOfinteger != nil {
-		return json.Marshal(u.ArrayOfarrayOfinteger)
+		return utils.MarshalJSON(u.ArrayOfarrayOfinteger, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
+}
+
+// CreateEmbeddingRequestModel2 - ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.
+type CreateEmbeddingRequestModel2 string
+
+const (
+	CreateEmbeddingRequestModel2TextEmbeddingAda002 CreateEmbeddingRequestModel2 = "text-embedding-ada-002"
+)
+
+func (e CreateEmbeddingRequestModel2) ToPointer() *CreateEmbeddingRequestModel2 {
+	return &e
+}
+
+func (e *CreateEmbeddingRequestModel2) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "text-embedding-ada-002":
+		*e = CreateEmbeddingRequestModel2(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateEmbeddingRequestModel2: %v", v)
+	}
+}
+
+type CreateEmbeddingRequestModelType string
+
+const (
+	CreateEmbeddingRequestModelTypeStr                          CreateEmbeddingRequestModelType = "str"
+	CreateEmbeddingRequestModelTypeCreateEmbeddingRequestModel2 CreateEmbeddingRequestModelType = "CreateEmbeddingRequest_model_2"
+)
+
+type CreateEmbeddingRequestModel struct {
+	Str                          *string
+	CreateEmbeddingRequestModel2 *CreateEmbeddingRequestModel2
+
+	Type CreateEmbeddingRequestModelType
+}
+
+func CreateCreateEmbeddingRequestModelStr(str string) CreateEmbeddingRequestModel {
+	typ := CreateEmbeddingRequestModelTypeStr
+
+	return CreateEmbeddingRequestModel{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateCreateEmbeddingRequestModelCreateEmbeddingRequestModel2(createEmbeddingRequestModel2 CreateEmbeddingRequestModel2) CreateEmbeddingRequestModel {
+	typ := CreateEmbeddingRequestModelTypeCreateEmbeddingRequestModel2
+
+	return CreateEmbeddingRequestModel{
+		CreateEmbeddingRequestModel2: &createEmbeddingRequestModel2,
+		Type:                         typ,
+	}
+}
+
+func (u *CreateEmbeddingRequestModel) UnmarshalJSON(data []byte) error {
+
+	str := ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = &str
+		u.Type = CreateEmbeddingRequestModelTypeStr
+		return nil
+	}
+
+	createEmbeddingRequestModel2 := CreateEmbeddingRequestModel2("")
+	if err := utils.UnmarshalJSON(data, &createEmbeddingRequestModel2, "", true, true); err == nil {
+		u.CreateEmbeddingRequestModel2 = &createEmbeddingRequestModel2
+		u.Type = CreateEmbeddingRequestModelTypeCreateEmbeddingRequestModel2
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u CreateEmbeddingRequestModel) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.CreateEmbeddingRequestModel2 != nil {
+		return utils.MarshalJSON(u.CreateEmbeddingRequestModel2, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 type CreateEmbeddingRequest struct {
-	// Input text to get embeddings for, encoded as a string or array of tokens. To get embeddings for multiple inputs in a single request, pass an array of strings or array of token arrays. Each input must not exceed 8192 tokens in length.
+	// The format to return the embeddings in. Can be either `float` or [`base64`](https://pypi.org/project/pybase64/).
+	EncodingFormat *CreateEmbeddingRequestEncodingFormat `default:"float" json:"encoding_format"`
+	// Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays. The input must not exceed the max input tokens for the model (8192 tokens for `text-embedding-ada-002`) and cannot be an empty string. [Example Python code](https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken) for counting tokens.
 	//
 	Input CreateEmbeddingRequestInput `json:"input"`
-	Model interface{}                 `json:"model"`
-	User  interface{}                 `json:"user,omitempty"`
+	// ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.
+	//
+	Model CreateEmbeddingRequestModel `json:"model"`
+	// A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).
+	//
+	User *string `json:"user,omitempty"`
+}
+
+func (c CreateEmbeddingRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreateEmbeddingRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *CreateEmbeddingRequest) GetEncodingFormat() *CreateEmbeddingRequestEncodingFormat {
+	if o == nil {
+		return nil
+	}
+	return o.EncodingFormat
+}
+
+func (o *CreateEmbeddingRequest) GetInput() CreateEmbeddingRequestInput {
+	if o == nil {
+		return CreateEmbeddingRequestInput{}
+	}
+	return o.Input
+}
+
+func (o *CreateEmbeddingRequest) GetModel() CreateEmbeddingRequestModel {
+	if o == nil {
+		return CreateEmbeddingRequestModel{}
+	}
+	return o.Model
+}
+
+func (o *CreateEmbeddingRequest) GetUser() *string {
+	if o == nil {
+		return nil
+	}
+	return o.User
 }

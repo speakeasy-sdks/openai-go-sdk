@@ -3,7 +3,8 @@
 package operations
 
 import (
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
 	"net/http"
 )
 
@@ -20,13 +21,69 @@ type ListFineTuneEventsRequest struct {
 	//
 	// If set to false, only events generated so far will be returned.
 	//
-	Stream *bool `queryParam:"style=form,explode=true,name=stream"`
+	Stream *bool `default:"false" queryParam:"style=form,explode=true,name=stream"`
+}
+
+func (l ListFineTuneEventsRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListFineTuneEventsRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *ListFineTuneEventsRequest) GetFineTuneID() string {
+	if o == nil {
+		return ""
+	}
+	return o.FineTuneID
+}
+
+func (o *ListFineTuneEventsRequest) GetStream() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Stream
 }
 
 type ListFineTuneEventsResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// OK
 	ListFineTuneEventsResponse *shared.ListFineTuneEventsResponse
-	StatusCode                 int
-	RawResponse                *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
+}
+
+func (o *ListFineTuneEventsResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListFineTuneEventsResponse) GetListFineTuneEventsResponse() *shared.ListFineTuneEventsResponse {
+	if o == nil {
+		return nil
+	}
+	return o.ListFineTuneEventsResponse
+}
+
+func (o *ListFineTuneEventsResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListFineTuneEventsResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

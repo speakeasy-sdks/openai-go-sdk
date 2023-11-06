@@ -2,9 +2,40 @@
 
 package shared
 
+// FineTuneEvent - Fine-tune event object
+//
+// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
 type FineTuneEvent struct {
 	CreatedAt int64  `json:"created_at"`
 	Level     string `json:"level"`
 	Message   string `json:"message"`
 	Object    string `json:"object"`
+}
+
+func (o *FineTuneEvent) GetCreatedAt() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.CreatedAt
+}
+
+func (o *FineTuneEvent) GetLevel() string {
+	if o == nil {
+		return ""
+	}
+	return o.Level
+}
+
+func (o *FineTuneEvent) GetMessage() string {
+	if o == nil {
+		return ""
+	}
+	return o.Message
+}
+
+func (o *FineTuneEvent) GetObject() string {
+	if o == nil {
+		return ""
+	}
+	return o.Object
 }

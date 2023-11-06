@@ -2,6 +2,217 @@
 
 package shared
 
+import (
+	"encoding/json"
+	"errors"
+	"fmt"
+	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+)
+
+// CreateFineTuneRequestHyperparametersNEpochs1 - The number of epochs to train the model for. An epoch refers to one
+// full cycle through the training dataset.
+type CreateFineTuneRequestHyperparametersNEpochs1 string
+
+const (
+	CreateFineTuneRequestHyperparametersNEpochs1Auto CreateFineTuneRequestHyperparametersNEpochs1 = "auto"
+)
+
+func (e CreateFineTuneRequestHyperparametersNEpochs1) ToPointer() *CreateFineTuneRequestHyperparametersNEpochs1 {
+	return &e
+}
+
+func (e *CreateFineTuneRequestHyperparametersNEpochs1) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "auto":
+		*e = CreateFineTuneRequestHyperparametersNEpochs1(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateFineTuneRequestHyperparametersNEpochs1: %v", v)
+	}
+}
+
+type CreateFineTuneRequestHyperparametersNEpochsType string
+
+const (
+	CreateFineTuneRequestHyperparametersNEpochsTypeCreateFineTuneRequestHyperparametersNEpochs1 CreateFineTuneRequestHyperparametersNEpochsType = "CreateFineTuneRequest_hyperparameters_n_epochs_1"
+	CreateFineTuneRequestHyperparametersNEpochsTypeInteger                                      CreateFineTuneRequestHyperparametersNEpochsType = "integer"
+)
+
+type CreateFineTuneRequestHyperparametersNEpochs struct {
+	CreateFineTuneRequestHyperparametersNEpochs1 *CreateFineTuneRequestHyperparametersNEpochs1
+	Integer                                      *int64
+
+	Type CreateFineTuneRequestHyperparametersNEpochsType
+}
+
+func CreateCreateFineTuneRequestHyperparametersNEpochsCreateFineTuneRequestHyperparametersNEpochs1(createFineTuneRequestHyperparametersNEpochs1 CreateFineTuneRequestHyperparametersNEpochs1) CreateFineTuneRequestHyperparametersNEpochs {
+	typ := CreateFineTuneRequestHyperparametersNEpochsTypeCreateFineTuneRequestHyperparametersNEpochs1
+
+	return CreateFineTuneRequestHyperparametersNEpochs{
+		CreateFineTuneRequestHyperparametersNEpochs1: &createFineTuneRequestHyperparametersNEpochs1,
+		Type: typ,
+	}
+}
+
+func CreateCreateFineTuneRequestHyperparametersNEpochsInteger(integer int64) CreateFineTuneRequestHyperparametersNEpochs {
+	typ := CreateFineTuneRequestHyperparametersNEpochsTypeInteger
+
+	return CreateFineTuneRequestHyperparametersNEpochs{
+		Integer: &integer,
+		Type:    typ,
+	}
+}
+
+func (u *CreateFineTuneRequestHyperparametersNEpochs) UnmarshalJSON(data []byte) error {
+
+	createFineTuneRequestHyperparametersNEpochs1 := CreateFineTuneRequestHyperparametersNEpochs1("")
+	if err := utils.UnmarshalJSON(data, &createFineTuneRequestHyperparametersNEpochs1, "", true, true); err == nil {
+		u.CreateFineTuneRequestHyperparametersNEpochs1 = &createFineTuneRequestHyperparametersNEpochs1
+		u.Type = CreateFineTuneRequestHyperparametersNEpochsTypeCreateFineTuneRequestHyperparametersNEpochs1
+		return nil
+	}
+
+	integer := int64(0)
+	if err := utils.UnmarshalJSON(data, &integer, "", true, true); err == nil {
+		u.Integer = &integer
+		u.Type = CreateFineTuneRequestHyperparametersNEpochsTypeInteger
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u CreateFineTuneRequestHyperparametersNEpochs) MarshalJSON() ([]byte, error) {
+	if u.CreateFineTuneRequestHyperparametersNEpochs1 != nil {
+		return utils.MarshalJSON(u.CreateFineTuneRequestHyperparametersNEpochs1, "", true)
+	}
+
+	if u.Integer != nil {
+		return utils.MarshalJSON(u.Integer, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
+}
+
+// CreateFineTuneRequestHyperparameters - The hyperparameters used for the fine-tuning job.
+type CreateFineTuneRequestHyperparameters struct {
+	// The number of epochs to train the model for. An epoch refers to one
+	// full cycle through the training dataset.
+	//
+	NEpochs *CreateFineTuneRequestHyperparametersNEpochs `json:"n_epochs,omitempty"`
+}
+
+func (o *CreateFineTuneRequestHyperparameters) GetNEpochs() *CreateFineTuneRequestHyperparametersNEpochs {
+	if o == nil {
+		return nil
+	}
+	return o.NEpochs
+}
+
+// CreateFineTuneRequestModel2 - The name of the base model to fine-tune. You can select one of "ada",
+// "babbage", "curie", "davinci", or a fine-tuned model created after 2022-04-21 and before 2023-08-22.
+// To learn more about these models, see the
+// [Models](/docs/models) documentation.
+type CreateFineTuneRequestModel2 string
+
+const (
+	CreateFineTuneRequestModel2Ada     CreateFineTuneRequestModel2 = "ada"
+	CreateFineTuneRequestModel2Babbage CreateFineTuneRequestModel2 = "babbage"
+	CreateFineTuneRequestModel2Curie   CreateFineTuneRequestModel2 = "curie"
+	CreateFineTuneRequestModel2Davinci CreateFineTuneRequestModel2 = "davinci"
+)
+
+func (e CreateFineTuneRequestModel2) ToPointer() *CreateFineTuneRequestModel2 {
+	return &e
+}
+
+func (e *CreateFineTuneRequestModel2) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "ada":
+		fallthrough
+	case "babbage":
+		fallthrough
+	case "curie":
+		fallthrough
+	case "davinci":
+		*e = CreateFineTuneRequestModel2(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateFineTuneRequestModel2: %v", v)
+	}
+}
+
+type CreateFineTuneRequestModelType string
+
+const (
+	CreateFineTuneRequestModelTypeStr                         CreateFineTuneRequestModelType = "str"
+	CreateFineTuneRequestModelTypeCreateFineTuneRequestModel2 CreateFineTuneRequestModelType = "CreateFineTuneRequest_model_2"
+)
+
+type CreateFineTuneRequestModel struct {
+	Str                         *string
+	CreateFineTuneRequestModel2 *CreateFineTuneRequestModel2
+
+	Type CreateFineTuneRequestModelType
+}
+
+func CreateCreateFineTuneRequestModelStr(str string) CreateFineTuneRequestModel {
+	typ := CreateFineTuneRequestModelTypeStr
+
+	return CreateFineTuneRequestModel{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateCreateFineTuneRequestModelCreateFineTuneRequestModel2(createFineTuneRequestModel2 CreateFineTuneRequestModel2) CreateFineTuneRequestModel {
+	typ := CreateFineTuneRequestModelTypeCreateFineTuneRequestModel2
+
+	return CreateFineTuneRequestModel{
+		CreateFineTuneRequestModel2: &createFineTuneRequestModel2,
+		Type:                        typ,
+	}
+}
+
+func (u *CreateFineTuneRequestModel) UnmarshalJSON(data []byte) error {
+
+	str := ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = &str
+		u.Type = CreateFineTuneRequestModelTypeStr
+		return nil
+	}
+
+	createFineTuneRequestModel2 := CreateFineTuneRequestModel2("")
+	if err := utils.UnmarshalJSON(data, &createFineTuneRequestModel2, "", true, true); err == nil {
+		u.CreateFineTuneRequestModel2 = &createFineTuneRequestModel2
+		u.Type = CreateFineTuneRequestModelTypeCreateFineTuneRequestModel2
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u CreateFineTuneRequestModel) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.CreateFineTuneRequestModel2 != nil {
+		return utils.MarshalJSON(u.CreateFineTuneRequestModel2, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
+}
+
 type CreateFineTuneRequest struct {
 	// The batch size to use for training. The batch size is the number of
 	// training examples used to train a single forward and backward pass.
@@ -11,7 +222,7 @@ type CreateFineTuneRequest struct {
 	// in general, we've found that larger batch sizes tend to work better
 	// for larger datasets.
 	//
-	BatchSize *int64 `json:"batch_size,omitempty"`
+	BatchSize *int64 `default:"null" json:"batch_size"`
 	// If this is provided, we calculate F-beta scores at the specified
 	// beta values. The F-beta score is a generalization of F-1 score.
 	// This is only used for binary classification.
@@ -26,23 +237,25 @@ type CreateFineTuneRequest struct {
 	//
 	// This parameter is required for multiclass classification.
 	//
-	ClassificationNClasses *int64 `json:"classification_n_classes,omitempty"`
+	ClassificationNClasses *int64 `default:"null" json:"classification_n_classes"`
 	// The positive class in binary classification.
 	//
 	// This parameter is needed to generate precision, recall, and F1
 	// metrics when doing binary classification.
 	//
-	ClassificationPositiveClass *string `json:"classification_positive_class,omitempty"`
+	ClassificationPositiveClass *string `default:"null" json:"classification_positive_class"`
 	// If set, we calculate classification-specific metrics such as accuracy
 	// and F-1 score using the validation set at the end of every epoch.
-	// These metrics can be viewed in the [results file](/docs/guides/fine-tuning/analyzing-your-fine-tuned-model).
+	// These metrics can be viewed in the [results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).
 	//
 	// In order to compute classification metrics, you must provide a
 	// `validation_file`. Additionally, you must
 	// specify `classification_n_classes` for multiclass classification or
 	// `classification_positive_class` for binary classification.
 	//
-	ComputeClassificationMetrics *bool `json:"compute_classification_metrics,omitempty"`
+	ComputeClassificationMetrics *bool `default:"false" json:"compute_classification_metrics"`
+	// The hyperparameters used for the fine-tuning job.
+	Hyperparameters *CreateFineTuneRequestHyperparameters `json:"hyperparameters,omitempty"`
 	// The learning rate multiplier to use for training.
 	// The fine-tuning learning rate is the original learning rate used for
 	// pretraining multiplied by this value.
@@ -53,17 +266,13 @@ type CreateFineTuneRequest struct {
 	// with values in the range 0.02 to 0.2 to see what produces the best
 	// results.
 	//
-	LearningRateMultiplier *float64 `json:"learning_rate_multiplier,omitempty"`
+	LearningRateMultiplier *float64 `default:"null" json:"learning_rate_multiplier"`
 	// The name of the base model to fine-tune. You can select one of "ada",
-	// "babbage", "curie", "davinci", or a fine-tuned model created after 2022-04-21.
+	// "babbage", "curie", "davinci", or a fine-tuned model created after 2022-04-21 and before 2023-08-22.
 	// To learn more about these models, see the
-	// [Models](https://platform.openai.com/docs/models) documentation.
+	// [Models](/docs/models) documentation.
 	//
-	Model *string `json:"model,omitempty"`
-	// The number of epochs to train the model for. An epoch refers to one
-	// full cycle through the training dataset.
-	//
-	NEpochs *int64 `json:"n_epochs,omitempty"`
+	Model *CreateFineTuneRequestModel `json:"model,omitempty"`
 	// The weight to use for loss on the prompt tokens. This controls how
 	// much the model tries to learn to generate the prompt (as compared
 	// to the completion which always has a weight of 1.0), and can add
@@ -73,12 +282,12 @@ type CreateFineTuneRequest struct {
 	// sense to reduce this weight so as to avoid over-prioritizing
 	// learning the prompt.
 	//
-	PromptLossWeight *float64 `json:"prompt_loss_weight,omitempty"`
+	PromptLossWeight *float64 `default:"0.01" json:"prompt_loss_weight"`
 	// A string of up to 40 characters that will be added to your fine-tuned model name.
 	//
 	// For example, a `suffix` of "custom-model-name" would produce a model name like `ada:ft-your-org:custom-model-name-2022-02-15-04-21-04`.
 	//
-	Suffix *string `json:"suffix,omitempty"`
+	Suffix *string `default:"null" json:"suffix"`
 	// The ID of an uploaded file that contains training data.
 	//
 	// See [upload file](/docs/api-reference/files/upload) for how to upload a file.
@@ -87,21 +296,116 @@ type CreateFineTuneRequest struct {
 	// example is a JSON object with the keys "prompt" and "completion".
 	// Additionally, you must upload your file with the purpose `fine-tune`.
 	//
-	// See the [fine-tuning guide](/docs/guides/fine-tuning/creating-training-data) for more details.
+	// See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more details.
 	//
 	TrainingFile string `json:"training_file"`
 	// The ID of an uploaded file that contains validation data.
 	//
 	// If you provide this file, the data is used to generate validation
 	// metrics periodically during fine-tuning. These metrics can be viewed in
-	// the [fine-tuning results file](/docs/guides/fine-tuning/analyzing-your-fine-tuned-model).
+	// the [fine-tuning results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).
 	// Your train and validation data should be mutually exclusive.
 	//
 	// Your dataset must be formatted as a JSONL file, where each validation
 	// example is a JSON object with the keys "prompt" and "completion".
 	// Additionally, you must upload your file with the purpose `fine-tune`.
 	//
-	// See the [fine-tuning guide](/docs/guides/fine-tuning/creating-training-data) for more details.
+	// See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more details.
 	//
 	ValidationFile *string `json:"validation_file,omitempty"`
+}
+
+func (c CreateFineTuneRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreateFineTuneRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *CreateFineTuneRequest) GetBatchSize() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.BatchSize
+}
+
+func (o *CreateFineTuneRequest) GetClassificationBetas() []float64 {
+	if o == nil {
+		return nil
+	}
+	return o.ClassificationBetas
+}
+
+func (o *CreateFineTuneRequest) GetClassificationNClasses() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ClassificationNClasses
+}
+
+func (o *CreateFineTuneRequest) GetClassificationPositiveClass() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ClassificationPositiveClass
+}
+
+func (o *CreateFineTuneRequest) GetComputeClassificationMetrics() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.ComputeClassificationMetrics
+}
+
+func (o *CreateFineTuneRequest) GetHyperparameters() *CreateFineTuneRequestHyperparameters {
+	if o == nil {
+		return nil
+	}
+	return o.Hyperparameters
+}
+
+func (o *CreateFineTuneRequest) GetLearningRateMultiplier() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.LearningRateMultiplier
+}
+
+func (o *CreateFineTuneRequest) GetModel() *CreateFineTuneRequestModel {
+	if o == nil {
+		return nil
+	}
+	return o.Model
+}
+
+func (o *CreateFineTuneRequest) GetPromptLossWeight() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.PromptLossWeight
+}
+
+func (o *CreateFineTuneRequest) GetSuffix() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Suffix
+}
+
+func (o *CreateFineTuneRequest) GetTrainingFile() string {
+	if o == nil {
+		return ""
+	}
+	return o.TrainingFile
+}
+
+func (o *CreateFineTuneRequest) GetValidationFile() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ValidationFile
 }

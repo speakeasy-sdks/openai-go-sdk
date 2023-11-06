@@ -2,14 +2,79 @@
 
 package shared
 
-// OpenAIFile - OK
+// OpenAIFile - The `File` object represents a document that has been uploaded to OpenAI.
 type OpenAIFile struct {
-	Bytes         int64                  `json:"bytes"`
-	CreatedAt     int64                  `json:"created_at"`
-	Filename      string                 `json:"filename"`
-	ID            string                 `json:"id"`
-	Object        string                 `json:"object"`
-	Purpose       string                 `json:"purpose"`
-	Status        *string                `json:"status,omitempty"`
-	StatusDetails map[string]interface{} `json:"status_details,omitempty"`
+	// The size of the file in bytes.
+	Bytes int64 `json:"bytes"`
+	// The Unix timestamp (in seconds) for when the file was created.
+	CreatedAt int64 `json:"created_at"`
+	// The name of the file.
+	Filename string `json:"filename"`
+	// The file identifier, which can be referenced in the API endpoints.
+	ID string `json:"id"`
+	// The object type, which is always "file".
+	Object string `json:"object"`
+	// The intended purpose of the file. Currently, only "fine-tune" is supported.
+	Purpose string `json:"purpose"`
+	// The current status of the file, which can be either `uploaded`, `processed`, `pending`, `error`, `deleting` or `deleted`.
+	Status *string `json:"status,omitempty"`
+	// Additional details about the status of the file. If the file is in the `error` state, this will include a message describing the error.
+	//
+	StatusDetails *string `json:"status_details,omitempty"`
+}
+
+func (o *OpenAIFile) GetBytes() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Bytes
+}
+
+func (o *OpenAIFile) GetCreatedAt() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.CreatedAt
+}
+
+func (o *OpenAIFile) GetFilename() string {
+	if o == nil {
+		return ""
+	}
+	return o.Filename
+}
+
+func (o *OpenAIFile) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *OpenAIFile) GetObject() string {
+	if o == nil {
+		return ""
+	}
+	return o.Object
+}
+
+func (o *OpenAIFile) GetPurpose() string {
+	if o == nil {
+		return ""
+	}
+	return o.Purpose
+}
+
+func (o *OpenAIFile) GetStatus() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *OpenAIFile) GetStatusDetails() *string {
+	if o == nil {
+		return nil
+	}
+	return o.StatusDetails
 }

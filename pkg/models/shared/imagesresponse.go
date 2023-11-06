@@ -2,13 +2,21 @@
 
 package shared
 
-type ImagesResponseData struct {
-	B64JSON *string `json:"b64_json,omitempty"`
-	URL     *string `json:"url,omitempty"`
+type ImagesResponse struct {
+	Created int64   `json:"created"`
+	Data    []Image `json:"data"`
 }
 
-// ImagesResponse - OK
-type ImagesResponse struct {
-	Created int64                `json:"created"`
-	Data    []ImagesResponseData `json:"data"`
+func (o *ImagesResponse) GetCreated() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Created
+}
+
+func (o *ImagesResponse) GetData() []Image {
+	if o == nil {
+		return []Image{}
+	}
+	return o.Data
 }
