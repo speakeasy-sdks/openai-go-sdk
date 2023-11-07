@@ -6,6 +6,8 @@ package shared
 type Image struct {
 	// The base64-encoded JSON of the generated image, if `response_format` is `b64_json`.
 	B64JSON *string `json:"b64_json,omitempty"`
+	// The prompt that was used to generate the image, if there was any revision to the prompt.
+	RevisedPrompt *string `json:"revised_prompt,omitempty"`
 	// The URL of the generated image, if `response_format` is `url` (default).
 	URL *string `json:"url,omitempty"`
 }
@@ -15,6 +17,13 @@ func (o *Image) GetB64JSON() *string {
 		return nil
 	}
 	return o.B64JSON
+}
+
+func (o *Image) GetRevisedPrompt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RevisedPrompt
 }
 
 func (o *Image) GetURL() *string {

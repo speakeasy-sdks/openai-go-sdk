@@ -1,5 +1,5 @@
 # FineTuning
-(*FineTuning*)
+(*.FineTuning*)
 
 ## Overview
 
@@ -37,8 +37,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -91,8 +91,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -103,12 +103,18 @@ func main() {
     ctx := context.Background()
     res, err := s.FineTuning.CreateFineTuningJob(ctx, shared.CreateFineTuningJobRequest{
         Hyperparameters: &shared.CreateFineTuningJobRequestHyperparameters{
-            NEpochs: shared.CreateCreateFineTuningJobRequestHyperparametersNEpochsCreateFineTuningJobRequestHyperparametersNEpochs1(
-            shared.CreateFineTuningJobRequestHyperparametersNEpochs1Auto,
+            BatchSize: shared.CreateBatchSizeCreateFineTuningJobRequest1(
+            shared.CreateFineTuningJobRequest1Auto,
+            ),
+            LearningRateMultiplier: shared.CreateLearningRateMultiplierCreateFineTuningJobRequestSchemas1(
+            shared.CreateFineTuningJobRequestSchemas1Auto,
+            ),
+            NEpochs: shared.CreateCreateFineTuningJobRequestNEpochsCreateFineTuningJobRequestSchemasHyperparameters1(
+            shared.CreateFineTuningJobRequestSchemasHyperparameters1Auto,
             ),
         },
-        Model: shared.CreateCreateFineTuningJobRequestModelCreateFineTuningJobRequestModel2(
-        shared.CreateFineTuningJobRequestModel2Gpt35Turbo,
+        Model: shared.CreateCreateFineTuningJobRequestModelCreateFineTuningJobRequest2(
+        shared.CreateFineTuningJobRequest2Gpt35Turbo,
         ),
         TrainingFile: "file-abc123",
         ValidationFile: openaigosdk.String("file-abc123"),
@@ -149,8 +155,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -205,8 +211,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -260,8 +266,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {

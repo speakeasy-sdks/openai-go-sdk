@@ -6,22 +6,39 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 )
 
-// CreateChatCompletionRequestFunctionCall1 - Controls how the model calls functions. "none" means the model will not call a function and instead generates a message. "auto" means the model can pick between generating a message or calling a function.  Specifying a particular function via `{"name": "my_function"}` forces the model to call that function. "none" is the default when no functions are present. "auto" is the default if functions are present.
-type CreateChatCompletionRequestFunctionCall1 string
+// Schemas - Specifying a particular function via `{"name": "my_function"}` forces the model to call that function.
+//
+// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
+type Schemas struct {
+	// The name of the function to call.
+	Name string `json:"name"`
+}
+
+func (o *Schemas) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+// One - `none` means the model will not call a function and instead generates a message. `auto` means the model can pick between generating a message or calling a function.
+//
+// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
+type One string
 
 const (
-	CreateChatCompletionRequestFunctionCall1None CreateChatCompletionRequestFunctionCall1 = "none"
-	CreateChatCompletionRequestFunctionCall1Auto CreateChatCompletionRequestFunctionCall1 = "auto"
+	OneNone One = "none"
+	OneAuto One = "auto"
 )
 
-func (e CreateChatCompletionRequestFunctionCall1) ToPointer() *CreateChatCompletionRequestFunctionCall1 {
+func (e One) ToPointer() *One {
 	return &e
 }
 
-func (e *CreateChatCompletionRequestFunctionCall1) UnmarshalJSON(data []byte) error {
+func (e *One) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -30,58 +47,58 @@ func (e *CreateChatCompletionRequestFunctionCall1) UnmarshalJSON(data []byte) er
 	case "none":
 		fallthrough
 	case "auto":
-		*e = CreateChatCompletionRequestFunctionCall1(v)
+		*e = One(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for CreateChatCompletionRequestFunctionCall1: %v", v)
+		return fmt.Errorf("invalid value for One: %v", v)
 	}
 }
 
 type CreateChatCompletionRequestFunctionCallType string
 
 const (
-	CreateChatCompletionRequestFunctionCallTypeCreateChatCompletionRequestFunctionCall1 CreateChatCompletionRequestFunctionCallType = "CreateChatCompletionRequest_function_call_1"
-	CreateChatCompletionRequestFunctionCallTypeChatCompletionFunctionCallOption         CreateChatCompletionRequestFunctionCallType = "ChatCompletionFunctionCallOption"
+	CreateChatCompletionRequestFunctionCallTypeOne     CreateChatCompletionRequestFunctionCallType = "1"
+	CreateChatCompletionRequestFunctionCallTypeSchemas CreateChatCompletionRequestFunctionCallType = "Schemas"
 )
 
 type CreateChatCompletionRequestFunctionCall struct {
-	CreateChatCompletionRequestFunctionCall1 *CreateChatCompletionRequestFunctionCall1
-	ChatCompletionFunctionCallOption         *ChatCompletionFunctionCallOption
+	One     *One
+	Schemas *Schemas
 
 	Type CreateChatCompletionRequestFunctionCallType
 }
 
-func CreateCreateChatCompletionRequestFunctionCallCreateChatCompletionRequestFunctionCall1(createChatCompletionRequestFunctionCall1 CreateChatCompletionRequestFunctionCall1) CreateChatCompletionRequestFunctionCall {
-	typ := CreateChatCompletionRequestFunctionCallTypeCreateChatCompletionRequestFunctionCall1
+func CreateCreateChatCompletionRequestFunctionCallOne(one One) CreateChatCompletionRequestFunctionCall {
+	typ := CreateChatCompletionRequestFunctionCallTypeOne
 
 	return CreateChatCompletionRequestFunctionCall{
-		CreateChatCompletionRequestFunctionCall1: &createChatCompletionRequestFunctionCall1,
-		Type:                                     typ,
+		One:  &one,
+		Type: typ,
 	}
 }
 
-func CreateCreateChatCompletionRequestFunctionCallChatCompletionFunctionCallOption(chatCompletionFunctionCallOption ChatCompletionFunctionCallOption) CreateChatCompletionRequestFunctionCall {
-	typ := CreateChatCompletionRequestFunctionCallTypeChatCompletionFunctionCallOption
+func CreateCreateChatCompletionRequestFunctionCallSchemas(schemas Schemas) CreateChatCompletionRequestFunctionCall {
+	typ := CreateChatCompletionRequestFunctionCallTypeSchemas
 
 	return CreateChatCompletionRequestFunctionCall{
-		ChatCompletionFunctionCallOption: &chatCompletionFunctionCallOption,
-		Type:                             typ,
+		Schemas: &schemas,
+		Type:    typ,
 	}
 }
 
 func (u *CreateChatCompletionRequestFunctionCall) UnmarshalJSON(data []byte) error {
 
-	chatCompletionFunctionCallOption := ChatCompletionFunctionCallOption{}
-	if err := utils.UnmarshalJSON(data, &chatCompletionFunctionCallOption, "", true, true); err == nil {
-		u.ChatCompletionFunctionCallOption = &chatCompletionFunctionCallOption
-		u.Type = CreateChatCompletionRequestFunctionCallTypeChatCompletionFunctionCallOption
+	schemas := Schemas{}
+	if err := utils.UnmarshalJSON(data, &schemas, "", true, true); err == nil {
+		u.Schemas = &schemas
+		u.Type = CreateChatCompletionRequestFunctionCallTypeSchemas
 		return nil
 	}
 
-	createChatCompletionRequestFunctionCall1 := CreateChatCompletionRequestFunctionCall1("")
-	if err := utils.UnmarshalJSON(data, &createChatCompletionRequestFunctionCall1, "", true, true); err == nil {
-		u.CreateChatCompletionRequestFunctionCall1 = &createChatCompletionRequestFunctionCall1
-		u.Type = CreateChatCompletionRequestFunctionCallTypeCreateChatCompletionRequestFunctionCall1
+	one := One("")
+	if err := utils.UnmarshalJSON(data, &one, "", true, true); err == nil {
+		u.One = &one
+		u.Type = CreateChatCompletionRequestFunctionCallTypeOne
 		return nil
 	}
 
@@ -89,39 +106,39 @@ func (u *CreateChatCompletionRequestFunctionCall) UnmarshalJSON(data []byte) err
 }
 
 func (u CreateChatCompletionRequestFunctionCall) MarshalJSON() ([]byte, error) {
-	if u.CreateChatCompletionRequestFunctionCall1 != nil {
-		return utils.MarshalJSON(u.CreateChatCompletionRequestFunctionCall1, "", true)
+	if u.One != nil {
+		return utils.MarshalJSON(u.One, "", true)
 	}
 
-	if u.ChatCompletionFunctionCallOption != nil {
-		return utils.MarshalJSON(u.ChatCompletionFunctionCallOption, "", true)
+	if u.Schemas != nil {
+		return utils.MarshalJSON(u.Schemas, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-// CreateChatCompletionRequestModel2 - ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility) table for details on which models work with the Chat API.
-type CreateChatCompletionRequestModel2 string
+// Two - ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility) table for details on which models work with the Chat API.
+type Two string
 
 const (
-	CreateChatCompletionRequestModel2Gpt4              CreateChatCompletionRequestModel2 = "gpt-4"
-	CreateChatCompletionRequestModel2Gpt40314          CreateChatCompletionRequestModel2 = "gpt-4-0314"
-	CreateChatCompletionRequestModel2Gpt40613          CreateChatCompletionRequestModel2 = "gpt-4-0613"
-	CreateChatCompletionRequestModel2Gpt432k           CreateChatCompletionRequestModel2 = "gpt-4-32k"
-	CreateChatCompletionRequestModel2Gpt432k0314       CreateChatCompletionRequestModel2 = "gpt-4-32k-0314"
-	CreateChatCompletionRequestModel2Gpt432k0613       CreateChatCompletionRequestModel2 = "gpt-4-32k-0613"
-	CreateChatCompletionRequestModel2Gpt35Turbo        CreateChatCompletionRequestModel2 = "gpt-3.5-turbo"
-	CreateChatCompletionRequestModel2Gpt35Turbo16k     CreateChatCompletionRequestModel2 = "gpt-3.5-turbo-16k"
-	CreateChatCompletionRequestModel2Gpt35Turbo0301    CreateChatCompletionRequestModel2 = "gpt-3.5-turbo-0301"
-	CreateChatCompletionRequestModel2Gpt35Turbo0613    CreateChatCompletionRequestModel2 = "gpt-3.5-turbo-0613"
-	CreateChatCompletionRequestModel2Gpt35Turbo16k0613 CreateChatCompletionRequestModel2 = "gpt-3.5-turbo-16k-0613"
+	TwoGpt4              Two = "gpt-4"
+	TwoGpt40314          Two = "gpt-4-0314"
+	TwoGpt40613          Two = "gpt-4-0613"
+	TwoGpt432k           Two = "gpt-4-32k"
+	TwoGpt432k0314       Two = "gpt-4-32k-0314"
+	TwoGpt432k0613       Two = "gpt-4-32k-0613"
+	TwoGpt35Turbo        Two = "gpt-3.5-turbo"
+	TwoGpt35Turbo16k     Two = "gpt-3.5-turbo-16k"
+	TwoGpt35Turbo0301    Two = "gpt-3.5-turbo-0301"
+	TwoGpt35Turbo0613    Two = "gpt-3.5-turbo-0613"
+	TwoGpt35Turbo16k0613 Two = "gpt-3.5-turbo-16k-0613"
 )
 
-func (e CreateChatCompletionRequestModel2) ToPointer() *CreateChatCompletionRequestModel2 {
+func (e Two) ToPointer() *Two {
 	return &e
 }
 
-func (e *CreateChatCompletionRequestModel2) UnmarshalJSON(data []byte) error {
+func (e *Two) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -148,23 +165,23 @@ func (e *CreateChatCompletionRequestModel2) UnmarshalJSON(data []byte) error {
 	case "gpt-3.5-turbo-0613":
 		fallthrough
 	case "gpt-3.5-turbo-16k-0613":
-		*e = CreateChatCompletionRequestModel2(v)
+		*e = Two(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for CreateChatCompletionRequestModel2: %v", v)
+		return fmt.Errorf("invalid value for Two: %v", v)
 	}
 }
 
 type CreateChatCompletionRequestModelType string
 
 const (
-	CreateChatCompletionRequestModelTypeStr                               CreateChatCompletionRequestModelType = "str"
-	CreateChatCompletionRequestModelTypeCreateChatCompletionRequestModel2 CreateChatCompletionRequestModelType = "CreateChatCompletionRequest_model_2"
+	CreateChatCompletionRequestModelTypeStr CreateChatCompletionRequestModelType = "str"
+	CreateChatCompletionRequestModelTypeTwo CreateChatCompletionRequestModelType = "2"
 )
 
 type CreateChatCompletionRequestModel struct {
-	Str                               *string
-	CreateChatCompletionRequestModel2 *CreateChatCompletionRequestModel2
+	Str *string
+	Two *Two
 
 	Type CreateChatCompletionRequestModelType
 }
@@ -178,12 +195,12 @@ func CreateCreateChatCompletionRequestModelStr(str string) CreateChatCompletionR
 	}
 }
 
-func CreateCreateChatCompletionRequestModelCreateChatCompletionRequestModel2(createChatCompletionRequestModel2 CreateChatCompletionRequestModel2) CreateChatCompletionRequestModel {
-	typ := CreateChatCompletionRequestModelTypeCreateChatCompletionRequestModel2
+func CreateCreateChatCompletionRequestModelTwo(two Two) CreateChatCompletionRequestModel {
+	typ := CreateChatCompletionRequestModelTypeTwo
 
 	return CreateChatCompletionRequestModel{
-		CreateChatCompletionRequestModel2: &createChatCompletionRequestModel2,
-		Type:                              typ,
+		Two:  &two,
+		Type: typ,
 	}
 }
 
@@ -196,10 +213,10 @@ func (u *CreateChatCompletionRequestModel) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	createChatCompletionRequestModel2 := CreateChatCompletionRequestModel2("")
-	if err := utils.UnmarshalJSON(data, &createChatCompletionRequestModel2, "", true, true); err == nil {
-		u.CreateChatCompletionRequestModel2 = &createChatCompletionRequestModel2
-		u.Type = CreateChatCompletionRequestModelTypeCreateChatCompletionRequestModel2
+	two := Two("")
+	if err := utils.UnmarshalJSON(data, &two, "", true, true); err == nil {
+		u.Two = &two
+		u.Type = CreateChatCompletionRequestModelTypeTwo
 		return nil
 	}
 
@@ -211,65 +228,126 @@ func (u CreateChatCompletionRequestModel) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
 
-	if u.CreateChatCompletionRequestModel2 != nil {
-		return utils.MarshalJSON(u.CreateChatCompletionRequestModel2, "", true)
+	if u.Two != nil {
+		return utils.MarshalJSON(u.Two, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-type CreateChatCompletionRequestStopType string
+// CreateChatCompletionRequestType - Setting to `json_object` enables JSON mode. This guarantees that the message the model generates is valid JSON.
+//
+// Note that your system prompt must still instruct the model to produce JSON, and to help ensure you don't forget, the API will throw an error if the string `JSON` does not appear in your system message. Also note that the message content may be partial (i.e. cut off) if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
+//
+// Must be one of `text` or `json_object`.
+type CreateChatCompletionRequestType string
 
 const (
-	CreateChatCompletionRequestStopTypeStr        CreateChatCompletionRequestStopType = "str"
-	CreateChatCompletionRequestStopTypeArrayOfstr CreateChatCompletionRequestStopType = "arrayOfstr"
+	CreateChatCompletionRequestTypeText       CreateChatCompletionRequestType = "text"
+	CreateChatCompletionRequestTypeJSONObject CreateChatCompletionRequestType = "json_object"
 )
 
-type CreateChatCompletionRequestStop struct {
+func (e CreateChatCompletionRequestType) ToPointer() *CreateChatCompletionRequestType {
+	return &e
+}
+
+func (e *CreateChatCompletionRequestType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "text":
+		fallthrough
+	case "json_object":
+		*e = CreateChatCompletionRequestType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateChatCompletionRequestType: %v", v)
+	}
+}
+
+// ResponseFormat - An object specifying the format that the model must output. Used to enable JSON mode.
+type ResponseFormat struct {
+	// Setting to `json_object` enables JSON mode. This guarantees that the message the model generates is valid JSON.
+	//
+	// Note that your system prompt must still instruct the model to produce JSON, and to help ensure you don't forget, the API will throw an error if the string `JSON` does not appear in your system message. Also note that the message content may be partial (i.e. cut off) if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
+	//
+	// Must be one of `text` or `json_object`.
+	//
+	Type *CreateChatCompletionRequestType `default:"text" json:"type"`
+}
+
+func (r ResponseFormat) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(r, "", false)
+}
+
+func (r *ResponseFormat) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *ResponseFormat) GetType() *CreateChatCompletionRequestType {
+	if o == nil {
+		return nil
+	}
+	return o.Type
+}
+
+type StopType string
+
+const (
+	StopTypeStr        StopType = "str"
+	StopTypeArrayOfstr StopType = "arrayOfstr"
+)
+
+type Stop struct {
 	Str        *string
 	ArrayOfstr []string
 
-	Type CreateChatCompletionRequestStopType
+	Type StopType
 }
 
-func CreateCreateChatCompletionRequestStopStr(str string) CreateChatCompletionRequestStop {
-	typ := CreateChatCompletionRequestStopTypeStr
+func CreateStopStr(str string) Stop {
+	typ := StopTypeStr
 
-	return CreateChatCompletionRequestStop{
+	return Stop{
 		Str:  &str,
 		Type: typ,
 	}
 }
 
-func CreateCreateChatCompletionRequestStopArrayOfstr(arrayOfstr []string) CreateChatCompletionRequestStop {
-	typ := CreateChatCompletionRequestStopTypeArrayOfstr
+func CreateStopArrayOfstr(arrayOfstr []string) Stop {
+	typ := StopTypeArrayOfstr
 
-	return CreateChatCompletionRequestStop{
+	return Stop{
 		ArrayOfstr: arrayOfstr,
 		Type:       typ,
 	}
 }
 
-func (u *CreateChatCompletionRequestStop) UnmarshalJSON(data []byte) error {
+func (u *Stop) UnmarshalJSON(data []byte) error {
 
 	str := ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
 		u.Str = &str
-		u.Type = CreateChatCompletionRequestStopTypeStr
+		u.Type = StopTypeStr
 		return nil
 	}
 
 	arrayOfstr := []string{}
 	if err := utils.UnmarshalJSON(data, &arrayOfstr, "", true, true); err == nil {
 		u.ArrayOfstr = arrayOfstr
-		u.Type = CreateChatCompletionRequestStopTypeArrayOfstr
+		u.Type = StopTypeArrayOfstr
 		return nil
 	}
 
 	return errors.New("could not unmarshal into supported union types")
 }
 
-func (u CreateChatCompletionRequestStop) MarshalJSON() ([]byte, error) {
+func (u Stop) MarshalJSON() ([]byte, error) {
 	if u.Str != nil {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
@@ -287,14 +365,28 @@ type CreateChatCompletionRequest struct {
 	// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
 	//
 	FrequencyPenalty *float64 `default:"0" json:"frequency_penalty"`
-	// Controls how the model calls functions. "none" means the model will not call a function and instead generates a message. "auto" means the model can pick between generating a message or calling a function.  Specifying a particular function via `{"name": "my_function"}` forces the model to call that function. "none" is the default when no functions are present. "auto" is the default if functions are present.
+	// Deprecated in favor of `tool_choice`.
 	//
+	// Controls which (if any) function is called by the model.
+	// `none` means the model will not call a function and instead generates a message.
+	// `auto` means the model can pick between generating a message or calling a function.
+	// Specifying a particular function via `{"name": "my_function"}` forces the model to call that function.
+	//
+	// `none` is the default when no functions are present. `auto`` is the default if functions are present.
+	//
+	//
+	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
 	FunctionCall *CreateChatCompletionRequestFunctionCall `json:"function_call,omitempty"`
+	// Deprecated in favor of `tools`.
+	//
 	// A list of functions the model may generate JSON inputs for.
+	//
+	//
+	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
 	Functions []ChatCompletionFunctions `json:"functions,omitempty"`
 	// Modify the likelihood of specified tokens appearing in the completion.
 	//
-	// Accepts a json object that maps tokens (specified by their token ID in the tokenizer) to an associated bias value from -100 to 100. Mathematically, the bias is added to the logits generated by the model prior to sampling. The exact effect will vary per model, but values between -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100 should result in a ban or exclusive selection of the relevant token.
+	// Accepts a JSON object that maps tokens (specified by their token ID in the tokenizer) to an associated bias value from -100 to 100. Mathematically, the bias is added to the logits generated by the model prior to sampling. The exact effect will vary per model, but values between -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100 should result in a ban or exclusive selection of the relevant token.
 	//
 	LogitBias map[string]int64 `json:"logit_bias,omitempty"`
 	// The maximum number of [tokens](/tokenizer) to generate in the chat completion.
@@ -313,9 +405,16 @@ type CreateChatCompletionRequest struct {
 	// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
 	//
 	PresencePenalty *float64 `default:"0" json:"presence_penalty"`
+	// An object specifying the format that the model must output. Used to enable JSON mode.
+	ResponseFormat *ResponseFormat `json:"response_format,omitempty"`
+	// This feature is in Beta.
+	// If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same `seed` and parameters should return the same result.
+	// Determinism is not guaranteed, and you should refer to the `system_fingerprint` response parameter to monitor changes in the backend.
+	//
+	Seed *int64 `json:"seed,omitempty"`
 	// Up to 4 sequences where the API will stop generating further tokens.
 	//
-	Stop *CreateChatCompletionRequestStop `json:"stop,omitempty"`
+	Stop *Stop `json:"stop,omitempty"`
 	// If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format) as they become available, with the stream terminated by a `data: [DONE]` message. [Example Python code](https://cookbook.openai.com/examples/how_to_stream_completions).
 	//
 	Stream *bool `default:"false" json:"stream"`
@@ -324,6 +423,17 @@ type CreateChatCompletionRequest struct {
 	// We generally recommend altering this or `top_p` but not both.
 	//
 	Temperature *float64 `default:"1" json:"temperature"`
+	// Controls which (if any) function is called by the model.
+	// `none` means the model will not call a function and instead generates a message.
+	// `auto` means the model can pick between generating a message or calling a function.
+	// Specifying a particular function via `{"type: "function", "function": {"name": "my_function"}}` forces the model to call that function.
+	//
+	// `none` is the default when no functions are present. `auto` is the default if functions are present.
+	//
+	ToolChoice *ChatCompletionToolChoiceOption `json:"tool_choice,omitempty"`
+	// A list of tools the model may call. Currently, only functions are supported as a tool. Use this to provide a list of functions the model may generate JSON inputs for.
+	//
+	Tools []ChatCompletionTool `json:"tools,omitempty"`
 	// An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.
 	//
 	// We generally recommend altering this or `temperature` but not both.
@@ -408,7 +518,21 @@ func (o *CreateChatCompletionRequest) GetPresencePenalty() *float64 {
 	return o.PresencePenalty
 }
 
-func (o *CreateChatCompletionRequest) GetStop() *CreateChatCompletionRequestStop {
+func (o *CreateChatCompletionRequest) GetResponseFormat() *ResponseFormat {
+	if o == nil {
+		return nil
+	}
+	return o.ResponseFormat
+}
+
+func (o *CreateChatCompletionRequest) GetSeed() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Seed
+}
+
+func (o *CreateChatCompletionRequest) GetStop() *Stop {
 	if o == nil {
 		return nil
 	}
@@ -427,6 +551,20 @@ func (o *CreateChatCompletionRequest) GetTemperature() *float64 {
 		return nil
 	}
 	return o.Temperature
+}
+
+func (o *CreateChatCompletionRequest) GetToolChoice() *ChatCompletionToolChoiceOption {
+	if o == nil {
+		return nil
+	}
+	return o.ToolChoice
+}
+
+func (o *CreateChatCompletionRequest) GetTools() []ChatCompletionTool {
+	if o == nil {
+		return nil
+	}
+	return o.Tools
 }
 
 func (o *CreateChatCompletionRequest) GetTopP() *float64 {

@@ -1,5 +1,5 @@
 # FineTunes
-(*FineTunes*)
+(*.FineTunes*)
 
 ## Overview
 
@@ -39,8 +39,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -95,8 +95,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -112,13 +112,13 @@ func main() {
             1.5,
             2,
         },
-        Hyperparameters: &shared.CreateFineTuneRequestHyperparameters{
-            NEpochs: shared.CreateCreateFineTuneRequestHyperparametersNEpochsInteger(
+        Hyperparameters: &shared.Hyperparameters{
+            NEpochs: shared.CreateNEpochsInteger(
             399302,
             ),
         },
-        Model: shared.CreateCreateFineTuneRequestModelCreateFineTuneRequestModel2(
-        shared.CreateFineTuneRequestModel2Curie,
+        Model: shared.CreateCreateFineTuneRequestModelCreateFineTuneRequest2(
+        shared.CreateFineTuneRequest2Curie,
         ),
         TrainingFile: "file-abc123",
         ValidationFile: openaigosdk.String("file-abc123"),
@@ -161,8 +161,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -216,8 +216,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -266,8 +266,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {

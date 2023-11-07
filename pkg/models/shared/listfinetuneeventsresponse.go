@@ -2,9 +2,38 @@
 
 package shared
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type ListFineTuneEventsResponseObject string
+
+const (
+	ListFineTuneEventsResponseObjectList ListFineTuneEventsResponseObject = "list"
+)
+
+func (e ListFineTuneEventsResponseObject) ToPointer() *ListFineTuneEventsResponseObject {
+	return &e
+}
+
+func (e *ListFineTuneEventsResponseObject) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "list":
+		*e = ListFineTuneEventsResponseObject(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ListFineTuneEventsResponseObject: %v", v)
+	}
+}
+
 type ListFineTuneEventsResponse struct {
-	Data   []FineTuneEvent `json:"data"`
-	Object string          `json:"object"`
+	Data   []FineTuneEvent                  `json:"data"`
+	Object ListFineTuneEventsResponseObject `json:"object"`
 }
 
 func (o *ListFineTuneEventsResponse) GetData() []FineTuneEvent {
@@ -14,9 +43,9 @@ func (o *ListFineTuneEventsResponse) GetData() []FineTuneEvent {
 	return o.Data
 }
 
-func (o *ListFineTuneEventsResponse) GetObject() string {
+func (o *ListFineTuneEventsResponse) GetObject() ListFineTuneEventsResponseObject {
 	if o == nil {
-		return ""
+		return ListFineTuneEventsResponseObject("")
 	}
 	return o.Object
 }

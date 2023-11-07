@@ -2,10 +2,39 @@
 
 package shared
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type ListPaginatedFineTuningJobsResponseObject string
+
+const (
+	ListPaginatedFineTuningJobsResponseObjectList ListPaginatedFineTuningJobsResponseObject = "list"
+)
+
+func (e ListPaginatedFineTuningJobsResponseObject) ToPointer() *ListPaginatedFineTuningJobsResponseObject {
+	return &e
+}
+
+func (e *ListPaginatedFineTuningJobsResponseObject) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "list":
+		*e = ListPaginatedFineTuningJobsResponseObject(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ListPaginatedFineTuningJobsResponseObject: %v", v)
+	}
+}
+
 type ListPaginatedFineTuningJobsResponse struct {
-	Data    []FineTuningJob `json:"data"`
-	HasMore bool            `json:"has_more"`
-	Object  string          `json:"object"`
+	Data    []FineTuningJob                           `json:"data"`
+	HasMore bool                                      `json:"has_more"`
+	Object  ListPaginatedFineTuningJobsResponseObject `json:"object"`
 }
 
 func (o *ListPaginatedFineTuningJobsResponse) GetData() []FineTuningJob {
@@ -22,9 +51,9 @@ func (o *ListPaginatedFineTuningJobsResponse) GetHasMore() bool {
 	return o.HasMore
 }
 
-func (o *ListPaginatedFineTuningJobsResponse) GetObject() string {
+func (o *ListPaginatedFineTuningJobsResponse) GetObject() ListPaginatedFineTuningJobsResponseObject {
 	if o == nil {
-		return ""
+		return ListPaginatedFineTuningJobsResponseObject("")
 	}
 	return o.Object
 }

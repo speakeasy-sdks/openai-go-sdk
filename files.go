@@ -6,28 +6,32 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/sdkerrors"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 	"io"
 	"net/http"
 	"strings"
 )
 
-// files - Files are used to upload documents that can be used with features like fine-tuning.
-type files struct {
+// Files are used to upload documents that can be used with features like Assistants and Fine-tuning.
+type Files struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newFiles(sdkConfig sdkConfiguration) *files {
-	return &files{
+func newFiles(sdkConfig sdkConfiguration) *Files {
+	return &Files{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
-// CreateFile - Upload a file that can be used across various endpoints/features. Currently, the size of all the files uploaded by one organization can be up to 1 GB. Please [contact us](https://help.openai.com/) if you need to increase the storage limit.
-func (s *files) CreateFile(ctx context.Context, request shared.CreateFileRequest) (*operations.CreateFileResponse, error) {
+// CreateFile - Upload a file that can be used across various endpoints/features. The size of all the files uploaded by one organization can be up to 100 GB.
+//
+// The size of individual files for can be a maximum of 512MB. See the [Assistants Tools guide](/docs/assistants/tools) to learn more about the types of files supported. The Fine-tuning API only supports `.jsonl` files.
+//
+// Please [contact us](https://help.openai.com/) if you need to increase these storage limits.
+func (s *Files) CreateFile(ctx context.Context, request shared.CreateFileRequest) (*operations.CreateFileResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/files"
 
@@ -85,13 +89,17 @@ func (s *files) CreateFile(ctx context.Context, request shared.CreateFileRequest
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
 }
 
 // DeleteFile - Delete a file.
-func (s *files) DeleteFile(ctx context.Context, fileID string) (*operations.DeleteFileResponse, error) {
+func (s *Files) DeleteFile(ctx context.Context, fileID string) (*operations.DeleteFileResponse, error) {
 	request := operations.DeleteFileRequest{
 		FileID: fileID,
 	}
@@ -146,13 +154,17 @@ func (s *files) DeleteFile(ctx context.Context, fileID string) (*operations.Dele
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
 }
 
 // DownloadFile - Returns the contents of the specified file.
-func (s *files) DownloadFile(ctx context.Context, fileID string) (*operations.DownloadFileResponse, error) {
+func (s *Files) DownloadFile(ctx context.Context, fileID string) (*operations.DownloadFileResponse, error) {
 	request := operations.DownloadFileRequest{
 		FileID: fileID,
 	}
@@ -199,17 +211,25 @@ func (s *files) DownloadFile(ctx context.Context, fileID string) (*operations.Do
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			out := string(rawBody)
-			res.DownloadFile200ApplicationJSONString = &out
+			res.Res = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
 }
 
 // ListFiles - Returns a list of files that belong to the user's organization.
-func (s *files) ListFiles(ctx context.Context) (*operations.ListFilesResponse, error) {
+func (s *Files) ListFiles(ctx context.Context, purpose *string) (*operations.ListFilesResponse, error) {
+	request := operations.ListFilesRequest{
+		Purpose: purpose,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/files"
 
@@ -219,6 +239,10 @@ func (s *files) ListFiles(ctx context.Context) (*operations.ListFilesResponse, e
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
+
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -257,13 +281,17 @@ func (s *files) ListFiles(ctx context.Context) (*operations.ListFilesResponse, e
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
 }
 
 // RetrieveFile - Returns information about a specific file.
-func (s *files) RetrieveFile(ctx context.Context, fileID string) (*operations.RetrieveFileResponse, error) {
+func (s *Files) RetrieveFile(ctx context.Context, fileID string) (*operations.RetrieveFileResponse, error) {
 	request := operations.RetrieveFileRequest{
 		FileID: fileID,
 	}
@@ -318,6 +346,10 @@ func (s *files) RetrieveFile(ctx context.Context, fileID string) (*operations.Re
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil

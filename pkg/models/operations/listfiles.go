@@ -3,9 +3,21 @@
 package operations
 
 import (
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 	"net/http"
 )
+
+type ListFilesRequest struct {
+	// Only return files with the given purpose.
+	Purpose *string `queryParam:"style=form,explode=true,name=purpose"`
+}
+
+func (o *ListFilesRequest) GetPurpose() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Purpose
+}
 
 type ListFilesResponse struct {
 	// HTTP response content type for this operation

@@ -6,89 +6,267 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 )
 
-// CreateFineTuningJobRequestHyperparametersNEpochs1 - The number of epochs to train the model for. An epoch refers to one
-// full cycle through the training dataset.
-type CreateFineTuningJobRequestHyperparametersNEpochs1 string
+// CreateFineTuningJobRequest1 - Number of examples in each batch. A larger batch size means that model parameters
+// are updated less frequently, but with lower variance.
+type CreateFineTuningJobRequest1 string
 
 const (
-	CreateFineTuningJobRequestHyperparametersNEpochs1Auto CreateFineTuningJobRequestHyperparametersNEpochs1 = "auto"
+	CreateFineTuningJobRequest1Auto CreateFineTuningJobRequest1 = "auto"
 )
 
-func (e CreateFineTuningJobRequestHyperparametersNEpochs1) ToPointer() *CreateFineTuningJobRequestHyperparametersNEpochs1 {
+func (e CreateFineTuningJobRequest1) ToPointer() *CreateFineTuningJobRequest1 {
 	return &e
 }
 
-func (e *CreateFineTuningJobRequestHyperparametersNEpochs1) UnmarshalJSON(data []byte) error {
+func (e *CreateFineTuningJobRequest1) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "auto":
-		*e = CreateFineTuningJobRequestHyperparametersNEpochs1(v)
+		*e = CreateFineTuningJobRequest1(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for CreateFineTuningJobRequestHyperparametersNEpochs1: %v", v)
+		return fmt.Errorf("invalid value for CreateFineTuningJobRequest1: %v", v)
 	}
 }
 
-type CreateFineTuningJobRequestHyperparametersNEpochsType string
+type BatchSizeType string
 
 const (
-	CreateFineTuningJobRequestHyperparametersNEpochsTypeCreateFineTuningJobRequestHyperparametersNEpochs1 CreateFineTuningJobRequestHyperparametersNEpochsType = "CreateFineTuningJobRequest_hyperparameters_n_epochs_1"
-	CreateFineTuningJobRequestHyperparametersNEpochsTypeInteger                                           CreateFineTuningJobRequestHyperparametersNEpochsType = "integer"
+	BatchSizeTypeCreateFineTuningJobRequest1 BatchSizeType = "CreateFineTuningJobRequest_1"
+	BatchSizeTypeInteger                     BatchSizeType = "integer"
 )
 
-type CreateFineTuningJobRequestHyperparametersNEpochs struct {
-	CreateFineTuningJobRequestHyperparametersNEpochs1 *CreateFineTuningJobRequestHyperparametersNEpochs1
-	Integer                                           *int64
+type BatchSize struct {
+	CreateFineTuningJobRequest1 *CreateFineTuningJobRequest1
+	Integer                     *int64
 
-	Type CreateFineTuningJobRequestHyperparametersNEpochsType
+	Type BatchSizeType
 }
 
-func CreateCreateFineTuningJobRequestHyperparametersNEpochsCreateFineTuningJobRequestHyperparametersNEpochs1(createFineTuningJobRequestHyperparametersNEpochs1 CreateFineTuningJobRequestHyperparametersNEpochs1) CreateFineTuningJobRequestHyperparametersNEpochs {
-	typ := CreateFineTuningJobRequestHyperparametersNEpochsTypeCreateFineTuningJobRequestHyperparametersNEpochs1
+func CreateBatchSizeCreateFineTuningJobRequest1(createFineTuningJobRequest1 CreateFineTuningJobRequest1) BatchSize {
+	typ := BatchSizeTypeCreateFineTuningJobRequest1
 
-	return CreateFineTuningJobRequestHyperparametersNEpochs{
-		CreateFineTuningJobRequestHyperparametersNEpochs1: &createFineTuningJobRequestHyperparametersNEpochs1,
-		Type: typ,
+	return BatchSize{
+		CreateFineTuningJobRequest1: &createFineTuningJobRequest1,
+		Type:                        typ,
 	}
 }
 
-func CreateCreateFineTuningJobRequestHyperparametersNEpochsInteger(integer int64) CreateFineTuningJobRequestHyperparametersNEpochs {
-	typ := CreateFineTuningJobRequestHyperparametersNEpochsTypeInteger
+func CreateBatchSizeInteger(integer int64) BatchSize {
+	typ := BatchSizeTypeInteger
 
-	return CreateFineTuningJobRequestHyperparametersNEpochs{
+	return BatchSize{
 		Integer: &integer,
 		Type:    typ,
 	}
 }
 
-func (u *CreateFineTuningJobRequestHyperparametersNEpochs) UnmarshalJSON(data []byte) error {
+func (u *BatchSize) UnmarshalJSON(data []byte) error {
 
-	createFineTuningJobRequestHyperparametersNEpochs1 := CreateFineTuningJobRequestHyperparametersNEpochs1("")
-	if err := utils.UnmarshalJSON(data, &createFineTuningJobRequestHyperparametersNEpochs1, "", true, true); err == nil {
-		u.CreateFineTuningJobRequestHyperparametersNEpochs1 = &createFineTuningJobRequestHyperparametersNEpochs1
-		u.Type = CreateFineTuningJobRequestHyperparametersNEpochsTypeCreateFineTuningJobRequestHyperparametersNEpochs1
+	createFineTuningJobRequest1 := CreateFineTuningJobRequest1("")
+	if err := utils.UnmarshalJSON(data, &createFineTuningJobRequest1, "", true, true); err == nil {
+		u.CreateFineTuningJobRequest1 = &createFineTuningJobRequest1
+		u.Type = BatchSizeTypeCreateFineTuningJobRequest1
 		return nil
 	}
 
 	integer := int64(0)
 	if err := utils.UnmarshalJSON(data, &integer, "", true, true); err == nil {
 		u.Integer = &integer
-		u.Type = CreateFineTuningJobRequestHyperparametersNEpochsTypeInteger
+		u.Type = BatchSizeTypeInteger
 		return nil
 	}
 
 	return errors.New("could not unmarshal into supported union types")
 }
 
-func (u CreateFineTuningJobRequestHyperparametersNEpochs) MarshalJSON() ([]byte, error) {
-	if u.CreateFineTuningJobRequestHyperparametersNEpochs1 != nil {
-		return utils.MarshalJSON(u.CreateFineTuningJobRequestHyperparametersNEpochs1, "", true)
+func (u BatchSize) MarshalJSON() ([]byte, error) {
+	if u.CreateFineTuningJobRequest1 != nil {
+		return utils.MarshalJSON(u.CreateFineTuningJobRequest1, "", true)
+	}
+
+	if u.Integer != nil {
+		return utils.MarshalJSON(u.Integer, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
+}
+
+// CreateFineTuningJobRequestSchemas1 - Scaling factor for the learning rate. A smaller learning rate may be useful to avoid
+// overfitting.
+type CreateFineTuningJobRequestSchemas1 string
+
+const (
+	CreateFineTuningJobRequestSchemas1Auto CreateFineTuningJobRequestSchemas1 = "auto"
+)
+
+func (e CreateFineTuningJobRequestSchemas1) ToPointer() *CreateFineTuningJobRequestSchemas1 {
+	return &e
+}
+
+func (e *CreateFineTuningJobRequestSchemas1) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "auto":
+		*e = CreateFineTuningJobRequestSchemas1(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateFineTuningJobRequestSchemas1: %v", v)
+	}
+}
+
+type LearningRateMultiplierType string
+
+const (
+	LearningRateMultiplierTypeCreateFineTuningJobRequestSchemas1 LearningRateMultiplierType = "CreateFineTuningJobRequest_Schemas_1"
+	LearningRateMultiplierTypeNumber                             LearningRateMultiplierType = "number"
+)
+
+type LearningRateMultiplier struct {
+	CreateFineTuningJobRequestSchemas1 *CreateFineTuningJobRequestSchemas1
+	Number                             *float64
+
+	Type LearningRateMultiplierType
+}
+
+func CreateLearningRateMultiplierCreateFineTuningJobRequestSchemas1(createFineTuningJobRequestSchemas1 CreateFineTuningJobRequestSchemas1) LearningRateMultiplier {
+	typ := LearningRateMultiplierTypeCreateFineTuningJobRequestSchemas1
+
+	return LearningRateMultiplier{
+		CreateFineTuningJobRequestSchemas1: &createFineTuningJobRequestSchemas1,
+		Type:                               typ,
+	}
+}
+
+func CreateLearningRateMultiplierNumber(number float64) LearningRateMultiplier {
+	typ := LearningRateMultiplierTypeNumber
+
+	return LearningRateMultiplier{
+		Number: &number,
+		Type:   typ,
+	}
+}
+
+func (u *LearningRateMultiplier) UnmarshalJSON(data []byte) error {
+
+	createFineTuningJobRequestSchemas1 := CreateFineTuningJobRequestSchemas1("")
+	if err := utils.UnmarshalJSON(data, &createFineTuningJobRequestSchemas1, "", true, true); err == nil {
+		u.CreateFineTuningJobRequestSchemas1 = &createFineTuningJobRequestSchemas1
+		u.Type = LearningRateMultiplierTypeCreateFineTuningJobRequestSchemas1
+		return nil
+	}
+
+	number := float64(0)
+	if err := utils.UnmarshalJSON(data, &number, "", true, true); err == nil {
+		u.Number = &number
+		u.Type = LearningRateMultiplierTypeNumber
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u LearningRateMultiplier) MarshalJSON() ([]byte, error) {
+	if u.CreateFineTuningJobRequestSchemas1 != nil {
+		return utils.MarshalJSON(u.CreateFineTuningJobRequestSchemas1, "", true)
+	}
+
+	if u.Number != nil {
+		return utils.MarshalJSON(u.Number, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
+}
+
+// CreateFineTuningJobRequestSchemasHyperparameters1 - The number of epochs to train the model for. An epoch refers to one full cycle
+// through the training dataset.
+type CreateFineTuningJobRequestSchemasHyperparameters1 string
+
+const (
+	CreateFineTuningJobRequestSchemasHyperparameters1Auto CreateFineTuningJobRequestSchemasHyperparameters1 = "auto"
+)
+
+func (e CreateFineTuningJobRequestSchemasHyperparameters1) ToPointer() *CreateFineTuningJobRequestSchemasHyperparameters1 {
+	return &e
+}
+
+func (e *CreateFineTuningJobRequestSchemasHyperparameters1) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "auto":
+		*e = CreateFineTuningJobRequestSchemasHyperparameters1(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateFineTuningJobRequestSchemasHyperparameters1: %v", v)
+	}
+}
+
+type CreateFineTuningJobRequestNEpochsType string
+
+const (
+	CreateFineTuningJobRequestNEpochsTypeCreateFineTuningJobRequestSchemasHyperparameters1 CreateFineTuningJobRequestNEpochsType = "CreateFineTuningJobRequest_Schemas_hyperparameters_1"
+	CreateFineTuningJobRequestNEpochsTypeInteger                                           CreateFineTuningJobRequestNEpochsType = "integer"
+)
+
+type CreateFineTuningJobRequestNEpochs struct {
+	CreateFineTuningJobRequestSchemasHyperparameters1 *CreateFineTuningJobRequestSchemasHyperparameters1
+	Integer                                           *int64
+
+	Type CreateFineTuningJobRequestNEpochsType
+}
+
+func CreateCreateFineTuningJobRequestNEpochsCreateFineTuningJobRequestSchemasHyperparameters1(createFineTuningJobRequestSchemasHyperparameters1 CreateFineTuningJobRequestSchemasHyperparameters1) CreateFineTuningJobRequestNEpochs {
+	typ := CreateFineTuningJobRequestNEpochsTypeCreateFineTuningJobRequestSchemasHyperparameters1
+
+	return CreateFineTuningJobRequestNEpochs{
+		CreateFineTuningJobRequestSchemasHyperparameters1: &createFineTuningJobRequestSchemasHyperparameters1,
+		Type: typ,
+	}
+}
+
+func CreateCreateFineTuningJobRequestNEpochsInteger(integer int64) CreateFineTuningJobRequestNEpochs {
+	typ := CreateFineTuningJobRequestNEpochsTypeInteger
+
+	return CreateFineTuningJobRequestNEpochs{
+		Integer: &integer,
+		Type:    typ,
+	}
+}
+
+func (u *CreateFineTuningJobRequestNEpochs) UnmarshalJSON(data []byte) error {
+
+	createFineTuningJobRequestSchemasHyperparameters1 := CreateFineTuningJobRequestSchemasHyperparameters1("")
+	if err := utils.UnmarshalJSON(data, &createFineTuningJobRequestSchemasHyperparameters1, "", true, true); err == nil {
+		u.CreateFineTuningJobRequestSchemasHyperparameters1 = &createFineTuningJobRequestSchemasHyperparameters1
+		u.Type = CreateFineTuningJobRequestNEpochsTypeCreateFineTuningJobRequestSchemasHyperparameters1
+		return nil
+	}
+
+	integer := int64(0)
+	if err := utils.UnmarshalJSON(data, &integer, "", true, true); err == nil {
+		u.Integer = &integer
+		u.Type = CreateFineTuningJobRequestNEpochsTypeInteger
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u CreateFineTuningJobRequestNEpochs) MarshalJSON() ([]byte, error) {
+	if u.CreateFineTuningJobRequestSchemasHyperparameters1 != nil {
+		return utils.MarshalJSON(u.CreateFineTuningJobRequestSchemasHyperparameters1, "", true)
 	}
 
 	if u.Integer != nil {
@@ -100,34 +278,56 @@ func (u CreateFineTuningJobRequestHyperparametersNEpochs) MarshalJSON() ([]byte,
 
 // CreateFineTuningJobRequestHyperparameters - The hyperparameters used for the fine-tuning job.
 type CreateFineTuningJobRequestHyperparameters struct {
-	// The number of epochs to train the model for. An epoch refers to one
-	// full cycle through the training dataset.
+	// Number of examples in each batch. A larger batch size means that model parameters
+	// are updated less frequently, but with lower variance.
 	//
-	NEpochs *CreateFineTuningJobRequestHyperparametersNEpochs `json:"n_epochs,omitempty"`
+	BatchSize *BatchSize `json:"batch_size,omitempty"`
+	// Scaling factor for the learning rate. A smaller learning rate may be useful to avoid
+	// overfitting.
+	//
+	LearningRateMultiplier *LearningRateMultiplier `json:"learning_rate_multiplier,omitempty"`
+	// The number of epochs to train the model for. An epoch refers to one full cycle
+	// through the training dataset.
+	//
+	NEpochs *CreateFineTuningJobRequestNEpochs `json:"n_epochs,omitempty"`
 }
 
-func (o *CreateFineTuningJobRequestHyperparameters) GetNEpochs() *CreateFineTuningJobRequestHyperparametersNEpochs {
+func (o *CreateFineTuningJobRequestHyperparameters) GetBatchSize() *BatchSize {
+	if o == nil {
+		return nil
+	}
+	return o.BatchSize
+}
+
+func (o *CreateFineTuningJobRequestHyperparameters) GetLearningRateMultiplier() *LearningRateMultiplier {
+	if o == nil {
+		return nil
+	}
+	return o.LearningRateMultiplier
+}
+
+func (o *CreateFineTuningJobRequestHyperparameters) GetNEpochs() *CreateFineTuningJobRequestNEpochs {
 	if o == nil {
 		return nil
 	}
 	return o.NEpochs
 }
 
-// CreateFineTuningJobRequestModel2 - The name of the model to fine-tune. You can select one of the
+// CreateFineTuningJobRequest2 - The name of the model to fine-tune. You can select one of the
 // [supported models](/docs/guides/fine-tuning/what-models-can-be-fine-tuned).
-type CreateFineTuningJobRequestModel2 string
+type CreateFineTuningJobRequest2 string
 
 const (
-	CreateFineTuningJobRequestModel2Babbage002 CreateFineTuningJobRequestModel2 = "babbage-002"
-	CreateFineTuningJobRequestModel2Davinci002 CreateFineTuningJobRequestModel2 = "davinci-002"
-	CreateFineTuningJobRequestModel2Gpt35Turbo CreateFineTuningJobRequestModel2 = "gpt-3.5-turbo"
+	CreateFineTuningJobRequest2Babbage002 CreateFineTuningJobRequest2 = "babbage-002"
+	CreateFineTuningJobRequest2Davinci002 CreateFineTuningJobRequest2 = "davinci-002"
+	CreateFineTuningJobRequest2Gpt35Turbo CreateFineTuningJobRequest2 = "gpt-3.5-turbo"
 )
 
-func (e CreateFineTuningJobRequestModel2) ToPointer() *CreateFineTuningJobRequestModel2 {
+func (e CreateFineTuningJobRequest2) ToPointer() *CreateFineTuningJobRequest2 {
 	return &e
 }
 
-func (e *CreateFineTuningJobRequestModel2) UnmarshalJSON(data []byte) error {
+func (e *CreateFineTuningJobRequest2) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -138,23 +338,23 @@ func (e *CreateFineTuningJobRequestModel2) UnmarshalJSON(data []byte) error {
 	case "davinci-002":
 		fallthrough
 	case "gpt-3.5-turbo":
-		*e = CreateFineTuningJobRequestModel2(v)
+		*e = CreateFineTuningJobRequest2(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for CreateFineTuningJobRequestModel2: %v", v)
+		return fmt.Errorf("invalid value for CreateFineTuningJobRequest2: %v", v)
 	}
 }
 
 type CreateFineTuningJobRequestModelType string
 
 const (
-	CreateFineTuningJobRequestModelTypeStr                              CreateFineTuningJobRequestModelType = "str"
-	CreateFineTuningJobRequestModelTypeCreateFineTuningJobRequestModel2 CreateFineTuningJobRequestModelType = "CreateFineTuningJobRequest_model_2"
+	CreateFineTuningJobRequestModelTypeStr                         CreateFineTuningJobRequestModelType = "str"
+	CreateFineTuningJobRequestModelTypeCreateFineTuningJobRequest2 CreateFineTuningJobRequestModelType = "CreateFineTuningJobRequest_2"
 )
 
 type CreateFineTuningJobRequestModel struct {
-	Str                              *string
-	CreateFineTuningJobRequestModel2 *CreateFineTuningJobRequestModel2
+	Str                         *string
+	CreateFineTuningJobRequest2 *CreateFineTuningJobRequest2
 
 	Type CreateFineTuningJobRequestModelType
 }
@@ -168,12 +368,12 @@ func CreateCreateFineTuningJobRequestModelStr(str string) CreateFineTuningJobReq
 	}
 }
 
-func CreateCreateFineTuningJobRequestModelCreateFineTuningJobRequestModel2(createFineTuningJobRequestModel2 CreateFineTuningJobRequestModel2) CreateFineTuningJobRequestModel {
-	typ := CreateFineTuningJobRequestModelTypeCreateFineTuningJobRequestModel2
+func CreateCreateFineTuningJobRequestModelCreateFineTuningJobRequest2(createFineTuningJobRequest2 CreateFineTuningJobRequest2) CreateFineTuningJobRequestModel {
+	typ := CreateFineTuningJobRequestModelTypeCreateFineTuningJobRequest2
 
 	return CreateFineTuningJobRequestModel{
-		CreateFineTuningJobRequestModel2: &createFineTuningJobRequestModel2,
-		Type:                             typ,
+		CreateFineTuningJobRequest2: &createFineTuningJobRequest2,
+		Type:                        typ,
 	}
 }
 
@@ -186,10 +386,10 @@ func (u *CreateFineTuningJobRequestModel) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	createFineTuningJobRequestModel2 := CreateFineTuningJobRequestModel2("")
-	if err := utils.UnmarshalJSON(data, &createFineTuningJobRequestModel2, "", true, true); err == nil {
-		u.CreateFineTuningJobRequestModel2 = &createFineTuningJobRequestModel2
-		u.Type = CreateFineTuningJobRequestModelTypeCreateFineTuningJobRequestModel2
+	createFineTuningJobRequest2 := CreateFineTuningJobRequest2("")
+	if err := utils.UnmarshalJSON(data, &createFineTuningJobRequest2, "", true, true); err == nil {
+		u.CreateFineTuningJobRequest2 = &createFineTuningJobRequest2
+		u.Type = CreateFineTuningJobRequestModelTypeCreateFineTuningJobRequest2
 		return nil
 	}
 
@@ -201,8 +401,8 @@ func (u CreateFineTuningJobRequestModel) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
 
-	if u.CreateFineTuningJobRequestModel2 != nil {
-		return utils.MarshalJSON(u.CreateFineTuningJobRequestModel2, "", true)
+	if u.CreateFineTuningJobRequest2 != nil {
+		return utils.MarshalJSON(u.CreateFineTuningJobRequest2, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")

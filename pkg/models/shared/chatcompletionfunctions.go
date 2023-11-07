@@ -2,6 +2,9 @@
 
 package shared
 
+// ChatCompletionFunctions
+//
+// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
 type ChatCompletionFunctions struct {
 	// A description of what the function does, used by the model to choose when and how to call the function.
 	Description *string `json:"description,omitempty"`

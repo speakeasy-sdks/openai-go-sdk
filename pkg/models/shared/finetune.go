@@ -2,8 +2,13 @@
 
 package shared
 
-// FineTuneHyperparams - The hyperparameters used for the fine-tuning job. See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/hyperparameters) for more details.
-type FineTuneHyperparams struct {
+import (
+	"encoding/json"
+	"fmt"
+)
+
+// Hyperparams - The hyperparameters used for the fine-tuning job. See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/hyperparameters) for more details.
+type Hyperparams struct {
 	// The batch size to use for training. The batch size is the number of
 	// training examples used to train a single forward and backward pass.
 	//
@@ -29,53 +34,78 @@ type FineTuneHyperparams struct {
 	PromptLossWeight float64 `json:"prompt_loss_weight"`
 }
 
-func (o *FineTuneHyperparams) GetBatchSize() int64 {
+func (o *Hyperparams) GetBatchSize() int64 {
 	if o == nil {
 		return 0
 	}
 	return o.BatchSize
 }
 
-func (o *FineTuneHyperparams) GetClassificationNClasses() *int64 {
+func (o *Hyperparams) GetClassificationNClasses() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.ClassificationNClasses
 }
 
-func (o *FineTuneHyperparams) GetClassificationPositiveClass() *string {
+func (o *Hyperparams) GetClassificationPositiveClass() *string {
 	if o == nil {
 		return nil
 	}
 	return o.ClassificationPositiveClass
 }
 
-func (o *FineTuneHyperparams) GetComputeClassificationMetrics() *bool {
+func (o *Hyperparams) GetComputeClassificationMetrics() *bool {
 	if o == nil {
 		return nil
 	}
 	return o.ComputeClassificationMetrics
 }
 
-func (o *FineTuneHyperparams) GetLearningRateMultiplier() float64 {
+func (o *Hyperparams) GetLearningRateMultiplier() float64 {
 	if o == nil {
 		return 0.0
 	}
 	return o.LearningRateMultiplier
 }
 
-func (o *FineTuneHyperparams) GetNEpochs() int64 {
+func (o *Hyperparams) GetNEpochs() int64 {
 	if o == nil {
 		return 0
 	}
 	return o.NEpochs
 }
 
-func (o *FineTuneHyperparams) GetPromptLossWeight() float64 {
+func (o *Hyperparams) GetPromptLossWeight() float64 {
 	if o == nil {
 		return 0.0
 	}
 	return o.PromptLossWeight
+}
+
+// FineTuneObject - The object type, which is always "fine-tune".
+type FineTuneObject string
+
+const (
+	FineTuneObjectFineTune FineTuneObject = "fine-tune"
+)
+
+func (e FineTuneObject) ToPointer() *FineTuneObject {
+	return &e
+}
+
+func (e *FineTuneObject) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "fine-tune":
+		*e = FineTuneObject(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for FineTuneObject: %v", v)
+	}
 }
 
 // FineTune - The `FineTune` object represents a legacy fine-tune job that has been created through the API.
@@ -89,13 +119,13 @@ type FineTune struct {
 	// The name of the fine-tuned model that is being created.
 	FineTunedModel *string `json:"fine_tuned_model"`
 	// The hyperparameters used for the fine-tuning job. See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/hyperparameters) for more details.
-	Hyperparams FineTuneHyperparams `json:"hyperparams"`
+	Hyperparams Hyperparams `json:"hyperparams"`
 	// The object identifier, which can be referenced in the API endpoints.
 	ID string `json:"id"`
 	// The base model that is being fine-tuned.
 	Model string `json:"model"`
 	// The object type, which is always "fine-tune".
-	Object string `json:"object"`
+	Object FineTuneObject `json:"object"`
 	// The organization that owns the fine-tuning job.
 	OrganizationID string `json:"organization_id"`
 	// The compiled results files for the fine-tuning job.
@@ -131,9 +161,9 @@ func (o *FineTune) GetFineTunedModel() *string {
 	return o.FineTunedModel
 }
 
-func (o *FineTune) GetHyperparams() FineTuneHyperparams {
+func (o *FineTune) GetHyperparams() Hyperparams {
 	if o == nil {
-		return FineTuneHyperparams{}
+		return Hyperparams{}
 	}
 	return o.Hyperparams
 }
@@ -152,9 +182,9 @@ func (o *FineTune) GetModel() string {
 	return o.Model
 }
 
-func (o *FineTune) GetObject() string {
+func (o *FineTune) GetObject() FineTuneObject {
 	if o == nil {
-		return ""
+		return FineTuneObject("")
 	}
 	return o.Object
 }

@@ -5,8 +5,8 @@ package openaigosdk
 import (
 	"context"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 	"net/http"
 	"time"
 )
@@ -63,28 +63,31 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 
 // Gpt - OpenAI API: The OpenAI REST API. Please see https://platform.openai.com/docs/api-reference for more details.
 type Gpt struct {
-	// Learn how to turn audio into text.
-	Audio *audio
+	// Build Assistants that can call models and use tools.
+	Assistants *Assistants
+	Assistant  *Assistant
+	// Learn how to turn audio into text or text into audio.
+	Audio *Audio
 	// Given a list of messages comprising a conversation, the model will return a response.
-	Chat *chat
+	Chat *Chat
 	// Given a prompt, the model will return one or more predicted completions, and can also return the probabilities of alternative tokens at each position.
-	Completions *completions
+	Completions *Completions
 	// Given a prompt and an instruction, the model will return an edited version of the prompt.
-	Edits *edits
+	Edits *Edits
 	// Get a vector representation of a given input that can be easily consumed by machine learning models and algorithms.
-	Embeddings *embeddings
-	// Files are used to upload documents that can be used with features like fine-tuning.
-	Files *files
+	Embeddings *Embeddings
+	// Files are used to upload documents that can be used with features like Assistants and Fine-tuning.
+	Files *Files
 	// Manage legacy fine-tuning jobs to tailor a model to your specific training data.
-	FineTunes *fineTunes
+	FineTunes *FineTunes
 	// Manage fine-tuning jobs to tailor a model to your specific training data.
-	FineTuning *fineTuning
+	FineTuning *FineTuning
 	// Given a prompt and/or an input image, the model will generate a new image.
-	Images *images
+	Images *Images
 	// List and describe the various models available in the API.
-	Models *models
+	Models *Models
 	// Given a input text, outputs if the model classifies it as violating OpenAI's content policy.
-	Moderations *moderations
+	Moderations *Moderations
 
 	sdkConfiguration sdkConfiguration
 }
@@ -154,9 +157,9 @@ func New(opts ...SDKOption) *Gpt {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2.0.0",
-			SDKVersion:        "2.0.0",
-			GenVersion:        "2.173.0",
-			UserAgent:         "speakeasy-sdk/go 2.0.0 2.173.0 2.0.0 github.com/speakeasy-sdks/openai-go-sdk",
+			SDKVersion:        "3.0.0",
+			GenVersion:        "2.181.1",
+			UserAgent:         "speakeasy-sdk/go 3.0.0 2.181.1 2.0.0 github.com/speakeasy-sdks/openai-go-sdk",
 		},
 	}
 	for _, opt := range opts {
@@ -174,6 +177,10 @@ func New(opts ...SDKOption) *Gpt {
 			sdk.sdkConfiguration.SecurityClient = sdk.sdkConfiguration.DefaultClient
 		}
 	}
+
+	sdk.Assistants = newAssistants(sdk.sdkConfiguration)
+
+	sdk.Assistant = newAssistant(sdk.sdkConfiguration)
 
 	sdk.Audio = newAudio(sdk.sdkConfiguration)
 

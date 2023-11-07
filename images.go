@@ -6,28 +6,28 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/sdkerrors"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 	"io"
 	"net/http"
 	"strings"
 )
 
-// images - Given a prompt and/or an input image, the model will generate a new image.
-type images struct {
+// Images - Given a prompt and/or an input image, the model will generate a new image.
+type Images struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newImages(sdkConfig sdkConfiguration) *images {
-	return &images{
+func newImages(sdkConfig sdkConfiguration) *Images {
+	return &Images{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // CreateImage - Creates an image given a prompt.
-func (s *images) CreateImage(ctx context.Context, request shared.CreateImageRequest) (*operations.CreateImageResponse, error) {
+func (s *Images) CreateImage(ctx context.Context, request shared.CreateImageRequest) (*operations.CreateImageResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/images/generations"
 
@@ -85,13 +85,17 @@ func (s *images) CreateImage(ctx context.Context, request shared.CreateImageRequ
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
 }
 
 // CreateImageEdit - Creates an edited or extended image given an original image and a prompt.
-func (s *images) CreateImageEdit(ctx context.Context, request shared.CreateImageEditRequest) (*operations.CreateImageEditResponse, error) {
+func (s *Images) CreateImageEdit(ctx context.Context, request shared.CreateImageEditRequest) (*operations.CreateImageEditResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/images/edits"
 
@@ -149,13 +153,17 @@ func (s *images) CreateImageEdit(ctx context.Context, request shared.CreateImage
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
 }
 
 // CreateImageVariation - Creates a variation of a given image.
-func (s *images) CreateImageVariation(ctx context.Context, request shared.CreateImageVariationRequest) (*operations.CreateImageVariationResponse, error) {
+func (s *Images) CreateImageVariation(ctx context.Context, request shared.CreateImageVariationRequest) (*operations.CreateImageVariationResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/images/variations"
 
@@ -213,6 +221,10 @@ func (s *images) CreateImageVariation(ctx context.Context, request shared.Create
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil

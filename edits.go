@@ -6,22 +6,22 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/sdkerrors"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 	"io"
 	"net/http"
 	"strings"
 )
 
-// edits - Given a prompt and an instruction, the model will return an edited version of the prompt.
-type edits struct {
+// Edits - Given a prompt and an instruction, the model will return an edited version of the prompt.
+type Edits struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newEdits(sdkConfig sdkConfiguration) *edits {
-	return &edits{
+func newEdits(sdkConfig sdkConfiguration) *Edits {
+	return &Edits{
 		sdkConfiguration: sdkConfig,
 	}
 }
@@ -29,7 +29,7 @@ func newEdits(sdkConfig sdkConfiguration) *edits {
 // CreateEdit - Creates a new edit for the provided input, instruction, and parameters.
 //
 // Deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
-func (s *edits) CreateEdit(ctx context.Context, request shared.CreateEditRequest) (*operations.CreateEditResponse, error) {
+func (s *Edits) CreateEdit(ctx context.Context, request shared.CreateEditRequest) (*operations.CreateEditResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/edits"
 
@@ -87,6 +87,10 @@ func (s *edits) CreateEdit(ctx context.Context, request shared.CreateEditRequest
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil

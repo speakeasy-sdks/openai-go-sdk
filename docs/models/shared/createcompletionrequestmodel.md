@@ -9,9 +9,9 @@
 createCompletionRequestModel := shared.CreateCreateCompletionRequestModelStr(string{/* values here */})
 ```
 
-### CreateCompletionRequestModel2
+### CreateCompletionRequest2
 
 ```go
-createCompletionRequestModel := shared.CreateCreateCompletionRequestModelCreateCompletionRequestModel2(shared.CreateCompletionRequestModel2{/* values here */})
+createCompletionRequestModel := shared.CreateCreateCompletionRequestModelCreateCompletionRequest2(shared.CreateCompletionRequest2{/* values here */})
 ```
 

@@ -1,14 +1,67 @@
 # Audio
-(*Audio*)
+(*.Audio*)
 
 ## Overview
 
-Learn how to turn audio into text.
+Learn how to turn audio into text or text into audio.
 
 ### Available Operations
 
+* [CreateSpeech](#createspeech) - Generates audio from the input text.
 * [CreateTranscription](#createtranscription) - Transcribes audio into the input language.
 * [CreateTranslation](#createtranslation) - Translates audio into English.
+
+## CreateSpeech
+
+Generates audio from the input text.
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	"log"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+)
+
+func main() {
+    s := openaigosdk.New(
+        openaigosdk.WithSecurity(""),
+    )
+
+    ctx := context.Background()
+    res, err := s.Audio.CreateSpeech(ctx, shared.CreateSpeechRequest{
+        Input: "string",
+        Model: shared.CreateCreateSpeechRequestModelCreateSpeechRequest2(
+        shared.CreateSpeechRequest2Tts1,
+        ),
+        Voice: shared.VoiceFable,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Stream != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
+| `request`                                                                | [shared.CreateSpeechRequest](../../models/shared/createspeechrequest.md) | :heavy_check_mark:                                                       | The request object to use for the request.                               |
+
+
+### Response
+
+**[*operations.CreateSpeechResponse](../../models/operations/createspeechresponse.md), error**
+
 
 ## CreateTranscription
 
@@ -22,8 +75,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -34,11 +87,11 @@ func main() {
     ctx := context.Background()
     res, err := s.Audio.CreateTranscription(ctx, shared.CreateTranscriptionRequest{
         File: shared.CreateTranscriptionRequestFile{
-            Content: []byte("\#BbTW'zX9"),
-            File: "string",
+            Content: []byte("0xe08fcc1Fd5"),
+            FileName: "buckinghamshire.gif",
         },
-        Model: shared.CreateCreateTranscriptionRequestModelCreateTranscriptionRequestModel2(
-        shared.CreateTranscriptionRequestModel2Whisper1,
+        Model: shared.CreateCreateTranscriptionRequestModelCreateTranscriptionRequest2(
+        shared.CreateTranscriptionRequest2Whisper1,
         ),
     })
     if err != nil {
@@ -76,8 +129,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -88,11 +141,11 @@ func main() {
     ctx := context.Background()
     res, err := s.Audio.CreateTranslation(ctx, shared.CreateTranslationRequest{
         File: shared.CreateTranslationRequestFile{
-            Content: []byte("M57UL;W3rx"),
-            File: "string",
+            Content: []byte("0xa45ca6c4DE"),
+            FileName: "reggae_toys_silver.gif",
         },
-        Model: shared.CreateCreateTranslationRequestModelCreateTranslationRequestModel2(
-        shared.CreateTranslationRequestModel2Whisper1,
+        Model: shared.CreateCreateTranslationRequestModelCreateTranslationRequest2(
+        shared.CreateTranslationRequest2Whisper1,
         ),
     })
     if err != nil {

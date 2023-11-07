@@ -9,9 +9,9 @@
 createTranslationRequestModel := shared.CreateCreateTranslationRequestModelStr(string{/* values here */})
 ```
 
-### CreateTranslationRequestModel2
+### CreateTranslationRequest2
 
 ```go
-createTranslationRequestModel := shared.CreateCreateTranslationRequestModelCreateTranslationRequestModel2(shared.CreateTranslationRequestModel2{/* values here */})
+createTranslationRequestModel := shared.CreateCreateTranslationRequestModelCreateTranslationRequest2(shared.CreateTranslationRequest2{/* values here */})
 ```
 

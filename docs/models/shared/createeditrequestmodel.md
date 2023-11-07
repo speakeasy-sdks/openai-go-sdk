@@ -9,9 +9,9 @@
 createEditRequestModel := shared.CreateCreateEditRequestModelStr(string{/* values here */})
 ```
 
-### CreateEditRequestModel2
+### CreateEditRequest2
 
 ```go
-createEditRequestModel := shared.CreateCreateEditRequestModelCreateEditRequestModel2(shared.CreateEditRequestModel2{/* values here */})
+createEditRequestModel := shared.CreateCreateEditRequestModelCreateEditRequest2(shared.CreateEditRequest2{/* values here */})
 ```
 

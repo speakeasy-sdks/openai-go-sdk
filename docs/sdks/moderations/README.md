@@ -1,5 +1,5 @@
 # Moderations
-(*Moderations*)
+(*.Moderations*)
 
 ## Overview
 
@@ -21,8 +21,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -56,8 +56,8 @@ func main() {
                     ".",
                 },
         ),
-        Model: shared.CreateCreateModerationRequestModelCreateModerationRequestModel2(
-        shared.CreateModerationRequestModel2TextModerationStable,
+        Model: shared.CreateCreateModerationRequestModelCreateModerationRequest2(
+        shared.CreateModerationRequest2TextModerationStable,
         ),
     })
     if err != nil {

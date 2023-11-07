@@ -9,9 +9,9 @@
 createFineTuningJobRequestModel := shared.CreateCreateFineTuningJobRequestModelStr(string{/* values here */})
 ```
 
-### CreateFineTuningJobRequestModel2
+### CreateFineTuningJobRequest2
 
 ```go
-createFineTuningJobRequestModel := shared.CreateCreateFineTuningJobRequestModelCreateFineTuningJobRequestModel2(shared.CreateFineTuningJobRequestModel2{/* values here */})
+createFineTuningJobRequestModel := shared.CreateCreateFineTuningJobRequestModelCreateFineTuningJobRequest2(shared.CreateFineTuningJobRequest2{/* values here */})
 ```
 

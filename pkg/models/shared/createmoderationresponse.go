@@ -2,8 +2,8 @@
 
 package shared
 
-// CreateModerationResponseResultsCategories - A list of the categories, and whether they are flagged or not.
-type CreateModerationResponseResultsCategories struct {
+// Categories - A list of the categories, and whether they are flagged or not.
+type Categories struct {
 	// Content that expresses, incites, or promotes harassing language towards any target.
 	Harassment bool `json:"harassment"`
 	// Harassment content that also includes violence or serious harm towards any target.
@@ -28,85 +28,85 @@ type CreateModerationResponseResultsCategories struct {
 	ViolenceGraphic bool `json:"violence/graphic"`
 }
 
-func (o *CreateModerationResponseResultsCategories) GetHarassment() bool {
+func (o *Categories) GetHarassment() bool {
 	if o == nil {
 		return false
 	}
 	return o.Harassment
 }
 
-func (o *CreateModerationResponseResultsCategories) GetHarassmentThreatening() bool {
+func (o *Categories) GetHarassmentThreatening() bool {
 	if o == nil {
 		return false
 	}
 	return o.HarassmentThreatening
 }
 
-func (o *CreateModerationResponseResultsCategories) GetHate() bool {
+func (o *Categories) GetHate() bool {
 	if o == nil {
 		return false
 	}
 	return o.Hate
 }
 
-func (o *CreateModerationResponseResultsCategories) GetHateThreatening() bool {
+func (o *Categories) GetHateThreatening() bool {
 	if o == nil {
 		return false
 	}
 	return o.HateThreatening
 }
 
-func (o *CreateModerationResponseResultsCategories) GetSelfHarm() bool {
+func (o *Categories) GetSelfHarm() bool {
 	if o == nil {
 		return false
 	}
 	return o.SelfHarm
 }
 
-func (o *CreateModerationResponseResultsCategories) GetSelfHarmInstructions() bool {
+func (o *Categories) GetSelfHarmInstructions() bool {
 	if o == nil {
 		return false
 	}
 	return o.SelfHarmInstructions
 }
 
-func (o *CreateModerationResponseResultsCategories) GetSelfHarmIntent() bool {
+func (o *Categories) GetSelfHarmIntent() bool {
 	if o == nil {
 		return false
 	}
 	return o.SelfHarmIntent
 }
 
-func (o *CreateModerationResponseResultsCategories) GetSexual() bool {
+func (o *Categories) GetSexual() bool {
 	if o == nil {
 		return false
 	}
 	return o.Sexual
 }
 
-func (o *CreateModerationResponseResultsCategories) GetSexualMinors() bool {
+func (o *Categories) GetSexualMinors() bool {
 	if o == nil {
 		return false
 	}
 	return o.SexualMinors
 }
 
-func (o *CreateModerationResponseResultsCategories) GetViolence() bool {
+func (o *Categories) GetViolence() bool {
 	if o == nil {
 		return false
 	}
 	return o.Violence
 }
 
-func (o *CreateModerationResponseResultsCategories) GetViolenceGraphic() bool {
+func (o *Categories) GetViolenceGraphic() bool {
 	if o == nil {
 		return false
 	}
 	return o.ViolenceGraphic
 }
 
-// CreateModerationResponseResultsCategoryScores - A list of the categories along with their scores as predicted by model.
-type CreateModerationResponseResultsCategoryScores struct {
+// CategoryScores - A list of the categories along with their scores as predicted by model.
+type CategoryScores struct {
 	// The score for the category 'harassment'.
 	Harassment float64 `json:"harassment"`
 	// The score for the category 'harassment/threatening'.
@@ -131,107 +131,107 @@ type CreateModerationResponseResultsCategoryScores struct {
 	ViolenceGraphic float64 `json:"violence/graphic"`
 }
 
-func (o *CreateModerationResponseResultsCategoryScores) GetHarassment() float64 {
+func (o *CategoryScores) GetHarassment() float64 {
 	if o == nil {
 		return 0.0
 	}
 	return o.Harassment
 }
 
-func (o *CreateModerationResponseResultsCategoryScores) GetHarassmentThreatening() float64 {
+func (o *CategoryScores) GetHarassmentThreatening() float64 {
 	if o == nil {
 		return 0.0
 	}
 	return o.HarassmentThreatening
 }
 
-func (o *CreateModerationResponseResultsCategoryScores) GetHate() float64 {
+func (o *CategoryScores) GetHate() float64 {
 	if o == nil {
 		return 0.0
 	}
 	return o.Hate
 }
 
-func (o *CreateModerationResponseResultsCategoryScores) GetHateThreatening() float64 {
+func (o *CategoryScores) GetHateThreatening() float64 {
 	if o == nil {
 		return 0.0
 	}
 	return o.HateThreatening
 }
 
-func (o *CreateModerationResponseResultsCategoryScores) GetSelfHarm() float64 {
+func (o *CategoryScores) GetSelfHarm() float64 {
 	if o == nil {
 		return 0.0
 	}
 	return o.SelfHarm
 }
 
-func (o *CreateModerationResponseResultsCategoryScores) GetSelfHarmInstructions() float64 {
+func (o *CategoryScores) GetSelfHarmInstructions() float64 {
 	if o == nil {
 		return 0.0
 	}
 	return o.SelfHarmInstructions
 }
 
-func (o *CreateModerationResponseResultsCategoryScores) GetSelfHarmIntent() float64 {
+func (o *CategoryScores) GetSelfHarmIntent() float64 {
 	if o == nil {
 		return 0.0
 	}
 	return o.SelfHarmIntent
 }
 
-func (o *CreateModerationResponseResultsCategoryScores) GetSexual() float64 {
+func (o *CategoryScores) GetSexual() float64 {
 	if o == nil {
 		return 0.0
 	}
 	return o.Sexual
 }
 
-func (o *CreateModerationResponseResultsCategoryScores) GetSexualMinors() float64 {
+func (o *CategoryScores) GetSexualMinors() float64 {
 	if o == nil {
 		return 0.0
 	}
 	return o.SexualMinors
 }
 
-func (o *CreateModerationResponseResultsCategoryScores) GetViolence() float64 {
+func (o *CategoryScores) GetViolence() float64 {
 	if o == nil {
 		return 0.0
 	}
 	return o.Violence
 }
 
-func (o *CreateModerationResponseResultsCategoryScores) GetViolenceGraphic() float64 {
+func (o *CategoryScores) GetViolenceGraphic() float64 {
 	if o == nil {
 		return 0.0
 	}
 	return o.ViolenceGraphic
 }
 
-type CreateModerationResponseResults struct {
+type Results struct {
 	// A list of the categories, and whether they are flagged or not.
-	Categories CreateModerationResponseResultsCategories `json:"categories"`
+	Categories Categories `json:"categories"`
 	// A list of the categories along with their scores as predicted by model.
-	CategoryScores CreateModerationResponseResultsCategoryScores `json:"category_scores"`
+	CategoryScores CategoryScores `json:"category_scores"`
 	// Whether the content violates [OpenAI's usage policies](/policies/usage-policies).
 	Flagged bool `json:"flagged"`
 }
 
-func (o *CreateModerationResponseResults) GetCategories() CreateModerationResponseResultsCategories {
+func (o *Results) GetCategories() Categories {
 	if o == nil {
-		return CreateModerationResponseResultsCategories{}
+		return Categories{}
 	}
 	return o.Categories
 }
 
-func (o *CreateModerationResponseResults) GetCategoryScores() CreateModerationResponseResultsCategoryScores {
+func (o *Results) GetCategoryScores() CategoryScores {
 	if o == nil {
-		return CreateModerationResponseResultsCategoryScores{}
+		return CategoryScores{}
 	}
 	return o.CategoryScores
 }
 
-func (o *CreateModerationResponseResults) GetFlagged() bool {
+func (o *Results) GetFlagged() bool {
 	if o == nil {
 		return false
 	}
@@ -245,7 +245,7 @@ type CreateModerationResponse struct {
 	// The model used to generate the moderation results.
 	Model string `json:"model"`
 	// A list of moderation objects.
-	Results []CreateModerationResponseResults `json:"results"`
+	Results []Results `json:"results"`
 }
 
 func (o *CreateModerationResponse) GetID() string {
@@ -262,9 +262,9 @@ func (o *CreateModerationResponse) GetModel() string {
 	return o.Model
 }
 
-func (o *CreateModerationResponse) GetResults() []CreateModerationResponseResults {
+func (o *CreateModerationResponse) GetResults() []Results {
 	if o == nil {
-		return []CreateModerationResponseResults{}
+		return []Results{}
 	}
 	return o.Results
 }

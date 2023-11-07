@@ -1,5 +1,5 @@
 # Models
-(*Models*)
+(*.Models*)
 
 ## Overview
 
@@ -23,8 +23,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -72,8 +72,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -117,8 +117,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {

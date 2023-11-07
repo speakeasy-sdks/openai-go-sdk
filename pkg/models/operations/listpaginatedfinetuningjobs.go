@@ -3,8 +3,8 @@
 package operations
 
 import (
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 	"net/http"
 )
 

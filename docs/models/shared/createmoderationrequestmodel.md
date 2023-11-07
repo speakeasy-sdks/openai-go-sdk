@@ -9,9 +9,9 @@
 createModerationRequestModel := shared.CreateCreateModerationRequestModelStr(string{/* values here */})
 ```
 
-### CreateModerationRequestModel2
+### CreateModerationRequest2
 
 ```go
-createModerationRequestModel := shared.CreateCreateModerationRequestModelCreateModerationRequestModel2(shared.CreateModerationRequestModel2{/* values here */})
+createModerationRequestModel := shared.CreateCreateModerationRequestModelCreateModerationRequest2(shared.CreateModerationRequest2{/* values here */})
 ```
 

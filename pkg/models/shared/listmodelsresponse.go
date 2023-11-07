@@ -2,9 +2,38 @@
 
 package shared
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type ListModelsResponseObject string
+
+const (
+	ListModelsResponseObjectList ListModelsResponseObject = "list"
+)
+
+func (e ListModelsResponseObject) ToPointer() *ListModelsResponseObject {
+	return &e
+}
+
+func (e *ListModelsResponseObject) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "list":
+		*e = ListModelsResponseObject(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ListModelsResponseObject: %v", v)
+	}
+}
+
 type ListModelsResponse struct {
-	Data   []Model `json:"data"`
-	Object string  `json:"object"`
+	Data   []Model                  `json:"data"`
+	Object ListModelsResponseObject `json:"object"`
 }
 
 func (o *ListModelsResponse) GetData() []Model {
@@ -14,9 +43,9 @@ func (o *ListModelsResponse) GetData() []Model {
 	return o.Data
 }
 
-func (o *ListModelsResponse) GetObject() string {
+func (o *ListModelsResponse) GetObject() ListModelsResponseObject {
 	if o == nil {
-		return ""
+		return ListModelsResponseObject("")
 	}
 	return o.Object
 }

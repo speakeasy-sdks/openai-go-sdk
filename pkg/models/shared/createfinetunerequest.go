@@ -6,89 +6,89 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 )
 
-// CreateFineTuneRequestHyperparametersNEpochs1 - The number of epochs to train the model for. An epoch refers to one
+// CreateFineTuneRequest1 - The number of epochs to train the model for. An epoch refers to one
 // full cycle through the training dataset.
-type CreateFineTuneRequestHyperparametersNEpochs1 string
+type CreateFineTuneRequest1 string
 
 const (
-	CreateFineTuneRequestHyperparametersNEpochs1Auto CreateFineTuneRequestHyperparametersNEpochs1 = "auto"
+	CreateFineTuneRequest1Auto CreateFineTuneRequest1 = "auto"
 )
 
-func (e CreateFineTuneRequestHyperparametersNEpochs1) ToPointer() *CreateFineTuneRequestHyperparametersNEpochs1 {
+func (e CreateFineTuneRequest1) ToPointer() *CreateFineTuneRequest1 {
 	return &e
 }
 
-func (e *CreateFineTuneRequestHyperparametersNEpochs1) UnmarshalJSON(data []byte) error {
+func (e *CreateFineTuneRequest1) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "auto":
-		*e = CreateFineTuneRequestHyperparametersNEpochs1(v)
+		*e = CreateFineTuneRequest1(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for CreateFineTuneRequestHyperparametersNEpochs1: %v", v)
+		return fmt.Errorf("invalid value for CreateFineTuneRequest1: %v", v)
 	}
 }
 
-type CreateFineTuneRequestHyperparametersNEpochsType string
+type NEpochsType string
 
 const (
-	CreateFineTuneRequestHyperparametersNEpochsTypeCreateFineTuneRequestHyperparametersNEpochs1 CreateFineTuneRequestHyperparametersNEpochsType = "CreateFineTuneRequest_hyperparameters_n_epochs_1"
-	CreateFineTuneRequestHyperparametersNEpochsTypeInteger                                      CreateFineTuneRequestHyperparametersNEpochsType = "integer"
+	NEpochsTypeCreateFineTuneRequest1 NEpochsType = "CreateFineTuneRequest_1"
+	NEpochsTypeInteger                NEpochsType = "integer"
 )
 
-type CreateFineTuneRequestHyperparametersNEpochs struct {
-	CreateFineTuneRequestHyperparametersNEpochs1 *CreateFineTuneRequestHyperparametersNEpochs1
-	Integer                                      *int64
+type NEpochs struct {
+	CreateFineTuneRequest1 *CreateFineTuneRequest1
+	Integer                *int64
 
-	Type CreateFineTuneRequestHyperparametersNEpochsType
+	Type NEpochsType
 }
 
-func CreateCreateFineTuneRequestHyperparametersNEpochsCreateFineTuneRequestHyperparametersNEpochs1(createFineTuneRequestHyperparametersNEpochs1 CreateFineTuneRequestHyperparametersNEpochs1) CreateFineTuneRequestHyperparametersNEpochs {
-	typ := CreateFineTuneRequestHyperparametersNEpochsTypeCreateFineTuneRequestHyperparametersNEpochs1
+func CreateNEpochsCreateFineTuneRequest1(createFineTuneRequest1 CreateFineTuneRequest1) NEpochs {
+	typ := NEpochsTypeCreateFineTuneRequest1
 
-	return CreateFineTuneRequestHyperparametersNEpochs{
-		CreateFineTuneRequestHyperparametersNEpochs1: &createFineTuneRequestHyperparametersNEpochs1,
-		Type: typ,
+	return NEpochs{
+		CreateFineTuneRequest1: &createFineTuneRequest1,
+		Type:                   typ,
 	}
 }
 
-func CreateCreateFineTuneRequestHyperparametersNEpochsInteger(integer int64) CreateFineTuneRequestHyperparametersNEpochs {
-	typ := CreateFineTuneRequestHyperparametersNEpochsTypeInteger
+func CreateNEpochsInteger(integer int64) NEpochs {
+	typ := NEpochsTypeInteger
 
-	return CreateFineTuneRequestHyperparametersNEpochs{
+	return NEpochs{
 		Integer: &integer,
 		Type:    typ,
 	}
 }
 
-func (u *CreateFineTuneRequestHyperparametersNEpochs) UnmarshalJSON(data []byte) error {
+func (u *NEpochs) UnmarshalJSON(data []byte) error {
 
-	createFineTuneRequestHyperparametersNEpochs1 := CreateFineTuneRequestHyperparametersNEpochs1("")
-	if err := utils.UnmarshalJSON(data, &createFineTuneRequestHyperparametersNEpochs1, "", true, true); err == nil {
-		u.CreateFineTuneRequestHyperparametersNEpochs1 = &createFineTuneRequestHyperparametersNEpochs1
-		u.Type = CreateFineTuneRequestHyperparametersNEpochsTypeCreateFineTuneRequestHyperparametersNEpochs1
+	createFineTuneRequest1 := CreateFineTuneRequest1("")
+	if err := utils.UnmarshalJSON(data, &createFineTuneRequest1, "", true, true); err == nil {
+		u.CreateFineTuneRequest1 = &createFineTuneRequest1
+		u.Type = NEpochsTypeCreateFineTuneRequest1
 		return nil
 	}
 
 	integer := int64(0)
 	if err := utils.UnmarshalJSON(data, &integer, "", true, true); err == nil {
 		u.Integer = &integer
-		u.Type = CreateFineTuneRequestHyperparametersNEpochsTypeInteger
+		u.Type = NEpochsTypeInteger
 		return nil
 	}
 
 	return errors.New("could not unmarshal into supported union types")
 }
 
-func (u CreateFineTuneRequestHyperparametersNEpochs) MarshalJSON() ([]byte, error) {
-	if u.CreateFineTuneRequestHyperparametersNEpochs1 != nil {
-		return utils.MarshalJSON(u.CreateFineTuneRequestHyperparametersNEpochs1, "", true)
+func (u NEpochs) MarshalJSON() ([]byte, error) {
+	if u.CreateFineTuneRequest1 != nil {
+		return utils.MarshalJSON(u.CreateFineTuneRequest1, "", true)
 	}
 
 	if u.Integer != nil {
@@ -98,39 +98,39 @@ func (u CreateFineTuneRequestHyperparametersNEpochs) MarshalJSON() ([]byte, erro
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-// CreateFineTuneRequestHyperparameters - The hyperparameters used for the fine-tuning job.
-type CreateFineTuneRequestHyperparameters struct {
+// Hyperparameters - The hyperparameters used for the fine-tuning job.
+type Hyperparameters struct {
 	// The number of epochs to train the model for. An epoch refers to one
 	// full cycle through the training dataset.
 	//
-	NEpochs *CreateFineTuneRequestHyperparametersNEpochs `json:"n_epochs,omitempty"`
+	NEpochs *NEpochs `json:"n_epochs,omitempty"`
 }
 
-func (o *CreateFineTuneRequestHyperparameters) GetNEpochs() *CreateFineTuneRequestHyperparametersNEpochs {
+func (o *Hyperparameters) GetNEpochs() *NEpochs {
 	if o == nil {
 		return nil
 	}
 	return o.NEpochs
 }
 
-// CreateFineTuneRequestModel2 - The name of the base model to fine-tune. You can select one of "ada",
+// CreateFineTuneRequest2 - The name of the base model to fine-tune. You can select one of "ada",
 // "babbage", "curie", "davinci", or a fine-tuned model created after 2022-04-21 and before 2023-08-22.
 // To learn more about these models, see the
 // [Models](/docs/models) documentation.
-type CreateFineTuneRequestModel2 string
+type CreateFineTuneRequest2 string
 
 const (
-	CreateFineTuneRequestModel2Ada     CreateFineTuneRequestModel2 = "ada"
-	CreateFineTuneRequestModel2Babbage CreateFineTuneRequestModel2 = "babbage"
-	CreateFineTuneRequestModel2Curie   CreateFineTuneRequestModel2 = "curie"
-	CreateFineTuneRequestModel2Davinci CreateFineTuneRequestModel2 = "davinci"
+	CreateFineTuneRequest2Ada     CreateFineTuneRequest2 = "ada"
+	CreateFineTuneRequest2Babbage CreateFineTuneRequest2 = "babbage"
+	CreateFineTuneRequest2Curie   CreateFineTuneRequest2 = "curie"
+	CreateFineTuneRequest2Davinci CreateFineTuneRequest2 = "davinci"
 )
 
-func (e CreateFineTuneRequestModel2) ToPointer() *CreateFineTuneRequestModel2 {
+func (e CreateFineTuneRequest2) ToPointer() *CreateFineTuneRequest2 {
 	return &e
 }
 
-func (e *CreateFineTuneRequestModel2) UnmarshalJSON(data []byte) error {
+func (e *CreateFineTuneRequest2) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -143,23 +143,23 @@ func (e *CreateFineTuneRequestModel2) UnmarshalJSON(data []byte) error {
 	case "curie":
 		fallthrough
 	case "davinci":
-		*e = CreateFineTuneRequestModel2(v)
+		*e = CreateFineTuneRequest2(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for CreateFineTuneRequestModel2: %v", v)
+		return fmt.Errorf("invalid value for CreateFineTuneRequest2: %v", v)
 	}
 }
 
 type CreateFineTuneRequestModelType string
 
 const (
-	CreateFineTuneRequestModelTypeStr                         CreateFineTuneRequestModelType = "str"
-	CreateFineTuneRequestModelTypeCreateFineTuneRequestModel2 CreateFineTuneRequestModelType = "CreateFineTuneRequest_model_2"
+	CreateFineTuneRequestModelTypeStr                    CreateFineTuneRequestModelType = "str"
+	CreateFineTuneRequestModelTypeCreateFineTuneRequest2 CreateFineTuneRequestModelType = "CreateFineTuneRequest_2"
 )
 
 type CreateFineTuneRequestModel struct {
-	Str                         *string
-	CreateFineTuneRequestModel2 *CreateFineTuneRequestModel2
+	Str                    *string
+	CreateFineTuneRequest2 *CreateFineTuneRequest2
 
 	Type CreateFineTuneRequestModelType
 }
@@ -173,12 +173,12 @@ func CreateCreateFineTuneRequestModelStr(str string) CreateFineTuneRequestModel 
 	}
 }
 
-func CreateCreateFineTuneRequestModelCreateFineTuneRequestModel2(createFineTuneRequestModel2 CreateFineTuneRequestModel2) CreateFineTuneRequestModel {
-	typ := CreateFineTuneRequestModelTypeCreateFineTuneRequestModel2
+func CreateCreateFineTuneRequestModelCreateFineTuneRequest2(createFineTuneRequest2 CreateFineTuneRequest2) CreateFineTuneRequestModel {
+	typ := CreateFineTuneRequestModelTypeCreateFineTuneRequest2
 
 	return CreateFineTuneRequestModel{
-		CreateFineTuneRequestModel2: &createFineTuneRequestModel2,
-		Type:                        typ,
+		CreateFineTuneRequest2: &createFineTuneRequest2,
+		Type:                   typ,
 	}
 }
 
@@ -191,10 +191,10 @@ func (u *CreateFineTuneRequestModel) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	createFineTuneRequestModel2 := CreateFineTuneRequestModel2("")
-	if err := utils.UnmarshalJSON(data, &createFineTuneRequestModel2, "", true, true); err == nil {
-		u.CreateFineTuneRequestModel2 = &createFineTuneRequestModel2
-		u.Type = CreateFineTuneRequestModelTypeCreateFineTuneRequestModel2
+	createFineTuneRequest2 := CreateFineTuneRequest2("")
+	if err := utils.UnmarshalJSON(data, &createFineTuneRequest2, "", true, true); err == nil {
+		u.CreateFineTuneRequest2 = &createFineTuneRequest2
+		u.Type = CreateFineTuneRequestModelTypeCreateFineTuneRequest2
 		return nil
 	}
 
@@ -206,8 +206,8 @@ func (u CreateFineTuneRequestModel) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
 
-	if u.CreateFineTuneRequestModel2 != nil {
-		return utils.MarshalJSON(u.CreateFineTuneRequestModel2, "", true)
+	if u.CreateFineTuneRequest2 != nil {
+		return utils.MarshalJSON(u.CreateFineTuneRequest2, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
@@ -255,7 +255,7 @@ type CreateFineTuneRequest struct {
 	//
 	ComputeClassificationMetrics *bool `default:"false" json:"compute_classification_metrics"`
 	// The hyperparameters used for the fine-tuning job.
-	Hyperparameters *CreateFineTuneRequestHyperparameters `json:"hyperparameters,omitempty"`
+	Hyperparameters *Hyperparameters `json:"hyperparameters,omitempty"`
 	// The learning rate multiplier to use for training.
 	// The fine-tuning learning rate is the original learning rate used for
 	// pretraining multiplied by this value.
@@ -361,7 +361,7 @@ func (o *CreateFineTuneRequest) GetComputeClassificationMetrics() *bool {
 	return o.ComputeClassificationMetrics
 }
 
-func (o *CreateFineTuneRequest) GetHyperparameters() *CreateFineTuneRequestHyperparameters {
+func (o *CreateFineTuneRequest) GetHyperparameters() *Hyperparameters {
 	if o == nil {
 		return nil
 	}

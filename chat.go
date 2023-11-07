@@ -6,28 +6,28 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/sdkerrors"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 	"io"
 	"net/http"
 	"strings"
 )
 
-// chat - Given a list of messages comprising a conversation, the model will return a response.
-type chat struct {
+// Chat - Given a list of messages comprising a conversation, the model will return a response.
+type Chat struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newChat(sdkConfig sdkConfiguration) *chat {
-	return &chat{
+func newChat(sdkConfig sdkConfiguration) *Chat {
+	return &Chat{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // CreateChatCompletion - Creates a model response for the given chat conversation.
-func (s *chat) CreateChatCompletion(ctx context.Context, request shared.CreateChatCompletionRequest) (*operations.CreateChatCompletionResponse, error) {
+func (s *Chat) CreateChatCompletion(ctx context.Context, request shared.CreateChatCompletionRequest) (*operations.CreateChatCompletionResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/chat/completions"
 
@@ -85,6 +85,10 @@ func (s *chat) CreateChatCompletion(ctx context.Context, request shared.CreateCh
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil

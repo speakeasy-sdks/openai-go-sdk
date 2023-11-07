@@ -7,19 +7,19 @@ import (
 	"fmt"
 )
 
-type FineTuningJobEventLevel string
+type Level string
 
 const (
-	FineTuningJobEventLevelInfo  FineTuningJobEventLevel = "info"
-	FineTuningJobEventLevelWarn  FineTuningJobEventLevel = "warn"
-	FineTuningJobEventLevelError FineTuningJobEventLevel = "error"
+	LevelInfo  Level = "info"
+	LevelWarn  Level = "warn"
+	LevelError Level = "error"
 )
 
-func (e FineTuningJobEventLevel) ToPointer() *FineTuningJobEventLevel {
+func (e Level) ToPointer() *Level {
 	return &e
 }
 
-func (e *FineTuningJobEventLevel) UnmarshalJSON(data []byte) error {
+func (e *Level) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -30,20 +30,44 @@ func (e *FineTuningJobEventLevel) UnmarshalJSON(data []byte) error {
 	case "warn":
 		fallthrough
 	case "error":
-		*e = FineTuningJobEventLevel(v)
+		*e = Level(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for FineTuningJobEventLevel: %v", v)
+		return fmt.Errorf("invalid value for Level: %v", v)
+	}
+}
+
+type FineTuningJobEventObject string
+
+const (
+	FineTuningJobEventObjectFineTuningJobEvent FineTuningJobEventObject = "fine_tuning.job.event"
+)
+
+func (e FineTuningJobEventObject) ToPointer() *FineTuningJobEventObject {
+	return &e
+}
+
+func (e *FineTuningJobEventObject) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "fine_tuning.job.event":
+		*e = FineTuningJobEventObject(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for FineTuningJobEventObject: %v", v)
 	}
 }
 
 // FineTuningJobEvent - Fine-tuning job event object
 type FineTuningJobEvent struct {
-	CreatedAt int64                   `json:"created_at"`
-	ID        string                  `json:"id"`
-	Level     FineTuningJobEventLevel `json:"level"`
-	Message   string                  `json:"message"`
-	Object    string                  `json:"object"`
+	CreatedAt int64                    `json:"created_at"`
+	ID        string                   `json:"id"`
+	Level     Level                    `json:"level"`
+	Message   string                   `json:"message"`
+	Object    FineTuningJobEventObject `json:"object"`
 }
 
 func (o *FineTuningJobEvent) GetCreatedAt() int64 {
@@ -60,9 +84,9 @@ func (o *FineTuningJobEvent) GetID() string {
 	return o.ID
 }
 
-func (o *FineTuningJobEvent) GetLevel() FineTuningJobEventLevel {
+func (o *FineTuningJobEvent) GetLevel() Level {
 	if o == nil {
-		return FineTuningJobEventLevel("")
+		return Level("")
 	}
 	return o.Level
 }
@@ -74,9 +98,9 @@ func (o *FineTuningJobEvent) GetMessage() string {
 	return o.Message
 }
 
-func (o *FineTuningJobEvent) GetObject() string {
+func (o *FineTuningJobEvent) GetObject() FineTuningJobEventObject {
 	if o == nil {
-		return ""
+		return FineTuningJobEventObject("")
 	}
 	return o.Object
 }

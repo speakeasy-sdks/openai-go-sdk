@@ -1,5 +1,5 @@
 # Completions
-(*Completions*)
+(*.Completions*)
 
 ## Overview
 
@@ -21,8 +21,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -40,7 +40,7 @@ func main() {
         "string",
         ),
         N: openaigosdk.Int64(1),
-        Prompt: shared.CreateCreateCompletionRequestPromptStr(
+        Prompt: shared.CreatePromptStr(
         "This is a test.",
         ),
         Stop: shared.CreateCreateCompletionRequestStopStr(

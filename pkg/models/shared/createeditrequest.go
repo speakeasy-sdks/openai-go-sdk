@@ -6,22 +6,22 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 )
 
-// CreateEditRequestModel2 - ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001` model with this endpoint.
-type CreateEditRequestModel2 string
+// CreateEditRequest2 - ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001` model with this endpoint.
+type CreateEditRequest2 string
 
 const (
-	CreateEditRequestModel2TextDavinciEdit001 CreateEditRequestModel2 = "text-davinci-edit-001"
-	CreateEditRequestModel2CodeDavinciEdit001 CreateEditRequestModel2 = "code-davinci-edit-001"
+	CreateEditRequest2TextDavinciEdit001 CreateEditRequest2 = "text-davinci-edit-001"
+	CreateEditRequest2CodeDavinciEdit001 CreateEditRequest2 = "code-davinci-edit-001"
 )
 
-func (e CreateEditRequestModel2) ToPointer() *CreateEditRequestModel2 {
+func (e CreateEditRequest2) ToPointer() *CreateEditRequest2 {
 	return &e
 }
 
-func (e *CreateEditRequestModel2) UnmarshalJSON(data []byte) error {
+func (e *CreateEditRequest2) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -30,23 +30,23 @@ func (e *CreateEditRequestModel2) UnmarshalJSON(data []byte) error {
 	case "text-davinci-edit-001":
 		fallthrough
 	case "code-davinci-edit-001":
-		*e = CreateEditRequestModel2(v)
+		*e = CreateEditRequest2(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for CreateEditRequestModel2: %v", v)
+		return fmt.Errorf("invalid value for CreateEditRequest2: %v", v)
 	}
 }
 
 type CreateEditRequestModelType string
 
 const (
-	CreateEditRequestModelTypeStr                     CreateEditRequestModelType = "str"
-	CreateEditRequestModelTypeCreateEditRequestModel2 CreateEditRequestModelType = "CreateEditRequest_model_2"
+	CreateEditRequestModelTypeStr                CreateEditRequestModelType = "str"
+	CreateEditRequestModelTypeCreateEditRequest2 CreateEditRequestModelType = "CreateEditRequest_2"
 )
 
 type CreateEditRequestModel struct {
-	Str                     *string
-	CreateEditRequestModel2 *CreateEditRequestModel2
+	Str                *string
+	CreateEditRequest2 *CreateEditRequest2
 
 	Type CreateEditRequestModelType
 }
@@ -60,12 +60,12 @@ func CreateCreateEditRequestModelStr(str string) CreateEditRequestModel {
 	}
 }
 
-func CreateCreateEditRequestModelCreateEditRequestModel2(createEditRequestModel2 CreateEditRequestModel2) CreateEditRequestModel {
-	typ := CreateEditRequestModelTypeCreateEditRequestModel2
+func CreateCreateEditRequestModelCreateEditRequest2(createEditRequest2 CreateEditRequest2) CreateEditRequestModel {
+	typ := CreateEditRequestModelTypeCreateEditRequest2
 
 	return CreateEditRequestModel{
-		CreateEditRequestModel2: &createEditRequestModel2,
-		Type:                    typ,
+		CreateEditRequest2: &createEditRequest2,
+		Type:               typ,
 	}
 }
 
@@ -78,10 +78,10 @@ func (u *CreateEditRequestModel) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	createEditRequestModel2 := CreateEditRequestModel2("")
-	if err := utils.UnmarshalJSON(data, &createEditRequestModel2, "", true, true); err == nil {
-		u.CreateEditRequestModel2 = &createEditRequestModel2
-		u.Type = CreateEditRequestModelTypeCreateEditRequestModel2
+	createEditRequest2 := CreateEditRequest2("")
+	if err := utils.UnmarshalJSON(data, &createEditRequest2, "", true, true); err == nil {
+		u.CreateEditRequest2 = &createEditRequest2
+		u.Type = CreateEditRequestModelTypeCreateEditRequest2
 		return nil
 	}
 
@@ -93,8 +93,8 @@ func (u CreateEditRequestModel) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
 
-	if u.CreateEditRequestModel2 != nil {
-		return utils.MarshalJSON(u.CreateEditRequestModel2, "", true)
+	if u.CreateEditRequest2 != nil {
+		return utils.MarshalJSON(u.CreateEditRequest2, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")

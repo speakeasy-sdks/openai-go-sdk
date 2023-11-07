@@ -9,9 +9,9 @@
 createTranscriptionRequestModel := shared.CreateCreateTranscriptionRequestModelStr(string{/* values here */})
 ```
 
-### CreateTranscriptionRequestModel2
+### CreateTranscriptionRequest2
 
 ```go
-createTranscriptionRequestModel := shared.CreateCreateTranscriptionRequestModelCreateTranscriptionRequestModel2(shared.CreateTranscriptionRequestModel2{/* values here */})
+createTranscriptionRequestModel := shared.CreateCreateTranscriptionRequestModelCreateTranscriptionRequest2(shared.CreateTranscriptionRequest2{/* values here */})
 ```
 

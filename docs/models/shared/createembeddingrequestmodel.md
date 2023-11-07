@@ -9,9 +9,9 @@
 createEmbeddingRequestModel := shared.CreateCreateEmbeddingRequestModelStr(string{/* values here */})
 ```
 
-### CreateEmbeddingRequestModel2
+### CreateEmbeddingRequest2
 
 ```go
-createEmbeddingRequestModel := shared.CreateCreateEmbeddingRequestModelCreateEmbeddingRequestModel2(shared.CreateEmbeddingRequestModel2{/* values here */})
+createEmbeddingRequestModel := shared.CreateCreateEmbeddingRequestModelCreateEmbeddingRequest2(shared.CreateEmbeddingRequest2{/* values here */})
 ```
 

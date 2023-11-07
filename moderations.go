@@ -6,28 +6,28 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/sdkerrors"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 	"io"
 	"net/http"
 	"strings"
 )
 
-// moderations - Given a input text, outputs if the model classifies it as violating OpenAI's content policy.
-type moderations struct {
+// Moderations - Given a input text, outputs if the model classifies it as violating OpenAI's content policy.
+type Moderations struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newModerations(sdkConfig sdkConfiguration) *moderations {
-	return &moderations{
+func newModerations(sdkConfig sdkConfiguration) *Moderations {
+	return &Moderations{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // CreateModeration - Classifies if text violates OpenAI's Content Policy
-func (s *moderations) CreateModeration(ctx context.Context, request shared.CreateModerationRequest) (*operations.CreateModerationResponse, error) {
+func (s *Moderations) CreateModeration(ctx context.Context, request shared.CreateModerationRequest) (*operations.CreateModerationResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/moderations"
 
@@ -85,6 +85,10 @@ func (s *moderations) CreateModeration(ctx context.Context, request shared.Creat
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil

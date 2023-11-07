@@ -6,28 +6,28 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/sdkerrors"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 	"io"
 	"net/http"
 	"strings"
 )
 
-// models - List and describe the various models available in the API.
-type models struct {
+// Models - List and describe the various models available in the API.
+type Models struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newModels(sdkConfig sdkConfiguration) *models {
-	return &models{
+func newModels(sdkConfig sdkConfiguration) *Models {
+	return &Models{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // DeleteModel - Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.
-func (s *models) DeleteModel(ctx context.Context, model string) (*operations.DeleteModelResponse, error) {
+func (s *Models) DeleteModel(ctx context.Context, model string) (*operations.DeleteModelResponse, error) {
 	request := operations.DeleteModelRequest{
 		Model: model,
 	}
@@ -82,13 +82,17 @@ func (s *models) DeleteModel(ctx context.Context, model string) (*operations.Del
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
 }
 
 // ListModels - Lists the currently available models, and provides basic information about each one such as the owner and availability.
-func (s *models) ListModels(ctx context.Context) (*operations.ListModelsResponse, error) {
+func (s *Models) ListModels(ctx context.Context) (*operations.ListModelsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/models"
 
@@ -136,13 +140,17 @@ func (s *models) ListModels(ctx context.Context) (*operations.ListModelsResponse
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
 }
 
 // RetrieveModel - Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
-func (s *models) RetrieveModel(ctx context.Context, model string) (*operations.RetrieveModelResponse, error) {
+func (s *Models) RetrieveModel(ctx context.Context, model string) (*operations.RetrieveModelResponse, error) {
 	request := operations.RetrieveModelRequest{
 		Model: model,
 	}
@@ -197,6 +205,10 @@ func (s *models) RetrieveModel(ctx context.Context, model string) (*operations.R
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil

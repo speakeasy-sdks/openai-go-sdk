@@ -1,5 +1,5 @@
 # Images
-(*Images*)
+(*.Images*)
 
 ## Overview
 
@@ -23,8 +23,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -34,10 +34,15 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Images.CreateImage(ctx, shared.CreateImageRequest{
+        Model: shared.CreateCreateImageRequestModelCreateImageRequest2(
+        shared.CreateImageRequest2DallE3,
+        ),
         N: openaigosdk.Int64(1),
         Prompt: "A cute baby sea otter",
+        Quality: shared.QualityStandard.ToPointer(),
         ResponseFormat: shared.CreateImageRequestResponseFormatURL.ToPointer(),
         Size: shared.CreateImageRequestSizeOneThousandAndTwentyFourx1024.ToPointer(),
+        Style: shared.StyleVivid.ToPointer(),
         User: openaigosdk.String("user-1234"),
     })
     if err != nil {
@@ -75,8 +80,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -87,17 +92,20 @@ func main() {
     ctx := context.Background()
     res, err := s.Images.CreateImageEdit(ctx, shared.CreateImageEditRequest{
         Image: shared.CreateImageEditRequestImage{
-            Content: []byte("0]/(|3W_T9"),
-            Image: "https://loremflickr.com/640/480",
+            Content: []byte("0x3e31F4cec5"),
+            FileName: "facilitator_gosh_hatchback.mpe",
         },
-        Mask: &shared.CreateImageEditRequestMask{
-            Content: []byte("`^YjrpxopK"),
-            Mask: "string",
+        Mask: &shared.Mask{
+            Content: []byte("0xFC5456e4eC"),
+            FileName: "electric_cambridgeshire.jpeg",
         },
+        Model: shared.CreateCreateImageEditRequestModelCreateImageEditRequest2(
+        shared.CreateImageEditRequest2DallE2,
+        ),
         N: openaigosdk.Int64(1),
         Prompt: "A cute baby sea otter wearing a beret",
         ResponseFormat: shared.CreateImageEditRequestResponseFormatURL.ToPointer(),
-        Size: shared.CreateImageEditRequestSizeOneThousandAndTwentyFourx1024.ToPointer(),
+        Size: shared.SizeOneThousandAndTwentyFourx1024.ToPointer(),
         User: openaigosdk.String("user-1234"),
     })
     if err != nil {
@@ -135,8 +143,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -147,9 +155,12 @@ func main() {
     ctx := context.Background()
     res, err := s.Images.CreateImageVariation(ctx, shared.CreateImageVariationRequest{
         Image: shared.CreateImageVariationRequestImage{
-            Content: []byte("`YY7PCrWuK"),
-            Image: "https://loremflickr.com/640/480",
+            Content: []byte("0xfdd5b8DcDa"),
+            FileName: "fantastic.gif",
         },
+        Model: shared.CreateCreateImageVariationRequestModelCreateImageVariationRequest2(
+        shared.CreateImageVariationRequest2DallE2,
+        ),
         N: openaigosdk.Int64(1),
         ResponseFormat: shared.CreateImageVariationRequestResponseFormatURL.ToPointer(),
         Size: shared.CreateImageVariationRequestSizeOneThousandAndTwentyFourx1024.ToPointer(),

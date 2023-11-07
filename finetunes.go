@@ -6,22 +6,22 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/sdkerrors"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 	"io"
 	"net/http"
 	"strings"
 )
 
-// fineTunes - Manage legacy fine-tuning jobs to tailor a model to your specific training data.
-type fineTunes struct {
+// FineTunes - Manage legacy fine-tuning jobs to tailor a model to your specific training data.
+type FineTunes struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newFineTunes(sdkConfig sdkConfiguration) *fineTunes {
-	return &fineTunes{
+func newFineTunes(sdkConfig sdkConfiguration) *FineTunes {
+	return &FineTunes{
 		sdkConfiguration: sdkConfig,
 	}
 }
@@ -29,7 +29,7 @@ func newFineTunes(sdkConfig sdkConfiguration) *fineTunes {
 // CancelFineTune - Immediately cancel a fine-tune job.
 //
 // Deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
-func (s *fineTunes) CancelFineTune(ctx context.Context, fineTuneID string) (*operations.CancelFineTuneResponse, error) {
+func (s *FineTunes) CancelFineTune(ctx context.Context, fineTuneID string) (*operations.CancelFineTuneResponse, error) {
 	request := operations.CancelFineTuneRequest{
 		FineTuneID: fineTuneID,
 	}
@@ -84,6 +84,10 @@ func (s *fineTunes) CancelFineTune(ctx context.Context, fineTuneID string) (*ope
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
@@ -96,7 +100,7 @@ func (s *fineTunes) CancelFineTune(ctx context.Context, fineTuneID string) (*ope
 // [Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)
 //
 // Deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
-func (s *fineTunes) CreateFineTune(ctx context.Context, request shared.CreateFineTuneRequest) (*operations.CreateFineTuneResponse, error) {
+func (s *FineTunes) CreateFineTune(ctx context.Context, request shared.CreateFineTuneRequest) (*operations.CreateFineTuneResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/fine-tunes"
 
@@ -154,6 +158,10 @@ func (s *fineTunes) CreateFineTune(ctx context.Context, request shared.CreateFin
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
@@ -162,7 +170,7 @@ func (s *fineTunes) CreateFineTune(ctx context.Context, request shared.CreateFin
 // ListFineTuneEvents - Get fine-grained status updates for a fine-tune job.
 //
 // Deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
-func (s *fineTunes) ListFineTuneEvents(ctx context.Context, fineTuneID string, stream *bool) (*operations.ListFineTuneEventsResponse, error) {
+func (s *FineTunes) ListFineTuneEvents(ctx context.Context, fineTuneID string, stream *bool) (*operations.ListFineTuneEventsResponse, error) {
 	request := operations.ListFineTuneEventsRequest{
 		FineTuneID: fineTuneID,
 		Stream:     stream,
@@ -222,6 +230,10 @@ func (s *fineTunes) ListFineTuneEvents(ctx context.Context, fineTuneID string, s
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
@@ -230,7 +242,7 @@ func (s *fineTunes) ListFineTuneEvents(ctx context.Context, fineTuneID string, s
 // ListFineTunes - List your organization's fine-tuning jobs
 //
 // Deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
-func (s *fineTunes) ListFineTunes(ctx context.Context) (*operations.ListFineTunesResponse, error) {
+func (s *FineTunes) ListFineTunes(ctx context.Context) (*operations.ListFineTunesResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/fine-tunes"
 
@@ -278,6 +290,10 @@ func (s *fineTunes) ListFineTunes(ctx context.Context) (*operations.ListFineTune
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
@@ -288,7 +304,7 @@ func (s *fineTunes) ListFineTunes(ctx context.Context) (*operations.ListFineTune
 // [Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)
 //
 // Deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
-func (s *fineTunes) RetrieveFineTune(ctx context.Context, fineTuneID string) (*operations.RetrieveFineTuneResponse, error) {
+func (s *FineTunes) RetrieveFineTune(ctx context.Context, fineTuneID string) (*operations.RetrieveFineTuneResponse, error) {
 	request := operations.RetrieveFineTuneRequest{
 		FineTuneID: fineTuneID,
 	}
@@ -343,6 +359,10 @@ func (s *fineTunes) RetrieveFineTune(ctx context.Context, fineTuneID string) (*o
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil

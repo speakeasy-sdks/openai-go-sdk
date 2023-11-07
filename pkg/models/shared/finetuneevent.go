@@ -2,14 +2,43 @@
 
 package shared
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type FineTuneEventObject string
+
+const (
+	FineTuneEventObjectFineTuneEvent FineTuneEventObject = "fine-tune-event"
+)
+
+func (e FineTuneEventObject) ToPointer() *FineTuneEventObject {
+	return &e
+}
+
+func (e *FineTuneEventObject) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "fine-tune-event":
+		*e = FineTuneEventObject(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for FineTuneEventObject: %v", v)
+	}
+}
+
 // FineTuneEvent - Fine-tune event object
 //
 // Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
 type FineTuneEvent struct {
-	CreatedAt int64  `json:"created_at"`
-	Level     string `json:"level"`
-	Message   string `json:"message"`
-	Object    string `json:"object"`
+	CreatedAt int64               `json:"created_at"`
+	Level     string              `json:"level"`
+	Message   string              `json:"message"`
+	Object    FineTuneEventObject `json:"object"`
 }
 
 func (o *FineTuneEvent) GetCreatedAt() int64 {
@@ -33,9 +62,9 @@ func (o *FineTuneEvent) GetMessage() string {
 	return o.Message
 }
 
-func (o *FineTuneEvent) GetObject() string {
+func (o *FineTuneEvent) GetObject() FineTuneEventObject {
 	if o == nil {
-		return ""
+		return FineTuneEventObject("")
 	}
 	return o.Object
 }

@@ -2,9 +2,38 @@
 
 package shared
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type ListFineTuningJobEventsResponseObject string
+
+const (
+	ListFineTuningJobEventsResponseObjectList ListFineTuningJobEventsResponseObject = "list"
+)
+
+func (e ListFineTuningJobEventsResponseObject) ToPointer() *ListFineTuningJobEventsResponseObject {
+	return &e
+}
+
+func (e *ListFineTuningJobEventsResponseObject) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "list":
+		*e = ListFineTuningJobEventsResponseObject(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ListFineTuningJobEventsResponseObject: %v", v)
+	}
+}
+
 type ListFineTuningJobEventsResponse struct {
-	Data   []FineTuningJobEvent `json:"data"`
-	Object string               `json:"object"`
+	Data   []FineTuningJobEvent                  `json:"data"`
+	Object ListFineTuningJobEventsResponseObject `json:"object"`
 }
 
 func (o *ListFineTuningJobEventsResponse) GetData() []FineTuningJobEvent {
@@ -14,9 +43,9 @@ func (o *ListFineTuningJobEventsResponse) GetData() []FineTuningJobEvent {
 	return o.Data
 }
 
-func (o *ListFineTuningJobEventsResponse) GetObject() string {
+func (o *ListFineTuningJobEventsResponse) GetObject() ListFineTuningJobEventsResponseObject {
 	if o == nil {
-		return ""
+		return ListFineTuningJobEventsResponseObject("")
 	}
 	return o.Object
 }

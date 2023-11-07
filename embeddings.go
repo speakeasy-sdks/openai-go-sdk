@@ -6,28 +6,28 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/sdkerrors"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 	"io"
 	"net/http"
 	"strings"
 )
 
-// embeddings - Get a vector representation of a given input that can be easily consumed by machine learning models and algorithms.
-type embeddings struct {
+// Embeddings - Get a vector representation of a given input that can be easily consumed by machine learning models and algorithms.
+type Embeddings struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newEmbeddings(sdkConfig sdkConfiguration) *embeddings {
-	return &embeddings{
+func newEmbeddings(sdkConfig sdkConfiguration) *Embeddings {
+	return &Embeddings{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // CreateEmbedding - Creates an embedding vector representing the input text.
-func (s *embeddings) CreateEmbedding(ctx context.Context, request shared.CreateEmbeddingRequest) (*operations.CreateEmbeddingResponse, error) {
+func (s *Embeddings) CreateEmbedding(ctx context.Context, request shared.CreateEmbeddingRequest) (*operations.CreateEmbeddingResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/embeddings"
 
@@ -85,6 +85,10 @@ func (s *embeddings) CreateEmbedding(ctx context.Context, request shared.CreateE
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil

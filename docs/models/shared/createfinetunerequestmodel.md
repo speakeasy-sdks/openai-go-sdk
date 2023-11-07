@@ -9,9 +9,9 @@
 createFineTuneRequestModel := shared.CreateCreateFineTuneRequestModelStr(string{/* values here */})
 ```
 
-### CreateFineTuneRequestModel2
+### CreateFineTuneRequest2
 
 ```go
-createFineTuneRequestModel := shared.CreateCreateFineTuneRequestModelCreateFineTuneRequestModel2(shared.CreateFineTuneRequestModel2{/* values here */})
+createFineTuneRequestModel := shared.CreateCreateFineTuneRequestModelCreateFineTuneRequest2(shared.CreateFineTuneRequest2{/* values here */})
 ```
 

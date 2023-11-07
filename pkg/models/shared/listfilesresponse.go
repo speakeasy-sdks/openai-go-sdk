@@ -2,9 +2,38 @@
 
 package shared
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type ListFilesResponseObject string
+
+const (
+	ListFilesResponseObjectList ListFilesResponseObject = "list"
+)
+
+func (e ListFilesResponseObject) ToPointer() *ListFilesResponseObject {
+	return &e
+}
+
+func (e *ListFilesResponseObject) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "list":
+		*e = ListFilesResponseObject(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ListFilesResponseObject: %v", v)
+	}
+}
+
 type ListFilesResponse struct {
-	Data   []OpenAIFile `json:"data"`
-	Object string       `json:"object"`
+	Data   []OpenAIFile            `json:"data"`
+	Object ListFilesResponseObject `json:"object"`
 }
 
 func (o *ListFilesResponse) GetData() []OpenAIFile {
@@ -14,9 +43,9 @@ func (o *ListFilesResponse) GetData() []OpenAIFile {
 	return o.Data
 }
 
-func (o *ListFilesResponse) GetObject() string {
+func (o *ListFilesResponse) GetObject() ListFilesResponseObject {
 	if o == nil {
-		return ""
+		return ListFilesResponseObject("")
 	}
 	return o.Object
 }

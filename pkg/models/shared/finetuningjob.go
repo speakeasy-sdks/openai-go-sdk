@@ -6,11 +6,11 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 )
 
-// FineTuningJobError - For fine-tuning jobs that have `failed`, this will contain more information on the cause of the failure.
-type FineTuningJobError struct {
+// Error - For fine-tuning jobs that have `failed`, this will contain more information on the cause of the failure.
+type Error struct {
 	// A machine-readable error code.
 	Code string `json:"code"`
 	// A human-readable error message.
@@ -19,107 +19,107 @@ type FineTuningJobError struct {
 	Param *string `json:"param"`
 }
 
-func (o *FineTuningJobError) GetCode() string {
+func (o *Error) GetCode() string {
 	if o == nil {
 		return ""
 	}
 	return o.Code
 }
 
-func (o *FineTuningJobError) GetMessage() string {
+func (o *Error) GetMessage() string {
 	if o == nil {
 		return ""
 	}
 	return o.Message
 }
 
-func (o *FineTuningJobError) GetParam() *string {
+func (o *Error) GetParam() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Param
 }
 
-// FineTuningJobHyperparametersNEpochs1 - The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
+// FineTuningJob1 - The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
 // "auto" decides the optimal number of epochs based on the size of the dataset. If setting the number manually, we support any number between 1 and 50 epochs.
-type FineTuningJobHyperparametersNEpochs1 string
+type FineTuningJob1 string
 
 const (
-	FineTuningJobHyperparametersNEpochs1Auto FineTuningJobHyperparametersNEpochs1 = "auto"
+	FineTuningJob1Auto FineTuningJob1 = "auto"
 )
 
-func (e FineTuningJobHyperparametersNEpochs1) ToPointer() *FineTuningJobHyperparametersNEpochs1 {
+func (e FineTuningJob1) ToPointer() *FineTuningJob1 {
 	return &e
 }
 
-func (e *FineTuningJobHyperparametersNEpochs1) UnmarshalJSON(data []byte) error {
+func (e *FineTuningJob1) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "auto":
-		*e = FineTuningJobHyperparametersNEpochs1(v)
+		*e = FineTuningJob1(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for FineTuningJobHyperparametersNEpochs1: %v", v)
+		return fmt.Errorf("invalid value for FineTuningJob1: %v", v)
 	}
 }
 
-type FineTuningJobHyperparametersNEpochsType string
+type FineTuningJobNEpochsType string
 
 const (
-	FineTuningJobHyperparametersNEpochsTypeFineTuningJobHyperparametersNEpochs1 FineTuningJobHyperparametersNEpochsType = "FineTuningJob_hyperparameters_n_epochs_1"
-	FineTuningJobHyperparametersNEpochsTypeInteger                              FineTuningJobHyperparametersNEpochsType = "integer"
+	FineTuningJobNEpochsTypeFineTuningJob1 FineTuningJobNEpochsType = "FineTuningJob_1"
+	FineTuningJobNEpochsTypeInteger        FineTuningJobNEpochsType = "integer"
 )
 
-type FineTuningJobHyperparametersNEpochs struct {
-	FineTuningJobHyperparametersNEpochs1 *FineTuningJobHyperparametersNEpochs1
-	Integer                              *int64
+type FineTuningJobNEpochs struct {
+	FineTuningJob1 *FineTuningJob1
+	Integer        *int64
 
-	Type FineTuningJobHyperparametersNEpochsType
+	Type FineTuningJobNEpochsType
 }
 
-func CreateFineTuningJobHyperparametersNEpochsFineTuningJobHyperparametersNEpochs1(fineTuningJobHyperparametersNEpochs1 FineTuningJobHyperparametersNEpochs1) FineTuningJobHyperparametersNEpochs {
-	typ := FineTuningJobHyperparametersNEpochsTypeFineTuningJobHyperparametersNEpochs1
+func CreateFineTuningJobNEpochsFineTuningJob1(fineTuningJob1 FineTuningJob1) FineTuningJobNEpochs {
+	typ := FineTuningJobNEpochsTypeFineTuningJob1
 
-	return FineTuningJobHyperparametersNEpochs{
-		FineTuningJobHyperparametersNEpochs1: &fineTuningJobHyperparametersNEpochs1,
-		Type:                                 typ,
+	return FineTuningJobNEpochs{
+		FineTuningJob1: &fineTuningJob1,
+		Type:           typ,
 	}
 }
 
-func CreateFineTuningJobHyperparametersNEpochsInteger(integer int64) FineTuningJobHyperparametersNEpochs {
-	typ := FineTuningJobHyperparametersNEpochsTypeInteger
+func CreateFineTuningJobNEpochsInteger(integer int64) FineTuningJobNEpochs {
+	typ := FineTuningJobNEpochsTypeInteger
 
-	return FineTuningJobHyperparametersNEpochs{
+	return FineTuningJobNEpochs{
 		Integer: &integer,
 		Type:    typ,
 	}
 }
 
-func (u *FineTuningJobHyperparametersNEpochs) UnmarshalJSON(data []byte) error {
+func (u *FineTuningJobNEpochs) UnmarshalJSON(data []byte) error {
 
-	fineTuningJobHyperparametersNEpochs1 := FineTuningJobHyperparametersNEpochs1("")
-	if err := utils.UnmarshalJSON(data, &fineTuningJobHyperparametersNEpochs1, "", true, true); err == nil {
-		u.FineTuningJobHyperparametersNEpochs1 = &fineTuningJobHyperparametersNEpochs1
-		u.Type = FineTuningJobHyperparametersNEpochsTypeFineTuningJobHyperparametersNEpochs1
+	fineTuningJob1 := FineTuningJob1("")
+	if err := utils.UnmarshalJSON(data, &fineTuningJob1, "", true, true); err == nil {
+		u.FineTuningJob1 = &fineTuningJob1
+		u.Type = FineTuningJobNEpochsTypeFineTuningJob1
 		return nil
 	}
 
 	integer := int64(0)
 	if err := utils.UnmarshalJSON(data, &integer, "", true, true); err == nil {
 		u.Integer = &integer
-		u.Type = FineTuningJobHyperparametersNEpochsTypeInteger
+		u.Type = FineTuningJobNEpochsTypeInteger
 		return nil
 	}
 
 	return errors.New("could not unmarshal into supported union types")
 }
 
-func (u FineTuningJobHyperparametersNEpochs) MarshalJSON() ([]byte, error) {
-	if u.FineTuningJobHyperparametersNEpochs1 != nil {
-		return utils.MarshalJSON(u.FineTuningJobHyperparametersNEpochs1, "", true)
+func (u FineTuningJobNEpochs) MarshalJSON() ([]byte, error) {
+	if u.FineTuningJob1 != nil {
+		return utils.MarshalJSON(u.FineTuningJob1, "", true)
 	}
 
 	if u.Integer != nil {
@@ -133,14 +133,79 @@ func (u FineTuningJobHyperparametersNEpochs) MarshalJSON() ([]byte, error) {
 type FineTuningJobHyperparameters struct {
 	// The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
 	// "auto" decides the optimal number of epochs based on the size of the dataset. If setting the number manually, we support any number between 1 and 50 epochs.
-	NEpochs FineTuningJobHyperparametersNEpochs `json:"n_epochs"`
+	NEpochs FineTuningJobNEpochs `json:"n_epochs"`
 }
 
-func (o *FineTuningJobHyperparameters) GetNEpochs() FineTuningJobHyperparametersNEpochs {
+func (o *FineTuningJobHyperparameters) GetNEpochs() FineTuningJobNEpochs {
 	if o == nil {
-		return FineTuningJobHyperparametersNEpochs{}
+		return FineTuningJobNEpochs{}
 	}
 	return o.NEpochs
+}
+
+// FineTuningJobObject - The object type, which is always "fine_tuning.job".
+type FineTuningJobObject string
+
+const (
+	FineTuningJobObjectFineTuningJob FineTuningJobObject = "fine_tuning.job"
+)
+
+func (e FineTuningJobObject) ToPointer() *FineTuningJobObject {
+	return &e
+}
+
+func (e *FineTuningJobObject) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "fine_tuning.job":
+		*e = FineTuningJobObject(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for FineTuningJobObject: %v", v)
+	}
+}
+
+// Status - The current status of the fine-tuning job, which can be either `validating_files`, `queued`, `running`, `succeeded`, `failed`, or `cancelled`.
+type Status string
+
+const (
+	StatusValidatingFiles Status = "validating_files"
+	StatusQueued          Status = "queued"
+	StatusRunning         Status = "running"
+	StatusSucceeded       Status = "succeeded"
+	StatusFailed          Status = "failed"
+	StatusCancelled       Status = "cancelled"
+)
+
+func (e Status) ToPointer() *Status {
+	return &e
+}
+
+func (e *Status) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "validating_files":
+		fallthrough
+	case "queued":
+		fallthrough
+	case "running":
+		fallthrough
+	case "succeeded":
+		fallthrough
+	case "failed":
+		fallthrough
+	case "cancelled":
+		*e = Status(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Status: %v", v)
+	}
 }
 
 // FineTuningJob - The `fine_tuning.job` object represents a fine-tuning job that has been created through the API.
@@ -148,7 +213,7 @@ type FineTuningJob struct {
 	// The Unix timestamp (in seconds) for when the fine-tuning job was created.
 	CreatedAt int64 `json:"created_at"`
 	// For fine-tuning jobs that have `failed`, this will contain more information on the cause of the failure.
-	Error *FineTuningJobError `json:"error"`
+	Error *Error `json:"error"`
 	// The name of the fine-tuned model that is being created. The value will be null if the fine-tuning job is still running.
 	FineTunedModel *string `json:"fine_tuned_model"`
 	// The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be null if the fine-tuning job is still running.
@@ -160,13 +225,13 @@ type FineTuningJob struct {
 	// The base model that is being fine-tuned.
 	Model string `json:"model"`
 	// The object type, which is always "fine_tuning.job".
-	Object string `json:"object"`
+	Object FineTuningJobObject `json:"object"`
 	// The organization that owns the fine-tuning job.
 	OrganizationID string `json:"organization_id"`
 	// The compiled results file ID(s) for the fine-tuning job. You can retrieve the results with the [Files API](/docs/api-reference/files/retrieve-contents).
 	ResultFiles []string `json:"result_files"`
 	// The current status of the fine-tuning job, which can be either `validating_files`, `queued`, `running`, `succeeded`, `failed`, or `cancelled`.
-	Status string `json:"status"`
+	Status Status `json:"status"`
 	// The total number of billable tokens processed by this fine-tuning job. The value will be null if the fine-tuning job is still running.
 	TrainedTokens *int64 `json:"trained_tokens"`
 	// The file ID used for training. You can retrieve the training data with the [Files API](/docs/api-reference/files/retrieve-contents).
@@ -182,7 +247,7 @@ func (o *FineTuningJob) GetCreatedAt() int64 {
 	return o.CreatedAt
 }
 
-func (o *FineTuningJob) GetError() *FineTuningJobError {
+func (o *FineTuningJob) GetError() *Error {
 	if o == nil {
 		return nil
 	}
@@ -224,9 +289,9 @@ func (o *FineTuningJob) GetModel() string {
 	return o.Model
 }
 
-func (o *FineTuningJob) GetObject() string {
+func (o *FineTuningJob) GetObject() FineTuningJobObject {
 	if o == nil {
-		return ""
+		return FineTuningJobObject("")
 	}
 	return o.Object
 }
@@ -245,9 +310,9 @@ func (o *FineTuningJob) GetResultFiles() []string {
 	return o.ResultFiles
 }
 
-func (o *FineTuningJob) GetStatus() string {
+func (o *FineTuningJob) GetStatus() Status {
 	if o == nil {
-		return ""
+		return Status("")
 	}
 	return o.Status
 }

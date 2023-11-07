@@ -1,5 +1,5 @@
 # Embeddings
-(*Embeddings*)
+(*.Embeddings*)
 
 ## Overview
 
@@ -21,8 +21,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -32,12 +32,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Embeddings.CreateEmbedding(ctx, shared.CreateEmbeddingRequest{
-        EncodingFormat: shared.CreateEmbeddingRequestEncodingFormatFloat.ToPointer(),
-        Input: shared.CreateCreateEmbeddingRequestInputStr(
+        EncodingFormat: shared.EncodingFormatFloat.ToPointer(),
+        Input: shared.CreateInputStr(
         "The quick brown fox jumped over the lazy dog",
         ),
-        Model: shared.CreateCreateEmbeddingRequestModelCreateEmbeddingRequestModel2(
-        shared.CreateEmbeddingRequestModel2TextEmbeddingAda002,
+        Model: shared.CreateCreateEmbeddingRequestModelCreateEmbeddingRequest2(
+        shared.CreateEmbeddingRequest2TextEmbeddingAda002,
         ),
         User: openaigosdk.String("user-1234"),
     })

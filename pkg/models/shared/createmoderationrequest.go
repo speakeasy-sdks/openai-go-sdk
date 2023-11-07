@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 )
 
 type CreateModerationRequestInputType string
@@ -72,21 +72,21 @@ func (u CreateModerationRequestInput) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-// CreateModerationRequestModel2 - Two content moderations models are available: `text-moderation-stable` and `text-moderation-latest`.
+// CreateModerationRequest2 - Two content moderations models are available: `text-moderation-stable` and `text-moderation-latest`.
 //
 // The default is `text-moderation-latest` which will be automatically upgraded over time. This ensures you are always using our most accurate model. If you use `text-moderation-stable`, we will provide advanced notice before updating the model. Accuracy of `text-moderation-stable` may be slightly lower than for `text-moderation-latest`.
-type CreateModerationRequestModel2 string
+type CreateModerationRequest2 string
 
 const (
-	CreateModerationRequestModel2TextModerationLatest CreateModerationRequestModel2 = "text-moderation-latest"
-	CreateModerationRequestModel2TextModerationStable CreateModerationRequestModel2 = "text-moderation-stable"
+	CreateModerationRequest2TextModerationLatest CreateModerationRequest2 = "text-moderation-latest"
+	CreateModerationRequest2TextModerationStable CreateModerationRequest2 = "text-moderation-stable"
 )
 
-func (e CreateModerationRequestModel2) ToPointer() *CreateModerationRequestModel2 {
+func (e CreateModerationRequest2) ToPointer() *CreateModerationRequest2 {
 	return &e
 }
 
-func (e *CreateModerationRequestModel2) UnmarshalJSON(data []byte) error {
+func (e *CreateModerationRequest2) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -95,23 +95,23 @@ func (e *CreateModerationRequestModel2) UnmarshalJSON(data []byte) error {
 	case "text-moderation-latest":
 		fallthrough
 	case "text-moderation-stable":
-		*e = CreateModerationRequestModel2(v)
+		*e = CreateModerationRequest2(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for CreateModerationRequestModel2: %v", v)
+		return fmt.Errorf("invalid value for CreateModerationRequest2: %v", v)
 	}
 }
 
 type CreateModerationRequestModelType string
 
 const (
-	CreateModerationRequestModelTypeStr                           CreateModerationRequestModelType = "str"
-	CreateModerationRequestModelTypeCreateModerationRequestModel2 CreateModerationRequestModelType = "CreateModerationRequest_model_2"
+	CreateModerationRequestModelTypeStr                      CreateModerationRequestModelType = "str"
+	CreateModerationRequestModelTypeCreateModerationRequest2 CreateModerationRequestModelType = "CreateModerationRequest_2"
 )
 
 type CreateModerationRequestModel struct {
-	Str                           *string
-	CreateModerationRequestModel2 *CreateModerationRequestModel2
+	Str                      *string
+	CreateModerationRequest2 *CreateModerationRequest2
 
 	Type CreateModerationRequestModelType
 }
@@ -125,12 +125,12 @@ func CreateCreateModerationRequestModelStr(str string) CreateModerationRequestMo
 	}
 }
 
-func CreateCreateModerationRequestModelCreateModerationRequestModel2(createModerationRequestModel2 CreateModerationRequestModel2) CreateModerationRequestModel {
-	typ := CreateModerationRequestModelTypeCreateModerationRequestModel2
+func CreateCreateModerationRequestModelCreateModerationRequest2(createModerationRequest2 CreateModerationRequest2) CreateModerationRequestModel {
+	typ := CreateModerationRequestModelTypeCreateModerationRequest2
 
 	return CreateModerationRequestModel{
-		CreateModerationRequestModel2: &createModerationRequestModel2,
-		Type:                          typ,
+		CreateModerationRequest2: &createModerationRequest2,
+		Type:                     typ,
 	}
 }
 
@@ -143,10 +143,10 @@ func (u *CreateModerationRequestModel) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	createModerationRequestModel2 := CreateModerationRequestModel2("")
-	if err := utils.UnmarshalJSON(data, &createModerationRequestModel2, "", true, true); err == nil {
-		u.CreateModerationRequestModel2 = &createModerationRequestModel2
-		u.Type = CreateModerationRequestModelTypeCreateModerationRequestModel2
+	createModerationRequest2 := CreateModerationRequest2("")
+	if err := utils.UnmarshalJSON(data, &createModerationRequest2, "", true, true); err == nil {
+		u.CreateModerationRequest2 = &createModerationRequest2
+		u.Type = CreateModerationRequestModelTypeCreateModerationRequest2
 		return nil
 	}
 
@@ -158,8 +158,8 @@ func (u CreateModerationRequestModel) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
 
-	if u.CreateModerationRequestModel2 != nil {
-		return utils.MarshalJSON(u.CreateModerationRequestModel2, "", true)
+	if u.CreateModerationRequest2 != nil {
+		return utils.MarshalJSON(u.CreateModerationRequest2, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")

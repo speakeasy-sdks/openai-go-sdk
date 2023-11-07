@@ -1,5 +1,5 @@
 # Edits
-(*Edits*)
+(*.Edits*)
 
 ## Overview
 
@@ -23,8 +23,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -36,8 +36,8 @@ func main() {
     res, err := s.Edits.CreateEdit(ctx, shared.CreateEditRequest{
         Input: openaigosdk.String("What day of the wek is it?"),
         Instruction: "Fix the spelling mistakes.",
-        Model: shared.CreateCreateEditRequestModelCreateEditRequestModel2(
-        shared.CreateEditRequestModel2TextDavinciEdit001,
+        Model: shared.CreateCreateEditRequestModelCreateEditRequest2(
+        shared.CreateEditRequest2TextDavinciEdit001,
         ),
         N: openaigosdk.Int64(1),
         Temperature: openaigosdk.Float64(1),

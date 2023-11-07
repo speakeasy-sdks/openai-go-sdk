@@ -6,30 +6,30 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 )
 
-// CreateCompletionRequestModel2 - ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.
-type CreateCompletionRequestModel2 string
+// CreateCompletionRequest2 - ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.
+type CreateCompletionRequest2 string
 
 const (
-	CreateCompletionRequestModel2Babbage002         CreateCompletionRequestModel2 = "babbage-002"
-	CreateCompletionRequestModel2Davinci002         CreateCompletionRequestModel2 = "davinci-002"
-	CreateCompletionRequestModel2Gpt35TurboInstruct CreateCompletionRequestModel2 = "gpt-3.5-turbo-instruct"
-	CreateCompletionRequestModel2TextDavinci003     CreateCompletionRequestModel2 = "text-davinci-003"
-	CreateCompletionRequestModel2TextDavinci002     CreateCompletionRequestModel2 = "text-davinci-002"
-	CreateCompletionRequestModel2TextDavinci001     CreateCompletionRequestModel2 = "text-davinci-001"
-	CreateCompletionRequestModel2CodeDavinci002     CreateCompletionRequestModel2 = "code-davinci-002"
-	CreateCompletionRequestModel2TextCurie001       CreateCompletionRequestModel2 = "text-curie-001"
-	CreateCompletionRequestModel2TextBabbage001     CreateCompletionRequestModel2 = "text-babbage-001"
-	CreateCompletionRequestModel2TextAda001         CreateCompletionRequestModel2 = "text-ada-001"
+	CreateCompletionRequest2Babbage002         CreateCompletionRequest2 = "babbage-002"
+	CreateCompletionRequest2Davinci002         CreateCompletionRequest2 = "davinci-002"
+	CreateCompletionRequest2Gpt35TurboInstruct CreateCompletionRequest2 = "gpt-3.5-turbo-instruct"
+	CreateCompletionRequest2TextDavinci003     CreateCompletionRequest2 = "text-davinci-003"
+	CreateCompletionRequest2TextDavinci002     CreateCompletionRequest2 = "text-davinci-002"
+	CreateCompletionRequest2TextDavinci001     CreateCompletionRequest2 = "text-davinci-001"
+	CreateCompletionRequest2CodeDavinci002     CreateCompletionRequest2 = "code-davinci-002"
+	CreateCompletionRequest2TextCurie001       CreateCompletionRequest2 = "text-curie-001"
+	CreateCompletionRequest2TextBabbage001     CreateCompletionRequest2 = "text-babbage-001"
+	CreateCompletionRequest2TextAda001         CreateCompletionRequest2 = "text-ada-001"
 )
 
-func (e CreateCompletionRequestModel2) ToPointer() *CreateCompletionRequestModel2 {
+func (e CreateCompletionRequest2) ToPointer() *CreateCompletionRequest2 {
 	return &e
 }
 
-func (e *CreateCompletionRequestModel2) UnmarshalJSON(data []byte) error {
+func (e *CreateCompletionRequest2) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -54,23 +54,23 @@ func (e *CreateCompletionRequestModel2) UnmarshalJSON(data []byte) error {
 	case "text-babbage-001":
 		fallthrough
 	case "text-ada-001":
-		*e = CreateCompletionRequestModel2(v)
+		*e = CreateCompletionRequest2(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for CreateCompletionRequestModel2: %v", v)
+		return fmt.Errorf("invalid value for CreateCompletionRequest2: %v", v)
 	}
 }
 
 type CreateCompletionRequestModelType string
 
 const (
-	CreateCompletionRequestModelTypeStr                           CreateCompletionRequestModelType = "str"
-	CreateCompletionRequestModelTypeCreateCompletionRequestModel2 CreateCompletionRequestModelType = "CreateCompletionRequest_model_2"
+	CreateCompletionRequestModelTypeStr                      CreateCompletionRequestModelType = "str"
+	CreateCompletionRequestModelTypeCreateCompletionRequest2 CreateCompletionRequestModelType = "CreateCompletionRequest_2"
 )
 
 type CreateCompletionRequestModel struct {
-	Str                           *string
-	CreateCompletionRequestModel2 *CreateCompletionRequestModel2
+	Str                      *string
+	CreateCompletionRequest2 *CreateCompletionRequest2
 
 	Type CreateCompletionRequestModelType
 }
@@ -84,12 +84,12 @@ func CreateCreateCompletionRequestModelStr(str string) CreateCompletionRequestMo
 	}
 }
 
-func CreateCreateCompletionRequestModelCreateCompletionRequestModel2(createCompletionRequestModel2 CreateCompletionRequestModel2) CreateCompletionRequestModel {
-	typ := CreateCompletionRequestModelTypeCreateCompletionRequestModel2
+func CreateCreateCompletionRequestModelCreateCompletionRequest2(createCompletionRequest2 CreateCompletionRequest2) CreateCompletionRequestModel {
+	typ := CreateCompletionRequestModelTypeCreateCompletionRequest2
 
 	return CreateCompletionRequestModel{
-		CreateCompletionRequestModel2: &createCompletionRequestModel2,
-		Type:                          typ,
+		CreateCompletionRequest2: &createCompletionRequest2,
+		Type:                     typ,
 	}
 }
 
@@ -102,10 +102,10 @@ func (u *CreateCompletionRequestModel) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	createCompletionRequestModel2 := CreateCompletionRequestModel2("")
-	if err := utils.UnmarshalJSON(data, &createCompletionRequestModel2, "", true, true); err == nil {
-		u.CreateCompletionRequestModel2 = &createCompletionRequestModel2
-		u.Type = CreateCompletionRequestModelTypeCreateCompletionRequestModel2
+	createCompletionRequest2 := CreateCompletionRequest2("")
+	if err := utils.UnmarshalJSON(data, &createCompletionRequest2, "", true, true); err == nil {
+		u.CreateCompletionRequest2 = &createCompletionRequest2
+		u.Type = CreateCompletionRequestModelTypeCreateCompletionRequest2
 		return nil
 	}
 
@@ -117,101 +117,101 @@ func (u CreateCompletionRequestModel) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
 
-	if u.CreateCompletionRequestModel2 != nil {
-		return utils.MarshalJSON(u.CreateCompletionRequestModel2, "", true)
+	if u.CreateCompletionRequest2 != nil {
+		return utils.MarshalJSON(u.CreateCompletionRequest2, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-type CreateCompletionRequestPromptType string
+type PromptType string
 
 const (
-	CreateCompletionRequestPromptTypeStr                   CreateCompletionRequestPromptType = "str"
-	CreateCompletionRequestPromptTypeArrayOfstr            CreateCompletionRequestPromptType = "arrayOfstr"
-	CreateCompletionRequestPromptTypeArrayOfinteger        CreateCompletionRequestPromptType = "arrayOfinteger"
-	CreateCompletionRequestPromptTypeArrayOfarrayOfinteger CreateCompletionRequestPromptType = "arrayOfarrayOfinteger"
+	PromptTypeStr                   PromptType = "str"
+	PromptTypeArrayOfstr            PromptType = "arrayOfstr"
+	PromptTypeArrayOfinteger        PromptType = "arrayOfinteger"
+	PromptTypeArrayOfarrayOfinteger PromptType = "arrayOfarrayOfinteger"
 )
 
-type CreateCompletionRequestPrompt struct {
+type Prompt struct {
 	Str                   *string
 	ArrayOfstr            []string
 	ArrayOfinteger        []int64
 	ArrayOfarrayOfinteger [][]int64
 
-	Type CreateCompletionRequestPromptType
+	Type PromptType
 }
 
-func CreateCreateCompletionRequestPromptStr(str string) CreateCompletionRequestPrompt {
-	typ := CreateCompletionRequestPromptTypeStr
+func CreatePromptStr(str string) Prompt {
+	typ := PromptTypeStr
 
-	return CreateCompletionRequestPrompt{
+	return Prompt{
 		Str:  &str,
 		Type: typ,
 	}
 }
 
-func CreateCreateCompletionRequestPromptArrayOfstr(arrayOfstr []string) CreateCompletionRequestPrompt {
-	typ := CreateCompletionRequestPromptTypeArrayOfstr
+func CreatePromptArrayOfstr(arrayOfstr []string) Prompt {
+	typ := PromptTypeArrayOfstr
 
-	return CreateCompletionRequestPrompt{
+	return Prompt{
 		ArrayOfstr: arrayOfstr,
 		Type:       typ,
 	}
 }
 
-func CreateCreateCompletionRequestPromptArrayOfinteger(arrayOfinteger []int64) CreateCompletionRequestPrompt {
-	typ := CreateCompletionRequestPromptTypeArrayOfinteger
+func CreatePromptArrayOfinteger(arrayOfinteger []int64) Prompt {
+	typ := PromptTypeArrayOfinteger
 
-	return CreateCompletionRequestPrompt{
+	return Prompt{
 		ArrayOfinteger: arrayOfinteger,
 		Type:           typ,
 	}
 }
 
-func CreateCreateCompletionRequestPromptArrayOfarrayOfinteger(arrayOfarrayOfinteger [][]int64) CreateCompletionRequestPrompt {
-	typ := CreateCompletionRequestPromptTypeArrayOfarrayOfinteger
+func CreatePromptArrayOfarrayOfinteger(arrayOfarrayOfinteger [][]int64) Prompt {
+	typ := PromptTypeArrayOfarrayOfinteger
 
-	return CreateCompletionRequestPrompt{
+	return Prompt{
 		ArrayOfarrayOfinteger: arrayOfarrayOfinteger,
 		Type:                  typ,
 	}
 }
 
-func (u *CreateCompletionRequestPrompt) UnmarshalJSON(data []byte) error {
+func (u *Prompt) UnmarshalJSON(data []byte) error {
 
 	str := ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
 		u.Str = &str
-		u.Type = CreateCompletionRequestPromptTypeStr
+		u.Type = PromptTypeStr
 		return nil
 	}
 
 	arrayOfstr := []string{}
 	if err := utils.UnmarshalJSON(data, &arrayOfstr, "", true, true); err == nil {
 		u.ArrayOfstr = arrayOfstr
-		u.Type = CreateCompletionRequestPromptTypeArrayOfstr
+		u.Type = PromptTypeArrayOfstr
 		return nil
 	}
 
 	arrayOfinteger := []int64{}
 	if err := utils.UnmarshalJSON(data, &arrayOfinteger, "", true, true); err == nil {
 		u.ArrayOfinteger = arrayOfinteger
-		u.Type = CreateCompletionRequestPromptTypeArrayOfinteger
+		u.Type = PromptTypeArrayOfinteger
 		return nil
 	}
 
 	arrayOfarrayOfinteger := [][]int64{}
 	if err := utils.UnmarshalJSON(data, &arrayOfarrayOfinteger, "", true, true); err == nil {
 		u.ArrayOfarrayOfinteger = arrayOfarrayOfinteger
-		u.Type = CreateCompletionRequestPromptTypeArrayOfarrayOfinteger
+		u.Type = PromptTypeArrayOfarrayOfinteger
 		return nil
 	}
 
 	return errors.New("could not unmarshal into supported union types")
 }
 
-func (u CreateCompletionRequestPrompt) MarshalJSON() ([]byte, error) {
+func (u Prompt) MarshalJSON() ([]byte, error) {
 	if u.Str != nil {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
@@ -312,7 +312,7 @@ type CreateCompletionRequest struct {
 	FrequencyPenalty *float64 `default:"0" json:"frequency_penalty"`
 	// Modify the likelihood of specified tokens appearing in the completion.
 	//
-	// Accepts a json object that maps tokens (specified by their token ID in the GPT tokenizer) to an associated bias value from -100 to 100. You can use this [tokenizer tool](/tokenizer?view=bpe) (which works for both GPT-2 and GPT-3) to convert text to token IDs. Mathematically, the bias is added to the logits generated by the model prior to sampling. The exact effect will vary per model, but values between -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100 should result in a ban or exclusive selection of the relevant token.
+	// Accepts a JSON object that maps tokens (specified by their token ID in the GPT tokenizer) to an associated bias value from -100 to 100. You can use this [tokenizer tool](/tokenizer?view=bpe) (which works for both GPT-2 and GPT-3) to convert text to token IDs. Mathematically, the bias is added to the logits generated by the model prior to sampling. The exact effect will vary per model, but values between -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100 should result in a ban or exclusive selection of the relevant token.
 	//
 	// As an example, you can pass `{"50256": -100}` to prevent the <|endoftext|> token from being generated.
 	//
@@ -344,7 +344,12 @@ type CreateCompletionRequest struct {
 	//
 	// Note that <|endoftext|> is the document separator that the model sees during training, so if a prompt is not specified the model will generate as if from the beginning of a new document.
 	//
-	Prompt *CreateCompletionRequestPrompt `json:"prompt"`
+	Prompt *Prompt `json:"prompt"`
+	// If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same `seed` and parameters should return the same result.
+	//
+	// Determinism is not guaranteed, and you should refer to the `system_fingerprint` response parameter to monitor changes in the backend.
+	//
+	Seed *int64 `json:"seed,omitempty"`
 	// Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
 	//
 	Stop *CreateCompletionRequestStop `json:"stop,omitempty"`
@@ -442,11 +447,18 @@ func (o *CreateCompletionRequest) GetPresencePenalty() *float64 {
 	return o.PresencePenalty
 }
 
-func (o *CreateCompletionRequest) GetPrompt() *CreateCompletionRequestPrompt {
+func (o *CreateCompletionRequest) GetPrompt() *Prompt {
 	if o == nil {
 		return nil
 	}
 	return o.Prompt
+}
+
+func (o *CreateCompletionRequest) GetSeed() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Seed
 }
 
 func (o *CreateCompletionRequest) GetStop() *CreateCompletionRequestStop {

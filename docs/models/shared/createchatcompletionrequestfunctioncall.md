@@ -3,15 +3,15 @@
 
 ## Supported Types
 
-### CreateChatCompletionRequestFunctionCall1
+### One
 
 ```go
-createChatCompletionRequestFunctionCall := shared.CreateCreateChatCompletionRequestFunctionCallCreateChatCompletionRequestFunctionCall1(shared.CreateChatCompletionRequestFunctionCall1{/* values here */})
+createChatCompletionRequestFunctionCall := shared.CreateCreateChatCompletionRequestFunctionCallOne(shared.One{/* values here */})
 ```
 
-### ChatCompletionFunctionCallOption
+### Schemas
 
 ```go
-createChatCompletionRequestFunctionCall := shared.CreateCreateChatCompletionRequestFunctionCallChatCompletionFunctionCallOption(shared.ChatCompletionFunctionCallOption{/* values here */})
+createChatCompletionRequestFunctionCall := shared.CreateCreateChatCompletionRequestFunctionCallSchemas(shared.Schemas{/* values here */})
 ```
 

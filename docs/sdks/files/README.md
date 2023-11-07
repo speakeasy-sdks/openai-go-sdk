@@ -1,13 +1,17 @@
 # Files
-(*Files*)
+(*.Files*)
 
 ## Overview
 
-Files are used to upload documents that can be used with features like fine-tuning.
+Files are used to upload documents that can be used with features like Assistants and Fine-tuning.
 
 ### Available Operations
 
-* [CreateFile](#createfile) - Upload a file that can be used across various endpoints/features. Currently, the size of all the files uploaded by one organization can be up to 1 GB. Please [contact us](https://help.openai.com/) if you need to increase the storage limit.
+* [CreateFile](#createfile) - Upload a file that can be used across various endpoints/features. The size of all the files uploaded by one organization can be up to 100 GB.
+
+The size of individual files for can be a maximum of 512MB. See the [Assistants Tools guide](/docs/assistants/tools) to learn more about the types of files supported. The Fine-tuning API only supports `.jsonl` files.
+
+Please [contact us](https://help.openai.com/) if you need to increase these storage limits.
 
 * [DeleteFile](#deletefile) - Delete a file.
 * [DownloadFile](#downloadfile) - Returns the contents of the specified file.
@@ -16,7 +20,11 @@ Files are used to upload documents that can be used with features like fine-tuni
 
 ## CreateFile
 
-Upload a file that can be used across various endpoints/features. Currently, the size of all the files uploaded by one organization can be up to 1 GB. Please [contact us](https://help.openai.com/) if you need to increase the storage limit.
+Upload a file that can be used across various endpoints/features. The size of all the files uploaded by one organization can be up to 100 GB.
+
+The size of individual files for can be a maximum of 512MB. See the [Assistants Tools guide](/docs/assistants/tools) to learn more about the types of files supported. The Fine-tuning API only supports `.jsonl` files.
+
+Please [contact us](https://help.openai.com/) if you need to increase these storage limits.
 
 
 ### Example Usage
@@ -27,8 +35,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -38,11 +46,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Files.CreateFile(ctx, shared.CreateFileRequest{
-        File: shared.CreateFileRequestFile{
-            Content: []byte("`'$Z`(L/RH"),
-            File: "string",
+        File: shared.File{
+            Content: []byte("0xf10df1a3b9"),
+            FileName: "rap_national.mp4v",
         },
-        Purpose: "string",
+        Purpose: shared.PurposeFineTune,
     })
     if err != nil {
         log.Fatal(err)
@@ -79,8 +87,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -128,8 +136,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -146,7 +154,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.DownloadFile200ApplicationJSONString != nil {
+    if res.Res != nil {
         // handle response
     }
 }
@@ -177,8 +185,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -186,8 +194,11 @@ func main() {
         openaigosdk.WithSecurity(""),
     )
 
+
+    var purpose *string = "string"
+
     ctx := context.Background()
-    res, err := s.Files.ListFiles(ctx)
+    res, err := s.Files.ListFiles(ctx, purpose)
     if err != nil {
         log.Fatal(err)
     }
@@ -203,6 +214,7 @@ func main() {
 | Parameter                                             | Type                                                  | Required                                              | Description                                           |
 | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
 | `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| `purpose`                                             | **string*                                             | :heavy_minus_sign:                                    | Only return files with the given purpose.             |
 
 
 ### Response
@@ -222,8 +234,8 @@ package main
 import(
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {

@@ -2,22 +2,52 @@
 
 package shared
 
-// CreateEmbeddingResponseUsage - The usage information for the request.
-type CreateEmbeddingResponseUsage struct {
+import (
+	"encoding/json"
+	"fmt"
+)
+
+// CreateEmbeddingResponseObject - The object type, which is always "embedding".
+type CreateEmbeddingResponseObject string
+
+const (
+	CreateEmbeddingResponseObjectEmbedding CreateEmbeddingResponseObject = "embedding"
+)
+
+func (e CreateEmbeddingResponseObject) ToPointer() *CreateEmbeddingResponseObject {
+	return &e
+}
+
+func (e *CreateEmbeddingResponseObject) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "embedding":
+		*e = CreateEmbeddingResponseObject(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateEmbeddingResponseObject: %v", v)
+	}
+}
+
+// Usage - The usage information for the request.
+type Usage struct {
 	// The number of tokens used by the prompt.
 	PromptTokens int64 `json:"prompt_tokens"`
 	// The total number of tokens used by the request.
 	TotalTokens int64 `json:"total_tokens"`
 }
 
-func (o *CreateEmbeddingResponseUsage) GetPromptTokens() int64 {
+func (o *Usage) GetPromptTokens() int64 {
 	if o == nil {
 		return 0
 	}
 	return o.PromptTokens
 }
 
-func (o *CreateEmbeddingResponseUsage) GetTotalTokens() int64 {
+func (o *Usage) GetTotalTokens() int64 {
 	if o == nil {
 		return 0
 	}
@@ -30,9 +60,9 @@ type CreateEmbeddingResponse struct {
 	// The name of the model used to generate the embedding.
 	Model string `json:"model"`
 	// The object type, which is always "embedding".
-	Object string `json:"object"`
+	Object CreateEmbeddingResponseObject `json:"object"`
 	// The usage information for the request.
-	Usage CreateEmbeddingResponseUsage `json:"usage"`
+	Usage Usage `json:"usage"`
 }
 
 func (o *CreateEmbeddingResponse) GetData() []Embedding {
@@ -49,16 +79,16 @@ func (o *CreateEmbeddingResponse) GetModel() string {
 	return o.Model
 }
 
-func (o *CreateEmbeddingResponse) GetObject() string {
+func (o *CreateEmbeddingResponse) GetObject() CreateEmbeddingResponseObject {
 	if o == nil {
-		return ""
+		return CreateEmbeddingResponseObject("")
 	}
 	return o.Object
 }
 
-func (o *CreateEmbeddingResponse) GetUsage() CreateEmbeddingResponseUsage {
+func (o *CreateEmbeddingResponse) GetUsage() Usage {
 	if o == nil {
-		return CreateEmbeddingResponseUsage{}
+		return Usage{}
 	}
 	return o.Usage
 }

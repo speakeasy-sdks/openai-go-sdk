@@ -1,0 +1,17 @@
+# CreateFineTuneRequest2
+
+The name of the base model to fine-tune. You can select one of "ada",
+"babbage", "curie", "davinci", or a fine-tuned model created after 2022-04-21 and before 2023-08-22.
+To learn more about these models, see the
+[Models](/docs/models) documentation.
+
+
+
+## Values
+
+| Name                            | Value                           |
+| ------------------------------- | ------------------------------- |
+| `CreateFineTuneRequest2Ada`     | ada                             |
+| `CreateFineTuneRequest2Babbage` | babbage                         |
+| `CreateFineTuneRequest2Curie`   | curie                           |
+| `CreateFineTuneRequest2Davinci` | davinci                         |

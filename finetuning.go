@@ -6,28 +6,28 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/sdkerrors"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 	"io"
 	"net/http"
 	"strings"
 )
 
-// fineTuning - Manage fine-tuning jobs to tailor a model to your specific training data.
-type fineTuning struct {
+// FineTuning - Manage fine-tuning jobs to tailor a model to your specific training data.
+type FineTuning struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newFineTuning(sdkConfig sdkConfiguration) *fineTuning {
-	return &fineTuning{
+func newFineTuning(sdkConfig sdkConfiguration) *FineTuning {
+	return &FineTuning{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // CancelFineTuningJob - Immediately cancel a fine-tune job.
-func (s *fineTuning) CancelFineTuningJob(ctx context.Context, fineTuningJobID string) (*operations.CancelFineTuningJobResponse, error) {
+func (s *FineTuning) CancelFineTuningJob(ctx context.Context, fineTuningJobID string) (*operations.CancelFineTuningJobResponse, error) {
 	request := operations.CancelFineTuningJobRequest{
 		FineTuningJobID: fineTuningJobID,
 	}
@@ -82,6 +82,10 @@ func (s *fineTuning) CancelFineTuningJob(ctx context.Context, fineTuningJobID st
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
@@ -92,7 +96,7 @@ func (s *fineTuning) CancelFineTuningJob(ctx context.Context, fineTuningJobID st
 // Response includes details of the enqueued job including job status and the name of the fine-tuned models once complete.
 //
 // [Learn more about fine-tuning](/docs/guides/fine-tuning)
-func (s *fineTuning) CreateFineTuningJob(ctx context.Context, request shared.CreateFineTuningJobRequest) (*operations.CreateFineTuningJobResponse, error) {
+func (s *FineTuning) CreateFineTuningJob(ctx context.Context, request shared.CreateFineTuningJobRequest) (*operations.CreateFineTuningJobResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/fine_tuning/jobs"
 
@@ -150,13 +154,17 @@ func (s *fineTuning) CreateFineTuningJob(ctx context.Context, request shared.Cre
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
 }
 
 // ListFineTuningEvents - Get status updates for a fine-tuning job.
-func (s *fineTuning) ListFineTuningEvents(ctx context.Context, fineTuningJobID string, after *string, limit *int64) (*operations.ListFineTuningEventsResponse, error) {
+func (s *FineTuning) ListFineTuningEvents(ctx context.Context, fineTuningJobID string, after *string, limit *int64) (*operations.ListFineTuningEventsResponse, error) {
 	request := operations.ListFineTuningEventsRequest{
 		FineTuningJobID: fineTuningJobID,
 		After:           after,
@@ -217,13 +225,17 @@ func (s *fineTuning) ListFineTuningEvents(ctx context.Context, fineTuningJobID s
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
 }
 
 // ListPaginatedFineTuningJobs - List your organization's fine-tuning jobs
-func (s *fineTuning) ListPaginatedFineTuningJobs(ctx context.Context, after *string, limit *int64) (*operations.ListPaginatedFineTuningJobsResponse, error) {
+func (s *FineTuning) ListPaginatedFineTuningJobs(ctx context.Context, after *string, limit *int64) (*operations.ListPaginatedFineTuningJobsResponse, error) {
 	request := operations.ListPaginatedFineTuningJobsRequest{
 		After: after,
 		Limit: limit,
@@ -280,6 +292,10 @@ func (s *fineTuning) ListPaginatedFineTuningJobs(ctx context.Context, after *str
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
@@ -288,7 +304,7 @@ func (s *fineTuning) ListPaginatedFineTuningJobs(ctx context.Context, after *str
 // RetrieveFineTuningJob - Get info about a fine-tuning job.
 //
 // [Learn more about fine-tuning](/docs/guides/fine-tuning)
-func (s *fineTuning) RetrieveFineTuningJob(ctx context.Context, fineTuningJobID string) (*operations.RetrieveFineTuningJobResponse, error) {
+func (s *FineTuning) RetrieveFineTuningJob(ctx context.Context, fineTuningJobID string) (*operations.RetrieveFineTuningJobResponse, error) {
 	request := operations.RetrieveFineTuningJobRequest{
 		FineTuningJobID: fineTuningJobID,
 	}
@@ -343,6 +359,10 @@ func (s *fineTuning) RetrieveFineTuningJob(ctx context.Context, fineTuningJobID 
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil

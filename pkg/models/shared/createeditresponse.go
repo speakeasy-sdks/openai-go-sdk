@@ -7,21 +7,21 @@ import (
 	"fmt"
 )
 
-// CreateEditResponseChoicesFinishReason - The reason the model stopped generating tokens. This will be `stop` if the model hit a natural stop point or a provided stop sequence,
+// CreateEditResponseFinishReason - The reason the model stopped generating tokens. This will be `stop` if the model hit a natural stop point or a provided stop sequence,
 // `length` if the maximum number of tokens specified in the request was reached,
 // or `content_filter` if content was omitted due to a flag from our content filters.
-type CreateEditResponseChoicesFinishReason string
+type CreateEditResponseFinishReason string
 
 const (
-	CreateEditResponseChoicesFinishReasonStop   CreateEditResponseChoicesFinishReason = "stop"
-	CreateEditResponseChoicesFinishReasonLength CreateEditResponseChoicesFinishReason = "length"
+	CreateEditResponseFinishReasonStop   CreateEditResponseFinishReason = "stop"
+	CreateEditResponseFinishReasonLength CreateEditResponseFinishReason = "length"
 )
 
-func (e CreateEditResponseChoicesFinishReason) ToPointer() *CreateEditResponseChoicesFinishReason {
+func (e CreateEditResponseFinishReason) ToPointer() *CreateEditResponseFinishReason {
 	return &e
 }
 
-func (e *CreateEditResponseChoicesFinishReason) UnmarshalJSON(data []byte) error {
+func (e *CreateEditResponseFinishReason) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -30,10 +30,10 @@ func (e *CreateEditResponseChoicesFinishReason) UnmarshalJSON(data []byte) error
 	case "stop":
 		fallthrough
 	case "length":
-		*e = CreateEditResponseChoicesFinishReason(v)
+		*e = CreateEditResponseFinishReason(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for CreateEditResponseChoicesFinishReason: %v", v)
+		return fmt.Errorf("invalid value for CreateEditResponseFinishReason: %v", v)
 	}
 }
 
@@ -42,16 +42,16 @@ type CreateEditResponseChoices struct {
 	// `length` if the maximum number of tokens specified in the request was reached,
 	// or `content_filter` if content was omitted due to a flag from our content filters.
 	//
-	FinishReason CreateEditResponseChoicesFinishReason `json:"finish_reason"`
+	FinishReason CreateEditResponseFinishReason `json:"finish_reason"`
 	// The index of the choice in the list of choices.
 	Index int64 `json:"index"`
 	// The edited result.
 	Text string `json:"text"`
 }
 
-func (o *CreateEditResponseChoices) GetFinishReason() CreateEditResponseChoicesFinishReason {
+func (o *CreateEditResponseChoices) GetFinishReason() CreateEditResponseFinishReason {
 	if o == nil {
-		return CreateEditResponseChoicesFinishReason("")
+		return CreateEditResponseFinishReason("")
 	}
 	return o.FinishReason
 }
@@ -70,6 +70,31 @@ func (o *CreateEditResponseChoices) GetText() string {
 	return o.Text
 }
 
+// CreateEditResponseObject - The object type, which is always `edit`.
+type CreateEditResponseObject string
+
+const (
+	CreateEditResponseObjectEdit CreateEditResponseObject = "edit"
+)
+
+func (e CreateEditResponseObject) ToPointer() *CreateEditResponseObject {
+	return &e
+}
+
+func (e *CreateEditResponseObject) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "edit":
+		*e = CreateEditResponseObject(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateEditResponseObject: %v", v)
+	}
+}
+
 // CreateEditResponse
 //
 // Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -79,7 +104,7 @@ type CreateEditResponse struct {
 	// The Unix timestamp (in seconds) of when the edit was created.
 	Created int64 `json:"created"`
 	// The object type, which is always `edit`.
-	Object string `json:"object"`
+	Object CreateEditResponseObject `json:"object"`
 	// Usage statistics for the completion request.
 	Usage CompletionUsage `json:"usage"`
 }
@@ -98,9 +123,9 @@ func (o *CreateEditResponse) GetCreated() int64 {
 	return o.Created
 }
 
-func (o *CreateEditResponse) GetObject() string {
+func (o *CreateEditResponse) GetObject() CreateEditResponseObject {
 	if o == nil {
-		return ""
+		return CreateEditResponseObject("")
 	}
 	return o.Object
 }

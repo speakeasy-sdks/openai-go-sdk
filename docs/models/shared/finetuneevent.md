@@ -7,9 +7,9 @@ Fine-tune event object
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `CreatedAt`        | *int64*            | :heavy_check_mark: | N/A                |
-| `Level`            | *string*           | :heavy_check_mark: | N/A                |
-| `Message`          | *string*           | :heavy_check_mark: | N/A                |
-| `Object`           | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `CreatedAt`                                                              | *int64*                                                                  | :heavy_check_mark:                                                       | N/A                                                                      |
+| `Level`                                                                  | *string*                                                                 | :heavy_check_mark:                                                       | N/A                                                                      |
+| `Message`                                                                | *string*                                                                 | :heavy_check_mark:                                                       | N/A                                                                      |
+| `Object`                                                                 | [shared.FineTuneEventObject](../../models/shared/finetuneeventobject.md) | :heavy_check_mark:                                                       | N/A                                                                      |

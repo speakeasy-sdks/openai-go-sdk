@@ -1,0 +1,10 @@
+# DeleteAssistantResponse
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `Deleted`                                                                                    | *bool*                                                                                       | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `ID`                                                                                         | *string*                                                                                     | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `Object`                                                                                     | [shared.DeleteAssistantResponseObject](../../models/shared/deleteassistantresponseobject.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |

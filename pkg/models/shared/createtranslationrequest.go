@@ -6,12 +6,12 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 )
 
 type CreateTranslationRequestFile struct {
-	Content []byte `multipartForm:"content"`
-	File    string `multipartForm:"name=file"`
+	Content  []byte `multipartForm:"content"`
+	FileName string `multipartForm:"name=file"`
 }
 
 func (o *CreateTranslationRequestFile) GetContent() []byte {
@@ -21,48 +21,48 @@ func (o *CreateTranslationRequestFile) GetContent() []byte {
 	return o.Content
 }
 
-func (o *CreateTranslationRequestFile) GetFile() string {
+func (o *CreateTranslationRequestFile) GetFileName() string {
 	if o == nil {
 		return ""
 	}
-	return o.File
+	return o.FileName
 }
 
-// CreateTranslationRequestModel2 - ID of the model to use. Only `whisper-1` is currently available.
-type CreateTranslationRequestModel2 string
+// CreateTranslationRequest2 - ID of the model to use. Only `whisper-1` is currently available.
+type CreateTranslationRequest2 string
 
 const (
-	CreateTranslationRequestModel2Whisper1 CreateTranslationRequestModel2 = "whisper-1"
+	CreateTranslationRequest2Whisper1 CreateTranslationRequest2 = "whisper-1"
 )
 
-func (e CreateTranslationRequestModel2) ToPointer() *CreateTranslationRequestModel2 {
+func (e CreateTranslationRequest2) ToPointer() *CreateTranslationRequest2 {
 	return &e
 }
 
-func (e *CreateTranslationRequestModel2) UnmarshalJSON(data []byte) error {
+func (e *CreateTranslationRequest2) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "whisper-1":
-		*e = CreateTranslationRequestModel2(v)
+		*e = CreateTranslationRequest2(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for CreateTranslationRequestModel2: %v", v)
+		return fmt.Errorf("invalid value for CreateTranslationRequest2: %v", v)
 	}
 }
 
 type CreateTranslationRequestModelType string
 
 const (
-	CreateTranslationRequestModelTypeStr                            CreateTranslationRequestModelType = "str"
-	CreateTranslationRequestModelTypeCreateTranslationRequestModel2 CreateTranslationRequestModelType = "CreateTranslationRequest_model_2"
+	CreateTranslationRequestModelTypeStr                       CreateTranslationRequestModelType = "str"
+	CreateTranslationRequestModelTypeCreateTranslationRequest2 CreateTranslationRequestModelType = "CreateTranslationRequest_2"
 )
 
 type CreateTranslationRequestModel struct {
-	Str                            *string
-	CreateTranslationRequestModel2 *CreateTranslationRequestModel2
+	Str                       *string
+	CreateTranslationRequest2 *CreateTranslationRequest2
 
 	Type CreateTranslationRequestModelType
 }
@@ -76,12 +76,12 @@ func CreateCreateTranslationRequestModelStr(str string) CreateTranslationRequest
 	}
 }
 
-func CreateCreateTranslationRequestModelCreateTranslationRequestModel2(createTranslationRequestModel2 CreateTranslationRequestModel2) CreateTranslationRequestModel {
-	typ := CreateTranslationRequestModelTypeCreateTranslationRequestModel2
+func CreateCreateTranslationRequestModelCreateTranslationRequest2(createTranslationRequest2 CreateTranslationRequest2) CreateTranslationRequestModel {
+	typ := CreateTranslationRequestModelTypeCreateTranslationRequest2
 
 	return CreateTranslationRequestModel{
-		CreateTranslationRequestModel2: &createTranslationRequestModel2,
-		Type:                           typ,
+		CreateTranslationRequest2: &createTranslationRequest2,
+		Type:                      typ,
 	}
 }
 
@@ -94,10 +94,10 @@ func (u *CreateTranslationRequestModel) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	createTranslationRequestModel2 := CreateTranslationRequestModel2("")
-	if err := utils.UnmarshalJSON(data, &createTranslationRequestModel2, "", true, true); err == nil {
-		u.CreateTranslationRequestModel2 = &createTranslationRequestModel2
-		u.Type = CreateTranslationRequestModelTypeCreateTranslationRequestModel2
+	createTranslationRequest2 := CreateTranslationRequest2("")
+	if err := utils.UnmarshalJSON(data, &createTranslationRequest2, "", true, true); err == nil {
+		u.CreateTranslationRequest2 = &createTranslationRequest2
+		u.Type = CreateTranslationRequestModelTypeCreateTranslationRequest2
 		return nil
 	}
 
@@ -109,8 +109,8 @@ func (u CreateTranslationRequestModel) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
 
-	if u.CreateTranslationRequestModel2 != nil {
-		return utils.MarshalJSON(u.CreateTranslationRequestModel2, "", true)
+	if u.CreateTranslationRequest2 != nil {
+		return utils.MarshalJSON(u.CreateTranslationRequest2, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
@@ -126,7 +126,7 @@ type CreateTranslationRequest struct {
 	// An optional text to guide the model's style or continue a previous audio segment. The [prompt](/docs/guides/speech-to-text/prompting) should be in English.
 	//
 	Prompt *string `multipartForm:"name=prompt"`
-	// The format of the transcript output, in one of these options: json, text, srt, verbose_json, or vtt.
+	// The format of the transcript output, in one of these options: `json`, `text`, `srt`, `verbose_json`, or `vtt`.
 	//
 	ResponseFormat *string `default:"json" multipartForm:"name=response_format"`
 	// The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to automatically increase the temperature until certain thresholds are hit.

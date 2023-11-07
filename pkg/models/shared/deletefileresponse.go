@@ -2,10 +2,39 @@
 
 package shared
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type DeleteFileResponseObject string
+
+const (
+	DeleteFileResponseObjectFile DeleteFileResponseObject = "file"
+)
+
+func (e DeleteFileResponseObject) ToPointer() *DeleteFileResponseObject {
+	return &e
+}
+
+func (e *DeleteFileResponseObject) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "file":
+		*e = DeleteFileResponseObject(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for DeleteFileResponseObject: %v", v)
+	}
+}
+
 type DeleteFileResponse struct {
-	Deleted bool   `json:"deleted"`
-	ID      string `json:"id"`
-	Object  string `json:"object"`
+	Deleted bool                     `json:"deleted"`
+	ID      string                   `json:"id"`
+	Object  DeleteFileResponseObject `json:"object"`
 }
 
 func (o *DeleteFileResponse) GetDeleted() bool {
@@ -22,9 +51,9 @@ func (o *DeleteFileResponse) GetID() string {
 	return o.ID
 }
 
-func (o *DeleteFileResponse) GetObject() string {
+func (o *DeleteFileResponse) GetObject() DeleteFileResponseObject {
 	if o == nil {
-		return ""
+		return DeleteFileResponseObject("")
 	}
 	return o.Object
 }

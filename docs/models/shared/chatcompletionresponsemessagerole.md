@@ -7,7 +7,4 @@ The role of the author of this message.
 
 | Name                                         | Value                                        |
 | -------------------------------------------- | -------------------------------------------- |
-| `ChatCompletionResponseMessageRoleSystem`    | system                                       |
-| `ChatCompletionResponseMessageRoleUser`      | user                                         |
 | `ChatCompletionResponseMessageRoleAssistant` | assistant                                    |
-| `ChatCompletionResponseMessageRoleFunction`  | function                                     |

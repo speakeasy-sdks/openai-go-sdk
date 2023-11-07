@@ -6,12 +6,12 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 )
 
 type CreateTranscriptionRequestFile struct {
-	Content []byte `multipartForm:"content"`
-	File    string `multipartForm:"name=file"`
+	Content  []byte `multipartForm:"content"`
+	FileName string `multipartForm:"name=file"`
 }
 
 func (o *CreateTranscriptionRequestFile) GetContent() []byte {
@@ -21,48 +21,48 @@ func (o *CreateTranscriptionRequestFile) GetContent() []byte {
 	return o.Content
 }
 
-func (o *CreateTranscriptionRequestFile) GetFile() string {
+func (o *CreateTranscriptionRequestFile) GetFileName() string {
 	if o == nil {
 		return ""
 	}
-	return o.File
+	return o.FileName
 }
 
-// CreateTranscriptionRequestModel2 - ID of the model to use. Only `whisper-1` is currently available.
-type CreateTranscriptionRequestModel2 string
+// CreateTranscriptionRequest2 - ID of the model to use. Only `whisper-1` is currently available.
+type CreateTranscriptionRequest2 string
 
 const (
-	CreateTranscriptionRequestModel2Whisper1 CreateTranscriptionRequestModel2 = "whisper-1"
+	CreateTranscriptionRequest2Whisper1 CreateTranscriptionRequest2 = "whisper-1"
 )
 
-func (e CreateTranscriptionRequestModel2) ToPointer() *CreateTranscriptionRequestModel2 {
+func (e CreateTranscriptionRequest2) ToPointer() *CreateTranscriptionRequest2 {
 	return &e
 }
 
-func (e *CreateTranscriptionRequestModel2) UnmarshalJSON(data []byte) error {
+func (e *CreateTranscriptionRequest2) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "whisper-1":
-		*e = CreateTranscriptionRequestModel2(v)
+		*e = CreateTranscriptionRequest2(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for CreateTranscriptionRequestModel2: %v", v)
+		return fmt.Errorf("invalid value for CreateTranscriptionRequest2: %v", v)
 	}
 }
 
 type CreateTranscriptionRequestModelType string
 
 const (
-	CreateTranscriptionRequestModelTypeStr                              CreateTranscriptionRequestModelType = "str"
-	CreateTranscriptionRequestModelTypeCreateTranscriptionRequestModel2 CreateTranscriptionRequestModelType = "CreateTranscriptionRequest_model_2"
+	CreateTranscriptionRequestModelTypeStr                         CreateTranscriptionRequestModelType = "str"
+	CreateTranscriptionRequestModelTypeCreateTranscriptionRequest2 CreateTranscriptionRequestModelType = "CreateTranscriptionRequest_2"
 )
 
 type CreateTranscriptionRequestModel struct {
-	Str                              *string
-	CreateTranscriptionRequestModel2 *CreateTranscriptionRequestModel2
+	Str                         *string
+	CreateTranscriptionRequest2 *CreateTranscriptionRequest2
 
 	Type CreateTranscriptionRequestModelType
 }
@@ -76,12 +76,12 @@ func CreateCreateTranscriptionRequestModelStr(str string) CreateTranscriptionReq
 	}
 }
 
-func CreateCreateTranscriptionRequestModelCreateTranscriptionRequestModel2(createTranscriptionRequestModel2 CreateTranscriptionRequestModel2) CreateTranscriptionRequestModel {
-	typ := CreateTranscriptionRequestModelTypeCreateTranscriptionRequestModel2
+func CreateCreateTranscriptionRequestModelCreateTranscriptionRequest2(createTranscriptionRequest2 CreateTranscriptionRequest2) CreateTranscriptionRequestModel {
+	typ := CreateTranscriptionRequestModelTypeCreateTranscriptionRequest2
 
 	return CreateTranscriptionRequestModel{
-		CreateTranscriptionRequestModel2: &createTranscriptionRequestModel2,
-		Type:                             typ,
+		CreateTranscriptionRequest2: &createTranscriptionRequest2,
+		Type:                        typ,
 	}
 }
 
@@ -94,10 +94,10 @@ func (u *CreateTranscriptionRequestModel) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	createTranscriptionRequestModel2 := CreateTranscriptionRequestModel2("")
-	if err := utils.UnmarshalJSON(data, &createTranscriptionRequestModel2, "", true, true); err == nil {
-		u.CreateTranscriptionRequestModel2 = &createTranscriptionRequestModel2
-		u.Type = CreateTranscriptionRequestModelTypeCreateTranscriptionRequestModel2
+	createTranscriptionRequest2 := CreateTranscriptionRequest2("")
+	if err := utils.UnmarshalJSON(data, &createTranscriptionRequest2, "", true, true); err == nil {
+		u.CreateTranscriptionRequest2 = &createTranscriptionRequest2
+		u.Type = CreateTranscriptionRequestModelTypeCreateTranscriptionRequest2
 		return nil
 	}
 
@@ -109,14 +109,14 @@ func (u CreateTranscriptionRequestModel) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
 
-	if u.CreateTranscriptionRequestModel2 != nil {
-		return utils.MarshalJSON(u.CreateTranscriptionRequestModel2, "", true)
+	if u.CreateTranscriptionRequest2 != nil {
+		return utils.MarshalJSON(u.CreateTranscriptionRequest2, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-// CreateTranscriptionRequestResponseFormat - The format of the transcript output, in one of these options: json, text, srt, verbose_json, or vtt.
+// CreateTranscriptionRequestResponseFormat - The format of the transcript output, in one of these options: `json`, `text`, `srt`, `verbose_json`, or `vtt`.
 type CreateTranscriptionRequestResponseFormat string
 
 const (
@@ -166,7 +166,7 @@ type CreateTranscriptionRequest struct {
 	// An optional text to guide the model's style or continue a previous audio segment. The [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.
 	//
 	Prompt *string `multipartForm:"name=prompt"`
-	// The format of the transcript output, in one of these options: json, text, srt, verbose_json, or vtt.
+	// The format of the transcript output, in one of these options: `json`, `text`, `srt`, `verbose_json`, or `vtt`.
 	//
 	ResponseFormat *CreateTranscriptionRequestResponseFormat `default:"json" multipartForm:"name=response_format"`
 	// The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to automatically increase the temperature until certain thresholds are hit.

@@ -3,8 +3,8 @@
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `Deleted`          | *bool*             | :heavy_check_mark: | N/A                |
-| `ID`               | *string*           | :heavy_check_mark: | N/A                |
-| `Object`           | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `Deleted`                                                                          | *bool*                                                                             | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `ID`                                                                               | *string*                                                                           | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `Object`                                                                           | [shared.DeleteFileResponseObject](../../models/shared/deletefileresponseobject.md) | :heavy_check_mark:                                                                 | N/A                                                                                |

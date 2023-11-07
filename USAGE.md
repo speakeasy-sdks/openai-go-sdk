@@ -4,35 +4,32 @@
 ```go
 package main
 
-import(
+import (
 	"context"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v2"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
 )
 
 func main() {
-    s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
-    )
+	s := openaigosdk.New(
+		openaigosdk.WithSecurity(""),
+	)
 
-    ctx := context.Background()
-    res, err := s.Audio.CreateTranscription(ctx, shared.CreateTranscriptionRequest{
-        File: shared.CreateTranscriptionRequestFile{
-            Content: []byte("\#BbTW'zX9"),
-            File: "string",
-        },
-        Model: shared.CreateCreateTranscriptionRequestModelCreateTranscriptionRequestModel2(
-        shared.CreateTranscriptionRequestModel2Whisper1,
-        ),
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
+	var runID string = "string"
 
-    if res.CreateTranscriptionResponse != nil {
-        // handle response
-    }
+	var threadID string = "string"
+
+	ctx := context.Background()
+	res, err := s.Assistants.CancelRun(ctx, runID, threadID)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.RunObject != nil {
+		// handle response
+	}
 }
+
 ```
 <!-- End SDK Example Usage -->

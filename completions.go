@@ -6,28 +6,28 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/operations"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/sdkerrors"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/models/shared"
-	"github.com/speakeasy-sdks/openai-go-sdk/v2/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 	"io"
 	"net/http"
 	"strings"
 )
 
-// completions - Given a prompt, the model will return one or more predicted completions, and can also return the probabilities of alternative tokens at each position.
-type completions struct {
+// Completions - Given a prompt, the model will return one or more predicted completions, and can also return the probabilities of alternative tokens at each position.
+type Completions struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newCompletions(sdkConfig sdkConfiguration) *completions {
-	return &completions{
+func newCompletions(sdkConfig sdkConfiguration) *Completions {
+	return &Completions{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // CreateCompletion - Creates a completion for the provided prompt and parameters.
-func (s *completions) CreateCompletion(ctx context.Context, request shared.CreateCompletionRequest) (*operations.CreateCompletionResponse, error) {
+func (s *Completions) CreateCompletion(ctx context.Context, request shared.CreateCompletionRequest) (*operations.CreateCompletionResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/completions"
 
@@ -85,6 +85,10 @@ func (s *completions) CreateCompletion(ctx context.Context, request shared.Creat
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil

@@ -1,0 +1,12 @@
+# DeleteAssistantFileResponse
+
+Deletes the association between the assistant and the file, but does not delete the [File](/docs/api-reference/files) object itself.
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `Deleted`                                                                                            | *bool*                                                                                               | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `ID`                                                                                                 | *string*                                                                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `Object`                                                                                             | [shared.DeleteAssistantFileResponseObject](../../models/shared/deleteassistantfileresponseobject.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
