@@ -7,38 +7,6 @@ import (
 	"fmt"
 )
 
-type ChatCompletionToolFunction struct {
-	// A description of what the function does, used by the model to choose when and how to call the function.
-	Description *string `json:"description,omitempty"`
-	// The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
-	Name string `json:"name"`
-	// The parameters the functions accepts, described as a JSON Schema object. See the [guide](/docs/guides/gpt/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
-	//
-	// To describe a function that accepts no parameters, provide the value `{"type": "object", "properties": {}}`.
-	Parameters map[string]interface{} `json:"parameters"`
-}
-
-func (o *ChatCompletionToolFunction) GetDescription() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Description
-}
-
-func (o *ChatCompletionToolFunction) GetName() string {
-	if o == nil {
-		return ""
-	}
-	return o.Name
-}
-
-func (o *ChatCompletionToolFunction) GetParameters() map[string]interface{} {
-	if o == nil {
-		return map[string]interface{}{}
-	}
-	return o.Parameters
-}
-
 // ChatCompletionToolType - The type of the tool. Currently, only `function` is supported.
 type ChatCompletionToolType string
 
@@ -65,14 +33,14 @@ func (e *ChatCompletionToolType) UnmarshalJSON(data []byte) error {
 }
 
 type ChatCompletionTool struct {
-	Function ChatCompletionToolFunction `json:"function"`
+	Function FunctionObject `json:"function"`
 	// The type of the tool. Currently, only `function` is supported.
 	Type ChatCompletionToolType `json:"type"`
 }
 
-func (o *ChatCompletionTool) GetFunction() ChatCompletionToolFunction {
+func (o *ChatCompletionTool) GetFunction() FunctionObject {
 	if o == nil {
-		return ChatCompletionToolFunction{}
+		return FunctionObject{}
 	}
 	return o.Function
 }

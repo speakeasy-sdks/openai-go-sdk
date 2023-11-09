@@ -44,7 +44,7 @@ type ImageURL struct {
 	// Specifies the detail level of the image.
 	Detail *Detail `default:"auto" json:"detail"`
 	// Either a URL of the image or the base64 encoded image data.
-	URL *string `json:"url,omitempty"`
+	URL string `json:"url"`
 }
 
 func (i ImageURL) MarshalJSON() ([]byte, error) {
@@ -65,9 +65,9 @@ func (o *ImageURL) GetDetail() *Detail {
 	return o.Detail
 }
 
-func (o *ImageURL) GetURL() *string {
+func (o *ImageURL) GetURL() string {
 	if o == nil {
-		return nil
+		return ""
 	}
 	return o.URL
 }

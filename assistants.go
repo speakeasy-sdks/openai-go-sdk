@@ -389,16 +389,13 @@ func (s *Assistants) CreateRun(ctx context.Context, createRunRequest shared.Crea
 }
 
 // CreateThread - Create a thread.
-func (s *Assistants) CreateThread(ctx context.Context, request shared.CreateThreadRequest) (*operations.CreateThreadResponse, error) {
+func (s *Assistants) CreateThread(ctx context.Context, request *shared.CreateThreadRequest) (*operations.CreateThreadResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/threads"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-	if bodyReader == nil {
-		return nil, fmt.Errorf("request body is required")
 	}
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)

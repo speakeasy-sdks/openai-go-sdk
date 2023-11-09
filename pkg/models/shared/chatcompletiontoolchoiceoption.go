@@ -9,12 +9,12 @@ import (
 	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 )
 
-type SchemasFunction struct {
+type Function struct {
 	// The name of the function to call.
 	Name string `json:"name"`
 }
 
-func (o *SchemasFunction) GetName() string {
+func (o *Function) GetName() string {
 	if o == nil {
 		return ""
 	}
@@ -48,12 +48,12 @@ func (e *SchemasChatCompletionNamedToolChoiceType) UnmarshalJSON(data []byte) er
 
 // ChatCompletionNamedToolChoiceSchemas - Specifies a tool the model should use. Use to force the model to call a specific function.
 type ChatCompletionNamedToolChoiceSchemas struct {
-	Function *SchemasFunction `json:"function,omitempty"`
+	Function *Function `json:"function,omitempty"`
 	// The type of the tool. Currently, only `function` is supported.
 	Type *SchemasChatCompletionNamedToolChoiceType `json:"type,omitempty"`
 }
 
-func (o *ChatCompletionNamedToolChoiceSchemas) GetFunction() *SchemasFunction {
+func (o *ChatCompletionNamedToolChoiceSchemas) GetFunction() *Function {
 	if o == nil {
 		return nil
 	}

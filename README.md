@@ -68,7 +68,7 @@ func main() {
 ## Available Resources and Operations
 
 
-### [.Assistants](docs/sdks/assistants/README.md)
+### [Assistants](docs/sdks/assistants/README.md)
 
 * [CancelRun](docs/sdks/assistants/README.md#cancelrun) - Cancels a run that is `in_progress`.
 * [CreateAssistant](docs/sdks/assistants/README.md#createassistant) - Create an assistant with a model and instructions.
@@ -99,33 +99,33 @@ func main() {
 * [SubmitToolOuputsToRun](docs/sdks/assistants/README.md#submittoolouputstorun) - When a run has the `status: "requires_action"` and `required_action.type` is `submit_tool_outputs`, this endpoint can be used to submit the outputs from the tool calls once they're all completed. All outputs must be submitted in a single request.
 
 
-### [.Assistant](docs/sdks/assistant/README.md)
+### [Assistant](docs/sdks/assistant/README.md)
 
 * [ModifyAssistant](docs/sdks/assistant/README.md#modifyassistant) - Modifies an assistant.
 
-### [.Audio](docs/sdks/audio/README.md)
+### [Audio](docs/sdks/audio/README.md)
 
 * [CreateSpeech](docs/sdks/audio/README.md#createspeech) - Generates audio from the input text.
 * [CreateTranscription](docs/sdks/audio/README.md#createtranscription) - Transcribes audio into the input language.
 * [CreateTranslation](docs/sdks/audio/README.md#createtranslation) - Translates audio into English.
 
-### [.Chat](docs/sdks/chat/README.md)
+### [Chat](docs/sdks/chat/README.md)
 
 * [CreateChatCompletion](docs/sdks/chat/README.md#createchatcompletion) - Creates a model response for the given chat conversation.
 
-### [.Completions](docs/sdks/completions/README.md)
+### [Completions](docs/sdks/completions/README.md)
 
 * [CreateCompletion](docs/sdks/completions/README.md#createcompletion) - Creates a completion for the provided prompt and parameters.
 
-### [.Edits](docs/sdks/edits/README.md)
+### [Edits](docs/sdks/edits/README.md)
 
 * [~~CreateEdit~~](docs/sdks/edits/README.md#createedit) - Creates a new edit for the provided input, instruction, and parameters. :warning: **Deprecated**
 
-### [.Embeddings](docs/sdks/embeddings/README.md)
+### [Embeddings](docs/sdks/embeddings/README.md)
 
 * [CreateEmbedding](docs/sdks/embeddings/README.md#createembedding) - Creates an embedding vector representing the input text.
 
-### [.Files](docs/sdks/files/README.md)
+### [Files](docs/sdks/files/README.md)
 
 * [CreateFile](docs/sdks/files/README.md#createfile) - Upload a file that can be used across various endpoints/features. The size of all the files uploaded by one organization can be up to 100 GB.
 
@@ -138,7 +138,7 @@ Please [contact us](https://help.openai.com/) if you need to increase these stor
 * [ListFiles](docs/sdks/files/README.md#listfiles) - Returns a list of files that belong to the user's organization.
 * [RetrieveFile](docs/sdks/files/README.md#retrievefile) - Returns information about a specific file.
 
-### [.FineTunes](docs/sdks/finetunes/README.md)
+### [FineTunes](docs/sdks/finetunes/README.md)
 
 * [~~CancelFineTune~~](docs/sdks/finetunes/README.md#cancelfinetune) - Immediately cancel a fine-tune job.
  :warning: **Deprecated**
@@ -157,7 +157,7 @@ Response includes details of the enqueued job including job status and the name 
 [Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)
  :warning: **Deprecated**
 
-### [.FineTuning](docs/sdks/finetuning/README.md)
+### [FineTuning](docs/sdks/finetuning/README.md)
 
 * [CancelFineTuningJob](docs/sdks/finetuning/README.md#cancelfinetuningjob) - Immediately cancel a fine-tune job.
 
@@ -176,19 +176,19 @@ Response includes details of the enqueued job including job status and the name 
 [Learn more about fine-tuning](/docs/guides/fine-tuning)
 
 
-### [.Images](docs/sdks/images/README.md)
+### [Images](docs/sdks/images/README.md)
 
 * [CreateImage](docs/sdks/images/README.md#createimage) - Creates an image given a prompt.
 * [CreateImageEdit](docs/sdks/images/README.md#createimageedit) - Creates an edited or extended image given an original image and a prompt.
 * [CreateImageVariation](docs/sdks/images/README.md#createimagevariation) - Creates a variation of a given image.
 
-### [.Models](docs/sdks/models/README.md)
+### [Models](docs/sdks/models/README.md)
 
 * [DeleteModel](docs/sdks/models/README.md#deletemodel) - Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.
 * [ListModels](docs/sdks/models/README.md#listmodels) - Lists the currently available models, and provides basic information about each one such as the owner and availability.
 * [RetrieveModel](docs/sdks/models/README.md#retrievemodel) - Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
 
-### [.Moderations](docs/sdks/moderations/README.md)
+### [Moderations](docs/sdks/moderations/README.md)
 
 * [CreateModeration](docs/sdks/moderations/README.md#createmoderation) - Classifies if text violates OpenAI's Content Policy
 <!-- End SDK Available Operations -->
@@ -204,7 +204,47 @@ Response includes details of the enqueued job including job status and the name 
 <!-- Start Error Handling -->
 # Error Handling
 
-Handling errors in your SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+Handling errors in this SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
+
+
+## Example
+
+```go
+package main
+
+import (
+	"context"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	"log"
+)
+
+func main() {
+	s := openaigosdk.New(
+		openaigosdk.WithSecurity(""),
+	)
+
+	var runID string = "string"
+
+	var threadID string = "string"
+
+	ctx := context.Background()
+	res, err := s.Assistants.CancelRun(ctx, runID, threadID)
+	if err != nil {
+
+		var e *sdkerrors.SDKError
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+	}
+}
+
+```
 <!-- End Error Handling -->
 
 
@@ -334,12 +374,11 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 
 
 <!-- Start Authentication -->
-
 # Authentication
 
 ## Per-Client Security Schemes
 
-Your SDK supports the following security scheme globally:
+This SDK supports the following security scheme globally:
 
 | Name         | Type         | Scheme       |
 | ------------ | ------------ | ------------ |

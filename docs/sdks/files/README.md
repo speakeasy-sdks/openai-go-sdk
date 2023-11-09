@@ -1,5 +1,5 @@
 # Files
-(*.Files*)
+(*Files*)
 
 ## Overview
 
@@ -64,16 +64,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                            | Type                                                                 | Required                                                             | Description                                                          |
-| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `ctx`                                                                | [context.Context](https://pkg.go.dev/context#Context)                | :heavy_check_mark:                                                   | The context to use for the request.                                  |
-| `request`                                                            | [shared.CreateFileRequest](../../models/shared/createfilerequest.md) | :heavy_check_mark:                                                   | The request object to use for the request.                           |
+| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
+| `request`                                                                | [shared.CreateFileRequest](../../pkg/models/shared/createfilerequest.md) | :heavy_check_mark:                                                       | The request object to use for the request.                               |
 
 
 ### Response
 
-**[*operations.CreateFileResponse](../../models/operations/createfileresponse.md), error**
-
+**[*operations.CreateFileResponse](../../pkg/models/operations/createfileresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## DeleteFile
 
@@ -121,8 +123,10 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteFileResponse](../../models/operations/deletefileresponse.md), error**
-
+**[*operations.DeleteFileResponse](../../pkg/models/operations/deletefileresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## DownloadFile
 
@@ -170,8 +174,10 @@ func main() {
 
 ### Response
 
-**[*operations.DownloadFileResponse](../../models/operations/downloadfileresponse.md), error**
-
+**[*operations.DownloadFileResponse](../../pkg/models/operations/downloadfileresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ListFiles
 
@@ -219,8 +225,10 @@ func main() {
 
 ### Response
 
-**[*operations.ListFilesResponse](../../models/operations/listfilesresponse.md), error**
-
+**[*operations.ListFilesResponse](../../pkg/models/operations/listfilesresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## RetrieveFile
 
@@ -268,5 +276,7 @@ func main() {
 
 ### Response
 
-**[*operations.RetrieveFileResponse](../../models/operations/retrievefileresponse.md), error**
-
+**[*operations.RetrieveFileResponse](../../pkg/models/operations/retrievefileresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

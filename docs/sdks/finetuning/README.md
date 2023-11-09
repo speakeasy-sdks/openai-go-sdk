@@ -1,5 +1,5 @@
 # FineTuning
-(*.FineTuning*)
+(*FineTuning*)
 
 ## Overview
 
@@ -71,8 +71,10 @@ func main() {
 
 ### Response
 
-**[*operations.CancelFineTuningJobResponse](../../models/operations/cancelfinetuningjobresponse.md), error**
-
+**[*operations.CancelFineTuningJobResponse](../../pkg/models/operations/cancelfinetuningjobresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## CreateFineTuningJob
 
@@ -131,16 +133,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
-| `request`                                                                              | [shared.CreateFineTuningJobRequest](../../models/shared/createfinetuningjobrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
+| `request`                                                                                  | [shared.CreateFineTuningJobRequest](../../pkg/models/shared/createfinetuningjobrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 
 
 ### Response
 
-**[*operations.CreateFineTuningJobResponse](../../models/operations/createfinetuningjobresponse.md), error**
-
+**[*operations.CreateFineTuningJobResponse](../../pkg/models/operations/createfinetuningjobresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ListFineTuningEvents
 
@@ -195,8 +199,10 @@ func main() {
 
 ### Response
 
-**[*operations.ListFineTuningEventsResponse](../../models/operations/listfinetuningeventsresponse.md), error**
-
+**[*operations.ListFineTuningEventsResponse](../../pkg/models/operations/listfinetuningeventsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ListPaginatedFineTuningJobs
 
@@ -248,8 +254,10 @@ func main() {
 
 ### Response
 
-**[*operations.ListPaginatedFineTuningJobsResponse](../../models/operations/listpaginatedfinetuningjobsresponse.md), error**
-
+**[*operations.ListPaginatedFineTuningJobsResponse](../../pkg/models/operations/listpaginatedfinetuningjobsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## RetrieveFineTuningJob
 
@@ -300,5 +308,7 @@ func main() {
 
 ### Response
 
-**[*operations.RetrieveFineTuningJobResponse](../../models/operations/retrievefinetuningjobresponse.md), error**
-
+**[*operations.RetrieveFineTuningJobResponse](../../pkg/models/operations/retrievefinetuningjobresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

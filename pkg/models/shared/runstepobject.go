@@ -63,11 +63,11 @@ func (o *RunStepObjectLastError) GetMessage() string {
 type RunStepObjectMetadata struct {
 }
 
-// RunStepObjectObject - The object type, which is always `assistant.run.step“.
+// RunStepObjectObject - The object type, which is always `thread.run.step“.
 type RunStepObjectObject string
 
 const (
-	RunStepObjectObjectAssistantRunStep RunStepObjectObject = "assistant.run.step"
+	RunStepObjectObjectThreadRunStep RunStepObjectObject = "thread.run.step"
 )
 
 func (e RunStepObjectObject) ToPointer() *RunStepObjectObject {
@@ -80,7 +80,7 @@ func (e *RunStepObjectObject) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
-	case "assistant.run.step":
+	case "thread.run.step":
 		*e = RunStepObjectObject(v)
 		return nil
 	default:
@@ -88,7 +88,7 @@ func (e *RunStepObjectObject) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// RunStepObjectStatus - The status of the run, which can be either `in_progress`, `cancelled`, `failed`, `completed`, or `expired`.
+// RunStepObjectStatus - The status of the run step, which can be either `in_progress`, `cancelled`, `failed`, `completed`, or `expired`.
 type RunStepObjectStatus string
 
 const (
@@ -125,8 +125,8 @@ func (e *RunStepObjectStatus) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// SchemasRunStepDetailsToolCallsFunctionObjectFunction - The definition of the function that was called.
-type SchemasRunStepDetailsToolCallsFunctionObjectFunction struct {
+// SchemasFunction - The definition of the function that was called.
+type SchemasFunction struct {
 	// The arguments passed to the function.
 	Arguments string `json:"arguments"`
 	// The name of the function.
@@ -135,21 +135,21 @@ type SchemasRunStepDetailsToolCallsFunctionObjectFunction struct {
 	Output *string `json:"output"`
 }
 
-func (o *SchemasRunStepDetailsToolCallsFunctionObjectFunction) GetArguments() string {
+func (o *SchemasFunction) GetArguments() string {
 	if o == nil {
 		return ""
 	}
 	return o.Arguments
 }
 
-func (o *SchemasRunStepDetailsToolCallsFunctionObjectFunction) GetName() string {
+func (o *SchemasFunction) GetName() string {
 	if o == nil {
 		return ""
 	}
 	return o.Name
 }
 
-func (o *SchemasRunStepDetailsToolCallsFunctionObjectFunction) GetOutput() *string {
+func (o *SchemasFunction) GetOutput() *string {
 	if o == nil {
 		return nil
 	}
@@ -183,16 +183,16 @@ func (e *SchemasRunStepDetailsToolCallsFunctionObjectType) UnmarshalJSON(data []
 
 type FunctionToolCall struct {
 	// The definition of the function that was called.
-	Function SchemasRunStepDetailsToolCallsFunctionObjectFunction `json:"function"`
+	Function SchemasFunction `json:"function"`
 	// The ID of the tool call object.
 	ID string `json:"id"`
 	// The type of tool call. This is always going to be `function` for this type of tool call.
 	Type SchemasRunStepDetailsToolCallsFunctionObjectType `json:"type"`
 }
 
-func (o *FunctionToolCall) GetFunction() SchemasRunStepDetailsToolCallsFunctionObjectFunction {
+func (o *FunctionToolCall) GetFunction() SchemasFunction {
 	if o == nil {
-		return SchemasRunStepDetailsToolCallsFunctionObjectFunction{}
+		return SchemasFunction{}
 	}
 	return o.Function
 }
@@ -818,11 +818,11 @@ type RunStepObject struct {
 	// Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maxium of 512 characters long.
 	//
 	Metadata *RunStepObjectMetadata `json:"metadata"`
-	// The object type, which is always `assistant.run.step``.
+	// The object type, which is always `thread.run.step``.
 	Object RunStepObjectObject `json:"object"`
 	// The ID of the [run](/docs/api-reference/runs) that this run step is a part of.
 	RunID string `json:"run_id"`
-	// The status of the run, which can be either `in_progress`, `cancelled`, `failed`, `completed`, or `expired`.
+	// The status of the run step, which can be either `in_progress`, `cancelled`, `failed`, `completed`, or `expired`.
 	Status RunStepObjectStatus `json:"status"`
 	// The details of the run step.
 	StepDetails StepDetails `json:"step_details"`

@@ -1,5 +1,5 @@
 # FineTunes
-(*.FineTunes*)
+(*FineTunes*)
 
 ## Overview
 
@@ -73,8 +73,10 @@ func main() {
 
 ### Response
 
-**[*operations.CancelFineTuneResponse](../../models/operations/cancelfinetuneresponse.md), error**
-
+**[*operations.CancelFineTuneResponse](../../pkg/models/operations/cancelfinetuneresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ~~CreateFineTune~~
 
@@ -135,16 +137,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
-| `request`                                                                    | [shared.CreateFineTuneRequest](../../models/shared/createfinetunerequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
+| `request`                                                                        | [shared.CreateFineTuneRequest](../../pkg/models/shared/createfinetunerequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 
 
 ### Response
 
-**[*operations.CreateFineTuneResponse](../../models/operations/createfinetuneresponse.md), error**
-
+**[*operations.CreateFineTuneResponse](../../pkg/models/operations/createfinetuneresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ~~ListFineTuneEvents~~
 
@@ -198,8 +202,10 @@ func main() {
 
 ### Response
 
-**[*operations.ListFineTuneEventsResponse](../../models/operations/listfinetuneeventsresponse.md), error**
-
+**[*operations.ListFineTuneEventsResponse](../../pkg/models/operations/listfinetuneeventsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ~~ListFineTunes~~
 
@@ -246,8 +252,10 @@ func main() {
 
 ### Response
 
-**[*operations.ListFineTunesResponse](../../models/operations/listfinetunesresponse.md), error**
-
+**[*operations.ListFineTunesResponse](../../pkg/models/operations/listfinetunesresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ~~RetrieveFineTune~~
 
@@ -300,5 +308,7 @@ func main() {
 
 ### Response
 
-**[*operations.RetrieveFineTuneResponse](../../models/operations/retrievefinetuneresponse.md), error**
-
+**[*operations.RetrieveFineTuneResponse](../../pkg/models/operations/retrievefinetuneresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

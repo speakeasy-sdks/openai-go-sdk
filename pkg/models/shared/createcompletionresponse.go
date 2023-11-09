@@ -41,10 +41,10 @@ func (e *CreateCompletionResponseFinishReason) UnmarshalJSON(data []byte) error 
 }
 
 type Logprobs struct {
-	TextOffset    []int64            `json:"text_offset,omitempty"`
-	TokenLogprobs []float64          `json:"token_logprobs,omitempty"`
-	Tokens        []string           `json:"tokens,omitempty"`
-	TopLogprobs   []map[string]int64 `json:"top_logprobs,omitempty"`
+	TextOffset    []int64              `json:"text_offset,omitempty"`
+	TokenLogprobs []float64            `json:"token_logprobs,omitempty"`
+	Tokens        []string             `json:"tokens,omitempty"`
+	TopLogprobs   []map[string]float64 `json:"top_logprobs,omitempty"`
 }
 
 func (o *Logprobs) GetTextOffset() []int64 {
@@ -68,7 +68,7 @@ func (o *Logprobs) GetTokens() []string {
 	return o.Tokens
 }
 
-func (o *Logprobs) GetTopLogprobs() []map[string]int64 {
+func (o *Logprobs) GetTopLogprobs() []map[string]float64 {
 	if o == nil {
 		return nil
 	}

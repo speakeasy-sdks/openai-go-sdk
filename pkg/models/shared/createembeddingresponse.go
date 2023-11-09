@@ -7,11 +7,11 @@ import (
 	"fmt"
 )
 
-// CreateEmbeddingResponseObject - The object type, which is always "embedding".
+// CreateEmbeddingResponseObject - The object type, which is always "list".
 type CreateEmbeddingResponseObject string
 
 const (
-	CreateEmbeddingResponseObjectEmbedding CreateEmbeddingResponseObject = "embedding"
+	CreateEmbeddingResponseObjectList CreateEmbeddingResponseObject = "list"
 )
 
 func (e CreateEmbeddingResponseObject) ToPointer() *CreateEmbeddingResponseObject {
@@ -24,7 +24,7 @@ func (e *CreateEmbeddingResponseObject) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
-	case "embedding":
+	case "list":
 		*e = CreateEmbeddingResponseObject(v)
 		return nil
 	default:
@@ -59,7 +59,7 @@ type CreateEmbeddingResponse struct {
 	Data []Embedding `json:"data"`
 	// The name of the model used to generate the embedding.
 	Model string `json:"model"`
-	// The object type, which is always "embedding".
+	// The object type, which is always "list".
 	Object CreateEmbeddingResponseObject `json:"object"`
 	// The usage information for the request.
 	Usage Usage `json:"usage"`

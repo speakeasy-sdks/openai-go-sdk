@@ -121,6 +121,8 @@ func (u CreateChatCompletionRequestFunctionCall) MarshalJSON() ([]byte, error) {
 type Two string
 
 const (
+	TwoGpt41106Preview   Two = "gpt-4-1106-preview"
+	TwoGpt4VisionPreview Two = "gpt-4-vision-preview"
 	TwoGpt4              Two = "gpt-4"
 	TwoGpt40314          Two = "gpt-4-0314"
 	TwoGpt40613          Two = "gpt-4-0613"
@@ -144,6 +146,10 @@ func (e *Two) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
+	case "gpt-4-1106-preview":
+		fallthrough
+	case "gpt-4-vision-preview":
+		fallthrough
 	case "gpt-4":
 		fallthrough
 	case "gpt-4-0314":
@@ -235,11 +241,7 @@ func (u CreateChatCompletionRequestModel) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-// CreateChatCompletionRequestType - Setting to `json_object` enables JSON mode. This guarantees that the message the model generates is valid JSON.
-//
-// Note that your system prompt must still instruct the model to produce JSON, and to help ensure you don't forget, the API will throw an error if the string `JSON` does not appear in your system message. Also note that the message content may be partial (i.e. cut off) if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
-//
-// Must be one of `text` or `json_object`.
+// CreateChatCompletionRequestType - Must be one of `text` or `json_object`.
 type CreateChatCompletionRequestType string
 
 const (
@@ -267,14 +269,13 @@ func (e *CreateChatCompletionRequestType) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// ResponseFormat - An object specifying the format that the model must output. Used to enable JSON mode.
+// ResponseFormat - An object specifying the format that the model must output.
+//
+// Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is valid JSON.
+//
+// **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in increased latency and appearance of a "stuck" request. Also note that the message content may be partially cut off if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
 type ResponseFormat struct {
-	// Setting to `json_object` enables JSON mode. This guarantees that the message the model generates is valid JSON.
-	//
-	// Note that your system prompt must still instruct the model to produce JSON, and to help ensure you don't forget, the API will throw an error if the string `JSON` does not appear in your system message. Also note that the message content may be partial (i.e. cut off) if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
-	//
 	// Must be one of `text` or `json_object`.
-	//
 	Type *CreateChatCompletionRequestType `default:"text" json:"type"`
 }
 
@@ -405,7 +406,12 @@ type CreateChatCompletionRequest struct {
 	// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
 	//
 	PresencePenalty *float64 `default:"0" json:"presence_penalty"`
-	// An object specifying the format that the model must output. Used to enable JSON mode.
+	// An object specifying the format that the model must output.
+	//
+	// Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is valid JSON.
+	//
+	// **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in increased latency and appearance of a "stuck" request. Also note that the message content may be partially cut off if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
+	//
 	ResponseFormat *ResponseFormat `json:"response_format,omitempty"`
 	// This feature is in Beta.
 	// If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same `seed` and parameters should return the same result.

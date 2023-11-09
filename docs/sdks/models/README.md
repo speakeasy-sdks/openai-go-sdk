@@ -1,5 +1,5 @@
 # Models
-(*.Models*)
+(*Models*)
 
 ## Overview
 
@@ -57,8 +57,10 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteModelResponse](../../models/operations/deletemodelresponse.md), error**
-
+**[*operations.DeleteModelResponse](../../pkg/models/operations/deletemodelresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ListModels
 
@@ -102,8 +104,10 @@ func main() {
 
 ### Response
 
-**[*operations.ListModelsResponse](../../models/operations/listmodelsresponse.md), error**
-
+**[*operations.ListModelsResponse](../../pkg/models/operations/listmodelsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## RetrieveModel
 
@@ -151,5 +155,7 @@ func main() {
 
 ### Response
 
-**[*operations.RetrieveModelResponse](../../models/operations/retrievemodelresponse.md), error**
-
+**[*operations.RetrieveModelResponse](../../pkg/models/operations/retrievemodelresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

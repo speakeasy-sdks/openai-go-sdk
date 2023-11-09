@@ -7,39 +7,6 @@ import (
 	"fmt"
 )
 
-// AssistantToolsFunctionFunction - The function definition.
-type AssistantToolsFunctionFunction struct {
-	// A description of what the function does, used by the model to choose when and how to call the function.
-	Description string `json:"description"`
-	// The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
-	Name string `json:"name"`
-	// The parameters the functions accepts, described as a JSON Schema object. See the [guide](/docs/guides/gpt/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
-	//
-	// To describe a function that accepts no parameters, provide the value `{"type": "object", "properties": {}}`.
-	Parameters map[string]interface{} `json:"parameters"`
-}
-
-func (o *AssistantToolsFunctionFunction) GetDescription() string {
-	if o == nil {
-		return ""
-	}
-	return o.Description
-}
-
-func (o *AssistantToolsFunctionFunction) GetName() string {
-	if o == nil {
-		return ""
-	}
-	return o.Name
-}
-
-func (o *AssistantToolsFunctionFunction) GetParameters() map[string]interface{} {
-	if o == nil {
-		return map[string]interface{}{}
-	}
-	return o.Parameters
-}
-
 // AssistantToolsFunctionType - The type of tool being defined: `function`
 type AssistantToolsFunctionType string
 
@@ -66,15 +33,14 @@ func (e *AssistantToolsFunctionType) UnmarshalJSON(data []byte) error {
 }
 
 type AssistantToolsFunction struct {
-	// The function definition.
-	Function AssistantToolsFunctionFunction `json:"function"`
+	Function FunctionObject `json:"function"`
 	// The type of tool being defined: `function`
 	Type AssistantToolsFunctionType `json:"type"`
 }
 
-func (o *AssistantToolsFunction) GetFunction() AssistantToolsFunctionFunction {
+func (o *AssistantToolsFunction) GetFunction() FunctionObject {
 	if o == nil {
-		return AssistantToolsFunctionFunction{}
+		return FunctionObject{}
 	}
 	return o.Function
 }

@@ -1,5 +1,5 @@
 # Assistants
-(*.Assistants*)
+(*Assistants*)
 
 ## Overview
 
@@ -85,8 +85,10 @@ func main() {
 
 ### Response
 
-**[*operations.CancelRunResponse](../../models/operations/cancelrunresponse.md), error**
-
+**[*operations.CancelRunResponse](../../pkg/models/operations/cancelrunresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## CreateAssistant
 
@@ -136,16 +138,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
-| `request`                                                                      | [shared.CreateAssistantRequest](../../models/shared/createassistantrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
+| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
+| `request`                                                                          | [shared.CreateAssistantRequest](../../pkg/models/shared/createassistantrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 
 
 ### Response
 
-**[*operations.CreateAssistantResponse](../../models/operations/createassistantresponse.md), error**
-
+**[*operations.CreateAssistantResponse](../../pkg/models/operations/createassistantresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## CreateAssistantFile
 
@@ -189,17 +193,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            | Example                                                                                |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |                                                                                        |
-| `createAssistantFileRequest`                                                           | [shared.CreateAssistantFileRequest](../../models/shared/createassistantfilerequest.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |                                                                                        |
-| `assistantID`                                                                          | *string*                                                                               | :heavy_check_mark:                                                                     | The ID of the assistant for which to create a File.<br/>                               | file-AF1WoRqd3aJAHsqc9NY7iL8F                                                          |
+| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                         | [context.Context](https://pkg.go.dev/context#Context)                                         | :heavy_check_mark:                                                                            | The context to use for the request.                                                           |                                                                                               |
+| `createAssistantFileRequest`                                                                  | [shared.CreateAssistantFileRequest](../../../pkg/models/shared/createassistantfilerequest.md) | :heavy_check_mark:                                                                            | N/A                                                                                           |                                                                                               |
+| `assistantID`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | The ID of the assistant for which to create a File.<br/>                                      | file-AF1WoRqd3aJAHsqc9NY7iL8F                                                                 |
 
 
 ### Response
 
-**[*operations.CreateAssistantFileResponse](../../models/operations/createassistantfileresponse.md), error**
-
+**[*operations.CreateAssistantFileResponse](../../pkg/models/operations/createassistantfileresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## CreateMessage
 
@@ -248,17 +254,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
-| `createMessageRequest`                                                       | [shared.CreateMessageRequest](../../models/shared/createmessagerequest.md)   | :heavy_check_mark:                                                           | N/A                                                                          |
-| `threadID`                                                                   | *string*                                                                     | :heavy_check_mark:                                                           | The ID of the [thread](/docs/api-reference/threads) to create a message for. |
+| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `ctx`                                                                             | [context.Context](https://pkg.go.dev/context#Context)                             | :heavy_check_mark:                                                                | The context to use for the request.                                               |
+| `createMessageRequest`                                                            | [shared.CreateMessageRequest](../../../pkg/models/shared/createmessagerequest.md) | :heavy_check_mark:                                                                | N/A                                                                               |
+| `threadID`                                                                        | *string*                                                                          | :heavy_check_mark:                                                                | The ID of the [thread](/docs/api-reference/threads) to create a message for.      |
 
 
 ### Response
 
-**[*operations.CreateMessageResponse](../../models/operations/createmessageresponse.md), error**
-
+**[*operations.CreateMessageResponse](../../pkg/models/operations/createmessageresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## CreateRun
 
@@ -310,17 +318,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                          | Type                                                               | Required                                                           | Description                                                        |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `ctx`                                                              | [context.Context](https://pkg.go.dev/context#Context)              | :heavy_check_mark:                                                 | The context to use for the request.                                |
-| `createRunRequest`                                                 | [shared.CreateRunRequest](../../models/shared/createrunrequest.md) | :heavy_check_mark:                                                 | N/A                                                                |
-| `threadID`                                                         | *string*                                                           | :heavy_check_mark:                                                 | The ID of the thread to run.                                       |
+| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `ctx`                                                                     | [context.Context](https://pkg.go.dev/context#Context)                     | :heavy_check_mark:                                                        | The context to use for the request.                                       |
+| `createRunRequest`                                                        | [shared.CreateRunRequest](../../../pkg/models/shared/createrunrequest.md) | :heavy_check_mark:                                                        | N/A                                                                       |
+| `threadID`                                                                | *string*                                                                  | :heavy_check_mark:                                                        | The ID of the thread to run.                                              |
 
 
 ### Response
 
-**[*operations.CreateRunResponse](../../models/operations/createrunresponse.md), error**
-
+**[*operations.CreateRunResponse](../../pkg/models/operations/createrunresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## CreateThread
 
@@ -344,7 +354,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Assistants.CreateThread(ctx, shared.CreateThreadRequest{
+    res, err := s.Assistants.CreateThread(ctx, &shared.CreateThreadRequest{
         Messages: []shared.CreateMessageRequest{
             shared.CreateMessageRequest{
                 Content: "string",
@@ -369,16 +379,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
-| `request`                                                                | [shared.CreateThreadRequest](../../models/shared/createthreadrequest.md) | :heavy_check_mark:                                                       | The request object to use for the request.                               |
+| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
+| `request`                                                                    | [shared.CreateThreadRequest](../../pkg/models/shared/createthreadrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
 
 
 ### Response
 
-**[*operations.CreateThreadResponse](../../models/operations/createthreadresponse.md), error**
-
+**[*operations.CreateThreadResponse](../../pkg/models/operations/createthreadresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## CreateThreadAndRun
 
@@ -421,8 +433,7 @@ func main() {
         Tools: []shared.CreateThreadAndRunRequestTools{
             shared.CreateCreateThreadAndRunRequestToolsAssistantToolsFunction(
                 shared.AssistantToolsFunction{
-                    Function: shared.AssistantToolsFunctionFunction{
-                        Description: "Exclusive holistic moratorium",
+                    Function: shared.FunctionObject{
                         Name: "string",
                         Parameters: map[string]interface{}{
                             "key": "string",
@@ -445,16 +456,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
-| `request`                                                                            | [shared.CreateThreadAndRunRequest](../../models/shared/createthreadandrunrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `request`                                                                                | [shared.CreateThreadAndRunRequest](../../pkg/models/shared/createthreadandrunrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 
 
 ### Response
 
-**[*operations.CreateThreadAndRunResponse](../../models/operations/createthreadandrunresponse.md), error**
-
+**[*operations.CreateThreadAndRunResponse](../../pkg/models/operations/createthreadandrunresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## DeleteAssistant
 
@@ -502,8 +515,10 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteAssistantResponse](../../models/operations/deleteassistantresponse.md), error**
-
+**[*operations.DeleteAssistantResponse](../../pkg/models/operations/deleteassistantresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## DeleteAssistantFile
 
@@ -554,8 +569,10 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteAssistantFileResponse](../../models/operations/deleteassistantfileresponse.md), error**
-
+**[*operations.DeleteAssistantFileResponse](../../pkg/models/operations/deleteassistantfileresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## DeleteThread
 
@@ -603,8 +620,10 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteThreadResponse](../../models/operations/deletethreadresponse.md), error**
-
+**[*operations.DeleteThreadResponse](../../pkg/models/operations/deletethreadresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetAssistant
 
@@ -652,8 +671,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetAssistantResponse](../../models/operations/getassistantresponse.md), error**
-
+**[*operations.GetAssistantResponse](../../pkg/models/operations/getassistantresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetAssistantFile
 
@@ -704,8 +725,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetAssistantFileResponse](../../models/operations/getassistantfileresponse.md), error**
-
+**[*operations.GetAssistantFileResponse](../../pkg/models/operations/getassistantfileresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetMessage
 
@@ -756,8 +779,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetMessageResponse](../../models/operations/getmessageresponse.md), error**
-
+**[*operations.GetMessageResponse](../../pkg/models/operations/getmessageresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetMessageFile
 
@@ -811,8 +836,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetMessageFileResponse](../../models/operations/getmessagefileresponse.md), error**
-
+**[*operations.GetMessageFileResponse](../../pkg/models/operations/getmessagefileresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetRun
 
@@ -863,8 +890,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetRunResponse](../../models/operations/getrunresponse.md), error**
-
+**[*operations.GetRunResponse](../../pkg/models/operations/getrunresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetRunStep
 
@@ -918,8 +947,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetRunStepResponse](../../models/operations/getrunstepresponse.md), error**
-
+**[*operations.GetRunStepResponse](../../pkg/models/operations/getrunstepresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetThread
 
@@ -967,8 +998,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetThreadResponse](../../models/operations/getthreadresponse.md), error**
-
+**[*operations.GetThreadResponse](../../pkg/models/operations/getthreadresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ListAssistantFiles
 
@@ -1008,16 +1041,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
-| `request`                                                                                    | [operations.ListAssistantFilesRequest](../../models/operations/listassistantfilesrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
+| `request`                                                                                        | [operations.ListAssistantFilesRequest](../../pkg/models/operations/listassistantfilesrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
 
 
 ### Response
 
-**[*operations.ListAssistantFilesResponse](../../models/operations/listassistantfilesresponse.md), error**
-
+**[*operations.ListAssistantFilesResponse](../../pkg/models/operations/listassistantfilesresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ListAssistants
 
@@ -1070,13 +1105,15 @@ func main() {
 | `after`                                                                                                                                                                                                                                                                                | **string*                                                                                                                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                                                                     | A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.<br/>   |
 | `before`                                                                                                                                                                                                                                                                               | **string*                                                                                                                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                                                                     | A cursor for use in pagination. `before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.<br/> |
 | `limit`                                                                                                                                                                                                                                                                                | **int64*                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                     | A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.<br/>                                                                                                                                                                        |
-| `order`                                                                                                                                                                                                                                                                                | [*operations.QueryParamOrder](../../models/operations/queryparamorder.md)                                                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                                                                     | Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order.<br/>                                                                                                                                                               |
+| `order`                                                                                                                                                                                                                                                                                | [*operations.QueryParamOrder](../../../pkg/models/operations/queryparamorder.md)                                                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                                                                                     | Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order.<br/>                                                                                                                                                               |
 
 
 ### Response
 
-**[*operations.ListAssistantsResponse](../../models/operations/listassistantsresponse.md), error**
-
+**[*operations.ListAssistantsResponse](../../pkg/models/operations/listassistantsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ListMessageFiles
 
@@ -1117,16 +1154,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `request`                                                                                | [operations.ListMessageFilesRequest](../../models/operations/listmessagefilesrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
+| `request`                                                                                    | [operations.ListMessageFilesRequest](../../pkg/models/operations/listmessagefilesrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
 
 
 ### Response
 
-**[*operations.ListMessageFilesResponse](../../models/operations/listmessagefilesresponse.md), error**
-
+**[*operations.ListMessageFilesResponse](../../pkg/models/operations/listmessagefilesresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ListMessages
 
@@ -1166,16 +1205,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
-| `request`                                                                        | [operations.ListMessagesRequest](../../models/operations/listmessagesrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
+| `request`                                                                            | [operations.ListMessagesRequest](../../pkg/models/operations/listmessagesrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 
 
 ### Response
 
-**[*operations.ListMessagesResponse](../../models/operations/listmessagesresponse.md), error**
-
+**[*operations.ListMessagesResponse](../../pkg/models/operations/listmessagesresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ListRunSteps
 
@@ -1216,16 +1257,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
-| `request`                                                                        | [operations.ListRunStepsRequest](../../models/operations/listrunstepsrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
+| `request`                                                                            | [operations.ListRunStepsRequest](../../pkg/models/operations/listrunstepsrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 
 
 ### Response
 
-**[*operations.ListRunStepsResponse](../../models/operations/listrunstepsresponse.md), error**
-
+**[*operations.ListRunStepsResponse](../../pkg/models/operations/listrunstepsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ListRuns
 
@@ -1265,16 +1308,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
-| `request`                                                                | [operations.ListRunsRequest](../../models/operations/listrunsrequest.md) | :heavy_check_mark:                                                       | The request object to use for the request.                               |
+| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
+| `request`                                                                    | [operations.ListRunsRequest](../../pkg/models/operations/listrunsrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
 
 
 ### Response
 
-**[*operations.ListRunsResponse](../../models/operations/listrunsresponse.md), error**
-
+**[*operations.ListRunsResponse](../../pkg/models/operations/listrunsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ModifyMessage
 
@@ -1320,18 +1365,20 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
-| `modifyMessageRequest`                                                     | [shared.ModifyMessageRequest](../../models/shared/modifymessagerequest.md) | :heavy_check_mark:                                                         | N/A                                                                        |
-| `messageID`                                                                | *string*                                                                   | :heavy_check_mark:                                                         | The ID of the message to modify.                                           |
-| `threadID`                                                                 | *string*                                                                   | :heavy_check_mark:                                                         | The ID of the thread to which this message belongs.                        |
+| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `ctx`                                                                             | [context.Context](https://pkg.go.dev/context#Context)                             | :heavy_check_mark:                                                                | The context to use for the request.                                               |
+| `modifyMessageRequest`                                                            | [shared.ModifyMessageRequest](../../../pkg/models/shared/modifymessagerequest.md) | :heavy_check_mark:                                                                | N/A                                                                               |
+| `messageID`                                                                       | *string*                                                                          | :heavy_check_mark:                                                                | The ID of the message to modify.                                                  |
+| `threadID`                                                                        | *string*                                                                          | :heavy_check_mark:                                                                | The ID of the thread to which this message belongs.                               |
 
 
 ### Response
 
-**[*operations.ModifyMessageResponse](../../models/operations/modifymessageresponse.md), error**
-
+**[*operations.ModifyMessageResponse](../../pkg/models/operations/modifymessageresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ModifyRun
 
@@ -1377,18 +1424,20 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                          | Type                                                               | Required                                                           | Description                                                        |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `ctx`                                                              | [context.Context](https://pkg.go.dev/context#Context)              | :heavy_check_mark:                                                 | The context to use for the request.                                |
-| `modifyRunRequest`                                                 | [shared.ModifyRunRequest](../../models/shared/modifyrunrequest.md) | :heavy_check_mark:                                                 | N/A                                                                |
-| `runID`                                                            | *string*                                                           | :heavy_check_mark:                                                 | The ID of the run to modify.                                       |
-| `threadID`                                                         | *string*                                                           | :heavy_check_mark:                                                 | The ID of the [thread](/docs/api-reference/threads) that was run.  |
+| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `ctx`                                                                     | [context.Context](https://pkg.go.dev/context#Context)                     | :heavy_check_mark:                                                        | The context to use for the request.                                       |
+| `modifyRunRequest`                                                        | [shared.ModifyRunRequest](../../../pkg/models/shared/modifyrunrequest.md) | :heavy_check_mark:                                                        | N/A                                                                       |
+| `runID`                                                                   | *string*                                                                  | :heavy_check_mark:                                                        | The ID of the run to modify.                                              |
+| `threadID`                                                                | *string*                                                                  | :heavy_check_mark:                                                        | The ID of the [thread](/docs/api-reference/threads) that was run.         |
 
 
 ### Response
 
-**[*operations.ModifyRunResponse](../../models/operations/modifyrunresponse.md), error**
-
+**[*operations.ModifyRunResponse](../../pkg/models/operations/modifyrunresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ModifyThread
 
@@ -1432,17 +1481,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
-| `modifyThreadRequest`                                                    | [shared.ModifyThreadRequest](../../models/shared/modifythreadrequest.md) | :heavy_check_mark:                                                       | N/A                                                                      |
-| `threadID`                                                               | *string*                                                                 | :heavy_check_mark:                                                       | The ID of the thread to modify. Only the `metadata` can be modified.     |
+| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `ctx`                                                                           | [context.Context](https://pkg.go.dev/context#Context)                           | :heavy_check_mark:                                                              | The context to use for the request.                                             |
+| `modifyThreadRequest`                                                           | [shared.ModifyThreadRequest](../../../pkg/models/shared/modifythreadrequest.md) | :heavy_check_mark:                                                              | N/A                                                                             |
+| `threadID`                                                                      | *string*                                                                        | :heavy_check_mark:                                                              | The ID of the thread to modify. Only the `metadata` can be modified.            |
 
 
 ### Response
 
-**[*operations.ModifyThreadResponse](../../models/operations/modifythreadresponse.md), error**
-
+**[*operations.ModifyThreadResponse](../../pkg/models/operations/modifythreadresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## SubmitToolOuputsToRun
 
@@ -1491,15 +1542,17 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `submitToolOutputsRunRequest`                                                            | [shared.SubmitToolOutputsRunRequest](../../models/shared/submittooloutputsrunrequest.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |
-| `runID`                                                                                  | *string*                                                                                 | :heavy_check_mark:                                                                       | The ID of the run that requires the tool output submission.                              |
-| `threadID`                                                                               | *string*                                                                                 | :heavy_check_mark:                                                                       | The ID of the [thread](/docs/api-reference/threads) to which this run belongs.           |
+| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                           | [context.Context](https://pkg.go.dev/context#Context)                                           | :heavy_check_mark:                                                                              | The context to use for the request.                                                             |
+| `submitToolOutputsRunRequest`                                                                   | [shared.SubmitToolOutputsRunRequest](../../../pkg/models/shared/submittooloutputsrunrequest.md) | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `runID`                                                                                         | *string*                                                                                        | :heavy_check_mark:                                                                              | The ID of the run that requires the tool output submission.                                     |
+| `threadID`                                                                                      | *string*                                                                                        | :heavy_check_mark:                                                                              | The ID of the [thread](/docs/api-reference/threads) to which this run belongs.                  |
 
 
 ### Response
 
-**[*operations.SubmitToolOuputsToRunResponse](../../models/operations/submittoolouputstorunresponse.md), error**
-
+**[*operations.SubmitToolOuputsToRunResponse](../../pkg/models/operations/submittoolouputstorunresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

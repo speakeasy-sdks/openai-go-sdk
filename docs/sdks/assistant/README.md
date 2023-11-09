@@ -1,5 +1,5 @@
 # Assistant
-(*.Assistant*)
+(*Assistant*)
 
 ### Available Operations
 
@@ -57,14 +57,16 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
-| `modifyAssistantRequest`                                                       | [shared.ModifyAssistantRequest](../../models/shared/modifyassistantrequest.md) | :heavy_check_mark:                                                             | N/A                                                                            |
-| `assistantID`                                                                  | *string*                                                                       | :heavy_check_mark:                                                             | The ID of the assistant to modify.                                             |
+| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `ctx`                                                                                 | [context.Context](https://pkg.go.dev/context#Context)                                 | :heavy_check_mark:                                                                    | The context to use for the request.                                                   |
+| `modifyAssistantRequest`                                                              | [shared.ModifyAssistantRequest](../../../pkg/models/shared/modifyassistantrequest.md) | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `assistantID`                                                                         | *string*                                                                              | :heavy_check_mark:                                                                    | The ID of the assistant to modify.                                                    |
 
 
 ### Response
 
-**[*operations.ModifyAssistantResponse](../../models/operations/modifyassistantresponse.md), error**
-
+**[*operations.ModifyAssistantResponse](../../pkg/models/operations/modifyassistantresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

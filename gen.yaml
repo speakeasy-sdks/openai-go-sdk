@@ -1,9 +1,9 @@
 configVersion: 1.0.0
 management:
-  docChecksum: c8910b26807477d7e3ee28fdd5259157
+  docChecksum: 8d98cbfb55ce397dd299c3d15c979047
   docVersion: 2.0.0
-  speakeasyVersion: 1.114.1
-  generationVersion: 2.181.1
+  speakeasyVersion: 1.116.0
+  generationVersion: 2.185.0
 generation:
   comments: {}
   sdkClassName: gpt
@@ -11,7 +11,7 @@ generation:
 features:
   go:
     constsAndDefaults: 0.1.1
-    core: 3.1.0
+    core: 3.1.2
     deprecations: 2.81.1
     downloadStreams: 0.1.1
     flattening: 2.81.1
@@ -19,7 +19,7 @@ features:
     globalServerURLs: 2.82.0
     unions: 2.85.0
 go:
-  version: 3.0.0
+  version: 3.0.1
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
   imports:
@@ -30,8 +30,10 @@ go:
       operations: pkg/models/operations
       shared: pkg/models/shared
       webhooks: pkg/models/webhooks
+  inputModelSuffix: input
   installationURL: https://github.com/speakeasy-sdks/openai-go-sdk
   maxMethodParams: 4
+  outputModelSuffix: output
   packageName: github.com/speakeasy-sdks/openai-go-sdk
   published: true
   repoSubDirectory: .

@@ -1,0 +1,11 @@
+# ChatCompletionNamedToolChoiceSchemas
+
+Specifies a tool the model should use. Use to force the model to call a specific function.
+
+
+## Fields
+
+| Field                                                                                                                      | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `Function`                                                                                                                 | [*shared.Function](../../../pkg/models/shared/function.md)                                                                 | :heavy_minus_sign:                                                                                                         | N/A                                                                                                                        |
+| `Type`                                                                                                                     | [*shared.SchemasChatCompletionNamedToolChoiceType](../../../pkg/models/shared/schemaschatcompletionnamedtoolchoicetype.md) | :heavy_minus_sign:                                                                                                         | The type of the tool. Currently, only `function` is supported.                                                             |

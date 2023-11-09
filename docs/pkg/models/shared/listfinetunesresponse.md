@@ -1,0 +1,9 @@
+# ListFineTunesResponse
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `Data`                                                                                          | [][shared.FineTune](../../../pkg/models/shared/finetune.md)                                     | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `Object`                                                                                        | [shared.ListFineTunesResponseObject](../../../pkg/models/shared/listfinetunesresponseobject.md) | :heavy_check_mark:                                                                              | N/A                                                                                             |

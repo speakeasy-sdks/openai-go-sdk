@@ -1,5 +1,5 @@
 # Chat
-(*.Chat*)
+(*Chat*)
 
 ## Overview
 
@@ -81,7 +81,7 @@ func main() {
         ),
         Tools: []shared.ChatCompletionTool{
             shared.ChatCompletionTool{
-                Function: shared.ChatCompletionToolFunction{
+                Function: shared.FunctionObject{
                     Name: "string",
                     Parameters: map[string]interface{}{
                         "key": "string",
@@ -105,13 +105,15 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `request`                                                                                | [shared.CreateChatCompletionRequest](../../models/shared/createchatcompletionrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
+| `request`                                                                                    | [shared.CreateChatCompletionRequest](../../pkg/models/shared/createchatcompletionrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
 
 
 ### Response
 
-**[*operations.CreateChatCompletionResponse](../../models/operations/createchatcompletionresponse.md), error**
-
+**[*operations.CreateChatCompletionResponse](../../pkg/models/operations/createchatcompletionresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
