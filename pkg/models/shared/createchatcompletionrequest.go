@@ -129,6 +129,7 @@ const (
 	TwoGpt432k           Two = "gpt-4-32k"
 	TwoGpt432k0314       Two = "gpt-4-32k-0314"
 	TwoGpt432k0613       Two = "gpt-4-32k-0613"
+	TwoGpt35Turbo1106    Two = "gpt-3.5-turbo-1106"
 	TwoGpt35Turbo        Two = "gpt-3.5-turbo"
 	TwoGpt35Turbo16k     Two = "gpt-3.5-turbo-16k"
 	TwoGpt35Turbo0301    Two = "gpt-3.5-turbo-0301"
@@ -161,6 +162,8 @@ func (e *Two) UnmarshalJSON(data []byte) error {
 	case "gpt-4-32k-0314":
 		fallthrough
 	case "gpt-4-32k-0613":
+		fallthrough
+	case "gpt-3.5-turbo-1106":
 		fallthrough
 	case "gpt-3.5-turbo":
 		fallthrough

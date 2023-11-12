@@ -15,6 +15,7 @@ ID of the model to use. See the [model endpoint compatibility](/docs/models/mode
 | `TwoGpt432k`           | gpt-4-32k              |
 | `TwoGpt432k0314`       | gpt-4-32k-0314         |
 | `TwoGpt432k0613`       | gpt-4-32k-0613         |
+| `TwoGpt35Turbo1106`    | gpt-3.5-turbo-1106     |
 | `TwoGpt35Turbo`        | gpt-3.5-turbo          |
 | `TwoGpt35Turbo16k`     | gpt-3.5-turbo-16k      |
 | `TwoGpt35Turbo0301`    | gpt-3.5-turbo-0301     |

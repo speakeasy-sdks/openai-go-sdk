@@ -1,17 +1,19 @@
 configVersion: 1.0.0
 management:
-  docChecksum: 8d98cbfb55ce397dd299c3d15c979047
+  docChecksum: c7a9a59cc3b9f08f57e40cd1aa64fedd
   docVersion: 2.0.0
-  speakeasyVersion: 1.116.0
-  generationVersion: 2.185.0
+  speakeasyVersion: 1.119.0
+  generationVersion: 2.188.1
 generation:
   comments: {}
   sdkClassName: gpt
   repoURL: https://github.com/speakeasy-sdks/openai-go-sdk.git
+  usageSnippets:
+    optionalPropertyRendering: withExample
 features:
   go:
     constsAndDefaults: 0.1.1
-    core: 3.1.2
+    core: 3.1.4
     deprecations: 2.81.1
     downloadStreams: 0.1.1
     flattening: 2.81.1
@@ -19,7 +21,7 @@ features:
     globalServerURLs: 2.82.0
     unions: 2.85.0
 go:
-  version: 3.0.1
+  version: 3.0.2
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
   imports:
