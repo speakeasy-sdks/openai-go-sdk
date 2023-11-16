@@ -21,10 +21,10 @@ Delete a fine-tuned model. You must have the Owner role in your organization to 
 package main
 
 import(
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -72,10 +72,10 @@ Lists the currently available models, and provides basic information about each 
 package main
 
 import(
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -119,10 +119,10 @@ Retrieves a model instance, providing basic information about the model such as 
 package main
 
 import(
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {

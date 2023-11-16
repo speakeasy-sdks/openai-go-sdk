@@ -21,10 +21,10 @@ Generates audio from the input text.
 package main
 
 import(
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -75,10 +75,10 @@ Transcribes audio into the input language.
 package main
 
 import(
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -131,10 +131,10 @@ Translates audio into English.
 package main
 
 import(
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {

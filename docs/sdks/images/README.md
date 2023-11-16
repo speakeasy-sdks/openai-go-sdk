@@ -21,10 +21,10 @@ Creates an image given a prompt.
 package main
 
 import(
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -80,10 +80,10 @@ Creates an edited or extended image given an original image and a prompt.
 package main
 
 import(
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
@@ -145,10 +145,10 @@ Creates a variation of a given image.
 package main
 
 import(
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
 	"context"
 	"log"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
 )
 
 func main() {
