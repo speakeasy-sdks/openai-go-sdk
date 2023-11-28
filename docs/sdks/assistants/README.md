@@ -30,6 +30,7 @@ Build Assistants that can call models and use tools.
 * [ListMessages](#listmessages) - Returns a list of messages for a given thread.
 * [ListRunSteps](#listrunsteps) - Returns a list of run steps belonging to a run.
 * [ListRuns](#listruns) - Returns a list of runs belonging to a thread.
+* [ModifyAssistant](#modifyassistant) - Modifies an assistant.
 * [ModifyMessage](#modifymessage) - Modifies a message.
 * [ModifyRun](#modifyrun) - Modifies a run.
 * [ModifyThread](#modifythread) - Modifies a thread.
@@ -177,7 +178,7 @@ func main() {
         FileID: "string",
     }
 
-    var assistantID string = "file-AF1WoRqd3aJAHsqc9NY7iL8F"
+    var assistantID string = "file-abc123"
 
     ctx := context.Background()
     res, err := s.Assistants.CreateAssistantFile(ctx, createAssistantFileRequest, assistantID)
@@ -197,7 +198,7 @@ func main() {
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                         | [context.Context](https://pkg.go.dev/context#Context)                                         | :heavy_check_mark:                                                                            | The context to use for the request.                                                           |                                                                                               |
 | `createAssistantFileRequest`                                                                  | [shared.CreateAssistantFileRequest](../../../pkg/models/shared/createassistantfilerequest.md) | :heavy_check_mark:                                                                            | N/A                                                                                           |                                                                                               |
-| `assistantID`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | The ID of the assistant for which to create a File.<br/>                                      | file-AF1WoRqd3aJAHsqc9NY7iL8F                                                                 |
+| `assistantID`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | The ID of the assistant for which to create a File.<br/>                                      | file-abc123                                                                                   |
 
 
 ### Response
@@ -806,11 +807,11 @@ func main() {
     )
 
 
-    var fileID string = "file-AF1WoRqd3aJAHsqc9NY7iL8F"
+    var fileID string = "file-abc123"
 
-    var messageID string = "msg_AF1WoRqd3aJAHsqc9NY7iL8F"
+    var messageID string = "msg_abc123"
 
-    var threadID string = "thread_AF1WoRqd3aJAHsqc9NY7iL8F"
+    var threadID string = "thread_abc123"
 
     ctx := context.Background()
     res, err := s.Assistants.GetMessageFile(ctx, fileID, messageID, threadID)
@@ -829,9 +830,9 @@ func main() {
 | Parameter                                                  | Type                                                       | Required                                                   | Description                                                | Example                                                    |
 | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
 | `ctx`                                                      | [context.Context](https://pkg.go.dev/context#Context)      | :heavy_check_mark:                                         | The context to use for the request.                        |                                                            |
-| `fileID`                                                   | *string*                                                   | :heavy_check_mark:                                         | The ID of the file being retrieved.                        | file-AF1WoRqd3aJAHsqc9NY7iL8F                              |
-| `messageID`                                                | *string*                                                   | :heavy_check_mark:                                         | The ID of the message the file belongs to.                 | msg_AF1WoRqd3aJAHsqc9NY7iL8F                               |
-| `threadID`                                                 | *string*                                                   | :heavy_check_mark:                                         | The ID of the thread to which the message and File belong. | thread_AF1WoRqd3aJAHsqc9NY7iL8F                            |
+| `fileID`                                                   | *string*                                                   | :heavy_check_mark:                                         | The ID of the file being retrieved.                        | file-abc123                                                |
+| `messageID`                                                | *string*                                                   | :heavy_check_mark:                                         | The ID of the message the file belongs to.                 | msg_abc123                                                 |
+| `threadID`                                                 | *string*                                                   | :heavy_check_mark:                                         | The ID of the thread to which the message and File belong. | thread_abc123                                              |
 
 
 ### Response
@@ -1317,6 +1318,72 @@ func main() {
 ### Response
 
 **[*operations.ListRunsResponse](../../pkg/models/operations/listrunsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
+
+## ModifyAssistant
+
+Modifies an assistant.
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"context"
+	"log"
+)
+
+func main() {
+    s := openaigosdk.New(
+        openaigosdk.WithSecurity(""),
+    )
+
+
+    modifyAssistantRequest := shared.ModifyAssistantRequest{
+        FileIds: []string{
+            "string",
+        },
+        Metadata: &shared.ModifyAssistantRequestMetadata{},
+        Tools: []shared.ModifyAssistantRequestTools{
+            shared.CreateModifyAssistantRequestToolsCodeInterpreterTool(
+                shared.CodeInterpreterTool{
+                    Type: shared.TypeCodeInterpreter,
+                },
+            ),
+        },
+    }
+
+    var assistantID string = "string"
+
+    ctx := context.Background()
+    res, err := s.Assistants.ModifyAssistant(ctx, modifyAssistantRequest, assistantID)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.AssistantObject != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `ctx`                                                                                 | [context.Context](https://pkg.go.dev/context#Context)                                 | :heavy_check_mark:                                                                    | The context to use for the request.                                                   |
+| `modifyAssistantRequest`                                                              | [shared.ModifyAssistantRequest](../../../pkg/models/shared/modifyassistantrequest.md) | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `assistantID`                                                                         | *string*                                                                              | :heavy_check_mark:                                                                    | The ID of the assistant to modify.                                                    |
+
+
+### Response
+
+**[*operations.ModifyAssistantResponse](../../pkg/models/operations/modifyassistantresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 400-600            | */*                |

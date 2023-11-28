@@ -1,5 +1,4 @@
 assistants.go
-assistant.go
 audio.go
 chat.go
 completions.go
@@ -54,11 +53,11 @@ pkg/utils/utils.go
 /pkg/models/operations/listmessages.go
 /pkg/models/operations/listrunsteps.go
 /pkg/models/operations/listruns.go
+/pkg/models/operations/modifyassistant.go
 /pkg/models/operations/modifymessage.go
 /pkg/models/operations/modifyrun.go
 /pkg/models/operations/modifythread.go
 /pkg/models/operations/submittoolouputstorun.go
-/pkg/models/operations/modifyassistant.go
 /pkg/models/operations/createspeech.go
 /pkg/models/operations/createtranscription.go
 /pkg/models/operations/createtranslation.go
@@ -111,11 +110,11 @@ pkg/utils/utils.go
 /pkg/models/shared/listmessagesresponse.go
 /pkg/models/shared/listrunstepsresponse.go
 /pkg/models/shared/listrunsresponse.go
+/pkg/models/shared/runobject.go
 /pkg/models/shared/modifymessagerequest.go
 /pkg/models/shared/modifyrunrequest.go
 /pkg/models/shared/modifythreadrequest.go
 /pkg/models/shared/submittooloutputsrunrequest.go
-/pkg/models/shared/runobject.go
 /pkg/models/shared/createspeechrequest.go
 /pkg/models/shared/createtranscriptionresponse.go
 /pkg/models/shared/createtranscriptionrequest.go
@@ -163,7 +162,6 @@ pkg/utils/utils.go
 /pkg/models/shared/createmoderationresponse.go
 /pkg/models/shared/createmoderationrequest.go
 /pkg/models/shared/security.go
-USAGE.md
 docs/pkg/models/operations/cancelrunrequest.md
 docs/pkg/models/operations/cancelrunresponse.md
 docs/pkg/models/operations/createassistantresponse.md
@@ -213,6 +211,8 @@ docs/pkg/models/operations/listrunstepsresponse.md
 docs/pkg/models/operations/listrunsqueryparamorder.md
 docs/pkg/models/operations/listrunsrequest.md
 docs/pkg/models/operations/listrunsresponse.md
+docs/pkg/models/operations/modifyassistantrequest.md
+docs/pkg/models/operations/modifyassistantresponse.md
 docs/pkg/models/operations/modifymessagerequest.md
 docs/pkg/models/operations/modifymessageresponse.md
 docs/pkg/models/operations/modifyrunrequest.md
@@ -221,8 +221,6 @@ docs/pkg/models/operations/modifythreadrequest.md
 docs/pkg/models/operations/modifythreadresponse.md
 docs/pkg/models/operations/submittoolouputstorunrequest.md
 docs/pkg/models/operations/submittoolouputstorunresponse.md
-docs/pkg/models/operations/modifyassistantrequest.md
-docs/pkg/models/operations/modifyassistantresponse.md
 docs/pkg/models/operations/createspeechresponse.md
 docs/pkg/models/operations/createtranscriptionresponse.md
 docs/pkg/models/operations/createtranslationresponse.md
@@ -376,6 +374,9 @@ docs/pkg/models/shared/listmessagefilesresponse.md
 docs/pkg/models/shared/listmessagesresponse.md
 docs/pkg/models/shared/listrunstepsresponse.md
 docs/pkg/models/shared/listrunsresponse.md
+docs/pkg/models/shared/modifyassistantrequestmetadata.md
+docs/pkg/models/shared/modifyassistantrequesttools.md
+docs/pkg/models/shared/modifyassistantrequest.md
 docs/pkg/models/shared/modifymessagerequestmetadata.md
 docs/pkg/models/shared/modifymessagerequest.md
 docs/pkg/models/shared/modifyrunrequestmetadata.md
@@ -384,9 +385,6 @@ docs/pkg/models/shared/modifythreadrequestmetadata.md
 docs/pkg/models/shared/modifythreadrequest.md
 docs/pkg/models/shared/tooloutputs.md
 docs/pkg/models/shared/submittooloutputsrunrequest.md
-docs/pkg/models/shared/modifyassistantrequestmetadata.md
-docs/pkg/models/shared/modifyassistantrequesttools.md
-docs/pkg/models/shared/modifyassistantrequest.md
 docs/pkg/models/shared/createspeechrequest2.md
 docs/pkg/models/shared/createspeechrequestmodel.md
 docs/pkg/models/shared/createspeechrequestresponseformat.md
@@ -566,7 +564,6 @@ docs/pkg/models/shared/createmoderationrequest.md
 docs/pkg/models/shared/security.md
 docs/sdks/gpt/README.md
 docs/sdks/assistants/README.md
-docs/sdks/assistant/README.md
 docs/sdks/audio/README.md
 docs/sdks/chat/README.md
 docs/sdks/completions/README.md
@@ -578,4 +575,5 @@ docs/sdks/finetuning/README.md
 docs/sdks/images/README.md
 docs/sdks/models/README.md
 docs/sdks/moderations/README.md
+USAGE.md
 .gitattributes

@@ -307,7 +307,7 @@ type CreateCompletionRequest struct {
 	Echo *bool `default:"false" json:"echo"`
 	// Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
 	//
-	// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
+	// [See more information about frequency and presence penalties.](/docs/guides/text-generation/parameter-details)
 	//
 	FrequencyPenalty *float64 `default:"0" json:"frequency_penalty"`
 	// Modify the likelihood of specified tokens appearing in the completion.
@@ -337,7 +337,7 @@ type CreateCompletionRequest struct {
 	N *int64 `default:"1" json:"n"`
 	// Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
 	//
-	// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
+	// [See more information about frequency and presence penalties.](/docs/guides/text-generation/parameter-details)
 	//
 	PresencePenalty *float64 `default:"0" json:"presence_penalty"`
 	// The prompt(s) to generate completions for, encoded as a string, array of strings, array of tokens, or array of token arrays.

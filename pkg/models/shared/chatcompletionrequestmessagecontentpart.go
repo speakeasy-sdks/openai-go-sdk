@@ -9,7 +9,7 @@ import (
 	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 )
 
-// Detail - Specifies the detail level of the image.
+// Detail - Specifies the detail level of the image. Learn more in the [Vision guide](/docs/guides/vision/low-or-high-fidelity-image-understanding).
 type Detail string
 
 const (
@@ -41,7 +41,7 @@ func (e *Detail) UnmarshalJSON(data []byte) error {
 }
 
 type ImageURL struct {
-	// Specifies the detail level of the image.
+	// Specifies the detail level of the image. Learn more in the [Vision guide](/docs/guides/vision/low-or-high-fidelity-image-understanding).
 	Detail *Detail `default:"auto" json:"detail"`
 	// Either a URL of the image or the base64 encoded image data.
 	URL string `json:"url"`

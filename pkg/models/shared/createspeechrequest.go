@@ -134,7 +134,7 @@ func (e *CreateSpeechRequestResponseFormat) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// Voice - The voice to use when generating the audio. Supported voices are `alloy`, `echo`, `fable`, `onyx`, `nova`, and `shimmer`.
+// Voice - The voice to use when generating the audio. Supported voices are `alloy`, `echo`, `fable`, `onyx`, `nova`, and `shimmer`. Previews of the voices are available in the [Text to speech guide](/docs/guides/text-to-speech/voice-options).
 type Voice string
 
 const (
@@ -184,7 +184,7 @@ type CreateSpeechRequest struct {
 	ResponseFormat *CreateSpeechRequestResponseFormat `default:"mp3" json:"response_format"`
 	// The speed of the generated audio. Select a value from `0.25` to `4.0`. `1.0` is the default.
 	Speed *float64 `default:"1" json:"speed"`
-	// The voice to use when generating the audio. Supported voices are `alloy`, `echo`, `fable`, `onyx`, `nova`, and `shimmer`.
+	// The voice to use when generating the audio. Supported voices are `alloy`, `echo`, `fable`, `onyx`, `nova`, and `shimmer`. Previews of the voices are available in the [Text to speech guide](/docs/guides/text-to-speech/voice-options).
 	Voice Voice `json:"voice"`
 }
 

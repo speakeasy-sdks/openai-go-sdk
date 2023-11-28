@@ -129,11 +129,11 @@ const (
 	TwoGpt432k           Two = "gpt-4-32k"
 	TwoGpt432k0314       Two = "gpt-4-32k-0314"
 	TwoGpt432k0613       Two = "gpt-4-32k-0613"
-	TwoGpt35Turbo1106    Two = "gpt-3.5-turbo-1106"
 	TwoGpt35Turbo        Two = "gpt-3.5-turbo"
 	TwoGpt35Turbo16k     Two = "gpt-3.5-turbo-16k"
 	TwoGpt35Turbo0301    Two = "gpt-3.5-turbo-0301"
 	TwoGpt35Turbo0613    Two = "gpt-3.5-turbo-0613"
+	TwoGpt35Turbo1106    Two = "gpt-3.5-turbo-1106"
 	TwoGpt35Turbo16k0613 Two = "gpt-3.5-turbo-16k-0613"
 )
 
@@ -163,8 +163,6 @@ func (e *Two) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "gpt-4-32k-0613":
 		fallthrough
-	case "gpt-3.5-turbo-1106":
-		fallthrough
 	case "gpt-3.5-turbo":
 		fallthrough
 	case "gpt-3.5-turbo-16k":
@@ -172,6 +170,8 @@ func (e *Two) UnmarshalJSON(data []byte) error {
 	case "gpt-3.5-turbo-0301":
 		fallthrough
 	case "gpt-3.5-turbo-0613":
+		fallthrough
+	case "gpt-3.5-turbo-1106":
 		fallthrough
 	case "gpt-3.5-turbo-16k-0613":
 		*e = Two(v)
@@ -276,7 +276,7 @@ func (e *CreateChatCompletionRequestType) UnmarshalJSON(data []byte) error {
 //
 // Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is valid JSON.
 //
-// **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in increased latency and appearance of a "stuck" request. Also note that the message content may be partially cut off if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
+// **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
 type ResponseFormat struct {
 	// Must be one of `text` or `json_object`.
 	Type *CreateChatCompletionRequestType `default:"text" json:"type"`
@@ -366,7 +366,7 @@ func (u Stop) MarshalJSON() ([]byte, error) {
 type CreateChatCompletionRequest struct {
 	// Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
 	//
-	// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
+	// [See more information about frequency and presence penalties.](/docs/guides/text-generation/parameter-details)
 	//
 	FrequencyPenalty *float64 `default:"0" json:"frequency_penalty"`
 	// Deprecated in favor of `tool_choice`.
@@ -402,18 +402,18 @@ type CreateChatCompletionRequest struct {
 	Messages []ChatCompletionRequestMessage `json:"messages"`
 	// ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility) table for details on which models work with the Chat API.
 	Model CreateChatCompletionRequestModel `json:"model"`
-	// How many chat completion choices to generate for each input message.
+	// How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep `n` as `1` to minimize costs.
 	N *int64 `default:"1" json:"n"`
 	// Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
 	//
-	// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
+	// [See more information about frequency and presence penalties.](/docs/guides/text-generation/parameter-details)
 	//
 	PresencePenalty *float64 `default:"0" json:"presence_penalty"`
 	// An object specifying the format that the model must output.
 	//
 	// Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is valid JSON.
 	//
-	// **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in increased latency and appearance of a "stuck" request. Also note that the message content may be partially cut off if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
+	// **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
 	//
 	ResponseFormat *ResponseFormat `json:"response_format,omitempty"`
 	// This feature is in Beta.

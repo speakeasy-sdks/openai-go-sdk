@@ -65,7 +65,6 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 type Gpt struct {
 	// Build Assistants that can call models and use tools.
 	Assistants *Assistants
-	Assistant  *Assistant
 	// Learn how to turn audio into text or text into audio.
 	Audio *Audio
 	// Given a list of messages comprising a conversation, the model will return a response.
@@ -157,9 +156,9 @@ func New(opts ...SDKOption) *Gpt {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2.0.0",
-			SDKVersion:        "3.0.3",
-			GenVersion:        "2.192.1",
-			UserAgent:         "speakeasy-sdk/go 3.0.3 2.192.1 2.0.0 github.com/speakeasy-sdks/openai-go-sdk",
+			SDKVersion:        "3.0.4",
+			GenVersion:        "2.202.2",
+			UserAgent:         "speakeasy-sdk/go 3.0.4 2.202.2 2.0.0 github.com/speakeasy-sdks/openai-go-sdk",
 		},
 	}
 	for _, opt := range opts {
@@ -179,8 +178,6 @@ func New(opts ...SDKOption) *Gpt {
 	}
 
 	sdk.Assistants = newAssistants(sdk.sdkConfiguration)
-
-	sdk.Assistant = newAssistant(sdk.sdkConfiguration)
 
 	sdk.Audio = newAudio(sdk.sdkConfiguration)
 
