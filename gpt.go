@@ -136,7 +136,6 @@ func withSecurity(security interface{}) func(context.Context) (interface{}, erro
 }
 
 // WithSecurity configures the SDK to use the provided security details
-
 func WithSecurity(apiKeyAuth string) SDKOption {
 	return func(sdk *Gpt) {
 		security := shared.Security{APIKeyAuth: apiKeyAuth}
@@ -156,9 +155,9 @@ func New(opts ...SDKOption) *Gpt {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2.0.0",
-			SDKVersion:        "3.0.5",
-			GenVersion:        "2.210.3",
-			UserAgent:         "speakeasy-sdk/go 3.0.5 2.210.3 2.0.0 github.com/speakeasy-sdks/openai-go-sdk",
+			SDKVersion:        "3.1.0",
+			GenVersion:        "2.213.3",
+			UserAgent:         "speakeasy-sdk/go 3.1.0 2.213.3 2.0.0 github.com/speakeasy-sdks/openai-go-sdk",
 		},
 	}
 	for _, opt := range opts {

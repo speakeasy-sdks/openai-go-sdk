@@ -46,7 +46,7 @@ import (
 
 func main() {
 	s := openaigosdk.New(
-		openaigosdk.WithSecurity(""),
+		openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
 	var runID string = "string"
@@ -221,7 +221,7 @@ import (
 
 func main() {
 	s := openaigosdk.New(
-		openaigosdk.WithSecurity(""),
+		openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
 	var runID string = "string"
@@ -271,7 +271,7 @@ import (
 func main() {
 	s := openaigosdk.New(
 		openaigosdk.WithServerIndex(0),
-		openaigosdk.WithSecurity(""),
+		openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
 	var runID string = "string"
@@ -308,7 +308,7 @@ import (
 func main() {
 	s := openaigosdk.New(
 		openaigosdk.WithServerURL("https://api.openai.com/v1"),
-		openaigosdk.WithSecurity(""),
+		openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
 	var runID string = "string"
@@ -393,7 +393,7 @@ import (
 
 func main() {
 	s := openaigosdk.New(
-		openaigosdk.WithSecurity(""),
+		openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
 	var runID string = "string"

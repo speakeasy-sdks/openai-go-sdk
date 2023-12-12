@@ -27,33 +27,14 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
     res, err := s.Moderations.CreateModeration(ctx, shared.CreateModerationRequest{
         Input: shared.CreateCreateModerationRequestInputArrayOfstr(
                 []string{
-                    "I",
-                    " ",
-                    "w",
-                    "a",
-                    "n",
-                    "t",
-                    " ",
-                    "t",
-                    "o",
-                    " ",
-                    "k",
-                    "i",
-                    "l",
-                    "l",
-                    " ",
-                    "t",
-                    "h",
-                    "e",
-                    "m",
-                    ".",
+                    "I want to kill them.",
                 },
         ),
         Model: shared.CreateCreateModerationRequestModelCreateModerationRequest2(

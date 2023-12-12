@@ -43,7 +43,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -99,7 +99,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
@@ -165,7 +165,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -223,7 +223,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -280,7 +280,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 

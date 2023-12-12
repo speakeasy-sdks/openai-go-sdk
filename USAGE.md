@@ -11,7 +11,7 @@ import (
 
 func main() {
 	s := openaigosdk.New(
-		openaigosdk.WithSecurity(""),
+		openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
 	var runID string = "string"

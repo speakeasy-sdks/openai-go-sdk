@@ -55,7 +55,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -109,7 +109,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
@@ -170,7 +170,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -194,11 +194,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
-| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                         | [context.Context](https://pkg.go.dev/context#Context)                                         | :heavy_check_mark:                                                                            | The context to use for the request.                                                           |                                                                                               |
-| `createAssistantFileRequest`                                                                  | [shared.CreateAssistantFileRequest](../../../pkg/models/shared/createassistantfilerequest.md) | :heavy_check_mark:                                                                            | N/A                                                                                           |                                                                                               |
-| `assistantID`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | The ID of the assistant for which to create a File.<br/>                                      | file-abc123                                                                                   |
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                | Example                                                                                    |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |                                                                                            |
+| `createAssistantFileRequest`                                                               | [shared.CreateAssistantFileRequest](../../pkg/models/shared/createassistantfilerequest.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |                                                                                            |
+| `assistantID`                                                                              | *string*                                                                                   | :heavy_check_mark:                                                                         | The ID of the assistant for which to create a File.<br/>                                   | file-abc123                                                                                |
 
 
 ### Response
@@ -226,7 +226,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -255,11 +255,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `ctx`                                                                             | [context.Context](https://pkg.go.dev/context#Context)                             | :heavy_check_mark:                                                                | The context to use for the request.                                               |
-| `createMessageRequest`                                                            | [shared.CreateMessageRequest](../../../pkg/models/shared/createmessagerequest.md) | :heavy_check_mark:                                                                | N/A                                                                               |
-| `threadID`                                                                        | *string*                                                                          | :heavy_check_mark:                                                                | The ID of the [thread](/docs/api-reference/threads) to create a message for.      |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
+| `createMessageRequest`                                                         | [shared.CreateMessageRequest](../../pkg/models/shared/createmessagerequest.md) | :heavy_check_mark:                                                             | N/A                                                                            |
+| `threadID`                                                                     | *string*                                                                       | :heavy_check_mark:                                                             | The ID of the [thread](/docs/api-reference/threads) to create a message for.   |
 
 
 ### Response
@@ -287,7 +287,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -319,11 +319,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `ctx`                                                                     | [context.Context](https://pkg.go.dev/context#Context)                     | :heavy_check_mark:                                                        | The context to use for the request.                                       |
-| `createRunRequest`                                                        | [shared.CreateRunRequest](../../../pkg/models/shared/createrunrequest.md) | :heavy_check_mark:                                                        | N/A                                                                       |
-| `threadID`                                                                | *string*                                                                  | :heavy_check_mark:                                                        | The ID of the thread to run.                                              |
+| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `ctx`                                                                  | [context.Context](https://pkg.go.dev/context#Context)                  | :heavy_check_mark:                                                     | The context to use for the request.                                    |
+| `createRunRequest`                                                     | [shared.CreateRunRequest](../../pkg/models/shared/createrunrequest.md) | :heavy_check_mark:                                                     | N/A                                                                    |
+| `threadID`                                                             | *string*                                                               | :heavy_check_mark:                                                     | The ID of the thread to run.                                           |
 
 
 ### Response
@@ -351,7 +351,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
@@ -411,7 +411,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
@@ -488,7 +488,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -539,7 +539,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -593,7 +593,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -644,7 +644,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -695,7 +695,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -749,7 +749,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -803,7 +803,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -860,7 +860,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -914,7 +914,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -971,7 +971,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -1023,7 +1023,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
@@ -1074,7 +1074,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -1106,7 +1106,7 @@ func main() {
 | `after`                                                                                                                                                                                                                                                                                | **string*                                                                                                                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                                                                     | A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.<br/>   |
 | `before`                                                                                                                                                                                                                                                                               | **string*                                                                                                                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                                                                     | A cursor for use in pagination. `before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.<br/> |
 | `limit`                                                                                                                                                                                                                                                                                | **int64*                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                     | A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.<br/>                                                                                                                                                                        |
-| `order`                                                                                                                                                                                                                                                                                | [*operations.QueryParamOrder](../../../pkg/models/operations/queryparamorder.md)                                                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                                                                                     | Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order.<br/>                                                                                                                                                               |
+| `order`                                                                                                                                                                                                                                                                                | [*operations.QueryParamOrder](../../pkg/models/operations/queryparamorder.md)                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                     | Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order.<br/>                                                                                                                                                               |
 
 
 ### Response
@@ -1135,7 +1135,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
@@ -1187,7 +1187,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
@@ -1238,7 +1238,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
@@ -1290,7 +1290,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
@@ -1340,7 +1340,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -1374,11 +1374,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
-| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `ctx`                                                                                 | [context.Context](https://pkg.go.dev/context#Context)                                 | :heavy_check_mark:                                                                    | The context to use for the request.                                                   |
-| `modifyAssistantRequest`                                                              | [shared.ModifyAssistantRequest](../../../pkg/models/shared/modifyassistantrequest.md) | :heavy_check_mark:                                                                    | N/A                                                                                   |
-| `assistantID`                                                                         | *string*                                                                              | :heavy_check_mark:                                                                    | The ID of the assistant to modify.                                                    |
+| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
+| `modifyAssistantRequest`                                                           | [shared.ModifyAssistantRequest](../../pkg/models/shared/modifyassistantrequest.md) | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `assistantID`                                                                      | *string*                                                                           | :heavy_check_mark:                                                                 | The ID of the assistant to modify.                                                 |
 
 
 ### Response
@@ -1406,7 +1406,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -1432,12 +1432,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `ctx`                                                                             | [context.Context](https://pkg.go.dev/context#Context)                             | :heavy_check_mark:                                                                | The context to use for the request.                                               |
-| `modifyMessageRequest`                                                            | [shared.ModifyMessageRequest](../../../pkg/models/shared/modifymessagerequest.md) | :heavy_check_mark:                                                                | N/A                                                                               |
-| `messageID`                                                                       | *string*                                                                          | :heavy_check_mark:                                                                | The ID of the message to modify.                                                  |
-| `threadID`                                                                        | *string*                                                                          | :heavy_check_mark:                                                                | The ID of the thread to which this message belongs.                               |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
+| `modifyMessageRequest`                                                         | [shared.ModifyMessageRequest](../../pkg/models/shared/modifymessagerequest.md) | :heavy_check_mark:                                                             | N/A                                                                            |
+| `messageID`                                                                    | *string*                                                                       | :heavy_check_mark:                                                             | The ID of the message to modify.                                               |
+| `threadID`                                                                     | *string*                                                                       | :heavy_check_mark:                                                             | The ID of the thread to which this message belongs.                            |
 
 
 ### Response
@@ -1465,7 +1465,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -1491,12 +1491,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `ctx`                                                                     | [context.Context](https://pkg.go.dev/context#Context)                     | :heavy_check_mark:                                                        | The context to use for the request.                                       |
-| `modifyRunRequest`                                                        | [shared.ModifyRunRequest](../../../pkg/models/shared/modifyrunrequest.md) | :heavy_check_mark:                                                        | N/A                                                                       |
-| `runID`                                                                   | *string*                                                                  | :heavy_check_mark:                                                        | The ID of the run to modify.                                              |
-| `threadID`                                                                | *string*                                                                  | :heavy_check_mark:                                                        | The ID of the [thread](/docs/api-reference/threads) that was run.         |
+| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `ctx`                                                                  | [context.Context](https://pkg.go.dev/context#Context)                  | :heavy_check_mark:                                                     | The context to use for the request.                                    |
+| `modifyRunRequest`                                                     | [shared.ModifyRunRequest](../../pkg/models/shared/modifyrunrequest.md) | :heavy_check_mark:                                                     | N/A                                                                    |
+| `runID`                                                                | *string*                                                               | :heavy_check_mark:                                                     | The ID of the run to modify.                                           |
+| `threadID`                                                             | *string*                                                               | :heavy_check_mark:                                                     | The ID of the [thread](/docs/api-reference/threads) that was run.      |
 
 
 ### Response
@@ -1524,7 +1524,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -1548,11 +1548,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `ctx`                                                                           | [context.Context](https://pkg.go.dev/context#Context)                           | :heavy_check_mark:                                                              | The context to use for the request.                                             |
-| `modifyThreadRequest`                                                           | [shared.ModifyThreadRequest](../../../pkg/models/shared/modifythreadrequest.md) | :heavy_check_mark:                                                              | N/A                                                                             |
-| `threadID`                                                                      | *string*                                                                        | :heavy_check_mark:                                                              | The ID of the thread to modify. Only the `metadata` can be modified.            |
+| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
+| `modifyThreadRequest`                                                        | [shared.ModifyThreadRequest](../../pkg/models/shared/modifythreadrequest.md) | :heavy_check_mark:                                                           | N/A                                                                          |
+| `threadID`                                                                   | *string*                                                                     | :heavy_check_mark:                                                           | The ID of the thread to modify. Only the `metadata` can be modified.         |
 
 
 ### Response
@@ -1581,7 +1581,7 @@ import(
 
 func main() {
     s := openaigosdk.New(
-        openaigosdk.WithSecurity(""),
+        openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -1609,12 +1609,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
-| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                           | [context.Context](https://pkg.go.dev/context#Context)                                           | :heavy_check_mark:                                                                              | The context to use for the request.                                                             |
-| `submitToolOutputsRunRequest`                                                                   | [shared.SubmitToolOutputsRunRequest](../../../pkg/models/shared/submittooloutputsrunrequest.md) | :heavy_check_mark:                                                                              | N/A                                                                                             |
-| `runID`                                                                                         | *string*                                                                                        | :heavy_check_mark:                                                                              | The ID of the run that requires the tool output submission.                                     |
-| `threadID`                                                                                      | *string*                                                                                        | :heavy_check_mark:                                                                              | The ID of the [thread](/docs/api-reference/threads) to which this run belongs.                  |
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
+| `submitToolOutputsRunRequest`                                                                | [shared.SubmitToolOutputsRunRequest](../../pkg/models/shared/submittooloutputsrunrequest.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `runID`                                                                                      | *string*                                                                                     | :heavy_check_mark:                                                                           | The ID of the run that requires the tool output submission.                                  |
+| `threadID`                                                                                   | *string*                                                                                     | :heavy_check_mark:                                                                           | The ID of the [thread](/docs/api-reference/threads) to which this run belongs.               |
 
 
 ### Response
