@@ -48,21 +48,21 @@ func (e *SchemasChatCompletionNamedToolChoiceType) UnmarshalJSON(data []byte) er
 
 // ChatCompletionNamedToolChoiceSchemas - Specifies a tool the model should use. Use to force the model to call a specific function.
 type ChatCompletionNamedToolChoiceSchemas struct {
-	Function *Function `json:"function,omitempty"`
+	Function Function `json:"function"`
 	// The type of the tool. Currently, only `function` is supported.
-	Type *SchemasChatCompletionNamedToolChoiceType `json:"type,omitempty"`
+	Type SchemasChatCompletionNamedToolChoiceType `json:"type"`
 }
 
-func (o *ChatCompletionNamedToolChoiceSchemas) GetFunction() *Function {
+func (o *ChatCompletionNamedToolChoiceSchemas) GetFunction() Function {
 	if o == nil {
-		return nil
+		return Function{}
 	}
 	return o.Function
 }
 
-func (o *ChatCompletionNamedToolChoiceSchemas) GetType() *SchemasChatCompletionNamedToolChoiceType {
+func (o *ChatCompletionNamedToolChoiceSchemas) GetType() SchemasChatCompletionNamedToolChoiceType {
 	if o == nil {
-		return nil
+		return SchemasChatCompletionNamedToolChoiceType("")
 	}
 	return o.Type
 }
