@@ -12,8 +12,8 @@ type ChatCompletionFunctions struct {
 	Name string `json:"name"`
 	// The parameters the functions accepts, described as a JSON Schema object. See the [guide](/docs/guides/text-generation/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
 	//
-	// To describe a function that accepts no parameters, provide the value `{"type": "object", "properties": {}}`.
-	Parameters map[string]interface{} `json:"parameters"`
+	// Omitting `parameters` defines a function with an empty parameter list.
+	Parameters map[string]interface{} `json:"parameters,omitempty"`
 }
 
 func (o *ChatCompletionFunctions) GetDescription() *string {
@@ -32,7 +32,7 @@ func (o *ChatCompletionFunctions) GetName() string {
 
 func (o *ChatCompletionFunctions) GetParameters() map[string]interface{} {
 	if o == nil {
-		return map[string]interface{}{}
+		return nil
 	}
 	return o.Parameters
 }
