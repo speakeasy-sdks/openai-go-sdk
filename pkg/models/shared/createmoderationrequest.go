@@ -16,6 +16,7 @@ const (
 	CreateModerationRequestInputTypeArrayOfstr CreateModerationRequestInputType = "arrayOfstr"
 )
 
+// CreateModerationRequestInput - The input text to classify
 type CreateModerationRequestInput struct {
 	Str        *string
 	ArrayOfstr []string
@@ -72,9 +73,6 @@ func (u CreateModerationRequestInput) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-// CreateModerationRequest2 - Two content moderations models are available: `text-moderation-stable` and `text-moderation-latest`.
-//
-// The default is `text-moderation-latest` which will be automatically upgraded over time. This ensures you are always using our most accurate model. If you use `text-moderation-stable`, we will provide advanced notice before updating the model. Accuracy of `text-moderation-stable` may be slightly lower than for `text-moderation-latest`.
 type CreateModerationRequest2 string
 
 const (
@@ -109,6 +107,9 @@ const (
 	CreateModerationRequestModelTypeCreateModerationRequest2 CreateModerationRequestModelType = "CreateModerationRequest_2"
 )
 
+// CreateModerationRequestModel - Two content moderations models are available: `text-moderation-stable` and `text-moderation-latest`.
+//
+// The default is `text-moderation-latest` which will be automatically upgraded over time. This ensures you are always using our most accurate model. If you use `text-moderation-stable`, we will provide advanced notice before updating the model. Accuracy of `text-moderation-stable` may be slightly lower than for `text-moderation-latest`.
 type CreateModerationRequestModel struct {
 	Str                      *string
 	CreateModerationRequest2 *CreateModerationRequest2

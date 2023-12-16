@@ -3,21 +3,21 @@
 
 ## Supported Types
 
-### CodeInterpreterTool
+### AssistantToolsCode
 
 ```go
-runObjectTools := shared.CreateRunObjectToolsCodeInterpreterTool(shared.CodeInterpreterTool{/* values here */})
+runObjectTools := shared.CreateRunObjectToolsAssistantToolsCode(shared.AssistantToolsCode{/* values here */})
 ```
 
-### RetrievalTool
+### AssistantToolsRetrieval
 
 ```go
-runObjectTools := shared.CreateRunObjectToolsRetrievalTool(shared.RetrievalTool{/* values here */})
+runObjectTools := shared.CreateRunObjectToolsAssistantToolsRetrieval(shared.AssistantToolsRetrieval{/* values here */})
 ```
 
-### FunctionTool
+### AssistantToolsFunction
 
 ```go
-runObjectTools := shared.CreateRunObjectToolsFunctionTool(shared.FunctionTool{/* values here */})
+runObjectTools := shared.CreateRunObjectToolsAssistantToolsFunction(shared.AssistantToolsFunction{/* values here */})
 ```
 

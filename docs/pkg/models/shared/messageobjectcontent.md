@@ -3,15 +3,15 @@
 
 ## Supported Types
 
-### ImageFile
+### MessageContentImageFileObject
 
 ```go
-messageObjectContent := shared.CreateMessageObjectContentImageFile(shared.ImageFile{/* values here */})
+messageObjectContent := shared.CreateMessageObjectContentMessageContentImageFileObject(shared.MessageContentImageFileObject{/* values here */})
 ```
 
-### Text
+### MessageContentTextObject
 
 ```go
-messageObjectContent := shared.CreateMessageObjectContentText(shared.Text{/* values here */})
+messageObjectContent := shared.CreateMessageObjectContentMessageContentTextObject(shared.MessageContentTextObject{/* values here */})
 ```
 

@@ -9,7 +9,6 @@ import (
 	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 )
 
-// CreateImageRequest2 - The model to use for image generation.
 type CreateImageRequest2 string
 
 const (
@@ -44,6 +43,7 @@ const (
 	CreateImageRequestModelTypeCreateImageRequest2 CreateImageRequestModelType = "CreateImageRequest_2"
 )
 
+// CreateImageRequestModel - The model to use for image generation.
 type CreateImageRequestModel struct {
 	Str                 *string
 	CreateImageRequest2 *CreateImageRequest2

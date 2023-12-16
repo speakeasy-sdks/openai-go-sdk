@@ -28,7 +28,6 @@ func (o *CreateImageVariationRequestImage) GetFileName() string {
 	return o.FileName
 }
 
-// CreateImageVariationRequest2 - The model to use for image generation. Only `dall-e-2` is supported at this time.
 type CreateImageVariationRequest2 string
 
 const (
@@ -60,6 +59,7 @@ const (
 	CreateImageVariationRequestModelTypeCreateImageVariationRequest2 CreateImageVariationRequestModelType = "CreateImageVariationRequest_2"
 )
 
+// CreateImageVariationRequestModel - The model to use for image generation. Only `dall-e-2` is supported at this time.
 type CreateImageVariationRequestModel struct {
 	Str                          *string
 	CreateImageVariationRequest2 *CreateImageVariationRequest2

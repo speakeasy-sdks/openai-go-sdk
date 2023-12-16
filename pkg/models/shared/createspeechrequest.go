@@ -9,7 +9,6 @@ import (
 	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 )
 
-// CreateSpeechRequest2 - One of the available [TTS models](/docs/models/tts): `tts-1` or `tts-1-hd`
 type CreateSpeechRequest2 string
 
 const (
@@ -44,6 +43,7 @@ const (
 	CreateSpeechRequestModelTypeCreateSpeechRequest2 CreateSpeechRequestModelType = "CreateSpeechRequest_2"
 )
 
+// CreateSpeechRequestModel - One of the available [TTS models](/docs/models/tts): `tts-1` or `tts-1-hd`
 type CreateSpeechRequestModel struct {
 	Str                  *string
 	CreateSpeechRequest2 *CreateSpeechRequest2

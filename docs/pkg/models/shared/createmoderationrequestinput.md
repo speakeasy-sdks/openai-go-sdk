@@ -1,5 +1,7 @@
 # CreateModerationRequestInput
 
+The input text to classify
+
 
 ## Supported Types
 

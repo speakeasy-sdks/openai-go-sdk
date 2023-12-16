@@ -9,7 +9,6 @@ import (
 	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 )
 
-// CreateCompletionRequest2 - ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.
 type CreateCompletionRequest2 string
 
 const (
@@ -68,6 +67,7 @@ const (
 	CreateCompletionRequestModelTypeCreateCompletionRequest2 CreateCompletionRequestModelType = "CreateCompletionRequest_2"
 )
 
+// CreateCompletionRequestModel - ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.
 type CreateCompletionRequestModel struct {
 	Str                      *string
 	CreateCompletionRequest2 *CreateCompletionRequest2
@@ -133,6 +133,9 @@ const (
 	PromptTypeArrayOfarrayOfinteger PromptType = "arrayOfarrayOfinteger"
 )
 
+// Prompt - The prompt(s) to generate completions for, encoded as a string, array of strings, array of tokens, or array of token arrays.
+//
+// Note that <|endoftext|> is the document separator that the model sees during training, so if a prompt is not specified the model will generate as if from the beginning of a new document.
 type Prompt struct {
 	Str                   *string
 	ArrayOfstr            []string
@@ -238,6 +241,7 @@ const (
 	CreateCompletionRequestStopTypeArrayOfstr CreateCompletionRequestStopType = "arrayOfstr"
 )
 
+// CreateCompletionRequestStop - Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
 type CreateCompletionRequestStop struct {
 	Str        *string
 	ArrayOfstr []string
@@ -317,12 +321,12 @@ type CreateCompletionRequest struct {
 	// As an example, you can pass `{"50256": -100}` to prevent the <|endoftext|> token from being generated.
 	//
 	LogitBias map[string]int64 `json:"logit_bias,omitempty"`
-	// Include the log probabilities on the `logprobs` most likely tokens, as well the chosen tokens. For example, if `logprobs` is 5, the API will return a list of the 5 most likely tokens. The API will always return the `logprob` of the sampled token, so there may be up to `logprobs+1` elements in the response.
+	// Include the log probabilities on the `logprobs` most likely output tokens, as well the chosen tokens. For example, if `logprobs` is 5, the API will return a list of the 5 most likely tokens. The API will always return the `logprob` of the sampled token, so there may be up to `logprobs+1` elements in the response.
 	//
 	// The maximum value for `logprobs` is 5.
 	//
 	Logprobs *int64 `default:"null" json:"logprobs"`
-	// The maximum number of [tokens](/tokenizer) to generate in the completion.
+	// The maximum number of [tokens](/tokenizer) that can be generated in the completion.
 	//
 	// The token count of your prompt plus `max_tokens` cannot exceed the model's context length. [Example Python code](https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken) for counting tokens.
 	//

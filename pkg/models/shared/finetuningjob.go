@@ -40,8 +40,6 @@ func (o *Error) GetParam() *string {
 	return o.Param
 }
 
-// FineTuningJob1 - The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
-// "auto" decides the optimal number of epochs based on the size of the dataset. If setting the number manually, we support any number between 1 and 50 epochs.
 type FineTuningJob1 string
 
 const (
@@ -73,6 +71,8 @@ const (
 	FineTuningJobNEpochsTypeInteger        FineTuningJobNEpochsType = "integer"
 )
 
+// FineTuningJobNEpochs - The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
+// "auto" decides the optimal number of epochs based on the size of the dataset. If setting the number manually, we support any number between 1 and 50 epochs.
 type FineTuningJobNEpochs struct {
 	FineTuningJob1 *FineTuningJob1
 	Integer        *int64

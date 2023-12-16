@@ -9,77 +9,19 @@ import (
 	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 )
 
-type Function struct {
-	// The name of the function to call.
-	Name string `json:"name"`
-}
-
-func (o *Function) GetName() string {
-	if o == nil {
-		return ""
-	}
-	return o.Name
-}
-
-// SchemasChatCompletionNamedToolChoiceType - The type of the tool. Currently, only `function` is supported.
-type SchemasChatCompletionNamedToolChoiceType string
+// One - `none` means the model will not call a function and instead generates a message. `auto` means the model can pick between generating a message or calling a function.
+type One string
 
 const (
-	SchemasChatCompletionNamedToolChoiceTypeFunction SchemasChatCompletionNamedToolChoiceType = "function"
+	OneNone One = "none"
+	OneAuto One = "auto"
 )
 
-func (e SchemasChatCompletionNamedToolChoiceType) ToPointer() *SchemasChatCompletionNamedToolChoiceType {
+func (e One) ToPointer() *One {
 	return &e
 }
 
-func (e *SchemasChatCompletionNamedToolChoiceType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "function":
-		*e = SchemasChatCompletionNamedToolChoiceType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for SchemasChatCompletionNamedToolChoiceType: %v", v)
-	}
-}
-
-// ChatCompletionNamedToolChoiceSchemas - Specifies a tool the model should use. Use to force the model to call a specific function.
-type ChatCompletionNamedToolChoiceSchemas struct {
-	Function Function `json:"function"`
-	// The type of the tool. Currently, only `function` is supported.
-	Type SchemasChatCompletionNamedToolChoiceType `json:"type"`
-}
-
-func (o *ChatCompletionNamedToolChoiceSchemas) GetFunction() Function {
-	if o == nil {
-		return Function{}
-	}
-	return o.Function
-}
-
-func (o *ChatCompletionNamedToolChoiceSchemas) GetType() SchemasChatCompletionNamedToolChoiceType {
-	if o == nil {
-		return SchemasChatCompletionNamedToolChoiceType("")
-	}
-	return o.Type
-}
-
-// ChatCompletionToolChoiceOption1 - `none` means the model will not call a function and instead generates a message. `auto` means the model can pick between generating a message or calling a function.
-type ChatCompletionToolChoiceOption1 string
-
-const (
-	ChatCompletionToolChoiceOption1None ChatCompletionToolChoiceOption1 = "none"
-	ChatCompletionToolChoiceOption1Auto ChatCompletionToolChoiceOption1 = "auto"
-)
-
-func (e ChatCompletionToolChoiceOption1) ToPointer() *ChatCompletionToolChoiceOption1 {
-	return &e
-}
-
-func (e *ChatCompletionToolChoiceOption1) UnmarshalJSON(data []byte) error {
+func (e *One) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -88,58 +30,64 @@ func (e *ChatCompletionToolChoiceOption1) UnmarshalJSON(data []byte) error {
 	case "none":
 		fallthrough
 	case "auto":
-		*e = ChatCompletionToolChoiceOption1(v)
+		*e = One(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ChatCompletionToolChoiceOption1: %v", v)
+		return fmt.Errorf("invalid value for One: %v", v)
 	}
 }
 
 type ChatCompletionToolChoiceOptionType string
 
 const (
-	ChatCompletionToolChoiceOptionTypeChatCompletionToolChoiceOption1      ChatCompletionToolChoiceOptionType = "ChatCompletionToolChoiceOption_1"
-	ChatCompletionToolChoiceOptionTypeChatCompletionNamedToolChoiceSchemas ChatCompletionToolChoiceOptionType = "ChatCompletionNamedToolChoice_Schemas"
+	ChatCompletionToolChoiceOptionTypeOne                           ChatCompletionToolChoiceOptionType = "1"
+	ChatCompletionToolChoiceOptionTypeChatCompletionNamedToolChoice ChatCompletionToolChoiceOptionType = "ChatCompletionNamedToolChoice"
 )
 
+// ChatCompletionToolChoiceOption - Controls which (if any) function is called by the model.
+// `none` means the model will not call a function and instead generates a message.
+// `auto` means the model can pick between generating a message or calling a function.
+// Specifying a particular function via `{"type: "function", "function": {"name": "my_function"}}` forces the model to call that function.
+//
+// `none` is the default when no functions are present. `auto` is the default if functions are present.
 type ChatCompletionToolChoiceOption struct {
-	ChatCompletionToolChoiceOption1      *ChatCompletionToolChoiceOption1
-	ChatCompletionNamedToolChoiceSchemas *ChatCompletionNamedToolChoiceSchemas
+	One                           *One
+	ChatCompletionNamedToolChoice *ChatCompletionNamedToolChoice
 
 	Type ChatCompletionToolChoiceOptionType
 }
 
-func CreateChatCompletionToolChoiceOptionChatCompletionToolChoiceOption1(chatCompletionToolChoiceOption1 ChatCompletionToolChoiceOption1) ChatCompletionToolChoiceOption {
-	typ := ChatCompletionToolChoiceOptionTypeChatCompletionToolChoiceOption1
+func CreateChatCompletionToolChoiceOptionOne(one One) ChatCompletionToolChoiceOption {
+	typ := ChatCompletionToolChoiceOptionTypeOne
 
 	return ChatCompletionToolChoiceOption{
-		ChatCompletionToolChoiceOption1: &chatCompletionToolChoiceOption1,
-		Type:                            typ,
+		One:  &one,
+		Type: typ,
 	}
 }
 
-func CreateChatCompletionToolChoiceOptionChatCompletionNamedToolChoiceSchemas(chatCompletionNamedToolChoiceSchemas ChatCompletionNamedToolChoiceSchemas) ChatCompletionToolChoiceOption {
-	typ := ChatCompletionToolChoiceOptionTypeChatCompletionNamedToolChoiceSchemas
+func CreateChatCompletionToolChoiceOptionChatCompletionNamedToolChoice(chatCompletionNamedToolChoice ChatCompletionNamedToolChoice) ChatCompletionToolChoiceOption {
+	typ := ChatCompletionToolChoiceOptionTypeChatCompletionNamedToolChoice
 
 	return ChatCompletionToolChoiceOption{
-		ChatCompletionNamedToolChoiceSchemas: &chatCompletionNamedToolChoiceSchemas,
-		Type:                                 typ,
+		ChatCompletionNamedToolChoice: &chatCompletionNamedToolChoice,
+		Type:                          typ,
 	}
 }
 
 func (u *ChatCompletionToolChoiceOption) UnmarshalJSON(data []byte) error {
 
-	chatCompletionNamedToolChoiceSchemas := ChatCompletionNamedToolChoiceSchemas{}
-	if err := utils.UnmarshalJSON(data, &chatCompletionNamedToolChoiceSchemas, "", true, true); err == nil {
-		u.ChatCompletionNamedToolChoiceSchemas = &chatCompletionNamedToolChoiceSchemas
-		u.Type = ChatCompletionToolChoiceOptionTypeChatCompletionNamedToolChoiceSchemas
+	chatCompletionNamedToolChoice := ChatCompletionNamedToolChoice{}
+	if err := utils.UnmarshalJSON(data, &chatCompletionNamedToolChoice, "", true, true); err == nil {
+		u.ChatCompletionNamedToolChoice = &chatCompletionNamedToolChoice
+		u.Type = ChatCompletionToolChoiceOptionTypeChatCompletionNamedToolChoice
 		return nil
 	}
 
-	chatCompletionToolChoiceOption1 := ChatCompletionToolChoiceOption1("")
-	if err := utils.UnmarshalJSON(data, &chatCompletionToolChoiceOption1, "", true, true); err == nil {
-		u.ChatCompletionToolChoiceOption1 = &chatCompletionToolChoiceOption1
-		u.Type = ChatCompletionToolChoiceOptionTypeChatCompletionToolChoiceOption1
+	one := One("")
+	if err := utils.UnmarshalJSON(data, &one, "", true, true); err == nil {
+		u.One = &one
+		u.Type = ChatCompletionToolChoiceOptionTypeOne
 		return nil
 	}
 
@@ -147,12 +95,12 @@ func (u *ChatCompletionToolChoiceOption) UnmarshalJSON(data []byte) error {
 }
 
 func (u ChatCompletionToolChoiceOption) MarshalJSON() ([]byte, error) {
-	if u.ChatCompletionToolChoiceOption1 != nil {
-		return utils.MarshalJSON(u.ChatCompletionToolChoiceOption1, "", true)
+	if u.One != nil {
+		return utils.MarshalJSON(u.One, "", true)
 	}
 
-	if u.ChatCompletionNamedToolChoiceSchemas != nil {
-		return utils.MarshalJSON(u.ChatCompletionNamedToolChoiceSchemas, "", true)
+	if u.ChatCompletionNamedToolChoice != nil {
+		return utils.MarshalJSON(u.ChatCompletionNamedToolChoice, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")

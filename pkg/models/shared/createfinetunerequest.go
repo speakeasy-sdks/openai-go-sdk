@@ -9,8 +9,6 @@ import (
 	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 )
 
-// CreateFineTuneRequest1 - The number of epochs to train the model for. An epoch refers to one
-// full cycle through the training dataset.
 type CreateFineTuneRequest1 string
 
 const (
@@ -42,6 +40,8 @@ const (
 	NEpochsTypeInteger                NEpochsType = "integer"
 )
 
+// NEpochs - The number of epochs to train the model for. An epoch refers to one
+// full cycle through the training dataset.
 type NEpochs struct {
 	CreateFineTuneRequest1 *CreateFineTuneRequest1
 	Integer                *int64
@@ -113,10 +113,6 @@ func (o *Hyperparameters) GetNEpochs() *NEpochs {
 	return o.NEpochs
 }
 
-// CreateFineTuneRequest2 - The name of the base model to fine-tune. You can select one of "ada",
-// "babbage", "curie", "davinci", or a fine-tuned model created after 2022-04-21 and before 2023-08-22.
-// To learn more about these models, see the
-// [Models](/docs/models) documentation.
 type CreateFineTuneRequest2 string
 
 const (
@@ -157,6 +153,10 @@ const (
 	CreateFineTuneRequestModelTypeCreateFineTuneRequest2 CreateFineTuneRequestModelType = "CreateFineTuneRequest_2"
 )
 
+// CreateFineTuneRequestModel - The name of the base model to fine-tune. You can select one of "ada",
+// "babbage", "curie", "davinci", or a fine-tuned model created after 2022-04-21 and before 2023-08-22.
+// To learn more about these models, see the
+// [Models](/docs/models) documentation.
 type CreateFineTuneRequestModel struct {
 	Str                    *string
 	CreateFineTuneRequest2 *CreateFineTuneRequest2

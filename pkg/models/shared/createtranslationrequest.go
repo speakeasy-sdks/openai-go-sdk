@@ -28,7 +28,6 @@ func (o *CreateTranslationRequestFile) GetFileName() string {
 	return o.FileName
 }
 
-// CreateTranslationRequest2 - ID of the model to use. Only `whisper-1` is currently available.
 type CreateTranslationRequest2 string
 
 const (
@@ -60,6 +59,7 @@ const (
 	CreateTranslationRequestModelTypeCreateTranslationRequest2 CreateTranslationRequestModelType = "CreateTranslationRequest_2"
 )
 
+// CreateTranslationRequestModel - ID of the model to use. Only `whisper-1` is currently available.
 type CreateTranslationRequestModel struct {
 	Str                       *string
 	CreateTranslationRequest2 *CreateTranslationRequest2

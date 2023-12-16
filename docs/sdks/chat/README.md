@@ -32,11 +32,6 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Chat.CreateChatCompletion(ctx, shared.CreateChatCompletionRequest{
-        FunctionCall: shared.CreateCreateChatCompletionRequestFunctionCallSchemas(
-                shared.Schemas{
-                    Name: "string",
-                },
-        ),
         Functions: []shared.ChatCompletionFunctions{
             shared.ChatCompletionFunctions{
                 Name: "string",
@@ -46,22 +41,22 @@ func main() {
             },
         },
         LogitBias: map[string]int64{
-            "key": 544683,
+            "key": 770726,
         },
         Messages: []shared.ChatCompletionRequestMessage{
-            shared.CreateChatCompletionRequestMessageUserMessage(
-                shared.UserMessage{
-                    Content: shared.CreateContentArrayOfChatCompletionRequestMessageContentPart(
-                            []shared.ChatCompletionRequestMessageContentPart{
-                                shared.CreateChatCompletionRequestMessageContentPartTextContentPart(
-                                    shared.TextContentPart{
-                                        Text: "string",
-                                        Type: shared.SchemasChatCompletionRequestMessageContentPartTextTypeText,
-                                    },
-                                ),
+            shared.CreateChatCompletionRequestMessageChatCompletionRequestAssistantMessage(
+                shared.ChatCompletionRequestAssistantMessage{
+                    Role: shared.RoleAssistant,
+                    ToolCalls: []shared.ChatCompletionMessageToolCall{
+                        shared.ChatCompletionMessageToolCall{
+                            Function: shared.Function{
+                                Arguments: "string",
+                                Name: "string",
                             },
-                    ),
-                    Role: shared.SchemasChatCompletionRequestUserMessageRoleUser,
+                            ID: "<ID>",
+                            Type: shared.ChatCompletionMessageToolCallTypeFunction,
+                        },
+                    },
                 },
             ),
         },
@@ -76,8 +71,13 @@ func main() {
         "string",
         ),
         Temperature: openaigosdk.Float64(1),
-        ToolChoice: shared.CreateChatCompletionToolChoiceOptionChatCompletionToolChoiceOption1(
-        shared.ChatCompletionToolChoiceOption1None,
+        ToolChoice: shared.CreateChatCompletionToolChoiceOptionChatCompletionNamedToolChoice(
+                shared.ChatCompletionNamedToolChoice{
+                    Function: shared.ChatCompletionNamedToolChoiceFunction{
+                        Name: "string",
+                    },
+                    Type: shared.ChatCompletionNamedToolChoiceTypeFunction,
+                },
         ),
         Tools: []shared.ChatCompletionTool{
             shared.ChatCompletionTool{

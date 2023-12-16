@@ -9,36 +9,19 @@ import (
 	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 )
 
-// Schemas - Specifying a particular function via `{"name": "my_function"}` forces the model to call that function.
-//
-// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
-type Schemas struct {
-	// The name of the function to call.
-	Name string `json:"name"`
-}
-
-func (o *Schemas) GetName() string {
-	if o == nil {
-		return ""
-	}
-	return o.Name
-}
-
-// One - `none` means the model will not call a function and instead generates a message. `auto` means the model can pick between generating a message or calling a function.
-//
-// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
-type One string
+// CreateChatCompletionRequest1 - `none` means the model will not call a function and instead generates a message. `auto` means the model can pick between generating a message or calling a function.
+type CreateChatCompletionRequest1 string
 
 const (
-	OneNone One = "none"
-	OneAuto One = "auto"
+	CreateChatCompletionRequest1None CreateChatCompletionRequest1 = "none"
+	CreateChatCompletionRequest1Auto CreateChatCompletionRequest1 = "auto"
 )
 
-func (e One) ToPointer() *One {
+func (e CreateChatCompletionRequest1) ToPointer() *CreateChatCompletionRequest1 {
 	return &e
 }
 
-func (e *One) UnmarshalJSON(data []byte) error {
+func (e *CreateChatCompletionRequest1) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -47,58 +30,68 @@ func (e *One) UnmarshalJSON(data []byte) error {
 	case "none":
 		fallthrough
 	case "auto":
-		*e = One(v)
+		*e = CreateChatCompletionRequest1(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for One: %v", v)
+		return fmt.Errorf("invalid value for CreateChatCompletionRequest1: %v", v)
 	}
 }
 
 type CreateChatCompletionRequestFunctionCallType string
 
 const (
-	CreateChatCompletionRequestFunctionCallTypeOne     CreateChatCompletionRequestFunctionCallType = "1"
-	CreateChatCompletionRequestFunctionCallTypeSchemas CreateChatCompletionRequestFunctionCallType = "Schemas"
+	CreateChatCompletionRequestFunctionCallTypeCreateChatCompletionRequest1     CreateChatCompletionRequestFunctionCallType = "CreateChatCompletionRequest_1"
+	CreateChatCompletionRequestFunctionCallTypeChatCompletionFunctionCallOption CreateChatCompletionRequestFunctionCallType = "ChatCompletionFunctionCallOption"
 )
 
+// CreateChatCompletionRequestFunctionCall - Deprecated in favor of `tool_choice`.
+//
+// Controls which (if any) function is called by the model.
+// `none` means the model will not call a function and instead generates a message.
+// `auto` means the model can pick between generating a message or calling a function.
+// Specifying a particular function via `{"name": "my_function"}` forces the model to call that function.
+//
+// `none` is the default when no functions are present. `auto` is the default if functions are present.
+//
+// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
 type CreateChatCompletionRequestFunctionCall struct {
-	One     *One
-	Schemas *Schemas
+	CreateChatCompletionRequest1     *CreateChatCompletionRequest1
+	ChatCompletionFunctionCallOption *ChatCompletionFunctionCallOption
 
 	Type CreateChatCompletionRequestFunctionCallType
 }
 
-func CreateCreateChatCompletionRequestFunctionCallOne(one One) CreateChatCompletionRequestFunctionCall {
-	typ := CreateChatCompletionRequestFunctionCallTypeOne
+func CreateCreateChatCompletionRequestFunctionCallCreateChatCompletionRequest1(createChatCompletionRequest1 CreateChatCompletionRequest1) CreateChatCompletionRequestFunctionCall {
+	typ := CreateChatCompletionRequestFunctionCallTypeCreateChatCompletionRequest1
 
 	return CreateChatCompletionRequestFunctionCall{
-		One:  &one,
-		Type: typ,
+		CreateChatCompletionRequest1: &createChatCompletionRequest1,
+		Type:                         typ,
 	}
 }
 
-func CreateCreateChatCompletionRequestFunctionCallSchemas(schemas Schemas) CreateChatCompletionRequestFunctionCall {
-	typ := CreateChatCompletionRequestFunctionCallTypeSchemas
+func CreateCreateChatCompletionRequestFunctionCallChatCompletionFunctionCallOption(chatCompletionFunctionCallOption ChatCompletionFunctionCallOption) CreateChatCompletionRequestFunctionCall {
+	typ := CreateChatCompletionRequestFunctionCallTypeChatCompletionFunctionCallOption
 
 	return CreateChatCompletionRequestFunctionCall{
-		Schemas: &schemas,
-		Type:    typ,
+		ChatCompletionFunctionCallOption: &chatCompletionFunctionCallOption,
+		Type:                             typ,
 	}
 }
 
 func (u *CreateChatCompletionRequestFunctionCall) UnmarshalJSON(data []byte) error {
 
-	schemas := Schemas{}
-	if err := utils.UnmarshalJSON(data, &schemas, "", true, true); err == nil {
-		u.Schemas = &schemas
-		u.Type = CreateChatCompletionRequestFunctionCallTypeSchemas
+	chatCompletionFunctionCallOption := ChatCompletionFunctionCallOption{}
+	if err := utils.UnmarshalJSON(data, &chatCompletionFunctionCallOption, "", true, true); err == nil {
+		u.ChatCompletionFunctionCallOption = &chatCompletionFunctionCallOption
+		u.Type = CreateChatCompletionRequestFunctionCallTypeChatCompletionFunctionCallOption
 		return nil
 	}
 
-	one := One("")
-	if err := utils.UnmarshalJSON(data, &one, "", true, true); err == nil {
-		u.One = &one
-		u.Type = CreateChatCompletionRequestFunctionCallTypeOne
+	createChatCompletionRequest1 := CreateChatCompletionRequest1("")
+	if err := utils.UnmarshalJSON(data, &createChatCompletionRequest1, "", true, true); err == nil {
+		u.CreateChatCompletionRequest1 = &createChatCompletionRequest1
+		u.Type = CreateChatCompletionRequestFunctionCallTypeCreateChatCompletionRequest1
 		return nil
 	}
 
@@ -106,18 +99,17 @@ func (u *CreateChatCompletionRequestFunctionCall) UnmarshalJSON(data []byte) err
 }
 
 func (u CreateChatCompletionRequestFunctionCall) MarshalJSON() ([]byte, error) {
-	if u.One != nil {
-		return utils.MarshalJSON(u.One, "", true)
+	if u.CreateChatCompletionRequest1 != nil {
+		return utils.MarshalJSON(u.CreateChatCompletionRequest1, "", true)
 	}
 
-	if u.Schemas != nil {
-		return utils.MarshalJSON(u.Schemas, "", true)
+	if u.ChatCompletionFunctionCallOption != nil {
+		return utils.MarshalJSON(u.ChatCompletionFunctionCallOption, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-// Two - ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility) table for details on which models work with the Chat API.
 type Two string
 
 const (
@@ -188,6 +180,7 @@ const (
 	CreateChatCompletionRequestModelTypeTwo CreateChatCompletionRequestModelType = "2"
 )
 
+// CreateChatCompletionRequestModel - ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility) table for details on which models work with the Chat API.
 type CreateChatCompletionRequestModel struct {
 	Str *string
 	Two *Two
@@ -272,7 +265,7 @@ func (e *CreateChatCompletionRequestType) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// ResponseFormat - An object specifying the format that the model must output.
+// ResponseFormat - An object specifying the format that the model must output. Compatible with `gpt-4-1106-preview` and `gpt-3.5-turbo-1106`.
 //
 // Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is valid JSON.
 //
@@ -307,6 +300,7 @@ const (
 	StopTypeArrayOfstr StopType = "arrayOfstr"
 )
 
+// Stop - Up to 4 sequences where the API will stop generating further tokens.
 type Stop struct {
 	Str        *string
 	ArrayOfstr []string
@@ -376,7 +370,7 @@ type CreateChatCompletionRequest struct {
 	// `auto` means the model can pick between generating a message or calling a function.
 	// Specifying a particular function via `{"name": "my_function"}` forces the model to call that function.
 	//
-	// `none` is the default when no functions are present. `auto`` is the default if functions are present.
+	// `none` is the default when no functions are present. `auto` is the default if functions are present.
 	//
 	//
 	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -393,7 +387,9 @@ type CreateChatCompletionRequest struct {
 	// Accepts a JSON object that maps tokens (specified by their token ID in the tokenizer) to an associated bias value from -100 to 100. Mathematically, the bias is added to the logits generated by the model prior to sampling. The exact effect will vary per model, but values between -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100 should result in a ban or exclusive selection of the relevant token.
 	//
 	LogitBias map[string]int64 `json:"logit_bias,omitempty"`
-	// The maximum number of [tokens](/tokenizer) to generate in the chat completion.
+	// Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the `content` of `message`. This option is currently not available on the `gpt-4-vision-preview` model.
+	Logprobs *bool `default:"false" json:"logprobs"`
+	// The maximum number of [tokens](/tokenizer) that can be generated in the chat completion.
 	//
 	// The total length of input tokens and generated tokens is limited by the model's context length. [Example Python code](https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken) for counting tokens.
 	//
@@ -409,7 +405,7 @@ type CreateChatCompletionRequest struct {
 	// [See more information about frequency and presence penalties.](/docs/guides/text-generation/parameter-details)
 	//
 	PresencePenalty *float64 `default:"0" json:"presence_penalty"`
-	// An object specifying the format that the model must output.
+	// An object specifying the format that the model must output. Compatible with `gpt-4-1106-preview` and `gpt-3.5-turbo-1106`.
 	//
 	// Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is valid JSON.
 	//
@@ -443,6 +439,8 @@ type CreateChatCompletionRequest struct {
 	// A list of tools the model may call. Currently, only functions are supported as a tool. Use this to provide a list of functions the model may generate JSON inputs for.
 	//
 	Tools []ChatCompletionTool `json:"tools,omitempty"`
+	// An integer between 0 and 5 specifying the number of most likely tokens to return at each token position, each with an associated log probability. `logprobs` must be set to `true` if this parameter is used.
+	TopLogprobs *int64 `json:"top_logprobs,omitempty"`
 	// An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.
 	//
 	// We generally recommend altering this or `temperature` but not both.
@@ -490,6 +488,13 @@ func (o *CreateChatCompletionRequest) GetLogitBias() map[string]int64 {
 		return nil
 	}
 	return o.LogitBias
+}
+
+func (o *CreateChatCompletionRequest) GetLogprobs() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Logprobs
 }
 
 func (o *CreateChatCompletionRequest) GetMaxTokens() *int64 {
@@ -574,6 +579,13 @@ func (o *CreateChatCompletionRequest) GetTools() []ChatCompletionTool {
 		return nil
 	}
 	return o.Tools
+}
+
+func (o *CreateChatCompletionRequest) GetTopLogprobs() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.TopLogprobs
 }
 
 func (o *CreateChatCompletionRequest) GetTopP() *float64 {

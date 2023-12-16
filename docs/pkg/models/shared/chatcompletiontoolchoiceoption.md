@@ -1,17 +1,25 @@
 # ChatCompletionToolChoiceOption
 
+Controls which (if any) function is called by the model.
+`none` means the model will not call a function and instead generates a message.
+`auto` means the model can pick between generating a message or calling a function.
+Specifying a particular function via `{"type: "function", "function": {"name": "my_function"}}` forces the model to call that function.
+
+`none` is the default when no functions are present. `auto` is the default if functions are present.
+
+
 
 ## Supported Types
 
-### ChatCompletionToolChoiceOption1
+### One
 
 ```go
-chatCompletionToolChoiceOption := shared.CreateChatCompletionToolChoiceOptionChatCompletionToolChoiceOption1(shared.ChatCompletionToolChoiceOption1{/* values here */})
+chatCompletionToolChoiceOption := shared.CreateChatCompletionToolChoiceOptionOne(shared.One{/* values here */})
 ```
 
-### ChatCompletionNamedToolChoiceSchemas
+### ChatCompletionNamedToolChoice
 
 ```go
-chatCompletionToolChoiceOption := shared.CreateChatCompletionToolChoiceOptionChatCompletionNamedToolChoiceSchemas(shared.ChatCompletionNamedToolChoiceSchemas{/* values here */})
+chatCompletionToolChoiceOption := shared.CreateChatCompletionToolChoiceOptionChatCompletionNamedToolChoice(shared.ChatCompletionNamedToolChoice{/* values here */})
 ```
 

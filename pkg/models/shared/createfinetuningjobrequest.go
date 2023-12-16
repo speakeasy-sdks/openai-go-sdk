@@ -9,8 +9,6 @@ import (
 	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 )
 
-// CreateFineTuningJobRequest1 - Number of examples in each batch. A larger batch size means that model parameters
-// are updated less frequently, but with lower variance.
 type CreateFineTuningJobRequest1 string
 
 const (
@@ -42,6 +40,8 @@ const (
 	BatchSizeTypeInteger                     BatchSizeType = "integer"
 )
 
+// BatchSize - Number of examples in each batch. A larger batch size means that model parameters
+// are updated less frequently, but with lower variance.
 type BatchSize struct {
 	CreateFineTuningJobRequest1 *CreateFineTuningJobRequest1
 	Integer                     *int64
@@ -98,8 +98,6 @@ func (u BatchSize) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-// CreateFineTuningJobRequestSchemas1 - Scaling factor for the learning rate. A smaller learning rate may be useful to avoid
-// overfitting.
 type CreateFineTuningJobRequestSchemas1 string
 
 const (
@@ -131,6 +129,8 @@ const (
 	LearningRateMultiplierTypeNumber                             LearningRateMultiplierType = "number"
 )
 
+// LearningRateMultiplier - Scaling factor for the learning rate. A smaller learning rate may be useful to avoid
+// overfitting.
 type LearningRateMultiplier struct {
 	CreateFineTuningJobRequestSchemas1 *CreateFineTuningJobRequestSchemas1
 	Number                             *float64
@@ -187,8 +187,6 @@ func (u LearningRateMultiplier) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-// CreateFineTuningJobRequestSchemasHyperparameters1 - The number of epochs to train the model for. An epoch refers to one full cycle
-// through the training dataset.
 type CreateFineTuningJobRequestSchemasHyperparameters1 string
 
 const (
@@ -220,6 +218,8 @@ const (
 	CreateFineTuningJobRequestNEpochsTypeInteger                                           CreateFineTuningJobRequestNEpochsType = "integer"
 )
 
+// CreateFineTuningJobRequestNEpochs - The number of epochs to train the model for. An epoch refers to one full cycle
+// through the training dataset.
 type CreateFineTuningJobRequestNEpochs struct {
 	CreateFineTuningJobRequestSchemasHyperparameters1 *CreateFineTuningJobRequestSchemasHyperparameters1
 	Integer                                           *int64
@@ -313,8 +313,6 @@ func (o *CreateFineTuningJobRequestHyperparameters) GetNEpochs() *CreateFineTuni
 	return o.NEpochs
 }
 
-// CreateFineTuningJobRequest2 - The name of the model to fine-tune. You can select one of the
-// [supported models](/docs/guides/fine-tuning/what-models-can-be-fine-tuned).
 type CreateFineTuningJobRequest2 string
 
 const (
@@ -352,6 +350,8 @@ const (
 	CreateFineTuningJobRequestModelTypeCreateFineTuningJobRequest2 CreateFineTuningJobRequestModelType = "CreateFineTuningJobRequest_2"
 )
 
+// CreateFineTuningJobRequestModel - The name of the model to fine-tune. You can select one of the
+// [supported models](/docs/guides/fine-tuning/what-models-can-be-fine-tuned).
 type CreateFineTuningJobRequestModel struct {
 	Str                         *string
 	CreateFineTuningJobRequest2 *CreateFineTuningJobRequest2

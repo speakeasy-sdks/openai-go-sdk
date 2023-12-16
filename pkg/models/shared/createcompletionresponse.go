@@ -40,35 +40,35 @@ func (e *CreateCompletionResponseFinishReason) UnmarshalJSON(data []byte) error 
 	}
 }
 
-type Logprobs struct {
+type CreateCompletionResponseLogprobs struct {
 	TextOffset    []int64              `json:"text_offset,omitempty"`
 	TokenLogprobs []float64            `json:"token_logprobs,omitempty"`
 	Tokens        []string             `json:"tokens,omitempty"`
 	TopLogprobs   []map[string]float64 `json:"top_logprobs,omitempty"`
 }
 
-func (o *Logprobs) GetTextOffset() []int64 {
+func (o *CreateCompletionResponseLogprobs) GetTextOffset() []int64 {
 	if o == nil {
 		return nil
 	}
 	return o.TextOffset
 }
 
-func (o *Logprobs) GetTokenLogprobs() []float64 {
+func (o *CreateCompletionResponseLogprobs) GetTokenLogprobs() []float64 {
 	if o == nil {
 		return nil
 	}
 	return o.TokenLogprobs
 }
 
-func (o *Logprobs) GetTokens() []string {
+func (o *CreateCompletionResponseLogprobs) GetTokens() []string {
 	if o == nil {
 		return nil
 	}
 	return o.Tokens
 }
 
-func (o *Logprobs) GetTopLogprobs() []map[string]float64 {
+func (o *CreateCompletionResponseLogprobs) GetTopLogprobs() []map[string]float64 {
 	if o == nil {
 		return nil
 	}
@@ -82,7 +82,7 @@ type CreateCompletionResponseChoices struct {
 	//
 	FinishReason CreateCompletionResponseFinishReason `json:"finish_reason"`
 	Index        int64                                `json:"index"`
-	Logprobs     *Logprobs                            `json:"logprobs"`
+	Logprobs     *CreateCompletionResponseLogprobs    `json:"logprobs"`
 	Text         string                               `json:"text"`
 }
 
@@ -100,7 +100,7 @@ func (o *CreateCompletionResponseChoices) GetIndex() int64 {
 	return o.Index
 }
 
-func (o *CreateCompletionResponseChoices) GetLogprobs() *Logprobs {
+func (o *CreateCompletionResponseChoices) GetLogprobs() *CreateCompletionResponseLogprobs {
 	if o == nil {
 		return nil
 	}

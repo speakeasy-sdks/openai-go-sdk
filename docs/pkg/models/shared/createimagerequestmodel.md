@@ -1,5 +1,7 @@
 # CreateImageRequestModel
 
+The model to use for image generation.
+
 
 ## Supported Types
 

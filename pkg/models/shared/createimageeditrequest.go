@@ -47,7 +47,6 @@ func (o *Mask) GetFileName() string {
 	return o.FileName
 }
 
-// CreateImageEditRequest2 - The model to use for image generation. Only `dall-e-2` is supported at this time.
 type CreateImageEditRequest2 string
 
 const (
@@ -79,6 +78,7 @@ const (
 	CreateImageEditRequestModelTypeCreateImageEditRequest2 CreateImageEditRequestModelType = "CreateImageEditRequest_2"
 )
 
+// CreateImageEditRequestModel - The model to use for image generation. Only `dall-e-2` is supported at this time.
 type CreateImageEditRequestModel struct {
 	Str                     *string
 	CreateImageEditRequest2 *CreateImageEditRequest2

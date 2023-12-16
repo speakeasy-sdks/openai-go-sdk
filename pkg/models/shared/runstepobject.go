@@ -63,7 +63,7 @@ func (o *RunStepObjectLastError) GetMessage() string {
 type RunStepObjectMetadata struct {
 }
 
-// RunStepObjectObject - The object type, which is always `thread.run.step“.
+// RunStepObjectObject - The object type, which is always `thread.run.step`.
 type RunStepObjectObject string
 
 const (
@@ -125,632 +125,52 @@ func (e *RunStepObjectStatus) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// SchemasFunction - The definition of the function that was called.
-type SchemasFunction struct {
-	// The arguments passed to the function.
-	Arguments string `json:"arguments"`
-	// The name of the function.
-	Name string `json:"name"`
-	// The output of the function. This will be `null` if the outputs have not been [submitted](/docs/api-reference/runs/submitToolOutputs) yet.
-	Output *string `json:"output"`
-}
-
-func (o *SchemasFunction) GetArguments() string {
-	if o == nil {
-		return ""
-	}
-	return o.Arguments
-}
-
-func (o *SchemasFunction) GetName() string {
-	if o == nil {
-		return ""
-	}
-	return o.Name
-}
-
-func (o *SchemasFunction) GetOutput() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Output
-}
-
-// SchemasRunStepDetailsToolCallsFunctionObjectType - The type of tool call. This is always going to be `function` for this type of tool call.
-type SchemasRunStepDetailsToolCallsFunctionObjectType string
-
-const (
-	SchemasRunStepDetailsToolCallsFunctionObjectTypeFunction SchemasRunStepDetailsToolCallsFunctionObjectType = "function"
-)
-
-func (e SchemasRunStepDetailsToolCallsFunctionObjectType) ToPointer() *SchemasRunStepDetailsToolCallsFunctionObjectType {
-	return &e
-}
-
-func (e *SchemasRunStepDetailsToolCallsFunctionObjectType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "function":
-		*e = SchemasRunStepDetailsToolCallsFunctionObjectType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for SchemasRunStepDetailsToolCallsFunctionObjectType: %v", v)
-	}
-}
-
-type FunctionToolCall struct {
-	// The definition of the function that was called.
-	Function SchemasFunction `json:"function"`
-	// The ID of the tool call object.
-	ID string `json:"id"`
-	// The type of tool call. This is always going to be `function` for this type of tool call.
-	Type SchemasRunStepDetailsToolCallsFunctionObjectType `json:"type"`
-}
-
-func (o *FunctionToolCall) GetFunction() SchemasFunction {
-	if o == nil {
-		return SchemasFunction{}
-	}
-	return o.Function
-}
-
-func (o *FunctionToolCall) GetID() string {
-	if o == nil {
-		return ""
-	}
-	return o.ID
-}
-
-func (o *FunctionToolCall) GetType() SchemasRunStepDetailsToolCallsFunctionObjectType {
-	if o == nil {
-		return SchemasRunStepDetailsToolCallsFunctionObjectType("")
-	}
-	return o.Type
-}
-
-// Retrieval - For now, this is always going to be an empty object.
-type Retrieval struct {
-}
-
-// SchemasRunStepDetailsToolCallsRetrievalObjectType - The type of tool call. This is always going to be `retrieval` for this type of tool call.
-type SchemasRunStepDetailsToolCallsRetrievalObjectType string
-
-const (
-	SchemasRunStepDetailsToolCallsRetrievalObjectTypeRetrieval SchemasRunStepDetailsToolCallsRetrievalObjectType = "retrieval"
-)
-
-func (e SchemasRunStepDetailsToolCallsRetrievalObjectType) ToPointer() *SchemasRunStepDetailsToolCallsRetrievalObjectType {
-	return &e
-}
-
-func (e *SchemasRunStepDetailsToolCallsRetrievalObjectType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "retrieval":
-		*e = SchemasRunStepDetailsToolCallsRetrievalObjectType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for SchemasRunStepDetailsToolCallsRetrievalObjectType: %v", v)
-	}
-}
-
-type RetrievalToolCall struct {
-	// The ID of the tool call object.
-	ID string `json:"id"`
-	// For now, this is always going to be an empty object.
-	Retrieval Retrieval `json:"retrieval"`
-	// The type of tool call. This is always going to be `retrieval` for this type of tool call.
-	Type SchemasRunStepDetailsToolCallsRetrievalObjectType `json:"type"`
-}
-
-func (o *RetrievalToolCall) GetID() string {
-	if o == nil {
-		return ""
-	}
-	return o.ID
-}
-
-func (o *RetrievalToolCall) GetRetrieval() Retrieval {
-	if o == nil {
-		return Retrieval{}
-	}
-	return o.Retrieval
-}
-
-func (o *RetrievalToolCall) GetType() SchemasRunStepDetailsToolCallsRetrievalObjectType {
-	if o == nil {
-		return SchemasRunStepDetailsToolCallsRetrievalObjectType("")
-	}
-	return o.Type
-}
-
-type SchemasImage struct {
-	// The [file](/docs/api-reference/files) ID of the image.
-	FileID string `json:"file_id"`
-}
-
-func (o *SchemasImage) GetFileID() string {
-	if o == nil {
-		return ""
-	}
-	return o.FileID
-}
-
-// SchemasRunStepDetailsToolCallsCodeOutputImageObjectType - Always `image`.
-type SchemasRunStepDetailsToolCallsCodeOutputImageObjectType string
-
-const (
-	SchemasRunStepDetailsToolCallsCodeOutputImageObjectTypeImage SchemasRunStepDetailsToolCallsCodeOutputImageObjectType = "image"
-)
-
-func (e SchemasRunStepDetailsToolCallsCodeOutputImageObjectType) ToPointer() *SchemasRunStepDetailsToolCallsCodeOutputImageObjectType {
-	return &e
-}
-
-func (e *SchemasRunStepDetailsToolCallsCodeOutputImageObjectType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "image":
-		*e = SchemasRunStepDetailsToolCallsCodeOutputImageObjectType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for SchemasRunStepDetailsToolCallsCodeOutputImageObjectType: %v", v)
-	}
-}
-
-type CodeInterpreterImageOutput struct {
-	Image SchemasImage `json:"image"`
-	// Always `image`.
-	Type SchemasRunStepDetailsToolCallsCodeOutputImageObjectType `json:"type"`
-}
-
-func (o *CodeInterpreterImageOutput) GetImage() SchemasImage {
-	if o == nil {
-		return SchemasImage{}
-	}
-	return o.Image
-}
-
-func (o *CodeInterpreterImageOutput) GetType() SchemasRunStepDetailsToolCallsCodeOutputImageObjectType {
-	if o == nil {
-		return SchemasRunStepDetailsToolCallsCodeOutputImageObjectType("")
-	}
-	return o.Type
-}
-
-// SchemasRunStepDetailsToolCallsCodeOutputLogsObjectType - Always `logs`.
-type SchemasRunStepDetailsToolCallsCodeOutputLogsObjectType string
-
-const (
-	SchemasRunStepDetailsToolCallsCodeOutputLogsObjectTypeLogs SchemasRunStepDetailsToolCallsCodeOutputLogsObjectType = "logs"
-)
-
-func (e SchemasRunStepDetailsToolCallsCodeOutputLogsObjectType) ToPointer() *SchemasRunStepDetailsToolCallsCodeOutputLogsObjectType {
-	return &e
-}
-
-func (e *SchemasRunStepDetailsToolCallsCodeOutputLogsObjectType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "logs":
-		*e = SchemasRunStepDetailsToolCallsCodeOutputLogsObjectType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for SchemasRunStepDetailsToolCallsCodeOutputLogsObjectType: %v", v)
-	}
-}
-
-// CodeInterpreterLogOutput - Text output from the Code Interpreter tool call as part of a run step.
-type CodeInterpreterLogOutput struct {
-	// The text output from the Code Interpreter tool call.
-	Logs string `json:"logs"`
-	// Always `logs`.
-	Type SchemasRunStepDetailsToolCallsCodeOutputLogsObjectType `json:"type"`
-}
-
-func (o *CodeInterpreterLogOutput) GetLogs() string {
-	if o == nil {
-		return ""
-	}
-	return o.Logs
-}
-
-func (o *CodeInterpreterLogOutput) GetType() SchemasRunStepDetailsToolCallsCodeOutputLogsObjectType {
-	if o == nil {
-		return SchemasRunStepDetailsToolCallsCodeOutputLogsObjectType("")
-	}
-	return o.Type
-}
-
-type OutputsType string
-
-const (
-	OutputsTypeCodeInterpreterLogOutput   OutputsType = "Code interpreter log output"
-	OutputsTypeCodeInterpreterImageOutput OutputsType = "Code interpreter image output"
-)
-
-type Outputs struct {
-	CodeInterpreterLogOutput   *CodeInterpreterLogOutput
-	CodeInterpreterImageOutput *CodeInterpreterImageOutput
-
-	Type OutputsType
-}
-
-func CreateOutputsCodeInterpreterLogOutput(codeInterpreterLogOutput CodeInterpreterLogOutput) Outputs {
-	typ := OutputsTypeCodeInterpreterLogOutput
-
-	return Outputs{
-		CodeInterpreterLogOutput: &codeInterpreterLogOutput,
-		Type:                     typ,
-	}
-}
-
-func CreateOutputsCodeInterpreterImageOutput(codeInterpreterImageOutput CodeInterpreterImageOutput) Outputs {
-	typ := OutputsTypeCodeInterpreterImageOutput
-
-	return Outputs{
-		CodeInterpreterImageOutput: &codeInterpreterImageOutput,
-		Type:                       typ,
-	}
-}
-
-func (u *Outputs) UnmarshalJSON(data []byte) error {
-
-	codeInterpreterLogOutput := CodeInterpreterLogOutput{}
-	if err := utils.UnmarshalJSON(data, &codeInterpreterLogOutput, "", true, true); err == nil {
-		u.CodeInterpreterLogOutput = &codeInterpreterLogOutput
-		u.Type = OutputsTypeCodeInterpreterLogOutput
-		return nil
-	}
-
-	codeInterpreterImageOutput := CodeInterpreterImageOutput{}
-	if err := utils.UnmarshalJSON(data, &codeInterpreterImageOutput, "", true, true); err == nil {
-		u.CodeInterpreterImageOutput = &codeInterpreterImageOutput
-		u.Type = OutputsTypeCodeInterpreterImageOutput
-		return nil
-	}
-
-	return errors.New("could not unmarshal into supported union types")
-}
-
-func (u Outputs) MarshalJSON() ([]byte, error) {
-	if u.CodeInterpreterLogOutput != nil {
-		return utils.MarshalJSON(u.CodeInterpreterLogOutput, "", true)
-	}
-
-	if u.CodeInterpreterImageOutput != nil {
-		return utils.MarshalJSON(u.CodeInterpreterImageOutput, "", true)
-	}
-
-	return nil, errors.New("could not marshal union type: all fields are null")
-}
-
-// CodeInterpreter - The Code Interpreter tool call definition.
-type CodeInterpreter struct {
-	// The input to the Code Interpreter tool call.
-	Input string `json:"input"`
-	// The outputs from the Code Interpreter tool call. Code Interpreter can output one or more items, including text (`logs`) or images (`image`). Each of these are represented by a different object type.
-	Outputs []Outputs `json:"outputs"`
-}
-
-func (o *CodeInterpreter) GetInput() string {
-	if o == nil {
-		return ""
-	}
-	return o.Input
-}
-
-func (o *CodeInterpreter) GetOutputs() []Outputs {
-	if o == nil {
-		return []Outputs{}
-	}
-	return o.Outputs
-}
-
-// SchemasRunStepDetailsToolCallsCodeObjectType - The type of tool call. This is always going to be `code_interpreter` for this type of tool call.
-type SchemasRunStepDetailsToolCallsCodeObjectType string
-
-const (
-	SchemasRunStepDetailsToolCallsCodeObjectTypeCodeInterpreter SchemasRunStepDetailsToolCallsCodeObjectType = "code_interpreter"
-)
-
-func (e SchemasRunStepDetailsToolCallsCodeObjectType) ToPointer() *SchemasRunStepDetailsToolCallsCodeObjectType {
-	return &e
-}
-
-func (e *SchemasRunStepDetailsToolCallsCodeObjectType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "code_interpreter":
-		*e = SchemasRunStepDetailsToolCallsCodeObjectType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for SchemasRunStepDetailsToolCallsCodeObjectType: %v", v)
-	}
-}
-
-// CodeInterpreterToolCall - Details of the Code Interpreter tool call the run step was involved in.
-type CodeInterpreterToolCall struct {
-	// The Code Interpreter tool call definition.
-	CodeInterpreter CodeInterpreter `json:"code_interpreter"`
-	// The ID of the tool call.
-	ID string `json:"id"`
-	// The type of tool call. This is always going to be `code_interpreter` for this type of tool call.
-	Type SchemasRunStepDetailsToolCallsCodeObjectType `json:"type"`
-}
-
-func (o *CodeInterpreterToolCall) GetCodeInterpreter() CodeInterpreter {
-	if o == nil {
-		return CodeInterpreter{}
-	}
-	return o.CodeInterpreter
-}
-
-func (o *CodeInterpreterToolCall) GetID() string {
-	if o == nil {
-		return ""
-	}
-	return o.ID
-}
-
-func (o *CodeInterpreterToolCall) GetType() SchemasRunStepDetailsToolCallsCodeObjectType {
-	if o == nil {
-		return SchemasRunStepDetailsToolCallsCodeObjectType("")
-	}
-	return o.Type
-}
-
-type SchemasToolCallsType string
-
-const (
-	SchemasToolCallsTypeCodeInterpreterToolCall SchemasToolCallsType = "Code interpreter tool call"
-	SchemasToolCallsTypeRetrievalToolCall       SchemasToolCallsType = "Retrieval tool call"
-	SchemasToolCallsTypeFunctionToolCall        SchemasToolCallsType = "Function tool call"
-)
-
-type SchemasToolCalls struct {
-	CodeInterpreterToolCall *CodeInterpreterToolCall
-	RetrievalToolCall       *RetrievalToolCall
-	FunctionToolCall        *FunctionToolCall
-
-	Type SchemasToolCallsType
-}
-
-func CreateSchemasToolCallsCodeInterpreterToolCall(codeInterpreterToolCall CodeInterpreterToolCall) SchemasToolCalls {
-	typ := SchemasToolCallsTypeCodeInterpreterToolCall
-
-	return SchemasToolCalls{
-		CodeInterpreterToolCall: &codeInterpreterToolCall,
-		Type:                    typ,
-	}
-}
-
-func CreateSchemasToolCallsRetrievalToolCall(retrievalToolCall RetrievalToolCall) SchemasToolCalls {
-	typ := SchemasToolCallsTypeRetrievalToolCall
-
-	return SchemasToolCalls{
-		RetrievalToolCall: &retrievalToolCall,
-		Type:              typ,
-	}
-}
-
-func CreateSchemasToolCallsFunctionToolCall(functionToolCall FunctionToolCall) SchemasToolCalls {
-	typ := SchemasToolCallsTypeFunctionToolCall
-
-	return SchemasToolCalls{
-		FunctionToolCall: &functionToolCall,
-		Type:             typ,
-	}
-}
-
-func (u *SchemasToolCalls) UnmarshalJSON(data []byte) error {
-
-	codeInterpreterToolCall := CodeInterpreterToolCall{}
-	if err := utils.UnmarshalJSON(data, &codeInterpreterToolCall, "", true, true); err == nil {
-		u.CodeInterpreterToolCall = &codeInterpreterToolCall
-		u.Type = SchemasToolCallsTypeCodeInterpreterToolCall
-		return nil
-	}
-
-	retrievalToolCall := RetrievalToolCall{}
-	if err := utils.UnmarshalJSON(data, &retrievalToolCall, "", true, true); err == nil {
-		u.RetrievalToolCall = &retrievalToolCall
-		u.Type = SchemasToolCallsTypeRetrievalToolCall
-		return nil
-	}
-
-	functionToolCall := FunctionToolCall{}
-	if err := utils.UnmarshalJSON(data, &functionToolCall, "", true, true); err == nil {
-		u.FunctionToolCall = &functionToolCall
-		u.Type = SchemasToolCallsTypeFunctionToolCall
-		return nil
-	}
-
-	return errors.New("could not unmarshal into supported union types")
-}
-
-func (u SchemasToolCalls) MarshalJSON() ([]byte, error) {
-	if u.CodeInterpreterToolCall != nil {
-		return utils.MarshalJSON(u.CodeInterpreterToolCall, "", true)
-	}
-
-	if u.RetrievalToolCall != nil {
-		return utils.MarshalJSON(u.RetrievalToolCall, "", true)
-	}
-
-	if u.FunctionToolCall != nil {
-		return utils.MarshalJSON(u.FunctionToolCall, "", true)
-	}
-
-	return nil, errors.New("could not marshal union type: all fields are null")
-}
-
-// SchemasRunStepDetailsToolCallsObjectType - Always `tool_calls`.
-type SchemasRunStepDetailsToolCallsObjectType string
-
-const (
-	SchemasRunStepDetailsToolCallsObjectTypeToolCalls SchemasRunStepDetailsToolCallsObjectType = "tool_calls"
-)
-
-func (e SchemasRunStepDetailsToolCallsObjectType) ToPointer() *SchemasRunStepDetailsToolCallsObjectType {
-	return &e
-}
-
-func (e *SchemasRunStepDetailsToolCallsObjectType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "tool_calls":
-		*e = SchemasRunStepDetailsToolCallsObjectType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for SchemasRunStepDetailsToolCallsObjectType: %v", v)
-	}
-}
-
-// ToolCalls - Details of the tool call.
-type ToolCalls struct {
-	// An array of tool calls the run step was involved in. These can be associated with one of three types of tools: `code_interpreter`, `retrieval`, or `function`.
-	//
-	ToolCalls []SchemasToolCalls `json:"tool_calls"`
-	// Always `tool_calls`.
-	Type SchemasRunStepDetailsToolCallsObjectType `json:"type"`
-}
-
-func (o *ToolCalls) GetToolCalls() []SchemasToolCalls {
-	if o == nil {
-		return []SchemasToolCalls{}
-	}
-	return o.ToolCalls
-}
-
-func (o *ToolCalls) GetType() SchemasRunStepDetailsToolCallsObjectType {
-	if o == nil {
-		return SchemasRunStepDetailsToolCallsObjectType("")
-	}
-	return o.Type
-}
-
-type SchemasMessageCreation struct {
-	// The ID of the message that was created by this run step.
-	MessageID string `json:"message_id"`
-}
-
-func (o *SchemasMessageCreation) GetMessageID() string {
-	if o == nil {
-		return ""
-	}
-	return o.MessageID
-}
-
-// SchemasRunStepDetailsMessageCreationObjectType - Always `message_creation“.
-type SchemasRunStepDetailsMessageCreationObjectType string
-
-const (
-	SchemasRunStepDetailsMessageCreationObjectTypeMessageCreation SchemasRunStepDetailsMessageCreationObjectType = "message_creation"
-)
-
-func (e SchemasRunStepDetailsMessageCreationObjectType) ToPointer() *SchemasRunStepDetailsMessageCreationObjectType {
-	return &e
-}
-
-func (e *SchemasRunStepDetailsMessageCreationObjectType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "message_creation":
-		*e = SchemasRunStepDetailsMessageCreationObjectType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for SchemasRunStepDetailsMessageCreationObjectType: %v", v)
-	}
-}
-
-// MessageCreation - Details of the message creation by the run step.
-type MessageCreation struct {
-	MessageCreation SchemasMessageCreation `json:"message_creation"`
-	// Always `message_creation``.
-	Type SchemasRunStepDetailsMessageCreationObjectType `json:"type"`
-}
-
-func (o *MessageCreation) GetMessageCreation() SchemasMessageCreation {
-	if o == nil {
-		return SchemasMessageCreation{}
-	}
-	return o.MessageCreation
-}
-
-func (o *MessageCreation) GetType() SchemasRunStepDetailsMessageCreationObjectType {
-	if o == nil {
-		return SchemasRunStepDetailsMessageCreationObjectType("")
-	}
-	return o.Type
-}
-
 type StepDetailsType string
 
 const (
-	StepDetailsTypeMessageCreation StepDetailsType = "Message creation"
-	StepDetailsTypeToolCalls       StepDetailsType = "Tool calls"
+	StepDetailsTypeRunStepDetailsMessageCreationObject StepDetailsType = "RunStepDetailsMessageCreationObject"
+	StepDetailsTypeRunStepDetailsToolCallsObject       StepDetailsType = "RunStepDetailsToolCallsObject"
 )
 
+// StepDetails - The details of the run step.
 type StepDetails struct {
-	MessageCreation *MessageCreation
-	ToolCalls       *ToolCalls
+	RunStepDetailsMessageCreationObject *RunStepDetailsMessageCreationObject
+	RunStepDetailsToolCallsObject       *RunStepDetailsToolCallsObject
 
 	Type StepDetailsType
 }
 
-func CreateStepDetailsMessageCreation(messageCreation MessageCreation) StepDetails {
-	typ := StepDetailsTypeMessageCreation
+func CreateStepDetailsRunStepDetailsMessageCreationObject(runStepDetailsMessageCreationObject RunStepDetailsMessageCreationObject) StepDetails {
+	typ := StepDetailsTypeRunStepDetailsMessageCreationObject
 
 	return StepDetails{
-		MessageCreation: &messageCreation,
-		Type:            typ,
+		RunStepDetailsMessageCreationObject: &runStepDetailsMessageCreationObject,
+		Type:                                typ,
 	}
 }
 
-func CreateStepDetailsToolCalls(toolCalls ToolCalls) StepDetails {
-	typ := StepDetailsTypeToolCalls
+func CreateStepDetailsRunStepDetailsToolCallsObject(runStepDetailsToolCallsObject RunStepDetailsToolCallsObject) StepDetails {
+	typ := StepDetailsTypeRunStepDetailsToolCallsObject
 
 	return StepDetails{
-		ToolCalls: &toolCalls,
-		Type:      typ,
+		RunStepDetailsToolCallsObject: &runStepDetailsToolCallsObject,
+		Type:                          typ,
 	}
 }
 
 func (u *StepDetails) UnmarshalJSON(data []byte) error {
 
-	messageCreation := MessageCreation{}
-	if err := utils.UnmarshalJSON(data, &messageCreation, "", true, true); err == nil {
-		u.MessageCreation = &messageCreation
-		u.Type = StepDetailsTypeMessageCreation
+	runStepDetailsMessageCreationObject := RunStepDetailsMessageCreationObject{}
+	if err := utils.UnmarshalJSON(data, &runStepDetailsMessageCreationObject, "", true, true); err == nil {
+		u.RunStepDetailsMessageCreationObject = &runStepDetailsMessageCreationObject
+		u.Type = StepDetailsTypeRunStepDetailsMessageCreationObject
 		return nil
 	}
 
-	toolCalls := ToolCalls{}
-	if err := utils.UnmarshalJSON(data, &toolCalls, "", true, true); err == nil {
-		u.ToolCalls = &toolCalls
-		u.Type = StepDetailsTypeToolCalls
+	runStepDetailsToolCallsObject := RunStepDetailsToolCallsObject{}
+	if err := utils.UnmarshalJSON(data, &runStepDetailsToolCallsObject, "", true, true); err == nil {
+		u.RunStepDetailsToolCallsObject = &runStepDetailsToolCallsObject
+		u.Type = StepDetailsTypeRunStepDetailsToolCallsObject
 		return nil
 	}
 
@@ -758,12 +178,12 @@ func (u *StepDetails) UnmarshalJSON(data []byte) error {
 }
 
 func (u StepDetails) MarshalJSON() ([]byte, error) {
-	if u.MessageCreation != nil {
-		return utils.MarshalJSON(u.MessageCreation, "", true)
+	if u.RunStepDetailsMessageCreationObject != nil {
+		return utils.MarshalJSON(u.RunStepDetailsMessageCreationObject, "", true)
 	}
 
-	if u.ToolCalls != nil {
-		return utils.MarshalJSON(u.ToolCalls, "", true)
+	if u.RunStepDetailsToolCallsObject != nil {
+		return utils.MarshalJSON(u.RunStepDetailsToolCallsObject, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
@@ -818,7 +238,7 @@ type RunStepObject struct {
 	// Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maxium of 512 characters long.
 	//
 	Metadata *RunStepObjectMetadata `json:"metadata"`
-	// The object type, which is always `thread.run.step``.
+	// The object type, which is always `thread.run.step`.
 	Object RunStepObjectObject `json:"object"`
 	// The ID of the [run](/docs/api-reference/runs) that this run step is a part of.
 	RunID string `json:"run_id"`

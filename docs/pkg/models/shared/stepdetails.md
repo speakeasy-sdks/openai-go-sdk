@@ -1,17 +1,19 @@
 # StepDetails
 
+The details of the run step.
+
 
 ## Supported Types
 
-### MessageCreation
+### RunStepDetailsMessageCreationObject
 
 ```go
-stepDetails := shared.CreateStepDetailsMessageCreation(shared.MessageCreation{/* values here */})
+stepDetails := shared.CreateStepDetailsRunStepDetailsMessageCreationObject(shared.RunStepDetailsMessageCreationObject{/* values here */})
 ```
 
-### ToolCalls
+### RunStepDetailsToolCallsObject
 
 ```go
-stepDetails := shared.CreateStepDetailsToolCalls(shared.ToolCalls{/* values here */})
+stepDetails := shared.CreateStepDetailsRunStepDetailsToolCallsObject(shared.RunStepDetailsToolCallsObject{/* values here */})
 ```
 

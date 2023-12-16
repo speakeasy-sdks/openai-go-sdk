@@ -3,15 +3,15 @@
 
 ## Supported Types
 
-### FileCitation
+### MessageContentTextAnnotationsFileCitationObject
 
 ```go
-annotations := shared.CreateAnnotationsFileCitation(shared.FileCitation{/* values here */})
+annotations := shared.CreateAnnotationsMessageContentTextAnnotationsFileCitationObject(shared.MessageContentTextAnnotationsFileCitationObject{/* values here */})
 ```
 
-### FilePath
+### MessageContentTextAnnotationsFilePathObject
 
 ```go
-annotations := shared.CreateAnnotationsFilePath(shared.FilePath{/* values here */})
+annotations := shared.CreateAnnotationsMessageContentTextAnnotationsFilePathObject(shared.MessageContentTextAnnotationsFilePathObject{/* values here */})
 ```
 

@@ -1,11 +1,23 @@
 # ToolCalls
 
-Details of the tool call.
 
+## Supported Types
 
-## Fields
+### RunStepDetailsToolCallsCodeObject
 
-| Field                                                                                                                                                           | Type                                                                                                                                                            | Required                                                                                                                                                        | Description                                                                                                                                                     |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ToolCalls`                                                                                                                                                     | [][shared.SchemasToolCalls](../../../pkg/models/shared/schemastoolcalls.md)                                                                                     | :heavy_check_mark:                                                                                                                                              | An array of tool calls the run step was involved in. These can be associated with one of three types of tools: `code_interpreter`, `retrieval`, or `function`.<br/> |
-| `Type`                                                                                                                                                          | [shared.SchemasRunStepDetailsToolCallsObjectType](../../../pkg/models/shared/schemasrunstepdetailstoolcallsobjecttype.md)                                       | :heavy_check_mark:                                                                                                                                              | Always `tool_calls`.                                                                                                                                            |
+```go
+toolCalls := shared.CreateToolCallsRunStepDetailsToolCallsCodeObject(shared.RunStepDetailsToolCallsCodeObject{/* values here */})
+```
+
+### RunStepDetailsToolCallsRetrievalObject
+
+```go
+toolCalls := shared.CreateToolCallsRunStepDetailsToolCallsRetrievalObject(shared.RunStepDetailsToolCallsRetrievalObject{/* values here */})
+```
+
+### RunStepDetailsToolCallsFunctionObject
+
+```go
+toolCalls := shared.CreateToolCallsRunStepDetailsToolCallsFunctionObject(shared.RunStepDetailsToolCallsFunctionObject{/* values here */})
+```
+

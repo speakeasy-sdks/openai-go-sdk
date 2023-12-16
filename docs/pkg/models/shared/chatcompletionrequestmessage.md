@@ -3,33 +3,33 @@
 
 ## Supported Types
 
-### SystemMessage
+### ChatCompletionRequestSystemMessage
 
 ```go
-chatCompletionRequestMessage := shared.CreateChatCompletionRequestMessageSystemMessage(shared.SystemMessage{/* values here */})
+chatCompletionRequestMessage := shared.CreateChatCompletionRequestMessageChatCompletionRequestSystemMessage(shared.ChatCompletionRequestSystemMessage{/* values here */})
 ```
 
-### UserMessage
+### ChatCompletionRequestUserMessage
 
 ```go
-chatCompletionRequestMessage := shared.CreateChatCompletionRequestMessageUserMessage(shared.UserMessage{/* values here */})
+chatCompletionRequestMessage := shared.CreateChatCompletionRequestMessageChatCompletionRequestUserMessage(shared.ChatCompletionRequestUserMessage{/* values here */})
 ```
 
-### AssistantMessage
+### ChatCompletionRequestAssistantMessage
 
 ```go
-chatCompletionRequestMessage := shared.CreateChatCompletionRequestMessageAssistantMessage(shared.AssistantMessage{/* values here */})
+chatCompletionRequestMessage := shared.CreateChatCompletionRequestMessageChatCompletionRequestAssistantMessage(shared.ChatCompletionRequestAssistantMessage{/* values here */})
 ```
 
-### ToolMessage
+### ChatCompletionRequestToolMessage
 
 ```go
-chatCompletionRequestMessage := shared.CreateChatCompletionRequestMessageToolMessage(shared.ToolMessage{/* values here */})
+chatCompletionRequestMessage := shared.CreateChatCompletionRequestMessageChatCompletionRequestToolMessage(shared.ChatCompletionRequestToolMessage{/* values here */})
 ```
 
-### FunctionMessage
+### ChatCompletionRequestFunctionMessage
 
 ```go
-chatCompletionRequestMessage := shared.CreateChatCompletionRequestMessageFunctionMessage(shared.FunctionMessage{/* values here */})
+chatCompletionRequestMessage := shared.CreateChatCompletionRequestMessageChatCompletionRequestFunctionMessage(shared.ChatCompletionRequestFunctionMessage{/* values here */})
 ```
 

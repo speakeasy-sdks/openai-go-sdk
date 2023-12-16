@@ -3,15 +3,15 @@
 
 ## Supported Types
 
-### CodeInterpreterLogOutput
+### RunStepDetailsToolCallsCodeOutputLogsObject
 
 ```go
-outputs := shared.CreateOutputsCodeInterpreterLogOutput(shared.CodeInterpreterLogOutput{/* values here */})
+outputs := shared.CreateOutputsRunStepDetailsToolCallsCodeOutputLogsObject(shared.RunStepDetailsToolCallsCodeOutputLogsObject{/* values here */})
 ```
 
-### CodeInterpreterImageOutput
+### RunStepDetailsToolCallsCodeOutputImageObject
 
 ```go
-outputs := shared.CreateOutputsCodeInterpreterImageOutput(shared.CodeInterpreterImageOutput{/* values here */})
+outputs := shared.CreateOutputsRunStepDetailsToolCallsCodeOutputImageObject(shared.RunStepDetailsToolCallsCodeOutputImageObject{/* values here */})
 ```
 

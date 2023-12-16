@@ -9,413 +9,51 @@ import (
 	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 )
 
-type SchemasFilePath struct {
-	// The ID of the file that was generated.
-	FileID string `json:"file_id"`
-}
-
-func (o *SchemasFilePath) GetFileID() string {
-	if o == nil {
-		return ""
-	}
-	return o.FileID
-}
-
-// SchemasMessageContentTextAnnotationsFilePathObjectType - Always `file_path`.
-type SchemasMessageContentTextAnnotationsFilePathObjectType string
-
-const (
-	SchemasMessageContentTextAnnotationsFilePathObjectTypeFilePath SchemasMessageContentTextAnnotationsFilePathObjectType = "file_path"
-)
-
-func (e SchemasMessageContentTextAnnotationsFilePathObjectType) ToPointer() *SchemasMessageContentTextAnnotationsFilePathObjectType {
-	return &e
-}
-
-func (e *SchemasMessageContentTextAnnotationsFilePathObjectType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "file_path":
-		*e = SchemasMessageContentTextAnnotationsFilePathObjectType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for SchemasMessageContentTextAnnotationsFilePathObjectType: %v", v)
-	}
-}
-
-// FilePath - A URL for the file that's generated when the assistant used the `code_interpreter` tool to generate a file.
-type FilePath struct {
-	EndIndex   int64           `json:"end_index"`
-	FilePath   SchemasFilePath `json:"file_path"`
-	StartIndex int64           `json:"start_index"`
-	// The text in the message content that needs to be replaced.
-	Text string `json:"text"`
-	// Always `file_path`.
-	Type SchemasMessageContentTextAnnotationsFilePathObjectType `json:"type"`
-}
-
-func (o *FilePath) GetEndIndex() int64 {
-	if o == nil {
-		return 0
-	}
-	return o.EndIndex
-}
-
-func (o *FilePath) GetFilePath() SchemasFilePath {
-	if o == nil {
-		return SchemasFilePath{}
-	}
-	return o.FilePath
-}
-
-func (o *FilePath) GetStartIndex() int64 {
-	if o == nil {
-		return 0
-	}
-	return o.StartIndex
-}
-
-func (o *FilePath) GetText() string {
-	if o == nil {
-		return ""
-	}
-	return o.Text
-}
-
-func (o *FilePath) GetType() SchemasMessageContentTextAnnotationsFilePathObjectType {
-	if o == nil {
-		return SchemasMessageContentTextAnnotationsFilePathObjectType("")
-	}
-	return o.Type
-}
-
-type SchemasFileCitation struct {
-	// The ID of the specific File the citation is from.
-	FileID string `json:"file_id"`
-	// The specific quote in the file.
-	Quote string `json:"quote"`
-}
-
-func (o *SchemasFileCitation) GetFileID() string {
-	if o == nil {
-		return ""
-	}
-	return o.FileID
-}
-
-func (o *SchemasFileCitation) GetQuote() string {
-	if o == nil {
-		return ""
-	}
-	return o.Quote
-}
-
-// SchemasMessageContentTextAnnotationsFileCitationObjectType - Always `file_citation`.
-type SchemasMessageContentTextAnnotationsFileCitationObjectType string
-
-const (
-	SchemasMessageContentTextAnnotationsFileCitationObjectTypeFileCitation SchemasMessageContentTextAnnotationsFileCitationObjectType = "file_citation"
-)
-
-func (e SchemasMessageContentTextAnnotationsFileCitationObjectType) ToPointer() *SchemasMessageContentTextAnnotationsFileCitationObjectType {
-	return &e
-}
-
-func (e *SchemasMessageContentTextAnnotationsFileCitationObjectType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "file_citation":
-		*e = SchemasMessageContentTextAnnotationsFileCitationObjectType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for SchemasMessageContentTextAnnotationsFileCitationObjectType: %v", v)
-	}
-}
-
-// FileCitation - A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the "retrieval" tool to search files.
-type FileCitation struct {
-	EndIndex     int64               `json:"end_index"`
-	FileCitation SchemasFileCitation `json:"file_citation"`
-	StartIndex   int64               `json:"start_index"`
-	// The text in the message content that needs to be replaced.
-	Text string `json:"text"`
-	// Always `file_citation`.
-	Type SchemasMessageContentTextAnnotationsFileCitationObjectType `json:"type"`
-}
-
-func (o *FileCitation) GetEndIndex() int64 {
-	if o == nil {
-		return 0
-	}
-	return o.EndIndex
-}
-
-func (o *FileCitation) GetFileCitation() SchemasFileCitation {
-	if o == nil {
-		return SchemasFileCitation{}
-	}
-	return o.FileCitation
-}
-
-func (o *FileCitation) GetStartIndex() int64 {
-	if o == nil {
-		return 0
-	}
-	return o.StartIndex
-}
-
-func (o *FileCitation) GetText() string {
-	if o == nil {
-		return ""
-	}
-	return o.Text
-}
-
-func (o *FileCitation) GetType() SchemasMessageContentTextAnnotationsFileCitationObjectType {
-	if o == nil {
-		return SchemasMessageContentTextAnnotationsFileCitationObjectType("")
-	}
-	return o.Type
-}
-
-type AnnotationsType string
-
-const (
-	AnnotationsTypeFileCitation AnnotationsType = "File citation"
-	AnnotationsTypeFilePath     AnnotationsType = "File path"
-)
-
-type Annotations struct {
-	FileCitation *FileCitation
-	FilePath     *FilePath
-
-	Type AnnotationsType
-}
-
-func CreateAnnotationsFileCitation(fileCitation FileCitation) Annotations {
-	typ := AnnotationsTypeFileCitation
-
-	return Annotations{
-		FileCitation: &fileCitation,
-		Type:         typ,
-	}
-}
-
-func CreateAnnotationsFilePath(filePath FilePath) Annotations {
-	typ := AnnotationsTypeFilePath
-
-	return Annotations{
-		FilePath: &filePath,
-		Type:     typ,
-	}
-}
-
-func (u *Annotations) UnmarshalJSON(data []byte) error {
-
-	fileCitation := FileCitation{}
-	if err := utils.UnmarshalJSON(data, &fileCitation, "", true, true); err == nil {
-		u.FileCitation = &fileCitation
-		u.Type = AnnotationsTypeFileCitation
-		return nil
-	}
-
-	filePath := FilePath{}
-	if err := utils.UnmarshalJSON(data, &filePath, "", true, true); err == nil {
-		u.FilePath = &filePath
-		u.Type = AnnotationsTypeFilePath
-		return nil
-	}
-
-	return errors.New("could not unmarshal into supported union types")
-}
-
-func (u Annotations) MarshalJSON() ([]byte, error) {
-	if u.FileCitation != nil {
-		return utils.MarshalJSON(u.FileCitation, "", true)
-	}
-
-	if u.FilePath != nil {
-		return utils.MarshalJSON(u.FilePath, "", true)
-	}
-
-	return nil, errors.New("could not marshal union type: all fields are null")
-}
-
-type SchemasText struct {
-	Annotations []Annotations `json:"annotations"`
-	// The data that makes up the text.
-	Value string `json:"value"`
-}
-
-func (o *SchemasText) GetAnnotations() []Annotations {
-	if o == nil {
-		return []Annotations{}
-	}
-	return o.Annotations
-}
-
-func (o *SchemasText) GetValue() string {
-	if o == nil {
-		return ""
-	}
-	return o.Value
-}
-
-// SchemasMessageContentTextObjectType - Always `text`.
-type SchemasMessageContentTextObjectType string
-
-const (
-	SchemasMessageContentTextObjectTypeText SchemasMessageContentTextObjectType = "text"
-)
-
-func (e SchemasMessageContentTextObjectType) ToPointer() *SchemasMessageContentTextObjectType {
-	return &e
-}
-
-func (e *SchemasMessageContentTextObjectType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "text":
-		*e = SchemasMessageContentTextObjectType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for SchemasMessageContentTextObjectType: %v", v)
-	}
-}
-
-// Text - The text content that is part of a message.
-type Text struct {
-	Text SchemasText `json:"text"`
-	// Always `text`.
-	Type SchemasMessageContentTextObjectType `json:"type"`
-}
-
-func (o *Text) GetText() SchemasText {
-	if o == nil {
-		return SchemasText{}
-	}
-	return o.Text
-}
-
-func (o *Text) GetType() SchemasMessageContentTextObjectType {
-	if o == nil {
-		return SchemasMessageContentTextObjectType("")
-	}
-	return o.Type
-}
-
-type SchemasImageFile struct {
-	// The [File](/docs/api-reference/files) ID of the image in the message content.
-	FileID string `json:"file_id"`
-}
-
-func (o *SchemasImageFile) GetFileID() string {
-	if o == nil {
-		return ""
-	}
-	return o.FileID
-}
-
-// SchemasMessageContentImageFileObjectType - Always `image_file`.
-type SchemasMessageContentImageFileObjectType string
-
-const (
-	SchemasMessageContentImageFileObjectTypeImageFile SchemasMessageContentImageFileObjectType = "image_file"
-)
-
-func (e SchemasMessageContentImageFileObjectType) ToPointer() *SchemasMessageContentImageFileObjectType {
-	return &e
-}
-
-func (e *SchemasMessageContentImageFileObjectType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "image_file":
-		*e = SchemasMessageContentImageFileObjectType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for SchemasMessageContentImageFileObjectType: %v", v)
-	}
-}
-
-// ImageFile - References an image [File](/docs/api-reference/files) in the content of a message.
-type ImageFile struct {
-	ImageFile SchemasImageFile `json:"image_file"`
-	// Always `image_file`.
-	Type SchemasMessageContentImageFileObjectType `json:"type"`
-}
-
-func (o *ImageFile) GetImageFile() SchemasImageFile {
-	if o == nil {
-		return SchemasImageFile{}
-	}
-	return o.ImageFile
-}
-
-func (o *ImageFile) GetType() SchemasMessageContentImageFileObjectType {
-	if o == nil {
-		return SchemasMessageContentImageFileObjectType("")
-	}
-	return o.Type
-}
-
 type MessageObjectContentType string
 
 const (
-	MessageObjectContentTypeImageFile MessageObjectContentType = "Image file"
-	MessageObjectContentTypeText      MessageObjectContentType = "Text"
+	MessageObjectContentTypeMessageContentImageFileObject MessageObjectContentType = "MessageContentImageFileObject"
+	MessageObjectContentTypeMessageContentTextObject      MessageObjectContentType = "MessageContentTextObject"
 )
 
 type MessageObjectContent struct {
-	ImageFile *ImageFile
-	Text      *Text
+	MessageContentImageFileObject *MessageContentImageFileObject
+	MessageContentTextObject      *MessageContentTextObject
 
 	Type MessageObjectContentType
 }
 
-func CreateMessageObjectContentImageFile(imageFile ImageFile) MessageObjectContent {
-	typ := MessageObjectContentTypeImageFile
+func CreateMessageObjectContentMessageContentImageFileObject(messageContentImageFileObject MessageContentImageFileObject) MessageObjectContent {
+	typ := MessageObjectContentTypeMessageContentImageFileObject
 
 	return MessageObjectContent{
-		ImageFile: &imageFile,
-		Type:      typ,
+		MessageContentImageFileObject: &messageContentImageFileObject,
+		Type:                          typ,
 	}
 }
 
-func CreateMessageObjectContentText(text Text) MessageObjectContent {
-	typ := MessageObjectContentTypeText
+func CreateMessageObjectContentMessageContentTextObject(messageContentTextObject MessageContentTextObject) MessageObjectContent {
+	typ := MessageObjectContentTypeMessageContentTextObject
 
 	return MessageObjectContent{
-		Text: &text,
-		Type: typ,
+		MessageContentTextObject: &messageContentTextObject,
+		Type:                     typ,
 	}
 }
 
 func (u *MessageObjectContent) UnmarshalJSON(data []byte) error {
 
-	imageFile := ImageFile{}
-	if err := utils.UnmarshalJSON(data, &imageFile, "", true, true); err == nil {
-		u.ImageFile = &imageFile
-		u.Type = MessageObjectContentTypeImageFile
+	messageContentImageFileObject := MessageContentImageFileObject{}
+	if err := utils.UnmarshalJSON(data, &messageContentImageFileObject, "", true, true); err == nil {
+		u.MessageContentImageFileObject = &messageContentImageFileObject
+		u.Type = MessageObjectContentTypeMessageContentImageFileObject
 		return nil
 	}
 
-	text := Text{}
-	if err := utils.UnmarshalJSON(data, &text, "", true, true); err == nil {
-		u.Text = &text
-		u.Type = MessageObjectContentTypeText
+	messageContentTextObject := MessageContentTextObject{}
+	if err := utils.UnmarshalJSON(data, &messageContentTextObject, "", true, true); err == nil {
+		u.MessageContentTextObject = &messageContentTextObject
+		u.Type = MessageObjectContentTypeMessageContentTextObject
 		return nil
 	}
 
@@ -423,12 +61,12 @@ func (u *MessageObjectContent) UnmarshalJSON(data []byte) error {
 }
 
 func (u MessageObjectContent) MarshalJSON() ([]byte, error) {
-	if u.ImageFile != nil {
-		return utils.MarshalJSON(u.ImageFile, "", true)
+	if u.MessageContentImageFileObject != nil {
+		return utils.MarshalJSON(u.MessageContentImageFileObject, "", true)
 	}
 
-	if u.Text != nil {
-		return utils.MarshalJSON(u.Text, "", true)
+	if u.MessageContentTextObject != nil {
+		return utils.MarshalJSON(u.MessageContentTextObject, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")

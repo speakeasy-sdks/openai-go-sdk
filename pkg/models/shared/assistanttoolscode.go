@@ -7,39 +7,39 @@ import (
 	"fmt"
 )
 
-// AssistantToolsCodeType - The type of tool being defined: `code_interpreter`
-type AssistantToolsCodeType string
+// Type - The type of tool being defined: `code_interpreter`
+type Type string
 
 const (
-	AssistantToolsCodeTypeCodeInterpreter AssistantToolsCodeType = "code_interpreter"
+	TypeCodeInterpreter Type = "code_interpreter"
 )
 
-func (e AssistantToolsCodeType) ToPointer() *AssistantToolsCodeType {
+func (e Type) ToPointer() *Type {
 	return &e
 }
 
-func (e *AssistantToolsCodeType) UnmarshalJSON(data []byte) error {
+func (e *Type) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "code_interpreter":
-		*e = AssistantToolsCodeType(v)
+		*e = Type(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for AssistantToolsCodeType: %v", v)
+		return fmt.Errorf("invalid value for Type: %v", v)
 	}
 }
 
 type AssistantToolsCode struct {
 	// The type of tool being defined: `code_interpreter`
-	Type AssistantToolsCodeType `json:"type"`
+	Type Type `json:"type"`
 }
 
-func (o *AssistantToolsCode) GetType() AssistantToolsCodeType {
+func (o *AssistantToolsCode) GetType() Type {
 	if o == nil {
-		return AssistantToolsCodeType("")
+		return Type("")
 	}
 	return o.Type
 }

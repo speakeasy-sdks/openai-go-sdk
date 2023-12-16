@@ -9,7 +9,6 @@ import (
 	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
 )
 
-// CreateEditRequest2 - ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001` model with this endpoint.
 type CreateEditRequest2 string
 
 const (
@@ -44,6 +43,7 @@ const (
 	CreateEditRequestModelTypeCreateEditRequest2 CreateEditRequestModelType = "CreateEditRequest_2"
 )
 
+// CreateEditRequestModel - ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001` model with this endpoint.
 type CreateEditRequestModel struct {
 	Str                *string
 	CreateEditRequest2 *CreateEditRequest2

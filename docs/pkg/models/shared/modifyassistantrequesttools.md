@@ -3,21 +3,21 @@
 
 ## Supported Types
 
-### CodeInterpreterTool
+### AssistantToolsCode
 
 ```go
-modifyAssistantRequestTools := shared.CreateModifyAssistantRequestToolsCodeInterpreterTool(shared.CodeInterpreterTool{/* values here */})
+modifyAssistantRequestTools := shared.CreateModifyAssistantRequestToolsAssistantToolsCode(shared.AssistantToolsCode{/* values here */})
 ```
 
-### RetrievalTool
+### AssistantToolsRetrieval
 
 ```go
-modifyAssistantRequestTools := shared.CreateModifyAssistantRequestToolsRetrievalTool(shared.RetrievalTool{/* values here */})
+modifyAssistantRequestTools := shared.CreateModifyAssistantRequestToolsAssistantToolsRetrieval(shared.AssistantToolsRetrieval{/* values here */})
 ```
 
-### FunctionTool
+### AssistantToolsFunction
 
 ```go
-modifyAssistantRequestTools := shared.CreateModifyAssistantRequestToolsFunctionTool(shared.FunctionTool{/* values here */})
+modifyAssistantRequestTools := shared.CreateModifyAssistantRequestToolsAssistantToolsFunction(shared.AssistantToolsFunction{/* values here */})
 ```
 

@@ -120,9 +120,9 @@ func main() {
         Metadata: &shared.CreateAssistantRequestMetadata{},
         Model: "XTS",
         Tools: []shared.CreateAssistantRequestTools{
-            shared.CreateCreateAssistantRequestToolsRetrievalTool(
-                shared.RetrievalTool{
-                    Type: shared.SchemasAssistantToolsRetrievalTypeRetrieval,
+            shared.CreateCreateAssistantRequestToolsAssistantToolsRetrieval(
+                shared.AssistantToolsRetrieval{
+                    Type: shared.AssistantToolsRetrievalTypeRetrieval,
                 },
             ),
         },
@@ -295,8 +295,8 @@ func main() {
         AssistantID: "string",
         Metadata: &shared.CreateRunRequestMetadata{},
         Tools: []shared.CreateRunRequestTools{
-            shared.CreateCreateRunRequestToolsCodeInterpreterTool(
-                shared.CodeInterpreterTool{
+            shared.CreateCreateRunRequestToolsAssistantToolsCode(
+                shared.AssistantToolsCode{
                     Type: shared.TypeCodeInterpreter,
                 },
             ),
@@ -1350,8 +1350,8 @@ func main() {
         },
         Metadata: &shared.ModifyAssistantRequestMetadata{},
         Tools: []shared.ModifyAssistantRequestTools{
-            shared.CreateModifyAssistantRequestToolsCodeInterpreterTool(
-                shared.CodeInterpreterTool{
+            shared.CreateModifyAssistantRequestToolsAssistantToolsCode(
+                shared.AssistantToolsCode{
                     Type: shared.TypeCodeInterpreter,
                 },
             ),

@@ -194,188 +194,69 @@ func (e *RunObjectStatus) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// SchemasType - The type of tool being defined: `function`
-type SchemasType string
-
-const (
-	SchemasTypeFunction SchemasType = "function"
-)
-
-func (e SchemasType) ToPointer() *SchemasType {
-	return &e
-}
-
-func (e *SchemasType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "function":
-		*e = SchemasType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for SchemasType: %v", v)
-	}
-}
-
-type FunctionTool struct {
-	Function FunctionObject `json:"function"`
-	// The type of tool being defined: `function`
-	Type SchemasType `json:"type"`
-}
-
-func (o *FunctionTool) GetFunction() FunctionObject {
-	if o == nil {
-		return FunctionObject{}
-	}
-	return o.Function
-}
-
-func (o *FunctionTool) GetType() SchemasType {
-	if o == nil {
-		return SchemasType("")
-	}
-	return o.Type
-}
-
-// SchemasAssistantToolsRetrievalType - The type of tool being defined: `retrieval`
-type SchemasAssistantToolsRetrievalType string
-
-const (
-	SchemasAssistantToolsRetrievalTypeRetrieval SchemasAssistantToolsRetrievalType = "retrieval"
-)
-
-func (e SchemasAssistantToolsRetrievalType) ToPointer() *SchemasAssistantToolsRetrievalType {
-	return &e
-}
-
-func (e *SchemasAssistantToolsRetrievalType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "retrieval":
-		*e = SchemasAssistantToolsRetrievalType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for SchemasAssistantToolsRetrievalType: %v", v)
-	}
-}
-
-type RetrievalTool struct {
-	// The type of tool being defined: `retrieval`
-	Type SchemasAssistantToolsRetrievalType `json:"type"`
-}
-
-func (o *RetrievalTool) GetType() SchemasAssistantToolsRetrievalType {
-	if o == nil {
-		return SchemasAssistantToolsRetrievalType("")
-	}
-	return o.Type
-}
-
-// Type - The type of tool being defined: `code_interpreter`
-type Type string
-
-const (
-	TypeCodeInterpreter Type = "code_interpreter"
-)
-
-func (e Type) ToPointer() *Type {
-	return &e
-}
-
-func (e *Type) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "code_interpreter":
-		*e = Type(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for Type: %v", v)
-	}
-}
-
-type CodeInterpreterTool struct {
-	// The type of tool being defined: `code_interpreter`
-	Type Type `json:"type"`
-}
-
-func (o *CodeInterpreterTool) GetType() Type {
-	if o == nil {
-		return Type("")
-	}
-	return o.Type
-}
-
 type RunObjectToolsType string
 
 const (
-	RunObjectToolsTypeCodeInterpreterTool RunObjectToolsType = "Code interpreter tool"
-	RunObjectToolsTypeRetrievalTool       RunObjectToolsType = "Retrieval tool"
-	RunObjectToolsTypeFunctionTool        RunObjectToolsType = "Function tool"
+	RunObjectToolsTypeAssistantToolsCode      RunObjectToolsType = "AssistantToolsCode"
+	RunObjectToolsTypeAssistantToolsRetrieval RunObjectToolsType = "AssistantToolsRetrieval"
+	RunObjectToolsTypeAssistantToolsFunction  RunObjectToolsType = "AssistantToolsFunction"
 )
 
 type RunObjectTools struct {
-	CodeInterpreterTool *CodeInterpreterTool
-	RetrievalTool       *RetrievalTool
-	FunctionTool        *FunctionTool
+	AssistantToolsCode      *AssistantToolsCode
+	AssistantToolsRetrieval *AssistantToolsRetrieval
+	AssistantToolsFunction  *AssistantToolsFunction
 
 	Type RunObjectToolsType
 }
 
-func CreateRunObjectToolsCodeInterpreterTool(codeInterpreterTool CodeInterpreterTool) RunObjectTools {
-	typ := RunObjectToolsTypeCodeInterpreterTool
+func CreateRunObjectToolsAssistantToolsCode(assistantToolsCode AssistantToolsCode) RunObjectTools {
+	typ := RunObjectToolsTypeAssistantToolsCode
 
 	return RunObjectTools{
-		CodeInterpreterTool: &codeInterpreterTool,
-		Type:                typ,
+		AssistantToolsCode: &assistantToolsCode,
+		Type:               typ,
 	}
 }
 
-func CreateRunObjectToolsRetrievalTool(retrievalTool RetrievalTool) RunObjectTools {
-	typ := RunObjectToolsTypeRetrievalTool
+func CreateRunObjectToolsAssistantToolsRetrieval(assistantToolsRetrieval AssistantToolsRetrieval) RunObjectTools {
+	typ := RunObjectToolsTypeAssistantToolsRetrieval
 
 	return RunObjectTools{
-		RetrievalTool: &retrievalTool,
-		Type:          typ,
+		AssistantToolsRetrieval: &assistantToolsRetrieval,
+		Type:                    typ,
 	}
 }
 
-func CreateRunObjectToolsFunctionTool(functionTool FunctionTool) RunObjectTools {
-	typ := RunObjectToolsTypeFunctionTool
+func CreateRunObjectToolsAssistantToolsFunction(assistantToolsFunction AssistantToolsFunction) RunObjectTools {
+	typ := RunObjectToolsTypeAssistantToolsFunction
 
 	return RunObjectTools{
-		FunctionTool: &functionTool,
-		Type:         typ,
+		AssistantToolsFunction: &assistantToolsFunction,
+		Type:                   typ,
 	}
 }
 
 func (u *RunObjectTools) UnmarshalJSON(data []byte) error {
 
-	codeInterpreterTool := CodeInterpreterTool{}
-	if err := utils.UnmarshalJSON(data, &codeInterpreterTool, "", true, true); err == nil {
-		u.CodeInterpreterTool = &codeInterpreterTool
-		u.Type = RunObjectToolsTypeCodeInterpreterTool
+	assistantToolsCode := AssistantToolsCode{}
+	if err := utils.UnmarshalJSON(data, &assistantToolsCode, "", true, true); err == nil {
+		u.AssistantToolsCode = &assistantToolsCode
+		u.Type = RunObjectToolsTypeAssistantToolsCode
 		return nil
 	}
 
-	retrievalTool := RetrievalTool{}
-	if err := utils.UnmarshalJSON(data, &retrievalTool, "", true, true); err == nil {
-		u.RetrievalTool = &retrievalTool
-		u.Type = RunObjectToolsTypeRetrievalTool
+	assistantToolsRetrieval := AssistantToolsRetrieval{}
+	if err := utils.UnmarshalJSON(data, &assistantToolsRetrieval, "", true, true); err == nil {
+		u.AssistantToolsRetrieval = &assistantToolsRetrieval
+		u.Type = RunObjectToolsTypeAssistantToolsRetrieval
 		return nil
 	}
 
-	functionTool := FunctionTool{}
-	if err := utils.UnmarshalJSON(data, &functionTool, "", true, true); err == nil {
-		u.FunctionTool = &functionTool
-		u.Type = RunObjectToolsTypeFunctionTool
+	assistantToolsFunction := AssistantToolsFunction{}
+	if err := utils.UnmarshalJSON(data, &assistantToolsFunction, "", true, true); err == nil {
+		u.AssistantToolsFunction = &assistantToolsFunction
+		u.Type = RunObjectToolsTypeAssistantToolsFunction
 		return nil
 	}
 
@@ -383,16 +264,16 @@ func (u *RunObjectTools) UnmarshalJSON(data []byte) error {
 }
 
 func (u RunObjectTools) MarshalJSON() ([]byte, error) {
-	if u.CodeInterpreterTool != nil {
-		return utils.MarshalJSON(u.CodeInterpreterTool, "", true)
+	if u.AssistantToolsCode != nil {
+		return utils.MarshalJSON(u.AssistantToolsCode, "", true)
 	}
 
-	if u.RetrievalTool != nil {
-		return utils.MarshalJSON(u.RetrievalTool, "", true)
+	if u.AssistantToolsRetrieval != nil {
+		return utils.MarshalJSON(u.AssistantToolsRetrieval, "", true)
 	}
 
-	if u.FunctionTool != nil {
-		return utils.MarshalJSON(u.FunctionTool, "", true)
+	if u.AssistantToolsFunction != nil {
+		return utils.MarshalJSON(u.AssistantToolsFunction, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
@@ -561,683 +442,6 @@ func (o *RunObject) GetThreadID() string {
 func (o *RunObject) GetTools() []RunObjectTools {
 	if o == nil {
 		return []RunObjectTools{}
-	}
-	return o.Tools
-}
-
-// Metadata - Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maxium of 512 characters long.
-type Metadata struct {
-}
-
-// AssistantObjectObject - The object type, which is always `assistant`.
-type AssistantObjectObject string
-
-const (
-	AssistantObjectObjectAssistant AssistantObjectObject = "assistant"
-)
-
-func (e AssistantObjectObject) ToPointer() *AssistantObjectObject {
-	return &e
-}
-
-func (e *AssistantObjectObject) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "assistant":
-		*e = AssistantObjectObject(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AssistantObjectObject: %v", v)
-	}
-}
-
-type ToolsType string
-
-const (
-	ToolsTypeCodeInterpreterTool ToolsType = "Code interpreter tool"
-	ToolsTypeRetrievalTool       ToolsType = "Retrieval tool"
-	ToolsTypeFunctionTool        ToolsType = "Function tool"
-)
-
-type Tools struct {
-	CodeInterpreterTool *CodeInterpreterTool
-	RetrievalTool       *RetrievalTool
-	FunctionTool        *FunctionTool
-
-	Type ToolsType
-}
-
-func CreateToolsCodeInterpreterTool(codeInterpreterTool CodeInterpreterTool) Tools {
-	typ := ToolsTypeCodeInterpreterTool
-
-	return Tools{
-		CodeInterpreterTool: &codeInterpreterTool,
-		Type:                typ,
-	}
-}
-
-func CreateToolsRetrievalTool(retrievalTool RetrievalTool) Tools {
-	typ := ToolsTypeRetrievalTool
-
-	return Tools{
-		RetrievalTool: &retrievalTool,
-		Type:          typ,
-	}
-}
-
-func CreateToolsFunctionTool(functionTool FunctionTool) Tools {
-	typ := ToolsTypeFunctionTool
-
-	return Tools{
-		FunctionTool: &functionTool,
-		Type:         typ,
-	}
-}
-
-func (u *Tools) UnmarshalJSON(data []byte) error {
-
-	codeInterpreterTool := CodeInterpreterTool{}
-	if err := utils.UnmarshalJSON(data, &codeInterpreterTool, "", true, true); err == nil {
-		u.CodeInterpreterTool = &codeInterpreterTool
-		u.Type = ToolsTypeCodeInterpreterTool
-		return nil
-	}
-
-	retrievalTool := RetrievalTool{}
-	if err := utils.UnmarshalJSON(data, &retrievalTool, "", true, true); err == nil {
-		u.RetrievalTool = &retrievalTool
-		u.Type = ToolsTypeRetrievalTool
-		return nil
-	}
-
-	functionTool := FunctionTool{}
-	if err := utils.UnmarshalJSON(data, &functionTool, "", true, true); err == nil {
-		u.FunctionTool = &functionTool
-		u.Type = ToolsTypeFunctionTool
-		return nil
-	}
-
-	return errors.New("could not unmarshal into supported union types")
-}
-
-func (u Tools) MarshalJSON() ([]byte, error) {
-	if u.CodeInterpreterTool != nil {
-		return utils.MarshalJSON(u.CodeInterpreterTool, "", true)
-	}
-
-	if u.RetrievalTool != nil {
-		return utils.MarshalJSON(u.RetrievalTool, "", true)
-	}
-
-	if u.FunctionTool != nil {
-		return utils.MarshalJSON(u.FunctionTool, "", true)
-	}
-
-	return nil, errors.New("could not marshal union type: all fields are null")
-}
-
-// AssistantObject - Represents an `assistant` that can call the model and use tools.
-type AssistantObject struct {
-	// The Unix timestamp (in seconds) for when the assistant was created.
-	CreatedAt int64 `json:"created_at"`
-	// The description of the assistant. The maximum length is 512 characters.
-	//
-	Description *string `json:"description"`
-	// A list of [file](/docs/api-reference/files) IDs attached to this assistant. There can be a maximum of 20 files attached to the assistant. Files are ordered by their creation date in ascending order.
-	//
-	FileIds []string `json:"file_ids"`
-	// The identifier, which can be referenced in API endpoints.
-	ID string `json:"id"`
-	// The system instructions that the assistant uses. The maximum length is 32768 characters.
-	//
-	Instructions *string `json:"instructions"`
-	// Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maxium of 512 characters long.
-	//
-	Metadata *Metadata `json:"metadata"`
-	// ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.
-	//
-	Model string `json:"model"`
-	// The name of the assistant. The maximum length is 256 characters.
-	//
-	Name *string `json:"name"`
-	// The object type, which is always `assistant`.
-	Object AssistantObjectObject `json:"object"`
-	// A list of tool enabled on the assistant. There can be a maximum of 128 tools per assistant. Tools can be of types `code_interpreter`, `retrieval`, or `function`.
-	//
-	Tools []Tools `json:"tools"`
-}
-
-func (o *AssistantObject) GetCreatedAt() int64 {
-	if o == nil {
-		return 0
-	}
-	return o.CreatedAt
-}
-
-func (o *AssistantObject) GetDescription() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Description
-}
-
-func (o *AssistantObject) GetFileIds() []string {
-	if o == nil {
-		return []string{}
-	}
-	return o.FileIds
-}
-
-func (o *AssistantObject) GetID() string {
-	if o == nil {
-		return ""
-	}
-	return o.ID
-}
-
-func (o *AssistantObject) GetInstructions() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Instructions
-}
-
-func (o *AssistantObject) GetMetadata() *Metadata {
-	if o == nil {
-		return nil
-	}
-	return o.Metadata
-}
-
-func (o *AssistantObject) GetModel() string {
-	if o == nil {
-		return ""
-	}
-	return o.Model
-}
-
-func (o *AssistantObject) GetName() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Name
-}
-
-func (o *AssistantObject) GetObject() AssistantObjectObject {
-	if o == nil {
-		return AssistantObjectObject("")
-	}
-	return o.Object
-}
-
-func (o *AssistantObject) GetTools() []Tools {
-	if o == nil {
-		return []Tools{}
-	}
-	return o.Tools
-}
-
-// CreateAssistantRequestMetadata - Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maxium of 512 characters long.
-type CreateAssistantRequestMetadata struct {
-}
-
-type CreateAssistantRequestToolsType string
-
-const (
-	CreateAssistantRequestToolsTypeCodeInterpreterTool CreateAssistantRequestToolsType = "Code interpreter tool"
-	CreateAssistantRequestToolsTypeRetrievalTool       CreateAssistantRequestToolsType = "Retrieval tool"
-	CreateAssistantRequestToolsTypeFunctionTool        CreateAssistantRequestToolsType = "Function tool"
-)
-
-type CreateAssistantRequestTools struct {
-	CodeInterpreterTool *CodeInterpreterTool
-	RetrievalTool       *RetrievalTool
-	FunctionTool        *FunctionTool
-
-	Type CreateAssistantRequestToolsType
-}
-
-func CreateCreateAssistantRequestToolsCodeInterpreterTool(codeInterpreterTool CodeInterpreterTool) CreateAssistantRequestTools {
-	typ := CreateAssistantRequestToolsTypeCodeInterpreterTool
-
-	return CreateAssistantRequestTools{
-		CodeInterpreterTool: &codeInterpreterTool,
-		Type:                typ,
-	}
-}
-
-func CreateCreateAssistantRequestToolsRetrievalTool(retrievalTool RetrievalTool) CreateAssistantRequestTools {
-	typ := CreateAssistantRequestToolsTypeRetrievalTool
-
-	return CreateAssistantRequestTools{
-		RetrievalTool: &retrievalTool,
-		Type:          typ,
-	}
-}
-
-func CreateCreateAssistantRequestToolsFunctionTool(functionTool FunctionTool) CreateAssistantRequestTools {
-	typ := CreateAssistantRequestToolsTypeFunctionTool
-
-	return CreateAssistantRequestTools{
-		FunctionTool: &functionTool,
-		Type:         typ,
-	}
-}
-
-func (u *CreateAssistantRequestTools) UnmarshalJSON(data []byte) error {
-
-	codeInterpreterTool := CodeInterpreterTool{}
-	if err := utils.UnmarshalJSON(data, &codeInterpreterTool, "", true, true); err == nil {
-		u.CodeInterpreterTool = &codeInterpreterTool
-		u.Type = CreateAssistantRequestToolsTypeCodeInterpreterTool
-		return nil
-	}
-
-	retrievalTool := RetrievalTool{}
-	if err := utils.UnmarshalJSON(data, &retrievalTool, "", true, true); err == nil {
-		u.RetrievalTool = &retrievalTool
-		u.Type = CreateAssistantRequestToolsTypeRetrievalTool
-		return nil
-	}
-
-	functionTool := FunctionTool{}
-	if err := utils.UnmarshalJSON(data, &functionTool, "", true, true); err == nil {
-		u.FunctionTool = &functionTool
-		u.Type = CreateAssistantRequestToolsTypeFunctionTool
-		return nil
-	}
-
-	return errors.New("could not unmarshal into supported union types")
-}
-
-func (u CreateAssistantRequestTools) MarshalJSON() ([]byte, error) {
-	if u.CodeInterpreterTool != nil {
-		return utils.MarshalJSON(u.CodeInterpreterTool, "", true)
-	}
-
-	if u.RetrievalTool != nil {
-		return utils.MarshalJSON(u.RetrievalTool, "", true)
-	}
-
-	if u.FunctionTool != nil {
-		return utils.MarshalJSON(u.FunctionTool, "", true)
-	}
-
-	return nil, errors.New("could not marshal union type: all fields are null")
-}
-
-type CreateAssistantRequest struct {
-	// The description of the assistant. The maximum length is 512 characters.
-	//
-	Description *string `json:"description,omitempty"`
-	// A list of [file](/docs/api-reference/files) IDs attached to this assistant. There can be a maximum of 20 files attached to the assistant. Files are ordered by their creation date in ascending order.
-	//
-	FileIds []string `json:"file_ids,omitempty"`
-	// The system instructions that the assistant uses. The maximum length is 32768 characters.
-	//
-	Instructions *string `json:"instructions,omitempty"`
-	// Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maxium of 512 characters long.
-	//
-	Metadata *CreateAssistantRequestMetadata `json:"metadata,omitempty"`
-	// ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.
-	//
-	Model string `json:"model"`
-	// The name of the assistant. The maximum length is 256 characters.
-	//
-	Name *string `json:"name,omitempty"`
-	// A list of tool enabled on the assistant. There can be a maximum of 128 tools per assistant. Tools can be of types `code_interpreter`, `retrieval`, or `function`.
-	//
-	Tools []CreateAssistantRequestTools `json:"tools,omitempty"`
-}
-
-func (o *CreateAssistantRequest) GetDescription() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Description
-}
-
-func (o *CreateAssistantRequest) GetFileIds() []string {
-	if o == nil {
-		return nil
-	}
-	return o.FileIds
-}
-
-func (o *CreateAssistantRequest) GetInstructions() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Instructions
-}
-
-func (o *CreateAssistantRequest) GetMetadata() *CreateAssistantRequestMetadata {
-	if o == nil {
-		return nil
-	}
-	return o.Metadata
-}
-
-func (o *CreateAssistantRequest) GetModel() string {
-	if o == nil {
-		return ""
-	}
-	return o.Model
-}
-
-func (o *CreateAssistantRequest) GetName() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Name
-}
-
-func (o *CreateAssistantRequest) GetTools() []CreateAssistantRequestTools {
-	if o == nil {
-		return nil
-	}
-	return o.Tools
-}
-
-// CreateRunRequestMetadata - Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maxium of 512 characters long.
-type CreateRunRequestMetadata struct {
-}
-
-type CreateRunRequestToolsType string
-
-const (
-	CreateRunRequestToolsTypeCodeInterpreterTool CreateRunRequestToolsType = "Code interpreter tool"
-	CreateRunRequestToolsTypeRetrievalTool       CreateRunRequestToolsType = "Retrieval tool"
-	CreateRunRequestToolsTypeFunctionTool        CreateRunRequestToolsType = "Function tool"
-)
-
-type CreateRunRequestTools struct {
-	CodeInterpreterTool *CodeInterpreterTool
-	RetrievalTool       *RetrievalTool
-	FunctionTool        *FunctionTool
-
-	Type CreateRunRequestToolsType
-}
-
-func CreateCreateRunRequestToolsCodeInterpreterTool(codeInterpreterTool CodeInterpreterTool) CreateRunRequestTools {
-	typ := CreateRunRequestToolsTypeCodeInterpreterTool
-
-	return CreateRunRequestTools{
-		CodeInterpreterTool: &codeInterpreterTool,
-		Type:                typ,
-	}
-}
-
-func CreateCreateRunRequestToolsRetrievalTool(retrievalTool RetrievalTool) CreateRunRequestTools {
-	typ := CreateRunRequestToolsTypeRetrievalTool
-
-	return CreateRunRequestTools{
-		RetrievalTool: &retrievalTool,
-		Type:          typ,
-	}
-}
-
-func CreateCreateRunRequestToolsFunctionTool(functionTool FunctionTool) CreateRunRequestTools {
-	typ := CreateRunRequestToolsTypeFunctionTool
-
-	return CreateRunRequestTools{
-		FunctionTool: &functionTool,
-		Type:         typ,
-	}
-}
-
-func (u *CreateRunRequestTools) UnmarshalJSON(data []byte) error {
-
-	codeInterpreterTool := CodeInterpreterTool{}
-	if err := utils.UnmarshalJSON(data, &codeInterpreterTool, "", true, true); err == nil {
-		u.CodeInterpreterTool = &codeInterpreterTool
-		u.Type = CreateRunRequestToolsTypeCodeInterpreterTool
-		return nil
-	}
-
-	retrievalTool := RetrievalTool{}
-	if err := utils.UnmarshalJSON(data, &retrievalTool, "", true, true); err == nil {
-		u.RetrievalTool = &retrievalTool
-		u.Type = CreateRunRequestToolsTypeRetrievalTool
-		return nil
-	}
-
-	functionTool := FunctionTool{}
-	if err := utils.UnmarshalJSON(data, &functionTool, "", true, true); err == nil {
-		u.FunctionTool = &functionTool
-		u.Type = CreateRunRequestToolsTypeFunctionTool
-		return nil
-	}
-
-	return errors.New("could not unmarshal into supported union types")
-}
-
-func (u CreateRunRequestTools) MarshalJSON() ([]byte, error) {
-	if u.CodeInterpreterTool != nil {
-		return utils.MarshalJSON(u.CodeInterpreterTool, "", true)
-	}
-
-	if u.RetrievalTool != nil {
-		return utils.MarshalJSON(u.RetrievalTool, "", true)
-	}
-
-	if u.FunctionTool != nil {
-		return utils.MarshalJSON(u.FunctionTool, "", true)
-	}
-
-	return nil, errors.New("could not marshal union type: all fields are null")
-}
-
-type CreateRunRequest struct {
-	// The ID of the [assistant](/docs/api-reference/assistants) to use to execute this run.
-	AssistantID string `json:"assistant_id"`
-	// Override the default system message of the assistant. This is useful for modifying the behavior on a per-run basis.
-	Instructions *string `json:"instructions,omitempty"`
-	// Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maxium of 512 characters long.
-	//
-	Metadata *CreateRunRequestMetadata `json:"metadata,omitempty"`
-	// The ID of the [Model](/docs/api-reference/models) to be used to execute this run. If a value is provided here, it will override the model associated with the assistant. If not, the model associated with the assistant will be used.
-	Model *string `json:"model,omitempty"`
-	// Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis.
-	Tools []CreateRunRequestTools `json:"tools,omitempty"`
-}
-
-func (o *CreateRunRequest) GetAssistantID() string {
-	if o == nil {
-		return ""
-	}
-	return o.AssistantID
-}
-
-func (o *CreateRunRequest) GetInstructions() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Instructions
-}
-
-func (o *CreateRunRequest) GetMetadata() *CreateRunRequestMetadata {
-	if o == nil {
-		return nil
-	}
-	return o.Metadata
-}
-
-func (o *CreateRunRequest) GetModel() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Model
-}
-
-func (o *CreateRunRequest) GetTools() []CreateRunRequestTools {
-	if o == nil {
-		return nil
-	}
-	return o.Tools
-}
-
-// ModifyAssistantRequestMetadata - Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maxium of 512 characters long.
-type ModifyAssistantRequestMetadata struct {
-}
-
-type ModifyAssistantRequestToolsType string
-
-const (
-	ModifyAssistantRequestToolsTypeCodeInterpreterTool ModifyAssistantRequestToolsType = "Code interpreter tool"
-	ModifyAssistantRequestToolsTypeRetrievalTool       ModifyAssistantRequestToolsType = "Retrieval tool"
-	ModifyAssistantRequestToolsTypeFunctionTool        ModifyAssistantRequestToolsType = "Function tool"
-)
-
-type ModifyAssistantRequestTools struct {
-	CodeInterpreterTool *CodeInterpreterTool
-	RetrievalTool       *RetrievalTool
-	FunctionTool        *FunctionTool
-
-	Type ModifyAssistantRequestToolsType
-}
-
-func CreateModifyAssistantRequestToolsCodeInterpreterTool(codeInterpreterTool CodeInterpreterTool) ModifyAssistantRequestTools {
-	typ := ModifyAssistantRequestToolsTypeCodeInterpreterTool
-
-	return ModifyAssistantRequestTools{
-		CodeInterpreterTool: &codeInterpreterTool,
-		Type:                typ,
-	}
-}
-
-func CreateModifyAssistantRequestToolsRetrievalTool(retrievalTool RetrievalTool) ModifyAssistantRequestTools {
-	typ := ModifyAssistantRequestToolsTypeRetrievalTool
-
-	return ModifyAssistantRequestTools{
-		RetrievalTool: &retrievalTool,
-		Type:          typ,
-	}
-}
-
-func CreateModifyAssistantRequestToolsFunctionTool(functionTool FunctionTool) ModifyAssistantRequestTools {
-	typ := ModifyAssistantRequestToolsTypeFunctionTool
-
-	return ModifyAssistantRequestTools{
-		FunctionTool: &functionTool,
-		Type:         typ,
-	}
-}
-
-func (u *ModifyAssistantRequestTools) UnmarshalJSON(data []byte) error {
-
-	codeInterpreterTool := CodeInterpreterTool{}
-	if err := utils.UnmarshalJSON(data, &codeInterpreterTool, "", true, true); err == nil {
-		u.CodeInterpreterTool = &codeInterpreterTool
-		u.Type = ModifyAssistantRequestToolsTypeCodeInterpreterTool
-		return nil
-	}
-
-	retrievalTool := RetrievalTool{}
-	if err := utils.UnmarshalJSON(data, &retrievalTool, "", true, true); err == nil {
-		u.RetrievalTool = &retrievalTool
-		u.Type = ModifyAssistantRequestToolsTypeRetrievalTool
-		return nil
-	}
-
-	functionTool := FunctionTool{}
-	if err := utils.UnmarshalJSON(data, &functionTool, "", true, true); err == nil {
-		u.FunctionTool = &functionTool
-		u.Type = ModifyAssistantRequestToolsTypeFunctionTool
-		return nil
-	}
-
-	return errors.New("could not unmarshal into supported union types")
-}
-
-func (u ModifyAssistantRequestTools) MarshalJSON() ([]byte, error) {
-	if u.CodeInterpreterTool != nil {
-		return utils.MarshalJSON(u.CodeInterpreterTool, "", true)
-	}
-
-	if u.RetrievalTool != nil {
-		return utils.MarshalJSON(u.RetrievalTool, "", true)
-	}
-
-	if u.FunctionTool != nil {
-		return utils.MarshalJSON(u.FunctionTool, "", true)
-	}
-
-	return nil, errors.New("could not marshal union type: all fields are null")
-}
-
-type ModifyAssistantRequest struct {
-	// The description of the assistant. The maximum length is 512 characters.
-	//
-	Description *string `json:"description,omitempty"`
-	// A list of [File](/docs/api-reference/files) IDs attached to this assistant. There can be a maximum of 20 files attached to the assistant. Files are ordered by their creation date in ascending order. If a file was previosuly attached to the list but does not show up in the list, it will be deleted from the assistant.
-	//
-	FileIds []string `json:"file_ids,omitempty"`
-	// The system instructions that the assistant uses. The maximum length is 32768 characters.
-	//
-	Instructions *string `json:"instructions,omitempty"`
-	// Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maxium of 512 characters long.
-	//
-	Metadata *ModifyAssistantRequestMetadata `json:"metadata,omitempty"`
-	// ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.
-	//
-	Model *string `json:"model,omitempty"`
-	// The name of the assistant. The maximum length is 256 characters.
-	//
-	Name *string `json:"name,omitempty"`
-	// A list of tool enabled on the assistant. There can be a maximum of 128 tools per assistant. Tools can be of types `code_interpreter`, `retrieval`, or `function`.
-	//
-	Tools []ModifyAssistantRequestTools `json:"tools,omitempty"`
-}
-
-func (o *ModifyAssistantRequest) GetDescription() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Description
-}
-
-func (o *ModifyAssistantRequest) GetFileIds() []string {
-	if o == nil {
-		return nil
-	}
-	return o.FileIds
-}
-
-func (o *ModifyAssistantRequest) GetInstructions() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Instructions
-}
-
-func (o *ModifyAssistantRequest) GetMetadata() *ModifyAssistantRequestMetadata {
-	if o == nil {
-		return nil
-	}
-	return o.Metadata
-}
-
-func (o *ModifyAssistantRequest) GetModel() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Model
-}
-
-func (o *ModifyAssistantRequest) GetName() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Name
-}
-
-func (o *ModifyAssistantRequest) GetTools() []ModifyAssistantRequestTools {
-	if o == nil {
-		return nil
 	}
 	return o.Tools
 }

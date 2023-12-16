@@ -28,7 +28,6 @@ func (o *CreateTranscriptionRequestFile) GetFileName() string {
 	return o.FileName
 }
 
-// CreateTranscriptionRequest2 - ID of the model to use. Only `whisper-1` is currently available.
 type CreateTranscriptionRequest2 string
 
 const (
@@ -60,6 +59,7 @@ const (
 	CreateTranscriptionRequestModelTypeCreateTranscriptionRequest2 CreateTranscriptionRequestModelType = "CreateTranscriptionRequest_2"
 )
 
+// CreateTranscriptionRequestModel - ID of the model to use. Only `whisper-1` is currently available.
 type CreateTranscriptionRequestModel struct {
 	Str                         *string
 	CreateTranscriptionRequest2 *CreateTranscriptionRequest2

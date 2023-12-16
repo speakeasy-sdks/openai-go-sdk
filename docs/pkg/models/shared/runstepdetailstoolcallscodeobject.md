@@ -1,0 +1,12 @@
+# RunStepDetailsToolCallsCodeObject
+
+Details of the Code Interpreter tool call the run step was involved in.
+
+
+## Fields
+
+| Field                                                                                                               | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `CodeInterpreter`                                                                                                   | [shared.CodeInterpreter](../../../pkg/models/shared/codeinterpreter.md)                                             | :heavy_check_mark:                                                                                                  | The Code Interpreter tool call definition.                                                                          |
+| `ID`                                                                                                                | *string*                                                                                                            | :heavy_check_mark:                                                                                                  | The ID of the tool call.                                                                                            |
+| `Type`                                                                                                              | [shared.RunStepDetailsToolCallsCodeObjectType](../../../pkg/models/shared/runstepdetailstoolcallscodeobjecttype.md) | :heavy_check_mark:                                                                                                  | The type of tool call. This is always going to be `code_interpreter` for this type of tool call.                    |

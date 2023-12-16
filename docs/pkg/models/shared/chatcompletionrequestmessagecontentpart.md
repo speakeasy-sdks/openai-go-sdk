@@ -3,15 +3,15 @@
 
 ## Supported Types
 
-### TextContentPart
+### ChatCompletionRequestMessageContentPartText
 
 ```go
-chatCompletionRequestMessageContentPart := shared.CreateChatCompletionRequestMessageContentPartTextContentPart(shared.TextContentPart{/* values here */})
+chatCompletionRequestMessageContentPart := shared.CreateChatCompletionRequestMessageContentPartChatCompletionRequestMessageContentPartText(shared.ChatCompletionRequestMessageContentPartText{/* values here */})
 ```
 
-### ImageContentPart
+### ChatCompletionRequestMessageContentPartImage
 
 ```go
-chatCompletionRequestMessageContentPart := shared.CreateChatCompletionRequestMessageContentPartImageContentPart(shared.ImageContentPart{/* values here */})
+chatCompletionRequestMessageContentPart := shared.CreateChatCompletionRequestMessageContentPartChatCompletionRequestMessageContentPartImage(shared.ChatCompletionRequestMessageContentPartImage{/* values here */})
 ```
 

@@ -1,7 +1,5 @@
 # CreateImageRequest2
 
-The model to use for image generation.
-
 
 ## Values
 
