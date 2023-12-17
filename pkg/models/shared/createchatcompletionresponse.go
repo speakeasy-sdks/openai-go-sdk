@@ -47,82 +47,13 @@ func (e *FinishReason) UnmarshalJSON(data []byte) error {
 	}
 }
 
-type TopLogprobs struct {
-	// A list of integers representing the UTF-8 bytes representation of the token. Useful in instances where characters are represented by multiple tokens and their byte representations must be combined to generate the correct text representation. Can be `null` if there is no bytes representation for the token.
-	Bytes []int64 `json:"bytes,omitempty"`
-	// The log probability of this token.
-	Logprob *float64 `json:"logprob,omitempty"`
-	// The token.
-	Token *string `json:"token,omitempty"`
-}
-
-func (o *TopLogprobs) GetBytes() []int64 {
-	if o == nil {
-		return nil
-	}
-	return o.Bytes
-}
-
-func (o *TopLogprobs) GetLogprob() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.Logprob
-}
-
-func (o *TopLogprobs) GetToken() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Token
-}
-
-type CreateChatCompletionResponseContent struct {
-	// A list of integers representing the UTF-8 bytes representation of the token. Useful in instances where characters are represented by multiple tokens and their byte representations must be combined to generate the correct text representation. Can be `null` if there is no bytes representation for the token.
-	Bytes []int64 `json:"bytes"`
-	// The log probability of this token.
-	Logprob float64 `json:"logprob"`
-	// The token.
-	Token string `json:"token"`
-	// List of the most likely tokens and their log probability, at this token position. In rare cases, there may be fewer than the number of requested `top_logprobs` returned.
-	TopLogprobs []TopLogprobs `json:"top_logprobs"`
-}
-
-func (o *CreateChatCompletionResponseContent) GetBytes() []int64 {
-	if o == nil {
-		return nil
-	}
-	return o.Bytes
-}
-
-func (o *CreateChatCompletionResponseContent) GetLogprob() float64 {
-	if o == nil {
-		return 0.0
-	}
-	return o.Logprob
-}
-
-func (o *CreateChatCompletionResponseContent) GetToken() string {
-	if o == nil {
-		return ""
-	}
-	return o.Token
-}
-
-func (o *CreateChatCompletionResponseContent) GetTopLogprobs() []TopLogprobs {
-	if o == nil {
-		return []TopLogprobs{}
-	}
-	return o.TopLogprobs
-}
-
 // Logprobs - Log probability information for the choice.
 type Logprobs struct {
 	// A list of message content tokens with log probability information.
-	Content []CreateChatCompletionResponseContent `json:"content"`
+	Content []ChatCompletionTokenLogprob `json:"content"`
 }
 
-func (o *Logprobs) GetContent() []CreateChatCompletionResponseContent {
+func (o *Logprobs) GetContent() []ChatCompletionTokenLogprob {
 	if o == nil {
 		return nil
 	}

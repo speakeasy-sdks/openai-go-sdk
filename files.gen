@@ -139,6 +139,7 @@ pkg/utils/utils.go
 /pkg/models/shared/completionusage.go
 /pkg/models/shared/chatcompletionresponsemessage.go
 /pkg/models/shared/chatcompletionmessagetoolcall.go
+/pkg/models/shared/chatcompletiontokenlogprob.go
 /pkg/models/shared/createchatcompletionrequest.go
 /pkg/models/shared/chatcompletiontool.go
 /pkg/models/shared/chatcompletiontoolchoiceoption.go
@@ -420,8 +421,6 @@ docs/pkg/models/shared/createtranslationrequest2.md
 docs/pkg/models/shared/createtranslationrequestmodel.md
 docs/pkg/models/shared/createtranslationrequest.md
 docs/pkg/models/shared/finishreason.md
-docs/pkg/models/shared/toplogprobs.md
-docs/pkg/models/shared/createchatcompletionresponsecontent.md
 docs/pkg/models/shared/logprobs.md
 docs/pkg/models/shared/choices.md
 docs/pkg/models/shared/createchatcompletionresponseobject.md
@@ -433,6 +432,8 @@ docs/pkg/models/shared/chatcompletionresponsemessage.md
 docs/pkg/models/shared/function.md
 docs/pkg/models/shared/chatcompletionmessagetoolcalltype.md
 docs/pkg/models/shared/chatcompletionmessagetoolcall.md
+docs/pkg/models/shared/toplogprobs.md
+docs/pkg/models/shared/chatcompletiontokenlogprob.md
 docs/pkg/models/shared/createchatcompletionrequest1.md
 docs/pkg/models/shared/createchatcompletionrequestfunctioncall.md
 docs/pkg/models/shared/two.md
