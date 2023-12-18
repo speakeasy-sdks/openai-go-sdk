@@ -4,11 +4,11 @@ package shared
 
 type TopLogprobs struct {
 	// A list of integers representing the UTF-8 bytes representation of the token. Useful in instances where characters are represented by multiple tokens and their byte representations must be combined to generate the correct text representation. Can be `null` if there is no bytes representation for the token.
-	Bytes []int64 `json:"bytes,omitempty"`
+	Bytes []int64 `json:"bytes"`
 	// The log probability of this token.
-	Logprob *float64 `json:"logprob,omitempty"`
+	Logprob float64 `json:"logprob"`
 	// The token.
-	Token *string `json:"token,omitempty"`
+	Token string `json:"token"`
 }
 
 func (o *TopLogprobs) GetBytes() []int64 {
@@ -18,16 +18,16 @@ func (o *TopLogprobs) GetBytes() []int64 {
 	return o.Bytes
 }
 
-func (o *TopLogprobs) GetLogprob() *float64 {
+func (o *TopLogprobs) GetLogprob() float64 {
 	if o == nil {
-		return nil
+		return 0.0
 	}
 	return o.Logprob
 }
 
-func (o *TopLogprobs) GetToken() *string {
+func (o *TopLogprobs) GetToken() string {
 	if o == nil {
-		return nil
+		return ""
 	}
 	return o.Token
 }
