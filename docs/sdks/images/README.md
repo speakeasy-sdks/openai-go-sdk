@@ -68,7 +68,7 @@ func main() {
 **[*operations.CreateImageResponse](../../pkg/models/operations/createimageresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## CreateImageEdit
 
@@ -133,7 +133,7 @@ func main() {
 **[*operations.CreateImageEditResponse](../../pkg/models/operations/createimageeditresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## CreateImageVariation
 
@@ -193,4 +193,4 @@ func main() {
 **[*operations.CreateImageVariationResponse](../../pkg/models/operations/createimagevariationresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

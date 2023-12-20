@@ -75,7 +75,7 @@ func main() {
 **[*operations.CreateFileResponse](../../pkg/models/operations/createfileresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## DeleteFile
 
@@ -126,7 +126,7 @@ func main() {
 **[*operations.DeleteFileResponse](../../pkg/models/operations/deletefileresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## DownloadFile
 
@@ -177,7 +177,7 @@ func main() {
 **[*operations.DownloadFileResponse](../../pkg/models/operations/downloadfileresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ListFiles
 
@@ -228,7 +228,7 @@ func main() {
 **[*operations.ListFilesResponse](../../pkg/models/operations/listfilesresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## RetrieveFile
 
@@ -279,4 +279,4 @@ func main() {
 **[*operations.RetrieveFileResponse](../../pkg/models/operations/retrievefileresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

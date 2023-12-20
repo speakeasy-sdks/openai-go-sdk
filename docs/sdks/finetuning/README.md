@@ -74,7 +74,7 @@ func main() {
 **[*operations.CancelFineTuningJobResponse](../../pkg/models/operations/cancelfinetuningjobresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## CreateFineTuningJob
 
@@ -144,7 +144,7 @@ func main() {
 **[*operations.CreateFineTuningJobResponse](../../pkg/models/operations/createfinetuningjobresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ListFineTuningEvents
 
@@ -202,7 +202,7 @@ func main() {
 **[*operations.ListFineTuningEventsResponse](../../pkg/models/operations/listfinetuningeventsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ListPaginatedFineTuningJobs
 
@@ -257,7 +257,7 @@ func main() {
 **[*operations.ListPaginatedFineTuningJobsResponse](../../pkg/models/operations/listpaginatedfinetuningjobsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## RetrieveFineTuningJob
 
@@ -311,4 +311,4 @@ func main() {
 **[*operations.RetrieveFineTuningJobResponse](../../pkg/models/operations/retrievefinetuningjobresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

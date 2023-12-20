@@ -1,9 +1,9 @@
 configVersion: 1.0.0
 management:
-  docChecksum: e06194faed8bf7558b13dde7fc1d69e5
+  docChecksum: 86a19e42b82cff28680f5cd561f03e75
   docVersion: 2.0.0
-  speakeasyVersion: 1.126.4
-  generationVersion: 2.214.10
+  speakeasyVersion: 1.128.0
+  generationVersion: 2.221.0
 generation:
   comments: {}
   sdkClassName: gpt
@@ -23,7 +23,7 @@ features:
     globalServerURLs: 2.82.1
     unions: 2.85.2
 go:
-  version: 3.1.5
+  version: 3.1.6
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
   imports:

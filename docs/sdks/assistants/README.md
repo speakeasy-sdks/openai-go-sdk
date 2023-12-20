@@ -89,7 +89,7 @@ func main() {
 **[*operations.CancelRunResponse](../../pkg/models/operations/cancelrunresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## CreateAssistant
 
@@ -150,7 +150,7 @@ func main() {
 **[*operations.CreateAssistantResponse](../../pkg/models/operations/createassistantresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## CreateAssistantFile
 
@@ -206,7 +206,7 @@ func main() {
 **[*operations.CreateAssistantFileResponse](../../pkg/models/operations/createassistantfileresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## CreateMessage
 
@@ -267,7 +267,7 @@ func main() {
 **[*operations.CreateMessageResponse](../../pkg/models/operations/createmessageresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## CreateRun
 
@@ -331,7 +331,7 @@ func main() {
 **[*operations.CreateRunResponse](../../pkg/models/operations/createrunresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## CreateThread
 
@@ -391,7 +391,7 @@ func main() {
 **[*operations.CreateThreadResponse](../../pkg/models/operations/createthreadresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## CreateThreadAndRun
 
@@ -468,7 +468,7 @@ func main() {
 **[*operations.CreateThreadAndRunResponse](../../pkg/models/operations/createthreadandrunresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## DeleteAssistant
 
@@ -519,7 +519,7 @@ func main() {
 **[*operations.DeleteAssistantResponse](../../pkg/models/operations/deleteassistantresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## DeleteAssistantFile
 
@@ -573,7 +573,7 @@ func main() {
 **[*operations.DeleteAssistantFileResponse](../../pkg/models/operations/deleteassistantfileresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## DeleteThread
 
@@ -624,7 +624,7 @@ func main() {
 **[*operations.DeleteThreadResponse](../../pkg/models/operations/deletethreadresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetAssistant
 
@@ -675,7 +675,7 @@ func main() {
 **[*operations.GetAssistantResponse](../../pkg/models/operations/getassistantresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetAssistantFile
 
@@ -729,7 +729,7 @@ func main() {
 **[*operations.GetAssistantFileResponse](../../pkg/models/operations/getassistantfileresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetMessage
 
@@ -783,7 +783,7 @@ func main() {
 **[*operations.GetMessageResponse](../../pkg/models/operations/getmessageresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetMessageFile
 
@@ -840,7 +840,7 @@ func main() {
 **[*operations.GetMessageFileResponse](../../pkg/models/operations/getmessagefileresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetRun
 
@@ -894,7 +894,7 @@ func main() {
 **[*operations.GetRunResponse](../../pkg/models/operations/getrunresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetRunStep
 
@@ -951,7 +951,7 @@ func main() {
 **[*operations.GetRunStepResponse](../../pkg/models/operations/getrunstepresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetThread
 
@@ -1002,7 +1002,7 @@ func main() {
 **[*operations.GetThreadResponse](../../pkg/models/operations/getthreadresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ListAssistantFiles
 
@@ -1053,7 +1053,7 @@ func main() {
 **[*operations.ListAssistantFilesResponse](../../pkg/models/operations/listassistantfilesresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ListAssistants
 
@@ -1114,7 +1114,7 @@ func main() {
 **[*operations.ListAssistantsResponse](../../pkg/models/operations/listassistantsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ListMessageFiles
 
@@ -1166,7 +1166,7 @@ func main() {
 **[*operations.ListMessageFilesResponse](../../pkg/models/operations/listmessagefilesresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ListMessages
 
@@ -1217,7 +1217,7 @@ func main() {
 **[*operations.ListMessagesResponse](../../pkg/models/operations/listmessagesresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ListRunSteps
 
@@ -1269,7 +1269,7 @@ func main() {
 **[*operations.ListRunStepsResponse](../../pkg/models/operations/listrunstepsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ListRuns
 
@@ -1320,7 +1320,7 @@ func main() {
 **[*operations.ListRunsResponse](../../pkg/models/operations/listrunsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ModifyAssistant
 
@@ -1386,7 +1386,7 @@ func main() {
 **[*operations.ModifyAssistantResponse](../../pkg/models/operations/modifyassistantresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ModifyMessage
 
@@ -1445,7 +1445,7 @@ func main() {
 **[*operations.ModifyMessageResponse](../../pkg/models/operations/modifymessageresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ModifyRun
 
@@ -1504,7 +1504,7 @@ func main() {
 **[*operations.ModifyRunResponse](../../pkg/models/operations/modifyrunresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ModifyThread
 
@@ -1560,7 +1560,7 @@ func main() {
 **[*operations.ModifyThreadResponse](../../pkg/models/operations/modifythreadresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## SubmitToolOuputsToRun
 
@@ -1622,4 +1622,4 @@ func main() {
 **[*operations.SubmitToolOuputsToRunResponse](../../pkg/models/operations/submittoolouputstorunresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

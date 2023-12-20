@@ -97,9 +97,11 @@ func (u CreateRunRequestTools) MarshalJSON() ([]byte, error) {
 }
 
 type CreateRunRequest struct {
+	// Appends additional instructions at the end of the instructions for the run. This is useful for modifying the behavior on a per-run basis without overriding other instructions.
+	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
 	// The ID of the [assistant](/docs/api-reference/assistants) to use to execute this run.
 	AssistantID string `json:"assistant_id"`
-	// Override the default system message of the assistant. This is useful for modifying the behavior on a per-run basis.
+	// Overrides the [instructions](/docs/api-reference/assistants/createAssistant) of the assistant. This is useful for modifying the behavior on a per-run basis.
 	Instructions *string `json:"instructions,omitempty"`
 	// Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maxium of 512 characters long.
 	//
@@ -108,6 +110,13 @@ type CreateRunRequest struct {
 	Model *string `json:"model,omitempty"`
 	// Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis.
 	Tools []CreateRunRequestTools `json:"tools,omitempty"`
+}
+
+func (o *CreateRunRequest) GetAdditionalInstructions() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalInstructions
 }
 
 func (o *CreateRunRequest) GetAssistantID() string {

@@ -63,7 +63,7 @@ func main() {
 **[*operations.CreateSpeechResponse](../../pkg/models/operations/createspeechresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## CreateTranscription
 
@@ -119,7 +119,7 @@ func main() {
 **[*operations.CreateTranscriptionResponse](../../pkg/models/operations/createtranscriptionresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## CreateTranslation
 
@@ -175,4 +175,4 @@ func main() {
 **[*operations.CreateTranslationResponse](../../pkg/models/operations/createtranslationresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
