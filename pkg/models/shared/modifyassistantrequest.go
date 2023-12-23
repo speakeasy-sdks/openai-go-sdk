@@ -100,7 +100,7 @@ type ModifyAssistantRequest struct {
 	// The description of the assistant. The maximum length is 512 characters.
 	//
 	Description *string `json:"description,omitempty"`
-	// A list of [File](/docs/api-reference/files) IDs attached to this assistant. There can be a maximum of 20 files attached to the assistant. Files are ordered by their creation date in ascending order. If a file was previosuly attached to the list but does not show up in the list, it will be deleted from the assistant.
+	// A list of [File](/docs/api-reference/files) IDs attached to this assistant. There can be a maximum of 20 files attached to the assistant. Files are ordered by their creation date in ascending order. If a file was previously attached to the list but does not show up in the list, it will be deleted from the assistant.
 	//
 	FileIds []string `json:"file_ids,omitempty"`
 	// The system instructions that the assistant uses. The maximum length is 32768 characters.

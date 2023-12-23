@@ -8,7 +8,7 @@ type Categories struct {
 	Harassment bool `json:"harassment"`
 	// Harassment content that also includes violence or serious harm towards any target.
 	HarassmentThreatening bool `json:"harassment/threatening"`
-	// Content that expresses, incites, or promotes hate based on race, gender, ethnicity, religion, nationality, sexual orientation, disability status, or caste. Hateful content aimed at non-protected groups (e.g., chess players) is harrassment.
+	// Content that expresses, incites, or promotes hate based on race, gender, ethnicity, religion, nationality, sexual orientation, disability status, or caste. Hateful content aimed at non-protected groups (e.g., chess players) is harassment.
 	Hate bool `json:"hate"`
 	// Hateful content that also includes violence or serious harm towards the targeted group based on race, gender, ethnicity, religion, nationality, sexual orientation, disability status, or caste.
 	HateThreatening bool `json:"hate/threatening"`
