@@ -156,8 +156,8 @@ func New(opts ...SDKOption) *Gpt {
 			Language:          "go",
 			OpenAPIDocVersion: "2.0.0",
 			SDKVersion:        "3.1.7",
-			GenVersion:        "2.223.3",
-			UserAgent:         "speakeasy-sdk/go 3.1.7 2.223.3 2.0.0 github.com/speakeasy-sdks/openai-go-sdk",
+			GenVersion:        "2.225.2",
+			UserAgent:         "speakeasy-sdk/go 3.1.7 2.225.2 2.0.0 github.com/speakeasy-sdks/openai-go-sdk",
 		},
 	}
 	for _, opt := range opts {
