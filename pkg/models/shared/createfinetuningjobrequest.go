@@ -211,60 +211,60 @@ func (e *CreateFineTuningJobRequestSchemasHyperparameters1) UnmarshalJSON(data [
 	}
 }
 
-type CreateFineTuningJobRequestNEpochsType string
+type NEpochsType string
 
 const (
-	CreateFineTuningJobRequestNEpochsTypeCreateFineTuningJobRequestSchemasHyperparameters1 CreateFineTuningJobRequestNEpochsType = "CreateFineTuningJobRequest_Schemas_hyperparameters_1"
-	CreateFineTuningJobRequestNEpochsTypeInteger                                           CreateFineTuningJobRequestNEpochsType = "integer"
+	NEpochsTypeCreateFineTuningJobRequestSchemasHyperparameters1 NEpochsType = "CreateFineTuningJobRequest_Schemas_hyperparameters_1"
+	NEpochsTypeInteger                                           NEpochsType = "integer"
 )
 
-// CreateFineTuningJobRequestNEpochs - The number of epochs to train the model for. An epoch refers to one full cycle
+// NEpochs - The number of epochs to train the model for. An epoch refers to one full cycle
 // through the training dataset.
-type CreateFineTuningJobRequestNEpochs struct {
+type NEpochs struct {
 	CreateFineTuningJobRequestSchemasHyperparameters1 *CreateFineTuningJobRequestSchemasHyperparameters1
 	Integer                                           *int64
 
-	Type CreateFineTuningJobRequestNEpochsType
+	Type NEpochsType
 }
 
-func CreateCreateFineTuningJobRequestNEpochsCreateFineTuningJobRequestSchemasHyperparameters1(createFineTuningJobRequestSchemasHyperparameters1 CreateFineTuningJobRequestSchemasHyperparameters1) CreateFineTuningJobRequestNEpochs {
-	typ := CreateFineTuningJobRequestNEpochsTypeCreateFineTuningJobRequestSchemasHyperparameters1
+func CreateNEpochsCreateFineTuningJobRequestSchemasHyperparameters1(createFineTuningJobRequestSchemasHyperparameters1 CreateFineTuningJobRequestSchemasHyperparameters1) NEpochs {
+	typ := NEpochsTypeCreateFineTuningJobRequestSchemasHyperparameters1
 
-	return CreateFineTuningJobRequestNEpochs{
+	return NEpochs{
 		CreateFineTuningJobRequestSchemasHyperparameters1: &createFineTuningJobRequestSchemasHyperparameters1,
 		Type: typ,
 	}
 }
 
-func CreateCreateFineTuningJobRequestNEpochsInteger(integer int64) CreateFineTuningJobRequestNEpochs {
-	typ := CreateFineTuningJobRequestNEpochsTypeInteger
+func CreateNEpochsInteger(integer int64) NEpochs {
+	typ := NEpochsTypeInteger
 
-	return CreateFineTuningJobRequestNEpochs{
+	return NEpochs{
 		Integer: &integer,
 		Type:    typ,
 	}
 }
 
-func (u *CreateFineTuningJobRequestNEpochs) UnmarshalJSON(data []byte) error {
+func (u *NEpochs) UnmarshalJSON(data []byte) error {
 
 	createFineTuningJobRequestSchemasHyperparameters1 := CreateFineTuningJobRequestSchemasHyperparameters1("")
 	if err := utils.UnmarshalJSON(data, &createFineTuningJobRequestSchemasHyperparameters1, "", true, true); err == nil {
 		u.CreateFineTuningJobRequestSchemasHyperparameters1 = &createFineTuningJobRequestSchemasHyperparameters1
-		u.Type = CreateFineTuningJobRequestNEpochsTypeCreateFineTuningJobRequestSchemasHyperparameters1
+		u.Type = NEpochsTypeCreateFineTuningJobRequestSchemasHyperparameters1
 		return nil
 	}
 
 	integer := int64(0)
 	if err := utils.UnmarshalJSON(data, &integer, "", true, true); err == nil {
 		u.Integer = &integer
-		u.Type = CreateFineTuningJobRequestNEpochsTypeInteger
+		u.Type = NEpochsTypeInteger
 		return nil
 	}
 
 	return errors.New("could not unmarshal into supported union types")
 }
 
-func (u CreateFineTuningJobRequestNEpochs) MarshalJSON() ([]byte, error) {
+func (u NEpochs) MarshalJSON() ([]byte, error) {
 	if u.CreateFineTuningJobRequestSchemasHyperparameters1 != nil {
 		return utils.MarshalJSON(u.CreateFineTuningJobRequestSchemasHyperparameters1, "", true)
 	}
@@ -276,8 +276,8 @@ func (u CreateFineTuningJobRequestNEpochs) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-// CreateFineTuningJobRequestHyperparameters - The hyperparameters used for the fine-tuning job.
-type CreateFineTuningJobRequestHyperparameters struct {
+// Hyperparameters - The hyperparameters used for the fine-tuning job.
+type Hyperparameters struct {
 	// Number of examples in each batch. A larger batch size means that model parameters
 	// are updated less frequently, but with lower variance.
 	//
@@ -289,24 +289,24 @@ type CreateFineTuningJobRequestHyperparameters struct {
 	// The number of epochs to train the model for. An epoch refers to one full cycle
 	// through the training dataset.
 	//
-	NEpochs *CreateFineTuningJobRequestNEpochs `json:"n_epochs,omitempty"`
+	NEpochs *NEpochs `json:"n_epochs,omitempty"`
 }
 
-func (o *CreateFineTuningJobRequestHyperparameters) GetBatchSize() *BatchSize {
+func (o *Hyperparameters) GetBatchSize() *BatchSize {
 	if o == nil {
 		return nil
 	}
 	return o.BatchSize
 }
 
-func (o *CreateFineTuningJobRequestHyperparameters) GetLearningRateMultiplier() *LearningRateMultiplier {
+func (o *Hyperparameters) GetLearningRateMultiplier() *LearningRateMultiplier {
 	if o == nil {
 		return nil
 	}
 	return o.LearningRateMultiplier
 }
 
-func (o *CreateFineTuningJobRequestHyperparameters) GetNEpochs() *CreateFineTuningJobRequestNEpochs {
+func (o *Hyperparameters) GetNEpochs() *NEpochs {
 	if o == nil {
 		return nil
 	}
@@ -410,7 +410,7 @@ func (u CreateFineTuningJobRequestModel) MarshalJSON() ([]byte, error) {
 
 type CreateFineTuningJobRequest struct {
 	// The hyperparameters used for the fine-tuning job.
-	Hyperparameters *CreateFineTuningJobRequestHyperparameters `json:"hyperparameters,omitempty"`
+	Hyperparameters *Hyperparameters `json:"hyperparameters,omitempty"`
 	// The name of the model to fine-tune. You can select one of the
 	// [supported models](/docs/guides/fine-tuning/what-models-can-be-fine-tuned).
 	//
@@ -454,7 +454,7 @@ func (c *CreateFineTuningJobRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *CreateFineTuningJobRequest) GetHyperparameters() *CreateFineTuningJobRequestHyperparameters {
+func (o *CreateFineTuningJobRequest) GetHyperparameters() *Hyperparameters {
 	if o == nil {
 		return nil
 	}

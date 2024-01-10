@@ -9,7 +9,7 @@ Manage fine-tuning jobs to tailor a model to your specific training data.
 
 * [CancelFineTuningJob](#cancelfinetuningjob) - Immediately cancel a fine-tune job.
 
-* [CreateFineTuningJob](#createfinetuningjob) - Creates a job that fine-tunes a specified model from a given dataset.
+* [CreateFineTuningJob](#createfinetuningjob) - Creates a fine-tuning job which begins the process of creating a new model from a given dataset.
 
 Response includes details of the enqueued job including job status and the name of the fine-tuned models once complete.
 
@@ -78,7 +78,7 @@ func main() {
 
 ## CreateFineTuningJob
 
-Creates a job that fine-tunes a specified model from a given dataset.
+Creates a fine-tuning job which begins the process of creating a new model from a given dataset.
 
 Response includes details of the enqueued job including job status and the name of the fine-tuned models once complete.
 
@@ -104,14 +104,14 @@ func main() {
 
     ctx := context.Background()
     res, err := s.FineTuning.CreateFineTuningJob(ctx, shared.CreateFineTuningJobRequest{
-        Hyperparameters: &shared.CreateFineTuningJobRequestHyperparameters{
+        Hyperparameters: &shared.Hyperparameters{
             BatchSize: shared.CreateBatchSizeCreateFineTuningJobRequest1(
             shared.CreateFineTuningJobRequest1Auto,
             ),
             LearningRateMultiplier: shared.CreateLearningRateMultiplierCreateFineTuningJobRequestSchemas1(
             shared.CreateFineTuningJobRequestSchemas1Auto,
             ),
-            NEpochs: shared.CreateCreateFineTuningJobRequestNEpochsCreateFineTuningJobRequestSchemasHyperparameters1(
+            NEpochs: shared.CreateNEpochsCreateFineTuningJobRequestSchemasHyperparameters1(
             shared.CreateFineTuningJobRequestSchemasHyperparameters1Auto,
             ),
         },

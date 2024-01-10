@@ -71,14 +71,10 @@ type Gpt struct {
 	Chat *Chat
 	// Given a prompt, the model will return one or more predicted completions, and can also return the probabilities of alternative tokens at each position.
 	Completions *Completions
-	// Given a prompt and an instruction, the model will return an edited version of the prompt.
-	Edits *Edits
 	// Get a vector representation of a given input that can be easily consumed by machine learning models and algorithms.
 	Embeddings *Embeddings
 	// Files are used to upload documents that can be used with features like Assistants and Fine-tuning.
 	Files *Files
-	// Manage legacy fine-tuning jobs to tailor a model to your specific training data.
-	FineTunes *FineTunes
 	// Manage fine-tuning jobs to tailor a model to your specific training data.
 	FineTuning *FineTuning
 	// Given a prompt and/or an input image, the model will generate a new image.
@@ -155,9 +151,9 @@ func New(opts ...SDKOption) *Gpt {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2.0.0",
-			SDKVersion:        "3.1.7",
-			GenVersion:        "2.225.2",
-			UserAgent:         "speakeasy-sdk/go 3.1.7 2.225.2 2.0.0 github.com/speakeasy-sdks/openai-go-sdk",
+			SDKVersion:        "3.1.8",
+			GenVersion:        "2.230.3",
+			UserAgent:         "speakeasy-sdk/go 3.1.8 2.230.3 2.0.0 github.com/speakeasy-sdks/openai-go-sdk",
 		},
 	}
 	for _, opt := range opts {
@@ -184,13 +180,9 @@ func New(opts ...SDKOption) *Gpt {
 
 	sdk.Completions = newCompletions(sdk.sdkConfiguration)
 
-	sdk.Edits = newEdits(sdk.sdkConfiguration)
-
 	sdk.Embeddings = newEmbeddings(sdk.sdkConfiguration)
 
 	sdk.Files = newFiles(sdk.sdkConfiguration)
-
-	sdk.FineTunes = newFineTunes(sdk.sdkConfiguration)
 
 	sdk.FineTuning = newFineTuning(sdk.sdkConfiguration)
 

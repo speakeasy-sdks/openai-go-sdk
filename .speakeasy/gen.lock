@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: a162a3d3-f7ae-4b54-a83e-5eeaa086b6a3
 management:
-  docChecksum: 20d3cc86978da80cdf4bd1c649b0ebd7
+  docChecksum: 3650aae62d60640ad8bd28dcf1c0bda2
   docVersion: 2.0.0
   speakeasyVersion: internal
-  generationVersion: 2.225.2
-  releaseVersion: 3.1.7
-  configChecksum: 1a5535bd23ff15a35a2919f18ebb50d2
+  generationVersion: 2.230.3
+  releaseVersion: 3.1.8
+  configChecksum: e438fa516f8476272898aa06ba69dfaa
   repoURL: https://github.com/speakeasy-sdks/openai-go-sdk.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/openai-go-sdk
@@ -26,10 +26,8 @@ generatedFiles:
   - audio.go
   - chat.go
   - completions.go
-  - edits.go
   - embeddings.go
   - files.go
-  - finetunes.go
   - finetuning.go
   - images.go
   - models.go
@@ -87,18 +85,12 @@ generatedFiles:
   - /pkg/models/operations/createtranslation.go
   - /pkg/models/operations/createchatcompletion.go
   - /pkg/models/operations/createcompletion.go
-  - /pkg/models/operations/createedit.go
   - /pkg/models/operations/createembedding.go
   - /pkg/models/operations/createfile.go
   - /pkg/models/operations/deletefile.go
   - /pkg/models/operations/downloadfile.go
   - /pkg/models/operations/listfiles.go
   - /pkg/models/operations/retrievefile.go
-  - /pkg/models/operations/cancelfinetune.go
-  - /pkg/models/operations/createfinetune.go
-  - /pkg/models/operations/listfinetuneevents.go
-  - /pkg/models/operations/listfinetunes.go
-  - /pkg/models/operations/retrievefinetune.go
   - /pkg/models/operations/cancelfinetuningjob.go
   - /pkg/models/operations/createfinetuningjob.go
   - /pkg/models/operations/listfinetuningevents.go
@@ -181,8 +173,6 @@ generatedFiles:
   - /pkg/models/shared/chatcompletionfunctioncalloption.go
   - /pkg/models/shared/createcompletionresponse.go
   - /pkg/models/shared/createcompletionrequest.go
-  - /pkg/models/shared/createeditresponse.go
-  - /pkg/models/shared/createeditrequest.go
   - /pkg/models/shared/createembeddingresponse.go
   - /pkg/models/shared/embedding.go
   - /pkg/models/shared/createembeddingrequest.go
@@ -190,11 +180,6 @@ generatedFiles:
   - /pkg/models/shared/createfilerequest.go
   - /pkg/models/shared/deletefileresponse.go
   - /pkg/models/shared/listfilesresponse.go
-  - /pkg/models/shared/finetune.go
-  - /pkg/models/shared/finetuneevent.go
-  - /pkg/models/shared/createfinetunerequest.go
-  - /pkg/models/shared/listfinetuneeventsresponse.go
-  - /pkg/models/shared/listfinetunesresponse.go
   - /pkg/models/shared/finetuningjob.go
   - /pkg/models/shared/createfinetuningjobrequest.go
   - /pkg/models/shared/listfinetuningjobeventsresponse.go
@@ -275,7 +260,6 @@ generatedFiles:
   - docs/pkg/models/operations/createtranslationresponse.md
   - docs/pkg/models/operations/createchatcompletionresponse.md
   - docs/pkg/models/operations/createcompletionresponse.md
-  - docs/pkg/models/operations/createeditresponse.md
   - docs/pkg/models/operations/createembeddingresponse.md
   - docs/pkg/models/operations/createfileresponse.md
   - docs/pkg/models/operations/deletefilerequest.md
@@ -286,14 +270,6 @@ generatedFiles:
   - docs/pkg/models/operations/listfilesresponse.md
   - docs/pkg/models/operations/retrievefilerequest.md
   - docs/pkg/models/operations/retrievefileresponse.md
-  - docs/pkg/models/operations/cancelfinetunerequest.md
-  - docs/pkg/models/operations/cancelfinetuneresponse.md
-  - docs/pkg/models/operations/createfinetuneresponse.md
-  - docs/pkg/models/operations/listfinetuneeventsrequest.md
-  - docs/pkg/models/operations/listfinetuneeventsresponse.md
-  - docs/pkg/models/operations/listfinetunesresponse.md
-  - docs/pkg/models/operations/retrievefinetunerequest.md
-  - docs/pkg/models/operations/retrievefinetuneresponse.md
   - docs/pkg/models/operations/cancelfinetuningjobrequest.md
   - docs/pkg/models/operations/cancelfinetuningjobresponse.md
   - docs/pkg/models/operations/createfinetuningjobresponse.md
@@ -505,13 +481,6 @@ generatedFiles:
   - docs/pkg/models/shared/prompt.md
   - docs/pkg/models/shared/createcompletionrequeststop.md
   - docs/pkg/models/shared/createcompletionrequest.md
-  - docs/pkg/models/shared/createeditresponsefinishreason.md
-  - docs/pkg/models/shared/createeditresponsechoices.md
-  - docs/pkg/models/shared/createeditresponseobject.md
-  - docs/pkg/models/shared/createeditresponse.md
-  - docs/pkg/models/shared/createeditrequest2.md
-  - docs/pkg/models/shared/createeditrequestmodel.md
-  - docs/pkg/models/shared/createeditrequest.md
   - docs/pkg/models/shared/createembeddingresponseobject.md
   - docs/pkg/models/shared/usage.md
   - docs/pkg/models/shared/createembeddingresponse.md
@@ -533,21 +502,6 @@ generatedFiles:
   - docs/pkg/models/shared/deletefileresponse.md
   - docs/pkg/models/shared/listfilesresponseobject.md
   - docs/pkg/models/shared/listfilesresponse.md
-  - docs/pkg/models/shared/hyperparams.md
-  - docs/pkg/models/shared/finetuneobject.md
-  - docs/pkg/models/shared/finetune.md
-  - docs/pkg/models/shared/finetuneeventobject.md
-  - docs/pkg/models/shared/finetuneevent.md
-  - docs/pkg/models/shared/createfinetunerequest1.md
-  - docs/pkg/models/shared/nepochs.md
-  - docs/pkg/models/shared/hyperparameters.md
-  - docs/pkg/models/shared/createfinetunerequest2.md
-  - docs/pkg/models/shared/createfinetunerequestmodel.md
-  - docs/pkg/models/shared/createfinetunerequest.md
-  - docs/pkg/models/shared/listfinetuneeventsresponseobject.md
-  - docs/pkg/models/shared/listfinetuneeventsresponse.md
-  - docs/pkg/models/shared/listfinetunesresponseobject.md
-  - docs/pkg/models/shared/listfinetunesresponse.md
   - docs/pkg/models/shared/error.md
   - docs/pkg/models/shared/finetuningjob1.md
   - docs/pkg/models/shared/finetuningjobnepochs.md
@@ -560,8 +514,8 @@ generatedFiles:
   - docs/pkg/models/shared/createfinetuningjobrequestschemas1.md
   - docs/pkg/models/shared/learningratemultiplier.md
   - docs/pkg/models/shared/createfinetuningjobrequestschemashyperparameters1.md
-  - docs/pkg/models/shared/createfinetuningjobrequestnepochs.md
-  - docs/pkg/models/shared/createfinetuningjobrequesthyperparameters.md
+  - docs/pkg/models/shared/nepochs.md
+  - docs/pkg/models/shared/hyperparameters.md
   - docs/pkg/models/shared/createfinetuningjobrequest2.md
   - docs/pkg/models/shared/createfinetuningjobrequestmodel.md
   - docs/pkg/models/shared/createfinetuningjobrequest.md
@@ -613,10 +567,8 @@ generatedFiles:
   - docs/sdks/audio/README.md
   - docs/sdks/chat/README.md
   - docs/sdks/completions/README.md
-  - docs/sdks/edits/README.md
   - docs/sdks/embeddings/README.md
   - docs/sdks/files/README.md
-  - docs/sdks/finetunes/README.md
   - docs/sdks/finetuning/README.md
   - docs/sdks/images/README.md
   - docs/sdks/models/README.md
