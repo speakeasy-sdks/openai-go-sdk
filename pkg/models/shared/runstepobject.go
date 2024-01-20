@@ -250,6 +250,8 @@ type RunStepObject struct {
 	ThreadID string `json:"thread_id"`
 	// The type of run step, which can be either `message_creation` or `tool_calls`.
 	Type RunStepObjectType `json:"type"`
+	// Usage statistics related to the run step. This value will be `null` while the run step's status is `in_progress`.
+	Usage *RunStepCompletionUsage `json:"usage"`
 }
 
 func (o *RunStepObject) GetAssistantID() string {
@@ -355,4 +357,11 @@ func (o *RunStepObject) GetType() RunStepObjectType {
 		return RunStepObjectType("")
 	}
 	return o.Type
+}
+
+func (o *RunStepObject) GetUsage() *RunStepCompletionUsage {
+	if o == nil {
+		return nil
+	}
+	return o.Usage
 }

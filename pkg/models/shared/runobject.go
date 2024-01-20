@@ -318,6 +318,8 @@ type RunObject struct {
 	ThreadID string `json:"thread_id"`
 	// The list of tools that the [assistant](/docs/api-reference/assistants) used for this run.
 	Tools []RunObjectTools `json:"tools"`
+	// Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).
+	Usage *RunCompletionUsage `json:"usage"`
 }
 
 func (o *RunObject) GetAssistantID() string {
@@ -444,4 +446,11 @@ func (o *RunObject) GetTools() []RunObjectTools {
 		return []RunObjectTools{}
 	}
 	return o.Tools
+}
+
+func (o *RunObject) GetUsage() *RunCompletionUsage {
+	if o == nil {
+		return nil
+	}
+	return o.Usage
 }
