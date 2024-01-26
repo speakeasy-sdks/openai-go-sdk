@@ -149,6 +149,8 @@ type CreateEmbeddingRequest2 string
 
 const (
 	CreateEmbeddingRequest2TextEmbeddingAda002 CreateEmbeddingRequest2 = "text-embedding-ada-002"
+	CreateEmbeddingRequest2TextEmbedding3Small CreateEmbeddingRequest2 = "text-embedding-3-small"
+	CreateEmbeddingRequest2TextEmbedding3Large CreateEmbeddingRequest2 = "text-embedding-3-large"
 )
 
 func (e CreateEmbeddingRequest2) ToPointer() *CreateEmbeddingRequest2 {
@@ -162,6 +164,10 @@ func (e *CreateEmbeddingRequest2) UnmarshalJSON(data []byte) error {
 	}
 	switch v {
 	case "text-embedding-ada-002":
+		fallthrough
+	case "text-embedding-3-small":
+		fallthrough
+	case "text-embedding-3-large":
 		*e = CreateEmbeddingRequest2(v)
 		return nil
 	default:
@@ -234,6 +240,9 @@ func (u CreateEmbeddingRequestModel) MarshalJSON() ([]byte, error) {
 }
 
 type CreateEmbeddingRequest struct {
+	// The number of dimensions the resulting output embeddings should have. Only supported in `text-embedding-3` and later models.
+	//
+	Dimensions *int64 `json:"dimensions,omitempty"`
 	// The format to return the embeddings in. Can be either `float` or [`base64`](https://pypi.org/project/pybase64/).
 	EncodingFormat *EncodingFormat `default:"float" json:"encoding_format"`
 	// Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays. The input must not exceed the max input tokens for the model (8192 tokens for `text-embedding-ada-002`), cannot be an empty string, and any array must be 2048 dimensions or less. [Example Python code](https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken) for counting tokens.
@@ -256,6 +265,13 @@ func (c *CreateEmbeddingRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (o *CreateEmbeddingRequest) GetDimensions() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Dimensions
 }
 
 func (o *CreateEmbeddingRequest) GetEncodingFormat() *EncodingFormat {

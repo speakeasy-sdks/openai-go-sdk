@@ -37,7 +37,7 @@ func main() {
         "The quick brown fox jumped over the lazy dog",
         ),
         Model: shared.CreateCreateEmbeddingRequestModelCreateEmbeddingRequest2(
-        shared.CreateEmbeddingRequest2TextEmbeddingAda002,
+        shared.CreateEmbeddingRequest2TextEmbedding3Small,
         ),
         User: openaigosdk.String("user-1234"),
     })

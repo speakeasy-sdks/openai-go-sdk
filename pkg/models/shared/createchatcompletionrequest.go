@@ -113,6 +113,8 @@ func (u CreateChatCompletionRequestFunctionCall) MarshalJSON() ([]byte, error) {
 type Two string
 
 const (
+	TwoGpt40125Preview   Two = "gpt-4-0125-preview"
+	TwoGpt4TurboPreview  Two = "gpt-4-turbo-preview"
 	TwoGpt41106Preview   Two = "gpt-4-1106-preview"
 	TwoGpt4VisionPreview Two = "gpt-4-vision-preview"
 	TwoGpt4              Two = "gpt-4"
@@ -139,6 +141,10 @@ func (e *Two) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
+	case "gpt-4-0125-preview":
+		fallthrough
+	case "gpt-4-turbo-preview":
+		fallthrough
 	case "gpt-4-1106-preview":
 		fallthrough
 	case "gpt-4-vision-preview":
@@ -265,7 +271,7 @@ func (e *CreateChatCompletionRequestType) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// ResponseFormat - An object specifying the format that the model must output. Compatible with `gpt-4-1106-preview` and `gpt-3.5-turbo-1106`.
+// ResponseFormat - An object specifying the format that the model must output. Compatible with [GPT-4 Turbo](/docs/models/gpt-4-and-gpt-4-turbo) and `gpt-3.5-turbo-1106`.
 //
 // Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is valid JSON.
 //
@@ -405,7 +411,7 @@ type CreateChatCompletionRequest struct {
 	// [See more information about frequency and presence penalties.](/docs/guides/text-generation/parameter-details)
 	//
 	PresencePenalty *float64 `default:"0" json:"presence_penalty"`
-	// An object specifying the format that the model must output. Compatible with `gpt-4-1106-preview` and `gpt-3.5-turbo-1106`.
+	// An object specifying the format that the model must output. Compatible with [GPT-4 Turbo](/docs/models/gpt-4-and-gpt-4-turbo) and `gpt-3.5-turbo-1106`.
 	//
 	// Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is valid JSON.
 	//

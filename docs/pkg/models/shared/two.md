@@ -5,6 +5,8 @@
 
 | Name                   | Value                  |
 | ---------------------- | ---------------------- |
+| `TwoGpt40125Preview`   | gpt-4-0125-preview     |
+| `TwoGpt4TurboPreview`  | gpt-4-turbo-preview    |
 | `TwoGpt41106Preview`   | gpt-4-1106-preview     |
 | `TwoGpt4VisionPreview` | gpt-4-vision-preview   |
 | `TwoGpt4`              | gpt-4                  |
