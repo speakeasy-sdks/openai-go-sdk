@@ -35,8 +35,8 @@ Immediately cancel a fine-tune job.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -91,8 +91,8 @@ Response includes details of the enqueued job including job status and the name 
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -157,8 +157,8 @@ Get status updates for a fine-tuning job.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -215,8 +215,8 @@ List your organization's fine-tuning jobs
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -272,8 +272,8 @@ Get info about a fine-tuning job.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )

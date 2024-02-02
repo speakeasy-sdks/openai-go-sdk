@@ -12,7 +12,7 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/types"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/types"
 
 	"github.com/ericlagergren/decimal"
 )

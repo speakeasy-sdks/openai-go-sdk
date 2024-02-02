@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/utils"
 )
 
 // Error - For fine-tuning jobs that have `failed`, this will contain more information on the cause of the failure.

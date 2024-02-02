@@ -5,8 +5,8 @@ package operations
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/utils"
 	"net/http"
 )
 

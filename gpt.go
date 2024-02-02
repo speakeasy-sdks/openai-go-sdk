@@ -5,8 +5,8 @@ package openaigosdk
 import (
 	"context"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/utils"
 	"net/http"
 	"time"
 )
@@ -160,9 +160,9 @@ func New(opts ...SDKOption) *Gpt {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2.0.0",
-			SDKVersion:        "3.1.13",
-			GenVersion:        "2.245.1",
-			UserAgent:         "speakeasy-sdk/go 3.1.13 2.245.1 2.0.0 github.com/speakeasy-sdks/openai-go-sdk",
+			SDKVersion:        "4.0.0",
+			GenVersion:        "2.248.1",
+			UserAgent:         "speakeasy-sdk/go 4.0.0 2.248.1 2.0.0 github.com/speakeasy-sdks/openai-go-sdk",
 		},
 	}
 	for _, opt := range opts {

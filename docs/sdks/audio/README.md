@@ -21,8 +21,8 @@ Generates audio from the input text.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -75,8 +75,8 @@ Transcribes audio into the input language.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -131,8 +131,8 @@ Translates audio into English.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )

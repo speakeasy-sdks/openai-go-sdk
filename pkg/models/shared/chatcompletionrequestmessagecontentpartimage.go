@@ -5,7 +5,7 @@ package shared
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/utils"
 )
 
 // Detail - Specifies the detail level of the image. Learn more in the [Vision guide](/docs/guides/vision/low-or-high-fidelity-image-understanding).

@@ -39,8 +39,8 @@ package main
 
 import (
 	"context"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
 	"log"
 )
 
@@ -190,9 +190,9 @@ package main
 import (
 	"context"
 	"errors"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/sdkerrors"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
 	"log"
 )
 
@@ -240,8 +240,8 @@ package main
 
 import (
 	"context"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
 	"log"
 )
 
@@ -277,8 +277,8 @@ package main
 
 import (
 	"context"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
 	"log"
 )
 
@@ -364,7 +364,7 @@ package main
 
 import (
 	"context"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"log"
 )
 

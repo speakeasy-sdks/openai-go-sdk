@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/utils"
 )
 
 // One - `none` means the model will not call a function and instead generates a message. `auto` means the model can pick between generating a message or calling a function.

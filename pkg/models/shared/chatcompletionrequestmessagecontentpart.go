@@ -4,7 +4,7 @@ package shared
 
 import (
 	"errors"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/utils"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/utils"
 )
 
 type ChatCompletionRequestMessageContentPartType string

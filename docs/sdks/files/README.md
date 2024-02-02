@@ -33,8 +33,8 @@ Please [contact us](https://help.openai.com/) if you need to increase these stor
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -87,8 +87,8 @@ Delete a file.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -138,8 +138,8 @@ Returns the contents of the specified file.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -189,8 +189,8 @@ Returns a list of files that belong to the user's organization.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -240,8 +240,8 @@ Returns information about a specific file.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )

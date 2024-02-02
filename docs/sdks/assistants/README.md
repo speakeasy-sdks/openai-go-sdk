@@ -47,8 +47,8 @@ Cancels a run that is `in_progress`.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -101,8 +101,8 @@ Create an assistant with a model and instructions.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -162,8 +162,8 @@ Create an assistant file by attaching a [File](/docs/api-reference/files) to an 
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -218,8 +218,8 @@ Create a message.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -279,8 +279,8 @@ Create a run.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -343,8 +343,8 @@ Create a thread.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -403,8 +403,8 @@ Create a thread and run it in one request.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -480,8 +480,8 @@ Delete an assistant.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -531,8 +531,8 @@ Delete an assistant file.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -585,8 +585,8 @@ Delete a thread.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -636,8 +636,8 @@ Retrieves an assistant.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -687,8 +687,8 @@ Retrieves an AssistantFile.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -741,8 +741,8 @@ Retrieve a message.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -795,8 +795,8 @@ Retrieves a message file.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -852,8 +852,8 @@ Retrieves a run.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -906,8 +906,8 @@ Retrieves a run step.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -963,8 +963,8 @@ Retrieves a thread.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -1014,10 +1014,10 @@ Returns a list of assistant files.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/operations"
 	"log"
 )
 
@@ -1065,9 +1065,9 @@ Returns a list of assistants.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/operations"
 	"context"
 	"log"
 )
@@ -1126,10 +1126,10 @@ Returns a list of message files.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/operations"
 	"log"
 )
 
@@ -1178,10 +1178,10 @@ Returns a list of messages for a given thread.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/operations"
 	"log"
 )
 
@@ -1229,10 +1229,10 @@ Returns a list of run steps belonging to a run.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/operations"
 	"log"
 )
 
@@ -1281,10 +1281,10 @@ Returns a list of runs belonging to a thread.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/operations"
 	"log"
 )
 
@@ -1332,8 +1332,8 @@ Modifies an assistant.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -1398,8 +1398,8 @@ Modifies a message.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -1457,8 +1457,8 @@ Modifies a run.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -1516,8 +1516,8 @@ Modifies a thread.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
@@ -1573,8 +1573,8 @@ When a run has the `status: "requires_action"` and `required_action.type` is `su
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )

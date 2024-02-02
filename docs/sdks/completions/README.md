@@ -19,8 +19,8 @@ Creates a completion for the provided prompt and parameters.
 package main
 
 import(
-	"github.com/speakeasy-sdks/openai-go-sdk/v3/pkg/models/shared"
-	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v3"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
 	"context"
 	"log"
 )
