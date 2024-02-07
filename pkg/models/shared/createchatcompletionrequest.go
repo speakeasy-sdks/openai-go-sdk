@@ -128,6 +128,7 @@ const (
 	TwoGpt35Turbo0301    Two = "gpt-3.5-turbo-0301"
 	TwoGpt35Turbo0613    Two = "gpt-3.5-turbo-0613"
 	TwoGpt35Turbo1106    Two = "gpt-3.5-turbo-1106"
+	TwoGpt35Turbo0125    Two = "gpt-3.5-turbo-0125"
 	TwoGpt35Turbo16k0613 Two = "gpt-3.5-turbo-16k-0613"
 )
 
@@ -170,6 +171,8 @@ func (e *Two) UnmarshalJSON(data []byte) error {
 	case "gpt-3.5-turbo-0613":
 		fallthrough
 	case "gpt-3.5-turbo-1106":
+		fallthrough
+	case "gpt-3.5-turbo-0125":
 		fallthrough
 	case "gpt-3.5-turbo-16k-0613":
 		*e = Two(v)
@@ -271,7 +274,7 @@ func (e *CreateChatCompletionRequestType) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// ResponseFormat - An object specifying the format that the model must output. Compatible with [GPT-4 Turbo](/docs/models/gpt-4-and-gpt-4-turbo) and `gpt-3.5-turbo-1106`.
+// ResponseFormat - An object specifying the format that the model must output. Compatible with [GPT-4 Turbo](/docs/models/gpt-4-and-gpt-4-turbo) and all GPT-3.5 Turbo models newer than `gpt-3.5-turbo-1106`.
 //
 // Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is valid JSON.
 //
@@ -411,7 +414,7 @@ type CreateChatCompletionRequest struct {
 	// [See more information about frequency and presence penalties.](/docs/guides/text-generation/parameter-details)
 	//
 	PresencePenalty *float64 `default:"0" json:"presence_penalty"`
-	// An object specifying the format that the model must output. Compatible with [GPT-4 Turbo](/docs/models/gpt-4-and-gpt-4-turbo) and `gpt-3.5-turbo-1106`.
+	// An object specifying the format that the model must output. Compatible with [GPT-4 Turbo](/docs/models/gpt-4-and-gpt-4-turbo) and all GPT-3.5 Turbo models newer than `gpt-3.5-turbo-1106`.
 	//
 	// Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is valid JSON.
 	//

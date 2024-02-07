@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: a162a3d3-f7ae-4b54-a83e-5eeaa086b6a3
 management:
-  docChecksum: 98da40a5f6a0211dbf08a48a03e0cc17
+  docChecksum: 48d5059756953328026cfca7d15f0081
   docVersion: 2.0.0
   speakeasyVersion: internal
-  generationVersion: 2.250.2
-  releaseVersion: 4.0.1
-  configChecksum: d03e1baa25f53a0ac52254d1f1ab07fc
+  generationVersion: 2.250.12
+  releaseVersion: 4.1.0
+  configChecksum: 10fe215ba7e0bf9dc268518e6aad2ee9
   repoURL: https://github.com/speakeasy-sdks/openai-go-sdk.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/openai-go-sdk
@@ -417,6 +417,7 @@ generatedFiles:
   - docs/pkg/models/shared/createtranscriptionrequest2.md
   - docs/pkg/models/shared/createtranscriptionrequestmodel.md
   - docs/pkg/models/shared/createtranscriptionrequestresponseformat.md
+  - docs/pkg/models/shared/timestampgranularities.md
   - docs/pkg/models/shared/createtranscriptionrequest.md
   - docs/pkg/models/shared/createtranslationresponse.md
   - docs/pkg/models/shared/createtranslationrequestfile.md

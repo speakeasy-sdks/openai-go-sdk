@@ -20,4 +20,5 @@
 | `TwoGpt35Turbo0301`    | gpt-3.5-turbo-0301     |
 | `TwoGpt35Turbo0613`    | gpt-3.5-turbo-0613     |
 | `TwoGpt35Turbo1106`    | gpt-3.5-turbo-1106     |
+| `TwoGpt35Turbo0125`    | gpt-3.5-turbo-0125     |
 | `TwoGpt35Turbo16k0613` | gpt-3.5-turbo-16k-0613 |

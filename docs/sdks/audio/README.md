@@ -95,6 +95,9 @@ func main() {
         Model: shared.CreateCreateTranscriptionRequestModelCreateTranscriptionRequest2(
         shared.CreateTranscriptionRequest2Whisper1,
         ),
+        TimestampGranularities: []shared.TimestampGranularities{
+            shared.TimestampGranularitiesSegment,
+        },
     })
     if err != nil {
         log.Fatal(err)
