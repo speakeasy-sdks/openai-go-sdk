@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: a162a3d3-f7ae-4b54-a83e-5eeaa086b6a3
 management:
-  docChecksum: 48d5059756953328026cfca7d15f0081
+  docChecksum: fc72a6cb6d13a3b462587faec01dd645
   docVersion: 2.0.0
   speakeasyVersion: internal
-  generationVersion: 2.250.12
-  releaseVersion: 4.1.0
-  configChecksum: 10fe215ba7e0bf9dc268518e6aad2ee9
+  generationVersion: 2.252.2
+  releaseVersion: 4.1.1
+  configChecksum: 85be349bfc57c6dcdc6d4fc2e191610d
   repoURL: https://github.com/speakeasy-sdks/openai-go-sdk.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/openai-go-sdk
@@ -20,7 +20,7 @@ features:
     flattening: 2.81.1
     globalSecurity: 2.82.6
     globalServerURLs: 2.82.1
-    unions: 2.85.2
+    unions: 2.85.3
 generatedFiles:
   - assistants.go
   - audio.go
