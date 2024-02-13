@@ -4,7 +4,7 @@ management:
   docChecksum: fc72a6cb6d13a3b462587faec01dd645
   docVersion: 2.0.0
   speakeasyVersion: internal
-  generationVersion: 2.252.2
+  generationVersion: 2.253.0
   releaseVersion: 4.1.1
   configChecksum: 85be349bfc57c6dcdc6d4fc2e191610d
   repoURL: https://github.com/speakeasy-sdks/openai-go-sdk.git

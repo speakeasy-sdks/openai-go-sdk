@@ -32,31 +32,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Chat.CreateChatCompletion(ctx, shared.CreateChatCompletionRequest{
-        Functions: []shared.ChatCompletionFunctions{
-            shared.ChatCompletionFunctions{
-                Name: "string",
-                Parameters: map[string]interface{}{
-                    "key": "string",
-                },
-            },
-        },
-        LogitBias: map[string]int64{
-            "key": 770726,
-        },
         Messages: []shared.ChatCompletionRequestMessage{
-            shared.CreateChatCompletionRequestMessageChatCompletionRequestAssistantMessage(
-                shared.ChatCompletionRequestAssistantMessage{
-                    Role: shared.RoleAssistant,
-                    ToolCalls: []shared.ChatCompletionMessageToolCall{
-                        shared.ChatCompletionMessageToolCall{
-                            Function: shared.Function{
-                                Arguments: "string",
-                                Name: "string",
-                            },
-                            ID: "<ID>",
-                            Type: shared.ChatCompletionMessageToolCallTypeFunction,
-                        },
-                    },
+            shared.CreateChatCompletionRequestMessageChatCompletionRequestToolMessage(
+                shared.ChatCompletionRequestToolMessage{
+                    Content: "string",
+                    Role: shared.ChatCompletionRequestToolMessageRoleTool,
+                    ToolCallID: "string",
                 },
             ),
         },
@@ -64,32 +45,7 @@ func main() {
         shared.TwoGpt35Turbo,
         ),
         N: openaigosdk.Int64(1),
-        ResponseFormat: &shared.ResponseFormat{
-            Type: shared.CreateChatCompletionRequestTypeJSONObject.ToPointer(),
-        },
-        Stop: shared.CreateStopStr(
-        "string",
-        ),
         Temperature: openaigosdk.Float64(1),
-        ToolChoice: shared.CreateChatCompletionToolChoiceOptionChatCompletionNamedToolChoice(
-                shared.ChatCompletionNamedToolChoice{
-                    Function: shared.ChatCompletionNamedToolChoiceFunction{
-                        Name: "string",
-                    },
-                    Type: shared.ChatCompletionNamedToolChoiceTypeFunction,
-                },
-        ),
-        Tools: []shared.ChatCompletionTool{
-            shared.ChatCompletionTool{
-                Function: shared.FunctionObject{
-                    Name: "string",
-                    Parameters: map[string]interface{}{
-                        "key": "string",
-                    },
-                },
-                Type: shared.ChatCompletionToolTypeFunction,
-            },
-        },
         TopP: openaigosdk.Float64(1),
         User: openaigosdk.String("user-1234"),
     })

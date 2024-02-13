@@ -114,18 +114,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Assistants.CreateAssistant(ctx, shared.CreateAssistantRequest{
-        FileIds: []string{
-            "string",
-        },
-        Metadata: &shared.CreateAssistantRequestMetadata{},
         Model: "XTS",
-        Tools: []shared.CreateAssistantRequestTools{
-            shared.CreateCreateAssistantRequestToolsAssistantToolsRetrieval(
-                shared.AssistantToolsRetrieval{
-                    Type: shared.AssistantToolsRetrievalTypeRetrieval,
-                },
-            ),
-        },
     })
     if err != nil {
         log.Fatal(err)
@@ -232,10 +221,6 @@ func main() {
 
     createMessageRequest := shared.CreateMessageRequest{
         Content: "string",
-        FileIds: []string{
-            "string",
-        },
-        Metadata: &shared.CreateMessageRequestMetadata{},
         Role: shared.CreateMessageRequestRoleUser,
     }
 
@@ -293,14 +278,6 @@ func main() {
 
     createRunRequest := shared.CreateRunRequest{
         AssistantID: "string",
-        Metadata: &shared.CreateRunRequestMetadata{},
-        Tools: []shared.CreateRunRequestTools{
-            shared.CreateCreateRunRequestToolsAssistantToolsCode(
-                shared.AssistantToolsCode{
-                    Type: shared.TypeCodeInterpreter,
-                },
-            ),
-        },
     }
 
     var threadID string = "string"
@@ -355,19 +332,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Assistants.CreateThread(ctx, &shared.CreateThreadRequest{
-        Messages: []shared.CreateMessageRequest{
-            shared.CreateMessageRequest{
-                Content: "string",
-                FileIds: []string{
-                    "string",
-                },
-                Metadata: &shared.CreateMessageRequestMetadata{},
-                Role: shared.CreateMessageRequestRoleUser,
-            },
-        },
-        Metadata: &shared.CreateThreadRequestMetadata{},
-    })
+    res, err := s.Assistants.CreateThread(ctx, &shared.CreateThreadRequest{})
     if err != nil {
         log.Fatal(err)
     }
@@ -417,33 +382,6 @@ func main() {
     ctx := context.Background()
     res, err := s.Assistants.CreateThreadAndRun(ctx, shared.CreateThreadAndRunRequest{
         AssistantID: "string",
-        Metadata: &shared.CreateThreadAndRunRequestMetadata{},
-        Thread: &shared.CreateThreadRequest{
-            Messages: []shared.CreateMessageRequest{
-                shared.CreateMessageRequest{
-                    Content: "string",
-                    FileIds: []string{
-                        "string",
-                    },
-                    Metadata: &shared.CreateMessageRequestMetadata{},
-                    Role: shared.CreateMessageRequestRoleUser,
-                },
-            },
-            Metadata: &shared.CreateThreadRequestMetadata{},
-        },
-        Tools: []shared.CreateThreadAndRunRequestTools{
-            shared.CreateCreateThreadAndRunRequestToolsAssistantToolsFunction(
-                shared.AssistantToolsFunction{
-                    Function: shared.FunctionObject{
-                        Name: "string",
-                        Parameters: map[string]interface{}{
-                            "key": "string",
-                        },
-                    },
-                    Type: shared.AssistantToolsFunctionTypeFunction,
-                },
-            ),
-        },
     })
     if err != nil {
         log.Fatal(err)
@@ -1078,13 +1016,13 @@ func main() {
     )
 
 
-    var after *string = "string"
+    var after *string = openaigosdk.String("string")
 
-    var before *string = "string"
+    var before *string = openaigosdk.String("string")
 
-    var limit *int64 = 948776
+    var limit *int64 = openaigosdk.Int64(948776)
 
-    var order *operations.QueryParamOrder = operations.QueryParamOrderAsc
+    var order *operations.QueryParamOrder = operations.QueryParamOrderAsc.ToPointer()
 
     ctx := context.Background()
     res, err := s.Assistants.ListAssistants(ctx, after, before, limit, order)
@@ -1344,19 +1282,7 @@ func main() {
     )
 
 
-    modifyAssistantRequest := shared.ModifyAssistantRequest{
-        FileIds: []string{
-            "string",
-        },
-        Metadata: &shared.ModifyAssistantRequestMetadata{},
-        Tools: []shared.ModifyAssistantRequestTools{
-            shared.CreateModifyAssistantRequestToolsAssistantToolsCode(
-                shared.AssistantToolsCode{
-                    Type: shared.TypeCodeInterpreter,
-                },
-            ),
-        },
-    }
+    modifyAssistantRequest := shared.ModifyAssistantRequest{}
 
     var assistantID string = "string"
 
@@ -1410,9 +1336,7 @@ func main() {
     )
 
 
-    modifyMessageRequest := shared.ModifyMessageRequest{
-        Metadata: &shared.ModifyMessageRequestMetadata{},
-    }
+    modifyMessageRequest := shared.ModifyMessageRequest{}
 
     var messageID string = "string"
 
@@ -1469,9 +1393,7 @@ func main() {
     )
 
 
-    modifyRunRequest := shared.ModifyRunRequest{
-        Metadata: &shared.ModifyRunRequestMetadata{},
-    }
+    modifyRunRequest := shared.ModifyRunRequest{}
 
     var runID string = "string"
 
@@ -1528,9 +1450,7 @@ func main() {
     )
 
 
-    modifyThreadRequest := shared.ModifyThreadRequest{
-        Metadata: &shared.ModifyThreadRequestMetadata{},
-    }
+    modifyThreadRequest := shared.ModifyThreadRequest{}
 
     var threadID string = "string"
 

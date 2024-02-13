@@ -104,17 +104,6 @@ func main() {
 
     ctx := context.Background()
     res, err := s.FineTuning.CreateFineTuningJob(ctx, shared.CreateFineTuningJobRequest{
-        Hyperparameters: &shared.Hyperparameters{
-            BatchSize: shared.CreateBatchSizeCreateFineTuningJobRequest1(
-            shared.CreateFineTuningJobRequest1Auto,
-            ),
-            LearningRateMultiplier: shared.CreateLearningRateMultiplierCreateFineTuningJobRequestSchemas1(
-            shared.CreateFineTuningJobRequestSchemas1Auto,
-            ),
-            NEpochs: shared.CreateNEpochsCreateFineTuningJobRequestSchemasHyperparameters1(
-            shared.CreateFineTuningJobRequestSchemasHyperparameters1Auto,
-            ),
-        },
         Model: shared.CreateCreateFineTuningJobRequestModelCreateFineTuningJobRequest2(
         shared.CreateFineTuningJobRequest2Gpt35Turbo,
         ),
@@ -171,9 +160,9 @@ func main() {
 
     var fineTuningJobID string = "ft-AF1WoRqd3aJAHsqc9NY7iL8F"
 
-    var after *string = "string"
+    var after *string = openaigosdk.String("string")
 
-    var limit *int64 = 896841
+    var limit *int64 = openaigosdk.Int64(896841)
 
     ctx := context.Background()
     res, err := s.FineTuning.ListFineTuningEvents(ctx, fineTuningJobID, after, limit)
@@ -227,9 +216,9 @@ func main() {
     )
 
 
-    var after *string = "string"
+    var after *string = openaigosdk.String("string")
 
-    var limit *int64 = 385496
+    var limit *int64 = openaigosdk.Int64(385496)
 
     ctx := context.Background()
     res, err := s.FineTuning.ListPaginatedFineTuningJobs(ctx, after, limit)

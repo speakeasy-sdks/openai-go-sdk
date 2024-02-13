@@ -32,9 +32,6 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Completions.CreateCompletion(ctx, shared.CreateCompletionRequest{
-        LogitBias: map[string]int64{
-            "key": 160667,
-        },
         MaxTokens: openaigosdk.Int64(16),
         Model: shared.CreateCreateCompletionRequestModelStr(
         "string",
@@ -42,10 +39,6 @@ func main() {
         N: openaigosdk.Int64(1),
         Prompt: shared.CreatePromptStr(
         "This is a test.",
-        ),
-        Stop: shared.CreateCreateCompletionRequestStopStr(
-        "
-        ",
         ),
         Suffix: openaigosdk.String("test."),
         Temperature: openaigosdk.Float64(1),

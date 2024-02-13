@@ -97,10 +97,6 @@ func main() {
             Content: []byte("0x3e31F4cec5"),
             FileName: "facilitator_gosh_hatchback.mpe",
         },
-        Mask: &shared.Mask{
-            Content: []byte("0xFC5456e4eC"),
-            FileName: "electric_cambridgeshire.jpeg",
-        },
         Model: shared.CreateCreateImageEditRequestModelCreateImageEditRequest2(
         shared.CreateImageEditRequest2DallE2,
         ),

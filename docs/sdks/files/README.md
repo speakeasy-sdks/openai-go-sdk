@@ -201,7 +201,7 @@ func main() {
     )
 
 
-    var purpose *string = "string"
+    var purpose *string = openaigosdk.String("string")
 
     ctx := context.Background()
     res, err := s.Files.ListFiles(ctx, purpose)
