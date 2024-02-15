@@ -160,7 +160,7 @@ func main() {
 
     var fineTuningJobID string = "ft-AF1WoRqd3aJAHsqc9NY7iL8F"
 
-    var after *string = openaigosdk.String("string")
+    var after *string = openaigosdk.String("<value>")
 
     var limit *int64 = openaigosdk.Int64(896841)
 
@@ -216,7 +216,7 @@ func main() {
     )
 
 
-    var after *string = openaigosdk.String("string")
+    var after *string = openaigosdk.String("<value>")
 
     var limit *int64 = openaigosdk.Int64(385496)
 

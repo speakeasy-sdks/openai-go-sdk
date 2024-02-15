@@ -59,9 +59,9 @@ func main() {
     )
 
 
-    var runID string = "string"
+    var runID string = "<value>"
 
-    var threadID string = "string"
+    var threadID string = "<value>"
 
     ctx := context.Background()
     res, err := s.Assistants.CancelRun(ctx, runID, threadID)
@@ -164,7 +164,7 @@ func main() {
 
 
     createAssistantFileRequest := shared.CreateAssistantFileRequest{
-        FileID: "string",
+        FileID: "<value>",
     }
 
     var assistantID string = "file-abc123"
@@ -220,11 +220,11 @@ func main() {
 
 
     createMessageRequest := shared.CreateMessageRequest{
-        Content: "string",
+        Content: "<value>",
         Role: shared.CreateMessageRequestRoleUser,
     }
 
-    var threadID string = "string"
+    var threadID string = "<value>"
 
     ctx := context.Background()
     res, err := s.Assistants.CreateMessage(ctx, createMessageRequest, threadID)
@@ -277,10 +277,10 @@ func main() {
 
 
     createRunRequest := shared.CreateRunRequest{
-        AssistantID: "string",
+        AssistantID: "<value>",
     }
 
-    var threadID string = "string"
+    var threadID string = "<value>"
 
     ctx := context.Background()
     res, err := s.Assistants.CreateRun(ctx, createRunRequest, threadID)
@@ -381,7 +381,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Assistants.CreateThreadAndRun(ctx, shared.CreateThreadAndRunRequest{
-        AssistantID: "string",
+        AssistantID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
@@ -430,7 +430,7 @@ func main() {
     )
 
 
-    var assistantID string = "string"
+    var assistantID string = "<value>"
 
     ctx := context.Background()
     res, err := s.Assistants.DeleteAssistant(ctx, assistantID)
@@ -481,9 +481,9 @@ func main() {
     )
 
 
-    var assistantID string = "string"
+    var assistantID string = "<value>"
 
-    var fileID string = "string"
+    var fileID string = "<value>"
 
     ctx := context.Background()
     res, err := s.Assistants.DeleteAssistantFile(ctx, assistantID, fileID)
@@ -535,7 +535,7 @@ func main() {
     )
 
 
-    var threadID string = "string"
+    var threadID string = "<value>"
 
     ctx := context.Background()
     res, err := s.Assistants.DeleteThread(ctx, threadID)
@@ -586,7 +586,7 @@ func main() {
     )
 
 
-    var assistantID string = "string"
+    var assistantID string = "<value>"
 
     ctx := context.Background()
     res, err := s.Assistants.GetAssistant(ctx, assistantID)
@@ -637,9 +637,9 @@ func main() {
     )
 
 
-    var assistantID string = "string"
+    var assistantID string = "<value>"
 
-    var fileID string = "string"
+    var fileID string = "<value>"
 
     ctx := context.Background()
     res, err := s.Assistants.GetAssistantFile(ctx, assistantID, fileID)
@@ -691,9 +691,9 @@ func main() {
     )
 
 
-    var messageID string = "string"
+    var messageID string = "<value>"
 
-    var threadID string = "string"
+    var threadID string = "<value>"
 
     ctx := context.Background()
     res, err := s.Assistants.GetMessage(ctx, messageID, threadID)
@@ -802,9 +802,9 @@ func main() {
     )
 
 
-    var runID string = "string"
+    var runID string = "<value>"
 
-    var threadID string = "string"
+    var threadID string = "<value>"
 
     ctx := context.Background()
     res, err := s.Assistants.GetRun(ctx, runID, threadID)
@@ -856,11 +856,11 @@ func main() {
     )
 
 
-    var runID string = "string"
+    var runID string = "<value>"
 
-    var stepID string = "string"
+    var stepID string = "<value>"
 
-    var threadID string = "string"
+    var threadID string = "<value>"
 
     ctx := context.Background()
     res, err := s.Assistants.GetRunStep(ctx, runID, stepID, threadID)
@@ -913,7 +913,7 @@ func main() {
     )
 
 
-    var threadID string = "string"
+    var threadID string = "<value>"
 
     ctx := context.Background()
     res, err := s.Assistants.GetThread(ctx, threadID)
@@ -966,7 +966,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Assistants.ListAssistantFiles(ctx, operations.ListAssistantFilesRequest{
-        AssistantID: "string",
+        AssistantID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
@@ -1016,9 +1016,9 @@ func main() {
     )
 
 
-    var after *string = openaigosdk.String("string")
+    var after *string = openaigosdk.String("<value>")
 
-    var before *string = openaigosdk.String("string")
+    var before *string = openaigosdk.String("<value>")
 
     var limit *int64 = openaigosdk.Int64(948776)
 
@@ -1078,8 +1078,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Assistants.ListMessageFiles(ctx, operations.ListMessageFilesRequest{
-        MessageID: "string",
-        ThreadID: "string",
+        MessageID: "<value>",
+        ThreadID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
@@ -1130,7 +1130,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Assistants.ListMessages(ctx, operations.ListMessagesRequest{
-        ThreadID: "string",
+        ThreadID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
@@ -1181,8 +1181,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Assistants.ListRunSteps(ctx, operations.ListRunStepsRequest{
-        RunID: "string",
-        ThreadID: "string",
+        RunID: "<value>",
+        ThreadID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
@@ -1233,7 +1233,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Assistants.ListRuns(ctx, operations.ListRunsRequest{
-        ThreadID: "string",
+        ThreadID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
@@ -1284,7 +1284,7 @@ func main() {
 
     modifyAssistantRequest := shared.ModifyAssistantRequest{}
 
-    var assistantID string = "string"
+    var assistantID string = "<value>"
 
     ctx := context.Background()
     res, err := s.Assistants.ModifyAssistant(ctx, modifyAssistantRequest, assistantID)
@@ -1338,9 +1338,9 @@ func main() {
 
     modifyMessageRequest := shared.ModifyMessageRequest{}
 
-    var messageID string = "string"
+    var messageID string = "<value>"
 
-    var threadID string = "string"
+    var threadID string = "<value>"
 
     ctx := context.Background()
     res, err := s.Assistants.ModifyMessage(ctx, modifyMessageRequest, messageID, threadID)
@@ -1395,9 +1395,9 @@ func main() {
 
     modifyRunRequest := shared.ModifyRunRequest{}
 
-    var runID string = "string"
+    var runID string = "<value>"
 
-    var threadID string = "string"
+    var threadID string = "<value>"
 
     ctx := context.Background()
     res, err := s.Assistants.ModifyRun(ctx, modifyRunRequest, runID, threadID)
@@ -1452,7 +1452,7 @@ func main() {
 
     modifyThreadRequest := shared.ModifyThreadRequest{}
 
-    var threadID string = "string"
+    var threadID string = "<value>"
 
     ctx := context.Background()
     res, err := s.Assistants.ModifyThread(ctx, modifyThreadRequest, threadID)
@@ -1511,9 +1511,9 @@ func main() {
         },
     }
 
-    var runID string = "string"
+    var runID string = "<value>"
 
-    var threadID string = "string"
+    var threadID string = "<value>"
 
     ctx := context.Background()
     res, err := s.Assistants.SubmitToolOuputsToRun(ctx, submitToolOutputsRunRequest, runID, threadID)

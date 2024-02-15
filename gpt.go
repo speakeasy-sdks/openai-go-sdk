@@ -5,6 +5,7 @@ package openaigosdk
 import (
 	"context"
 	"fmt"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/internal/hooks"
 	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
 	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/utils"
 	"net/http"
@@ -51,6 +52,7 @@ type sdkConfiguration struct {
 	GenVersion        string
 	UserAgent         string
 	RetryConfig       *utils.RetryConfig
+	Hooks             *hooks.Hooks
 }
 
 func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
@@ -160,14 +162,17 @@ func New(opts ...SDKOption) *Gpt {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2.0.0",
-			SDKVersion:        "4.1.1",
-			GenVersion:        "2.253.0",
-			UserAgent:         "speakeasy-sdk/go 4.1.1 2.253.0 2.0.0 github.com/speakeasy-sdks/openai-go-sdk",
+			SDKVersion:        "4.2.0",
+			GenVersion:        "2.258.0",
+			UserAgent:         "speakeasy-sdk/go 4.2.0 2.258.0 2.0.0 github.com/speakeasy-sdks/openai-go-sdk",
+			Hooks:             hooks.New(),
 		},
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
+
+	sdk.sdkConfiguration.DefaultClient = sdk.sdkConfiguration.Hooks.ClientInit(sdk.sdkConfiguration.DefaultClient)
 
 	// Use WithClient to override the default client if you would like to customize the timeout
 	if sdk.sdkConfiguration.DefaultClient == nil {

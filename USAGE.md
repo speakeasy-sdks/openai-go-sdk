@@ -14,9 +14,9 @@ func main() {
 		openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
-	var runID string = "string"
+	var runID string = "<value>"
 
-	var threadID string = "string"
+	var threadID string = "<value>"
 
 	ctx := context.Background()
 	res, err := s.Assistants.CancelRun(ctx, runID, threadID)

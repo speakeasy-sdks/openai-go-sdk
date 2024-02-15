@@ -35,9 +35,9 @@ func main() {
         Messages: []shared.ChatCompletionRequestMessage{
             shared.CreateChatCompletionRequestMessageChatCompletionRequestToolMessage(
                 shared.ChatCompletionRequestToolMessage{
-                    Content: "string",
+                    Content: "<value>",
                     Role: shared.ChatCompletionRequestToolMessageRoleTool,
-                    ToolCallID: "string",
+                    ToolCallID: "<value>",
                 },
             ),
         },

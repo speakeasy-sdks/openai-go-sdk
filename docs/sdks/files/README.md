@@ -99,7 +99,7 @@ func main() {
     )
 
 
-    var fileID string = "string"
+    var fileID string = "<value>"
 
     ctx := context.Background()
     res, err := s.Files.DeleteFile(ctx, fileID)
@@ -150,7 +150,7 @@ func main() {
     )
 
 
-    var fileID string = "string"
+    var fileID string = "<value>"
 
     ctx := context.Background()
     res, err := s.Files.DownloadFile(ctx, fileID)
@@ -201,7 +201,7 @@ func main() {
     )
 
 
-    var purpose *string = openaigosdk.String("string")
+    var purpose *string = openaigosdk.String("<value>")
 
     ctx := context.Background()
     res, err := s.Files.ListFiles(ctx, purpose)
@@ -252,7 +252,7 @@ func main() {
     )
 
 
-    var fileID string = "string"
+    var fileID string = "<value>"
 
     ctx := context.Background()
     res, err := s.Files.RetrieveFile(ctx, fileID)

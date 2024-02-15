@@ -34,7 +34,7 @@ func main() {
     res, err := s.Completions.CreateCompletion(ctx, shared.CreateCompletionRequest{
         MaxTokens: openaigosdk.Int64(16),
         Model: shared.CreateCreateCompletionRequestModelStr(
-        "string",
+        "<value>",
         ),
         N: openaigosdk.Int64(1),
         Prompt: shared.CreatePromptStr(

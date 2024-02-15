@@ -34,7 +34,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Audio.CreateSpeech(ctx, shared.CreateSpeechRequest{
-        Input: "string",
+        Input: "<value>",
         Model: shared.CreateCreateSpeechRequestModelCreateSpeechRequest2(
         shared.CreateSpeechRequest2Tts1,
         ),
