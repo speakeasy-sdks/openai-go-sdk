@@ -1,0 +1,11 @@
+# RunStepDetailsToolCallsCodeOutputLogsObject
+
+Text output from the Code Interpreter tool call as part of a run step.
+
+
+## Fields
+
+| Field                                                                                                                                   | Type                                                                                                                                    | Required                                                                                                                                | Description                                                                                                                             |
+| --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `Logs`                                                                                                                                  | *string*                                                                                                                                | :heavy_check_mark:                                                                                                                      | The text output from the Code Interpreter tool call.                                                                                    |
+| `Type`                                                                                                                                  | [shared.RunStepDetailsToolCallsCodeOutputLogsObjectType](../../../pkg/models/shared/runstepdetailstoolcallscodeoutputlogsobjecttype.md) | :heavy_check_mark:                                                                                                                      | Always `logs`.                                                                                                                          |

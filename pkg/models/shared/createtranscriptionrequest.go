@@ -2,13 +2,186 @@
 
 package shared
 
+import (
+	"encoding/json"
+	"errors"
+	"fmt"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/utils"
+)
+
 type CreateTranscriptionRequestFile struct {
-	Content []byte `multipartForm:"content"`
-	File    string `multipartForm:"name=file"`
+	Content  []byte `multipartForm:"content"`
+	FileName string `multipartForm:"name=file"`
+}
+
+func (o *CreateTranscriptionRequestFile) GetContent() []byte {
+	if o == nil {
+		return []byte{}
+	}
+	return o.Content
+}
+
+func (o *CreateTranscriptionRequestFile) GetFileName() string {
+	if o == nil {
+		return ""
+	}
+	return o.FileName
+}
+
+type CreateTranscriptionRequest2 string
+
+const (
+	CreateTranscriptionRequest2Whisper1 CreateTranscriptionRequest2 = "whisper-1"
+)
+
+func (e CreateTranscriptionRequest2) ToPointer() *CreateTranscriptionRequest2 {
+	return &e
+}
+
+func (e *CreateTranscriptionRequest2) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "whisper-1":
+		*e = CreateTranscriptionRequest2(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateTranscriptionRequest2: %v", v)
+	}
+}
+
+type CreateTranscriptionRequestModelType string
+
+const (
+	CreateTranscriptionRequestModelTypeStr                         CreateTranscriptionRequestModelType = "str"
+	CreateTranscriptionRequestModelTypeCreateTranscriptionRequest2 CreateTranscriptionRequestModelType = "CreateTranscriptionRequest_2"
+)
+
+// CreateTranscriptionRequestModel - ID of the model to use. Only `whisper-1` is currently available.
+type CreateTranscriptionRequestModel struct {
+	Str                         *string
+	CreateTranscriptionRequest2 *CreateTranscriptionRequest2
+
+	Type CreateTranscriptionRequestModelType
+}
+
+func CreateCreateTranscriptionRequestModelStr(str string) CreateTranscriptionRequestModel {
+	typ := CreateTranscriptionRequestModelTypeStr
+
+	return CreateTranscriptionRequestModel{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateCreateTranscriptionRequestModelCreateTranscriptionRequest2(createTranscriptionRequest2 CreateTranscriptionRequest2) CreateTranscriptionRequestModel {
+	typ := CreateTranscriptionRequestModelTypeCreateTranscriptionRequest2
+
+	return CreateTranscriptionRequestModel{
+		CreateTranscriptionRequest2: &createTranscriptionRequest2,
+		Type:                        typ,
+	}
+}
+
+func (u *CreateTranscriptionRequestModel) UnmarshalJSON(data []byte) error {
+
+	str := ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = &str
+		u.Type = CreateTranscriptionRequestModelTypeStr
+		return nil
+	}
+
+	createTranscriptionRequest2 := CreateTranscriptionRequest2("")
+	if err := utils.UnmarshalJSON(data, &createTranscriptionRequest2, "", true, true); err == nil {
+		u.CreateTranscriptionRequest2 = &createTranscriptionRequest2
+		u.Type = CreateTranscriptionRequestModelTypeCreateTranscriptionRequest2
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u CreateTranscriptionRequestModel) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.CreateTranscriptionRequest2 != nil {
+		return utils.MarshalJSON(u.CreateTranscriptionRequest2, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
+}
+
+// CreateTranscriptionRequestResponseFormat - The format of the transcript output, in one of these options: `json`, `text`, `srt`, `verbose_json`, or `vtt`.
+type CreateTranscriptionRequestResponseFormat string
+
+const (
+	CreateTranscriptionRequestResponseFormatJSON        CreateTranscriptionRequestResponseFormat = "json"
+	CreateTranscriptionRequestResponseFormatText        CreateTranscriptionRequestResponseFormat = "text"
+	CreateTranscriptionRequestResponseFormatSrt         CreateTranscriptionRequestResponseFormat = "srt"
+	CreateTranscriptionRequestResponseFormatVerboseJSON CreateTranscriptionRequestResponseFormat = "verbose_json"
+	CreateTranscriptionRequestResponseFormatVtt         CreateTranscriptionRequestResponseFormat = "vtt"
+)
+
+func (e CreateTranscriptionRequestResponseFormat) ToPointer() *CreateTranscriptionRequestResponseFormat {
+	return &e
+}
+
+func (e *CreateTranscriptionRequestResponseFormat) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "json":
+		fallthrough
+	case "text":
+		fallthrough
+	case "srt":
+		fallthrough
+	case "verbose_json":
+		fallthrough
+	case "vtt":
+		*e = CreateTranscriptionRequestResponseFormat(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateTranscriptionRequestResponseFormat: %v", v)
+	}
+}
+
+type TimestampGranularities string
+
+const (
+	TimestampGranularitiesWord    TimestampGranularities = "word"
+	TimestampGranularitiesSegment TimestampGranularities = "segment"
+)
+
+func (e TimestampGranularities) ToPointer() *TimestampGranularities {
+	return &e
+}
+
+func (e *TimestampGranularities) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "word":
+		fallthrough
+	case "segment":
+		*e = TimestampGranularities(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for TimestampGranularities: %v", v)
+	}
 }
 
 type CreateTranscriptionRequest struct {
-	// The audio file to transcribe, in one of these formats: mp3, mp4, mpeg, mpga, m4a, wav, or webm.
+	// The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
 	//
 	File CreateTranscriptionRequestFile `multipartForm:"file"`
 	// The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format will improve accuracy and latency.
@@ -16,14 +189,77 @@ type CreateTranscriptionRequest struct {
 	Language *string `multipartForm:"name=language"`
 	// ID of the model to use. Only `whisper-1` is currently available.
 	//
-	Model string `multipartForm:"name=model"`
+	Model CreateTranscriptionRequestModel `multipartForm:"name=model"`
 	// An optional text to guide the model's style or continue a previous audio segment. The [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.
 	//
 	Prompt *string `multipartForm:"name=prompt"`
-	// The format of the transcript output, in one of these options: json, text, srt, verbose_json, or vtt.
+	// The format of the transcript output, in one of these options: `json`, `text`, `srt`, `verbose_json`, or `vtt`.
 	//
-	ResponseFormat *string `multipartForm:"name=response_format"`
+	ResponseFormat *CreateTranscriptionRequestResponseFormat `default:"json" multipartForm:"name=response_format"`
 	// The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to automatically increase the temperature until certain thresholds are hit.
 	//
-	Temperature *float64 `multipartForm:"name=temperature"`
+	Temperature *float64 `default:"0" multipartForm:"name=temperature"`
+	// The timestamp granularities to populate for this transcription. Any of these options: `word`, or `segment`. Note: There is no additional latency for segment timestamps, but generating word timestamps incurs additional latency.
+	//
+	TimestampGranularities []TimestampGranularities `multipartForm:"name=timestamp_granularities[]"`
+}
+
+func (c CreateTranscriptionRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreateTranscriptionRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *CreateTranscriptionRequest) GetFile() CreateTranscriptionRequestFile {
+	if o == nil {
+		return CreateTranscriptionRequestFile{}
+	}
+	return o.File
+}
+
+func (o *CreateTranscriptionRequest) GetLanguage() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Language
+}
+
+func (o *CreateTranscriptionRequest) GetModel() CreateTranscriptionRequestModel {
+	if o == nil {
+		return CreateTranscriptionRequestModel{}
+	}
+	return o.Model
+}
+
+func (o *CreateTranscriptionRequest) GetPrompt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Prompt
+}
+
+func (o *CreateTranscriptionRequest) GetResponseFormat() *CreateTranscriptionRequestResponseFormat {
+	if o == nil {
+		return nil
+	}
+	return o.ResponseFormat
+}
+
+func (o *CreateTranscriptionRequest) GetTemperature() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Temperature
+}
+
+func (o *CreateTranscriptionRequest) GetTimestampGranularities() []TimestampGranularities {
+	if o == nil {
+		return nil
+	}
+	return o.TimestampGranularities
 }

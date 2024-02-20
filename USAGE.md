@@ -1,31 +1,33 @@
-<!-- Start SDK Example Usage -->
+<!-- Start SDK Example Usage [usage] -->
 ```go
 package main
 
 import (
-    "context"
-    "log"
-    "github.com/speakeasy-sdks/openai-go-sdk"
-    "github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
-    "github.com/speakeasy-sdks/openai-go-sdk/pkg/models/operations"
+	"context"
+	openaigosdk "github.com/speakeasy-sdks/openai-go-sdk/v4"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	"log"
 )
 
 func main() {
-    s := gpt.New()
+	s := openaigosdk.New(
+		openaigosdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
+	)
 
-    req := operations.CancelFineTuneRequest{
-        FineTuneID: "ft-AF1WoRqd3aJAHsqc9NY7iL8F",
-    }
+	var runID string = "<value>"
 
-    ctx := context.Background()
-    res, err := s.OpenAI.CancelFineTune(ctx, req)
-    if err != nil {
-        log.Fatal(err)
-    }
+	var threadID string = "<value>"
 
-    if res.FineTune != nil {
-        // handle response
-    }
+	ctx := context.Background()
+	res, err := s.Assistants.CancelRun(ctx, runID, threadID)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.RunObject != nil {
+		// handle response
+	}
 }
+
 ```
-<!-- End SDK Example Usage -->
+<!-- End SDK Example Usage [usage] -->

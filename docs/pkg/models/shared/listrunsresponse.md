@@ -1,0 +1,12 @@
+# ListRunsResponse
+
+
+## Fields
+
+| Field                                                         | Type                                                          | Required                                                      | Description                                                   | Example                                                       |
+| ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| `Data`                                                        | [][shared.RunObject](../../../pkg/models/shared/runobject.md) | :heavy_check_mark:                                            | N/A                                                           |                                                               |
+| `FirstID`                                                     | *string*                                                      | :heavy_check_mark:                                            | N/A                                                           | run_abc123                                                    |
+| `HasMore`                                                     | *bool*                                                        | :heavy_check_mark:                                            | N/A                                                           | false                                                         |
+| `LastID`                                                      | *string*                                                      | :heavy_check_mark:                                            | N/A                                                           | run_abc456                                                    |
+| `Object`                                                      | *string*                                                      | :heavy_check_mark:                                            | N/A                                                           | list                                                          |

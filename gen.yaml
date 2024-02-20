@@ -1,14 +1,26 @@
-configVersion: 1.0.0
-management:
-  docChecksum: 5399f7767be93d4a4b8cecb9bbc687b3
-  docVersion: 1.2.0
-  speakeasyVersion: 1.19.3
-  generationVersion: 2.16.7
+configVersion: 2.0.0
 generation:
-  telemetryEnabled: false
   sdkClassName: gpt
-  sdkFlattening: true
-  singleTagPerOp: false
+  usageSnippets:
+    optionalPropertyRendering: withExample
+  fixes:
+    nameResolutionDec2023: false
+    parameterOrderingFeb2024: false
+    requestResponseComponentNamesFeb2024: false
 go:
-  version: 1.11.0
+  version: 4.2.1
+  additionalDependencies: {}
+  clientServerStatusCodesAsErrors: true
+  flattenGlobalSecurity: true
+  imports:
+    option: openapi
+    paths:
+      callbacks: pkg/models/callbacks
+      errors: pkg/models/sdkerrors
+      operations: pkg/models/operations
+      shared: pkg/models/shared
+      webhooks: pkg/models/webhooks
+  inputModelSuffix: input
+  maxMethodParams: 4
+  outputModelSuffix: output
   packageName: github.com/speakeasy-sdks/openai-go-sdk

@@ -2,25 +2,281 @@
 
 package shared
 
+import (
+	"encoding/json"
+	"errors"
+	"fmt"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/utils"
+)
+
 type CreateImageEditRequestImage struct {
-	Content []byte `multipartForm:"content"`
-	Image   string `multipartForm:"name=image"`
+	Content  []byte `multipartForm:"content"`
+	FileName string `multipartForm:"name=image"`
 }
 
-type CreateImageEditRequestMask struct {
-	Content []byte `multipartForm:"content"`
-	Mask    string `multipartForm:"name=mask"`
+func (o *CreateImageEditRequestImage) GetContent() []byte {
+	if o == nil {
+		return []byte{}
+	}
+	return o.Content
+}
+
+func (o *CreateImageEditRequestImage) GetFileName() string {
+	if o == nil {
+		return ""
+	}
+	return o.FileName
+}
+
+type Mask struct {
+	Content  []byte `multipartForm:"content"`
+	FileName string `multipartForm:"name=mask"`
+}
+
+func (o *Mask) GetContent() []byte {
+	if o == nil {
+		return []byte{}
+	}
+	return o.Content
+}
+
+func (o *Mask) GetFileName() string {
+	if o == nil {
+		return ""
+	}
+	return o.FileName
+}
+
+type CreateImageEditRequest2 string
+
+const (
+	CreateImageEditRequest2DallE2 CreateImageEditRequest2 = "dall-e-2"
+)
+
+func (e CreateImageEditRequest2) ToPointer() *CreateImageEditRequest2 {
+	return &e
+}
+
+func (e *CreateImageEditRequest2) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "dall-e-2":
+		*e = CreateImageEditRequest2(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateImageEditRequest2: %v", v)
+	}
+}
+
+type CreateImageEditRequestModelType string
+
+const (
+	CreateImageEditRequestModelTypeStr                     CreateImageEditRequestModelType = "str"
+	CreateImageEditRequestModelTypeCreateImageEditRequest2 CreateImageEditRequestModelType = "CreateImageEditRequest_2"
+)
+
+// CreateImageEditRequestModel - The model to use for image generation. Only `dall-e-2` is supported at this time.
+type CreateImageEditRequestModel struct {
+	Str                     *string
+	CreateImageEditRequest2 *CreateImageEditRequest2
+
+	Type CreateImageEditRequestModelType
+}
+
+func CreateCreateImageEditRequestModelStr(str string) CreateImageEditRequestModel {
+	typ := CreateImageEditRequestModelTypeStr
+
+	return CreateImageEditRequestModel{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateCreateImageEditRequestModelCreateImageEditRequest2(createImageEditRequest2 CreateImageEditRequest2) CreateImageEditRequestModel {
+	typ := CreateImageEditRequestModelTypeCreateImageEditRequest2
+
+	return CreateImageEditRequestModel{
+		CreateImageEditRequest2: &createImageEditRequest2,
+		Type:                    typ,
+	}
+}
+
+func (u *CreateImageEditRequestModel) UnmarshalJSON(data []byte) error {
+
+	str := ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = &str
+		u.Type = CreateImageEditRequestModelTypeStr
+		return nil
+	}
+
+	createImageEditRequest2 := CreateImageEditRequest2("")
+	if err := utils.UnmarshalJSON(data, &createImageEditRequest2, "", true, true); err == nil {
+		u.CreateImageEditRequest2 = &createImageEditRequest2
+		u.Type = CreateImageEditRequestModelTypeCreateImageEditRequest2
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u CreateImageEditRequestModel) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.CreateImageEditRequest2 != nil {
+		return utils.MarshalJSON(u.CreateImageEditRequest2, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
+}
+
+// CreateImageEditRequestResponseFormat - The format in which the generated images are returned. Must be one of `url` or `b64_json`.
+type CreateImageEditRequestResponseFormat string
+
+const (
+	CreateImageEditRequestResponseFormatURL     CreateImageEditRequestResponseFormat = "url"
+	CreateImageEditRequestResponseFormatB64JSON CreateImageEditRequestResponseFormat = "b64_json"
+)
+
+func (e CreateImageEditRequestResponseFormat) ToPointer() *CreateImageEditRequestResponseFormat {
+	return &e
+}
+
+func (e *CreateImageEditRequestResponseFormat) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "url":
+		fallthrough
+	case "b64_json":
+		*e = CreateImageEditRequestResponseFormat(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateImageEditRequestResponseFormat: %v", v)
+	}
+}
+
+// Size - The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.
+type Size string
+
+const (
+	SizeTwoHundredAndFiftySixx256     Size = "256x256"
+	SizeFiveHundredAndTwelvex512      Size = "512x512"
+	SizeOneThousandAndTwentyFourx1024 Size = "1024x1024"
+)
+
+func (e Size) ToPointer() *Size {
+	return &e
+}
+
+func (e *Size) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "256x256":
+		fallthrough
+	case "512x512":
+		fallthrough
+	case "1024x1024":
+		*e = Size(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Size: %v", v)
+	}
 }
 
 type CreateImageEditRequest struct {
 	// The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not provided, image must have transparency, which will be used as the mask.
 	Image CreateImageEditRequestImage `multipartForm:"file"`
 	// An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where `image` should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions as `image`.
-	Mask *CreateImageEditRequestMask `multipartForm:"file"`
-	N    interface{}                 `multipartForm:"name=n"`
+	Mask *Mask `multipartForm:"file"`
+	// The model to use for image generation. Only `dall-e-2` is supported at this time.
+	Model *CreateImageEditRequestModel `multipartForm:"name=model"`
+	// The number of images to generate. Must be between 1 and 10.
+	N *int64 `default:"1" multipartForm:"name=n"`
 	// A text description of the desired image(s). The maximum length is 1000 characters.
-	Prompt         string      `multipartForm:"name=prompt"`
-	ResponseFormat interface{} `multipartForm:"name=response_format"`
-	Size           interface{} `multipartForm:"name=size"`
-	User           interface{} `multipartForm:"name=user"`
+	Prompt string `multipartForm:"name=prompt"`
+	// The format in which the generated images are returned. Must be one of `url` or `b64_json`.
+	ResponseFormat *CreateImageEditRequestResponseFormat `default:"url" multipartForm:"name=response_format"`
+	// The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.
+	Size *Size `default:"1024x1024" multipartForm:"name=size"`
+	// A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).
+	//
+	User *string `multipartForm:"name=user"`
+}
+
+func (c CreateImageEditRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreateImageEditRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *CreateImageEditRequest) GetImage() CreateImageEditRequestImage {
+	if o == nil {
+		return CreateImageEditRequestImage{}
+	}
+	return o.Image
+}
+
+func (o *CreateImageEditRequest) GetMask() *Mask {
+	if o == nil {
+		return nil
+	}
+	return o.Mask
+}
+
+func (o *CreateImageEditRequest) GetModel() *CreateImageEditRequestModel {
+	if o == nil {
+		return nil
+	}
+	return o.Model
+}
+
+func (o *CreateImageEditRequest) GetN() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.N
+}
+
+func (o *CreateImageEditRequest) GetPrompt() string {
+	if o == nil {
+		return ""
+	}
+	return o.Prompt
+}
+
+func (o *CreateImageEditRequest) GetResponseFormat() *CreateImageEditRequestResponseFormat {
+	if o == nil {
+		return nil
+	}
+	return o.ResponseFormat
+}
+
+func (o *CreateImageEditRequest) GetSize() *Size {
+	if o == nil {
+		return nil
+	}
+	return o.Size
+}
+
+func (o *CreateImageEditRequest) GetUser() *string {
+	if o == nil {
+		return nil
+	}
+	return o.User
 }

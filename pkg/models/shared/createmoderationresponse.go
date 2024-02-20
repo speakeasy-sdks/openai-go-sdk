@@ -2,35 +2,269 @@
 
 package shared
 
-type CreateModerationResponseResultsCategories struct {
-	Hate            bool `json:"hate"`
+// Categories - A list of the categories, and whether they are flagged or not.
+type Categories struct {
+	// Content that expresses, incites, or promotes harassing language towards any target.
+	Harassment bool `json:"harassment"`
+	// Harassment content that also includes violence or serious harm towards any target.
+	HarassmentThreatening bool `json:"harassment/threatening"`
+	// Content that expresses, incites, or promotes hate based on race, gender, ethnicity, religion, nationality, sexual orientation, disability status, or caste. Hateful content aimed at non-protected groups (e.g., chess players) is harassment.
+	Hate bool `json:"hate"`
+	// Hateful content that also includes violence or serious harm towards the targeted group based on race, gender, ethnicity, religion, nationality, sexual orientation, disability status, or caste.
 	HateThreatening bool `json:"hate/threatening"`
-	SelfHarm        bool `json:"self-harm"`
-	Sexual          bool `json:"sexual"`
-	SexualMinors    bool `json:"sexual/minors"`
-	Violence        bool `json:"violence"`
+	// Content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting, and eating disorders.
+	SelfHarm bool `json:"self-harm"`
+	// Content that encourages performing acts of self-harm, such as suicide, cutting, and eating disorders, or that gives instructions or advice on how to commit such acts.
+	SelfHarmInstructions bool `json:"self-harm/instructions"`
+	// Content where the speaker expresses that they are engaging or intend to engage in acts of self-harm, such as suicide, cutting, and eating disorders.
+	SelfHarmIntent bool `json:"self-harm/intent"`
+	// Content meant to arouse sexual excitement, such as the description of sexual activity, or that promotes sexual services (excluding sex education and wellness).
+	Sexual bool `json:"sexual"`
+	// Sexual content that includes an individual who is under 18 years old.
+	SexualMinors bool `json:"sexual/minors"`
+	// Content that depicts death, violence, or physical injury.
+	Violence bool `json:"violence"`
+	// Content that depicts death, violence, or physical injury in graphic detail.
 	ViolenceGraphic bool `json:"violence/graphic"`
 }
 
-type CreateModerationResponseResultsCategoryScores struct {
-	Hate            float64 `json:"hate"`
+func (o *Categories) GetHarassment() bool {
+	if o == nil {
+		return false
+	}
+	return o.Harassment
+}
+
+func (o *Categories) GetHarassmentThreatening() bool {
+	if o == nil {
+		return false
+	}
+	return o.HarassmentThreatening
+}
+
+func (o *Categories) GetHate() bool {
+	if o == nil {
+		return false
+	}
+	return o.Hate
+}
+
+func (o *Categories) GetHateThreatening() bool {
+	if o == nil {
+		return false
+	}
+	return o.HateThreatening
+}
+
+func (o *Categories) GetSelfHarm() bool {
+	if o == nil {
+		return false
+	}
+	return o.SelfHarm
+}
+
+func (o *Categories) GetSelfHarmInstructions() bool {
+	if o == nil {
+		return false
+	}
+	return o.SelfHarmInstructions
+}
+
+func (o *Categories) GetSelfHarmIntent() bool {
+	if o == nil {
+		return false
+	}
+	return o.SelfHarmIntent
+}
+
+func (o *Categories) GetSexual() bool {
+	if o == nil {
+		return false
+	}
+	return o.Sexual
+}
+
+func (o *Categories) GetSexualMinors() bool {
+	if o == nil {
+		return false
+	}
+	return o.SexualMinors
+}
+
+func (o *Categories) GetViolence() bool {
+	if o == nil {
+		return false
+	}
+	return o.Violence
+}
+
+func (o *Categories) GetViolenceGraphic() bool {
+	if o == nil {
+		return false
+	}
+	return o.ViolenceGraphic
+}
+
+// CategoryScores - A list of the categories along with their scores as predicted by model.
+type CategoryScores struct {
+	// The score for the category 'harassment'.
+	Harassment float64 `json:"harassment"`
+	// The score for the category 'harassment/threatening'.
+	HarassmentThreatening float64 `json:"harassment/threatening"`
+	// The score for the category 'hate'.
+	Hate float64 `json:"hate"`
+	// The score for the category 'hate/threatening'.
 	HateThreatening float64 `json:"hate/threatening"`
-	SelfHarm        float64 `json:"self-harm"`
-	Sexual          float64 `json:"sexual"`
-	SexualMinors    float64 `json:"sexual/minors"`
-	Violence        float64 `json:"violence"`
+	// The score for the category 'self-harm'.
+	SelfHarm float64 `json:"self-harm"`
+	// The score for the category 'self-harm/instructions'.
+	SelfHarmInstructions float64 `json:"self-harm/instructions"`
+	// The score for the category 'self-harm/intent'.
+	SelfHarmIntent float64 `json:"self-harm/intent"`
+	// The score for the category 'sexual'.
+	Sexual float64 `json:"sexual"`
+	// The score for the category 'sexual/minors'.
+	SexualMinors float64 `json:"sexual/minors"`
+	// The score for the category 'violence'.
+	Violence float64 `json:"violence"`
+	// The score for the category 'violence/graphic'.
 	ViolenceGraphic float64 `json:"violence/graphic"`
 }
 
-type CreateModerationResponseResults struct {
-	Categories     CreateModerationResponseResultsCategories     `json:"categories"`
-	CategoryScores CreateModerationResponseResultsCategoryScores `json:"category_scores"`
-	Flagged        bool                                          `json:"flagged"`
+func (o *CategoryScores) GetHarassment() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Harassment
 }
 
-// CreateModerationResponse - OK
+func (o *CategoryScores) GetHarassmentThreatening() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.HarassmentThreatening
+}
+
+func (o *CategoryScores) GetHate() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Hate
+}
+
+func (o *CategoryScores) GetHateThreatening() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.HateThreatening
+}
+
+func (o *CategoryScores) GetSelfHarm() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.SelfHarm
+}
+
+func (o *CategoryScores) GetSelfHarmInstructions() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.SelfHarmInstructions
+}
+
+func (o *CategoryScores) GetSelfHarmIntent() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.SelfHarmIntent
+}
+
+func (o *CategoryScores) GetSexual() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Sexual
+}
+
+func (o *CategoryScores) GetSexualMinors() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.SexualMinors
+}
+
+func (o *CategoryScores) GetViolence() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Violence
+}
+
+func (o *CategoryScores) GetViolenceGraphic() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.ViolenceGraphic
+}
+
+type Results struct {
+	// A list of the categories, and whether they are flagged or not.
+	Categories Categories `json:"categories"`
+	// A list of the categories along with their scores as predicted by model.
+	CategoryScores CategoryScores `json:"category_scores"`
+	// Whether the content violates [OpenAI's usage policies](/policies/usage-policies).
+	Flagged bool `json:"flagged"`
+}
+
+func (o *Results) GetCategories() Categories {
+	if o == nil {
+		return Categories{}
+	}
+	return o.Categories
+}
+
+func (o *Results) GetCategoryScores() CategoryScores {
+	if o == nil {
+		return CategoryScores{}
+	}
+	return o.CategoryScores
+}
+
+func (o *Results) GetFlagged() bool {
+	if o == nil {
+		return false
+	}
+	return o.Flagged
+}
+
+// CreateModerationResponse - Represents policy compliance report by OpenAI's content moderation model against a given input.
 type CreateModerationResponse struct {
-	ID      string                            `json:"id"`
-	Model   string                            `json:"model"`
-	Results []CreateModerationResponseResults `json:"results"`
+	// The unique identifier for the moderation request.
+	ID string `json:"id"`
+	// The model used to generate the moderation results.
+	Model string `json:"model"`
+	// A list of moderation objects.
+	Results []Results `json:"results"`
+}
+
+func (o *CreateModerationResponse) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *CreateModerationResponse) GetModel() string {
+	if o == nil {
+		return ""
+	}
+	return o.Model
+}
+
+func (o *CreateModerationResponse) GetResults() []Results {
+	if o == nil {
+		return []Results{}
+	}
+	return o.Results
 }

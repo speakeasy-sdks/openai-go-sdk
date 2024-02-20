@@ -3,14 +3,45 @@
 package operations
 
 import (
-	"github.com/speakeasy-sdks/openai-go-sdk/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
 	"net/http"
 )
 
 type CreateFileResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// OK
-	OpenAIFile  *shared.OpenAIFile
-	StatusCode  int
+	OpenAIFile *shared.OpenAIFile
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
+}
+
+func (o *CreateFileResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *CreateFileResponse) GetOpenAIFile() *shared.OpenAIFile {
+	if o == nil {
+		return nil
+	}
+	return o.OpenAIFile
+}
+
+func (o *CreateFileResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *CreateFileResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

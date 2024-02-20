@@ -1,0 +1,12 @@
+# ListRunStepsResponse
+
+
+## Fields
+
+| Field                                                                 | Type                                                                  | Required                                                              | Description                                                           | Example                                                               |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `Data`                                                                | [][shared.RunStepObject](../../../pkg/models/shared/runstepobject.md) | :heavy_check_mark:                                                    | N/A                                                                   |                                                                       |
+| `FirstID`                                                             | *string*                                                              | :heavy_check_mark:                                                    | N/A                                                                   | step_abc123                                                           |
+| `HasMore`                                                             | *bool*                                                                | :heavy_check_mark:                                                    | N/A                                                                   | false                                                                 |
+| `LastID`                                                              | *string*                                                              | :heavy_check_mark:                                                    | N/A                                                                   | step_abc456                                                           |
+| `Object`                                                              | *string*                                                              | :heavy_check_mark:                                                    | N/A                                                                   | list                                                                  |

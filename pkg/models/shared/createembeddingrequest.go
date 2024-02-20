@@ -3,131 +3,301 @@
 package shared
 
 import (
-	"bytes"
 	"encoding/json"
 	"errors"
+	"fmt"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/utils"
 )
 
-type CreateEmbeddingRequestInputType string
+// EncodingFormat - The format to return the embeddings in. Can be either `float` or [`base64`](https://pypi.org/project/pybase64/).
+type EncodingFormat string
 
 const (
-	CreateEmbeddingRequestInputTypeStr                   CreateEmbeddingRequestInputType = "str"
-	CreateEmbeddingRequestInputTypeArrayOfstr            CreateEmbeddingRequestInputType = "arrayOfstr"
-	CreateEmbeddingRequestInputTypeArrayOfinteger        CreateEmbeddingRequestInputType = "arrayOfinteger"
-	CreateEmbeddingRequestInputTypeArrayOfarrayOfinteger CreateEmbeddingRequestInputType = "arrayOfarrayOfinteger"
+	EncodingFormatFloat  EncodingFormat = "float"
+	EncodingFormatBase64 EncodingFormat = "base64"
 )
 
-type CreateEmbeddingRequestInput struct {
+func (e EncodingFormat) ToPointer() *EncodingFormat {
+	return &e
+}
+
+func (e *EncodingFormat) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "float":
+		fallthrough
+	case "base64":
+		*e = EncodingFormat(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EncodingFormat: %v", v)
+	}
+}
+
+type InputType string
+
+const (
+	InputTypeStr                   InputType = "str"
+	InputTypeArrayOfstr            InputType = "arrayOfstr"
+	InputTypeArrayOfinteger        InputType = "arrayOfinteger"
+	InputTypeArrayOfarrayOfinteger InputType = "arrayOfarrayOfinteger"
+)
+
+// Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays. The input must not exceed the max input tokens for the model (8192 tokens for `text-embedding-ada-002`), cannot be an empty string, and any array must be 2048 dimensions or less. [Example Python code](https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken) for counting tokens.
+type Input struct {
 	Str                   *string
 	ArrayOfstr            []string
 	ArrayOfinteger        []int64
 	ArrayOfarrayOfinteger [][]int64
 
-	Type CreateEmbeddingRequestInputType
+	Type InputType
 }
 
-func CreateCreateEmbeddingRequestInputStr(str string) CreateEmbeddingRequestInput {
-	typ := CreateEmbeddingRequestInputTypeStr
+func CreateInputStr(str string) Input {
+	typ := InputTypeStr
 
-	return CreateEmbeddingRequestInput{
+	return Input{
 		Str:  &str,
 		Type: typ,
 	}
 }
 
-func CreateCreateEmbeddingRequestInputArrayOfstr(arrayOfstr []string) CreateEmbeddingRequestInput {
-	typ := CreateEmbeddingRequestInputTypeArrayOfstr
+func CreateInputArrayOfstr(arrayOfstr []string) Input {
+	typ := InputTypeArrayOfstr
 
-	return CreateEmbeddingRequestInput{
+	return Input{
 		ArrayOfstr: arrayOfstr,
 		Type:       typ,
 	}
 }
 
-func CreateCreateEmbeddingRequestInputArrayOfinteger(arrayOfinteger []int64) CreateEmbeddingRequestInput {
-	typ := CreateEmbeddingRequestInputTypeArrayOfinteger
+func CreateInputArrayOfinteger(arrayOfinteger []int64) Input {
+	typ := InputTypeArrayOfinteger
 
-	return CreateEmbeddingRequestInput{
+	return Input{
 		ArrayOfinteger: arrayOfinteger,
 		Type:           typ,
 	}
 }
 
-func CreateCreateEmbeddingRequestInputArrayOfarrayOfinteger(arrayOfarrayOfinteger [][]int64) CreateEmbeddingRequestInput {
-	typ := CreateEmbeddingRequestInputTypeArrayOfarrayOfinteger
+func CreateInputArrayOfarrayOfinteger(arrayOfarrayOfinteger [][]int64) Input {
+	typ := InputTypeArrayOfarrayOfinteger
 
-	return CreateEmbeddingRequestInput{
+	return Input{
 		ArrayOfarrayOfinteger: arrayOfarrayOfinteger,
 		Type:                  typ,
 	}
 }
 
-func (u *CreateEmbeddingRequestInput) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
+func (u *Input) UnmarshalJSON(data []byte) error {
 
-	str := new(string)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&str); err == nil {
-		u.Str = str
-		u.Type = CreateEmbeddingRequestInputTypeStr
+	str := ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = &str
+		u.Type = InputTypeStr
 		return nil
 	}
 
 	arrayOfstr := []string{}
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&arrayOfstr); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfstr, "", true, true); err == nil {
 		u.ArrayOfstr = arrayOfstr
-		u.Type = CreateEmbeddingRequestInputTypeArrayOfstr
+		u.Type = InputTypeArrayOfstr
 		return nil
 	}
 
 	arrayOfinteger := []int64{}
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&arrayOfinteger); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfinteger, "", true, true); err == nil {
 		u.ArrayOfinteger = arrayOfinteger
-		u.Type = CreateEmbeddingRequestInputTypeArrayOfinteger
+		u.Type = InputTypeArrayOfinteger
 		return nil
 	}
 
 	arrayOfarrayOfinteger := [][]int64{}
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&arrayOfarrayOfinteger); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfarrayOfinteger, "", true, true); err == nil {
 		u.ArrayOfarrayOfinteger = arrayOfarrayOfinteger
-		u.Type = CreateEmbeddingRequestInputTypeArrayOfarrayOfinteger
+		u.Type = InputTypeArrayOfarrayOfinteger
 		return nil
 	}
 
 	return errors.New("could not unmarshal into supported union types")
 }
 
-func (u CreateEmbeddingRequestInput) MarshalJSON() ([]byte, error) {
+func (u Input) MarshalJSON() ([]byte, error) {
 	if u.Str != nil {
-		return json.Marshal(u.Str)
+		return utils.MarshalJSON(u.Str, "", true)
 	}
 
 	if u.ArrayOfstr != nil {
-		return json.Marshal(u.ArrayOfstr)
+		return utils.MarshalJSON(u.ArrayOfstr, "", true)
 	}
 
 	if u.ArrayOfinteger != nil {
-		return json.Marshal(u.ArrayOfinteger)
+		return utils.MarshalJSON(u.ArrayOfinteger, "", true)
 	}
 
 	if u.ArrayOfarrayOfinteger != nil {
-		return json.Marshal(u.ArrayOfarrayOfinteger)
+		return utils.MarshalJSON(u.ArrayOfarrayOfinteger, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
+}
+
+type CreateEmbeddingRequest2 string
+
+const (
+	CreateEmbeddingRequest2TextEmbeddingAda002 CreateEmbeddingRequest2 = "text-embedding-ada-002"
+	CreateEmbeddingRequest2TextEmbedding3Small CreateEmbeddingRequest2 = "text-embedding-3-small"
+	CreateEmbeddingRequest2TextEmbedding3Large CreateEmbeddingRequest2 = "text-embedding-3-large"
+)
+
+func (e CreateEmbeddingRequest2) ToPointer() *CreateEmbeddingRequest2 {
+	return &e
+}
+
+func (e *CreateEmbeddingRequest2) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "text-embedding-ada-002":
+		fallthrough
+	case "text-embedding-3-small":
+		fallthrough
+	case "text-embedding-3-large":
+		*e = CreateEmbeddingRequest2(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateEmbeddingRequest2: %v", v)
+	}
+}
+
+type CreateEmbeddingRequestModelType string
+
+const (
+	CreateEmbeddingRequestModelTypeStr                     CreateEmbeddingRequestModelType = "str"
+	CreateEmbeddingRequestModelTypeCreateEmbeddingRequest2 CreateEmbeddingRequestModelType = "CreateEmbeddingRequest_2"
+)
+
+// CreateEmbeddingRequestModel - ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.
+type CreateEmbeddingRequestModel struct {
+	Str                     *string
+	CreateEmbeddingRequest2 *CreateEmbeddingRequest2
+
+	Type CreateEmbeddingRequestModelType
+}
+
+func CreateCreateEmbeddingRequestModelStr(str string) CreateEmbeddingRequestModel {
+	typ := CreateEmbeddingRequestModelTypeStr
+
+	return CreateEmbeddingRequestModel{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateCreateEmbeddingRequestModelCreateEmbeddingRequest2(createEmbeddingRequest2 CreateEmbeddingRequest2) CreateEmbeddingRequestModel {
+	typ := CreateEmbeddingRequestModelTypeCreateEmbeddingRequest2
+
+	return CreateEmbeddingRequestModel{
+		CreateEmbeddingRequest2: &createEmbeddingRequest2,
+		Type:                    typ,
+	}
+}
+
+func (u *CreateEmbeddingRequestModel) UnmarshalJSON(data []byte) error {
+
+	str := ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = &str
+		u.Type = CreateEmbeddingRequestModelTypeStr
+		return nil
+	}
+
+	createEmbeddingRequest2 := CreateEmbeddingRequest2("")
+	if err := utils.UnmarshalJSON(data, &createEmbeddingRequest2, "", true, true); err == nil {
+		u.CreateEmbeddingRequest2 = &createEmbeddingRequest2
+		u.Type = CreateEmbeddingRequestModelTypeCreateEmbeddingRequest2
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u CreateEmbeddingRequestModel) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.CreateEmbeddingRequest2 != nil {
+		return utils.MarshalJSON(u.CreateEmbeddingRequest2, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 type CreateEmbeddingRequest struct {
-	// Input text to get embeddings for, encoded as a string or array of tokens. To get embeddings for multiple inputs in a single request, pass an array of strings or array of token arrays. Each input must not exceed 8192 tokens in length.
+	// The number of dimensions the resulting output embeddings should have. Only supported in `text-embedding-3` and later models.
 	//
-	Input CreateEmbeddingRequestInput `json:"input"`
-	Model interface{}                 `json:"model"`
-	User  interface{}                 `json:"user,omitempty"`
+	Dimensions *int64 `json:"dimensions,omitempty"`
+	// The format to return the embeddings in. Can be either `float` or [`base64`](https://pypi.org/project/pybase64/).
+	EncodingFormat *EncodingFormat `default:"float" json:"encoding_format"`
+	// Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays. The input must not exceed the max input tokens for the model (8192 tokens for `text-embedding-ada-002`), cannot be an empty string, and any array must be 2048 dimensions or less. [Example Python code](https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken) for counting tokens.
+	//
+	Input Input `json:"input"`
+	// ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.
+	//
+	Model CreateEmbeddingRequestModel `json:"model"`
+	// A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).
+	//
+	User *string `json:"user,omitempty"`
+}
+
+func (c CreateEmbeddingRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreateEmbeddingRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *CreateEmbeddingRequest) GetDimensions() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Dimensions
+}
+
+func (o *CreateEmbeddingRequest) GetEncodingFormat() *EncodingFormat {
+	if o == nil {
+		return nil
+	}
+	return o.EncodingFormat
+}
+
+func (o *CreateEmbeddingRequest) GetInput() Input {
+	if o == nil {
+		return Input{}
+	}
+	return o.Input
+}
+
+func (o *CreateEmbeddingRequest) GetModel() CreateEmbeddingRequestModel {
+	if o == nil {
+		return CreateEmbeddingRequestModel{}
+	}
+	return o.Model
+}
+
+func (o *CreateEmbeddingRequest) GetUser() *string {
+	if o == nil {
+		return nil
+	}
+	return o.User
 }

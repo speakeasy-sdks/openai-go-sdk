@@ -2,14 +2,179 @@
 
 package shared
 
-// OpenAIFile - OK
+import (
+	"encoding/json"
+	"fmt"
+)
+
+// OpenAIFileObject - The object type, which is always `file`.
+type OpenAIFileObject string
+
+const (
+	OpenAIFileObjectFile OpenAIFileObject = "file"
+)
+
+func (e OpenAIFileObject) ToPointer() *OpenAIFileObject {
+	return &e
+}
+
+func (e *OpenAIFileObject) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "file":
+		*e = OpenAIFileObject(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for OpenAIFileObject: %v", v)
+	}
+}
+
+// OpenAIFilePurpose - The intended purpose of the file. Supported values are `fine-tune`, `fine-tune-results`, `assistants`, and `assistants_output`.
+type OpenAIFilePurpose string
+
+const (
+	OpenAIFilePurposeFineTune         OpenAIFilePurpose = "fine-tune"
+	OpenAIFilePurposeFineTuneResults  OpenAIFilePurpose = "fine-tune-results"
+	OpenAIFilePurposeAssistants       OpenAIFilePurpose = "assistants"
+	OpenAIFilePurposeAssistantsOutput OpenAIFilePurpose = "assistants_output"
+)
+
+func (e OpenAIFilePurpose) ToPointer() *OpenAIFilePurpose {
+	return &e
+}
+
+func (e *OpenAIFilePurpose) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "fine-tune":
+		fallthrough
+	case "fine-tune-results":
+		fallthrough
+	case "assistants":
+		fallthrough
+	case "assistants_output":
+		*e = OpenAIFilePurpose(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for OpenAIFilePurpose: %v", v)
+	}
+}
+
+// OpenAIFileStatus - Deprecated. The current status of the file, which can be either `uploaded`, `processed`, or `error`.
+//
+// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
+type OpenAIFileStatus string
+
+const (
+	OpenAIFileStatusUploaded  OpenAIFileStatus = "uploaded"
+	OpenAIFileStatusProcessed OpenAIFileStatus = "processed"
+	OpenAIFileStatusError     OpenAIFileStatus = "error"
+)
+
+func (e OpenAIFileStatus) ToPointer() *OpenAIFileStatus {
+	return &e
+}
+
+func (e *OpenAIFileStatus) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "uploaded":
+		fallthrough
+	case "processed":
+		fallthrough
+	case "error":
+		*e = OpenAIFileStatus(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for OpenAIFileStatus: %v", v)
+	}
+}
+
+// OpenAIFile - The `File` object represents a document that has been uploaded to OpenAI.
 type OpenAIFile struct {
-	Bytes         int64                  `json:"bytes"`
-	CreatedAt     int64                  `json:"created_at"`
-	Filename      string                 `json:"filename"`
-	ID            string                 `json:"id"`
-	Object        string                 `json:"object"`
-	Purpose       string                 `json:"purpose"`
-	Status        *string                `json:"status,omitempty"`
-	StatusDetails map[string]interface{} `json:"status_details,omitempty"`
+	// The size of the file, in bytes.
+	Bytes int64 `json:"bytes"`
+	// The Unix timestamp (in seconds) for when the file was created.
+	CreatedAt int64 `json:"created_at"`
+	// The name of the file.
+	Filename string `json:"filename"`
+	// The file identifier, which can be referenced in the API endpoints.
+	ID string `json:"id"`
+	// The object type, which is always `file`.
+	Object OpenAIFileObject `json:"object"`
+	// The intended purpose of the file. Supported values are `fine-tune`, `fine-tune-results`, `assistants`, and `assistants_output`.
+	Purpose OpenAIFilePurpose `json:"purpose"`
+	// Deprecated. The current status of the file, which can be either `uploaded`, `processed`, or `error`.
+	//
+	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+	Status OpenAIFileStatus `json:"status"`
+	// Deprecated. For details on why a fine-tuning training file failed validation, see the `error` field on `fine_tuning.job`.
+	//
+	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+	StatusDetails *string `json:"status_details,omitempty"`
+}
+
+func (o *OpenAIFile) GetBytes() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Bytes
+}
+
+func (o *OpenAIFile) GetCreatedAt() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.CreatedAt
+}
+
+func (o *OpenAIFile) GetFilename() string {
+	if o == nil {
+		return ""
+	}
+	return o.Filename
+}
+
+func (o *OpenAIFile) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *OpenAIFile) GetObject() OpenAIFileObject {
+	if o == nil {
+		return OpenAIFileObject("")
+	}
+	return o.Object
+}
+
+func (o *OpenAIFile) GetPurpose() OpenAIFilePurpose {
+	if o == nil {
+		return OpenAIFilePurpose("")
+	}
+	return o.Purpose
+}
+
+func (o *OpenAIFile) GetStatus() OpenAIFileStatus {
+	if o == nil {
+		return OpenAIFileStatus("")
+	}
+	return o.Status
+}
+
+func (o *OpenAIFile) GetStatusDetails() *string {
+	if o == nil {
+		return nil
+	}
+	return o.StatusDetails
 }

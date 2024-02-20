@@ -3,42 +3,135 @@
 package shared
 
 import (
-	"encoding/json"
-	"fmt"
+	"errors"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/utils"
 )
 
-// ChatCompletionRequestMessageRoleEnum - The role of the author of this message.
-type ChatCompletionRequestMessageRoleEnum string
+type ChatCompletionRequestMessageType string
 
 const (
-	ChatCompletionRequestMessageRoleEnumSystem    ChatCompletionRequestMessageRoleEnum = "system"
-	ChatCompletionRequestMessageRoleEnumUser      ChatCompletionRequestMessageRoleEnum = "user"
-	ChatCompletionRequestMessageRoleEnumAssistant ChatCompletionRequestMessageRoleEnum = "assistant"
+	ChatCompletionRequestMessageTypeChatCompletionRequestSystemMessage    ChatCompletionRequestMessageType = "ChatCompletionRequestSystemMessage"
+	ChatCompletionRequestMessageTypeChatCompletionRequestUserMessage      ChatCompletionRequestMessageType = "ChatCompletionRequestUserMessage"
+	ChatCompletionRequestMessageTypeChatCompletionRequestAssistantMessage ChatCompletionRequestMessageType = "ChatCompletionRequestAssistantMessage"
+	ChatCompletionRequestMessageTypeChatCompletionRequestToolMessage      ChatCompletionRequestMessageType = "ChatCompletionRequestToolMessage"
+	ChatCompletionRequestMessageTypeChatCompletionRequestFunctionMessage  ChatCompletionRequestMessageType = "ChatCompletionRequestFunctionMessage"
 )
 
-func (e *ChatCompletionRequestMessageRoleEnum) UnmarshalJSON(data []byte) error {
-	var s string
-	if err := json.Unmarshal(data, &s); err != nil {
-		return err
-	}
-	switch s {
-	case "system":
-		fallthrough
-	case "user":
-		fallthrough
-	case "assistant":
-		*e = ChatCompletionRequestMessageRoleEnum(s)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ChatCompletionRequestMessageRoleEnum: %s", s)
+type ChatCompletionRequestMessage struct {
+	ChatCompletionRequestSystemMessage    *ChatCompletionRequestSystemMessage
+	ChatCompletionRequestUserMessage      *ChatCompletionRequestUserMessage
+	ChatCompletionRequestAssistantMessage *ChatCompletionRequestAssistantMessage
+	ChatCompletionRequestToolMessage      *ChatCompletionRequestToolMessage
+	ChatCompletionRequestFunctionMessage  *ChatCompletionRequestFunctionMessage
+
+	Type ChatCompletionRequestMessageType
+}
+
+func CreateChatCompletionRequestMessageChatCompletionRequestSystemMessage(chatCompletionRequestSystemMessage ChatCompletionRequestSystemMessage) ChatCompletionRequestMessage {
+	typ := ChatCompletionRequestMessageTypeChatCompletionRequestSystemMessage
+
+	return ChatCompletionRequestMessage{
+		ChatCompletionRequestSystemMessage: &chatCompletionRequestSystemMessage,
+		Type:                               typ,
 	}
 }
 
-type ChatCompletionRequestMessage struct {
-	// The contents of the message
-	Content string `json:"content"`
-	// The name of the user in a multi-user chat
-	Name *string `json:"name,omitempty"`
-	// The role of the author of this message.
-	Role ChatCompletionRequestMessageRoleEnum `json:"role"`
+func CreateChatCompletionRequestMessageChatCompletionRequestUserMessage(chatCompletionRequestUserMessage ChatCompletionRequestUserMessage) ChatCompletionRequestMessage {
+	typ := ChatCompletionRequestMessageTypeChatCompletionRequestUserMessage
+
+	return ChatCompletionRequestMessage{
+		ChatCompletionRequestUserMessage: &chatCompletionRequestUserMessage,
+		Type:                             typ,
+	}
+}
+
+func CreateChatCompletionRequestMessageChatCompletionRequestAssistantMessage(chatCompletionRequestAssistantMessage ChatCompletionRequestAssistantMessage) ChatCompletionRequestMessage {
+	typ := ChatCompletionRequestMessageTypeChatCompletionRequestAssistantMessage
+
+	return ChatCompletionRequestMessage{
+		ChatCompletionRequestAssistantMessage: &chatCompletionRequestAssistantMessage,
+		Type:                                  typ,
+	}
+}
+
+func CreateChatCompletionRequestMessageChatCompletionRequestToolMessage(chatCompletionRequestToolMessage ChatCompletionRequestToolMessage) ChatCompletionRequestMessage {
+	typ := ChatCompletionRequestMessageTypeChatCompletionRequestToolMessage
+
+	return ChatCompletionRequestMessage{
+		ChatCompletionRequestToolMessage: &chatCompletionRequestToolMessage,
+		Type:                             typ,
+	}
+}
+
+func CreateChatCompletionRequestMessageChatCompletionRequestFunctionMessage(chatCompletionRequestFunctionMessage ChatCompletionRequestFunctionMessage) ChatCompletionRequestMessage {
+	typ := ChatCompletionRequestMessageTypeChatCompletionRequestFunctionMessage
+
+	return ChatCompletionRequestMessage{
+		ChatCompletionRequestFunctionMessage: &chatCompletionRequestFunctionMessage,
+		Type:                                 typ,
+	}
+}
+
+func (u *ChatCompletionRequestMessage) UnmarshalJSON(data []byte) error {
+
+	chatCompletionRequestSystemMessage := ChatCompletionRequestSystemMessage{}
+	if err := utils.UnmarshalJSON(data, &chatCompletionRequestSystemMessage, "", true, true); err == nil {
+		u.ChatCompletionRequestSystemMessage = &chatCompletionRequestSystemMessage
+		u.Type = ChatCompletionRequestMessageTypeChatCompletionRequestSystemMessage
+		return nil
+	}
+
+	chatCompletionRequestUserMessage := ChatCompletionRequestUserMessage{}
+	if err := utils.UnmarshalJSON(data, &chatCompletionRequestUserMessage, "", true, true); err == nil {
+		u.ChatCompletionRequestUserMessage = &chatCompletionRequestUserMessage
+		u.Type = ChatCompletionRequestMessageTypeChatCompletionRequestUserMessage
+		return nil
+	}
+
+	chatCompletionRequestToolMessage := ChatCompletionRequestToolMessage{}
+	if err := utils.UnmarshalJSON(data, &chatCompletionRequestToolMessage, "", true, true); err == nil {
+		u.ChatCompletionRequestToolMessage = &chatCompletionRequestToolMessage
+		u.Type = ChatCompletionRequestMessageTypeChatCompletionRequestToolMessage
+		return nil
+	}
+
+	chatCompletionRequestFunctionMessage := ChatCompletionRequestFunctionMessage{}
+	if err := utils.UnmarshalJSON(data, &chatCompletionRequestFunctionMessage, "", true, true); err == nil {
+		u.ChatCompletionRequestFunctionMessage = &chatCompletionRequestFunctionMessage
+		u.Type = ChatCompletionRequestMessageTypeChatCompletionRequestFunctionMessage
+		return nil
+	}
+
+	chatCompletionRequestAssistantMessage := ChatCompletionRequestAssistantMessage{}
+	if err := utils.UnmarshalJSON(data, &chatCompletionRequestAssistantMessage, "", true, true); err == nil {
+		u.ChatCompletionRequestAssistantMessage = &chatCompletionRequestAssistantMessage
+		u.Type = ChatCompletionRequestMessageTypeChatCompletionRequestAssistantMessage
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u ChatCompletionRequestMessage) MarshalJSON() ([]byte, error) {
+	if u.ChatCompletionRequestSystemMessage != nil {
+		return utils.MarshalJSON(u.ChatCompletionRequestSystemMessage, "", true)
+	}
+
+	if u.ChatCompletionRequestUserMessage != nil {
+		return utils.MarshalJSON(u.ChatCompletionRequestUserMessage, "", true)
+	}
+
+	if u.ChatCompletionRequestAssistantMessage != nil {
+		return utils.MarshalJSON(u.ChatCompletionRequestAssistantMessage, "", true)
+	}
+
+	if u.ChatCompletionRequestToolMessage != nil {
+		return utils.MarshalJSON(u.ChatCompletionRequestToolMessage, "", true)
+	}
+
+	if u.ChatCompletionRequestFunctionMessage != nil {
+		return utils.MarshalJSON(u.ChatCompletionRequestFunctionMessage, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
 }

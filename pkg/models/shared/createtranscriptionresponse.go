@@ -2,7 +2,13 @@
 
 package shared
 
-// CreateTranscriptionResponse - OK
 type CreateTranscriptionResponse struct {
 	Text string `json:"text"`
+}
+
+func (o *CreateTranscriptionResponse) GetText() string {
+	if o == nil {
+		return ""
+	}
+	return o.Text
 }
