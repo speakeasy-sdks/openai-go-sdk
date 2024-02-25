@@ -29,7 +29,11 @@ func newAssistants(sdkConfig sdkConfiguration) *Assistants {
 
 // CancelRun - Cancels a run that is `in_progress`.
 func (s *Assistants) CancelRun(ctx context.Context, runID string, threadID string) (*operations.CancelRunResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "cancelRun"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "cancelRun",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.CancelRunRequest{
 		RunID:    runID,
@@ -49,12 +53,12 @@ func (s *Assistants) CancelRun(ctx context.Context, runID string, threadID strin
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -64,15 +68,15 @@ func (s *Assistants) CancelRun(ctx context.Context, runID string, threadID strin
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -116,7 +120,11 @@ func (s *Assistants) CancelRun(ctx context.Context, runID string, threadID strin
 
 // CreateAssistant - Create an assistant with a model and instructions.
 func (s *Assistants) CreateAssistant(ctx context.Context, request shared.CreateAssistantRequest) (*operations.CreateAssistantResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "createAssistant"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "createAssistant",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := url.JoinPath(baseURL, "/assistants")
@@ -137,12 +145,12 @@ func (s *Assistants) CreateAssistant(ctx context.Context, request shared.CreateA
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -152,15 +160,15 @@ func (s *Assistants) CreateAssistant(ctx context.Context, request shared.CreateA
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -204,7 +212,11 @@ func (s *Assistants) CreateAssistant(ctx context.Context, request shared.CreateA
 
 // CreateAssistantFile - Create an assistant file by attaching a [File](/docs/api-reference/files) to an [assistant](/docs/api-reference/assistants).
 func (s *Assistants) CreateAssistantFile(ctx context.Context, createAssistantFileRequest shared.CreateAssistantFileRequest, assistantID string) (*operations.CreateAssistantFileResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "createAssistantFile"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "createAssistantFile",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.CreateAssistantFileRequest{
 		CreateAssistantFileRequest: createAssistantFileRequest,
@@ -230,12 +242,12 @@ func (s *Assistants) CreateAssistantFile(ctx context.Context, createAssistantFil
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -245,15 +257,15 @@ func (s *Assistants) CreateAssistantFile(ctx context.Context, createAssistantFil
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -297,7 +309,11 @@ func (s *Assistants) CreateAssistantFile(ctx context.Context, createAssistantFil
 
 // CreateMessage - Create a message.
 func (s *Assistants) CreateMessage(ctx context.Context, createMessageRequest shared.CreateMessageRequest, threadID string) (*operations.CreateMessageResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "createMessage"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "createMessage",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.CreateMessageRequest{
 		CreateMessageRequest: createMessageRequest,
@@ -323,12 +339,12 @@ func (s *Assistants) CreateMessage(ctx context.Context, createMessageRequest sha
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -338,15 +354,15 @@ func (s *Assistants) CreateMessage(ctx context.Context, createMessageRequest sha
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -390,7 +406,11 @@ func (s *Assistants) CreateMessage(ctx context.Context, createMessageRequest sha
 
 // CreateRun - Create a run.
 func (s *Assistants) CreateRun(ctx context.Context, createRunRequest shared.CreateRunRequest, threadID string) (*operations.CreateRunResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "createRun"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "createRun",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.CreateRunRequest{
 		CreateRunRequest: createRunRequest,
@@ -416,12 +436,12 @@ func (s *Assistants) CreateRun(ctx context.Context, createRunRequest shared.Crea
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -431,15 +451,15 @@ func (s *Assistants) CreateRun(ctx context.Context, createRunRequest shared.Crea
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -483,7 +503,11 @@ func (s *Assistants) CreateRun(ctx context.Context, createRunRequest shared.Crea
 
 // CreateThread - Create a thread.
 func (s *Assistants) CreateThread(ctx context.Context, request *shared.CreateThreadRequest) (*operations.CreateThreadResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "createThread"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "createThread",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := url.JoinPath(baseURL, "/threads")
@@ -504,12 +528,12 @@ func (s *Assistants) CreateThread(ctx context.Context, request *shared.CreateThr
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -519,15 +543,15 @@ func (s *Assistants) CreateThread(ctx context.Context, request *shared.CreateThr
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -571,7 +595,11 @@ func (s *Assistants) CreateThread(ctx context.Context, request *shared.CreateThr
 
 // CreateThreadAndRun - Create a thread and run it in one request.
 func (s *Assistants) CreateThreadAndRun(ctx context.Context, request shared.CreateThreadAndRunRequest) (*operations.CreateThreadAndRunResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "createThreadAndRun"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "createThreadAndRun",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := url.JoinPath(baseURL, "/threads/runs")
@@ -592,12 +620,12 @@ func (s *Assistants) CreateThreadAndRun(ctx context.Context, request shared.Crea
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -607,15 +635,15 @@ func (s *Assistants) CreateThreadAndRun(ctx context.Context, request shared.Crea
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -659,7 +687,11 @@ func (s *Assistants) CreateThreadAndRun(ctx context.Context, request shared.Crea
 
 // DeleteAssistant - Delete an assistant.
 func (s *Assistants) DeleteAssistant(ctx context.Context, assistantID string) (*operations.DeleteAssistantResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "deleteAssistant"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "deleteAssistant",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.DeleteAssistantRequest{
 		AssistantID: assistantID,
@@ -678,12 +710,12 @@ func (s *Assistants) DeleteAssistant(ctx context.Context, assistantID string) (*
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -693,15 +725,15 @@ func (s *Assistants) DeleteAssistant(ctx context.Context, assistantID string) (*
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -745,7 +777,11 @@ func (s *Assistants) DeleteAssistant(ctx context.Context, assistantID string) (*
 
 // DeleteAssistantFile - Delete an assistant file.
 func (s *Assistants) DeleteAssistantFile(ctx context.Context, assistantID string, fileID string) (*operations.DeleteAssistantFileResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "deleteAssistantFile"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "deleteAssistantFile",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.DeleteAssistantFileRequest{
 		AssistantID: assistantID,
@@ -765,12 +801,12 @@ func (s *Assistants) DeleteAssistantFile(ctx context.Context, assistantID string
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -780,15 +816,15 @@ func (s *Assistants) DeleteAssistantFile(ctx context.Context, assistantID string
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -832,7 +868,11 @@ func (s *Assistants) DeleteAssistantFile(ctx context.Context, assistantID string
 
 // DeleteThread - Delete a thread.
 func (s *Assistants) DeleteThread(ctx context.Context, threadID string) (*operations.DeleteThreadResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "deleteThread"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "deleteThread",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.DeleteThreadRequest{
 		ThreadID: threadID,
@@ -851,12 +891,12 @@ func (s *Assistants) DeleteThread(ctx context.Context, threadID string) (*operat
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -866,15 +906,15 @@ func (s *Assistants) DeleteThread(ctx context.Context, threadID string) (*operat
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -918,7 +958,11 @@ func (s *Assistants) DeleteThread(ctx context.Context, threadID string) (*operat
 
 // GetAssistant - Retrieves an assistant.
 func (s *Assistants) GetAssistant(ctx context.Context, assistantID string) (*operations.GetAssistantResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getAssistant"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getAssistant",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetAssistantRequest{
 		AssistantID: assistantID,
@@ -937,12 +981,12 @@ func (s *Assistants) GetAssistant(ctx context.Context, assistantID string) (*ope
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -952,15 +996,15 @@ func (s *Assistants) GetAssistant(ctx context.Context, assistantID string) (*ope
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -1004,7 +1048,11 @@ func (s *Assistants) GetAssistant(ctx context.Context, assistantID string) (*ope
 
 // GetAssistantFile - Retrieves an AssistantFile.
 func (s *Assistants) GetAssistantFile(ctx context.Context, assistantID string, fileID string) (*operations.GetAssistantFileResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getAssistantFile"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getAssistantFile",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetAssistantFileRequest{
 		AssistantID: assistantID,
@@ -1024,12 +1072,12 @@ func (s *Assistants) GetAssistantFile(ctx context.Context, assistantID string, f
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -1039,15 +1087,15 @@ func (s *Assistants) GetAssistantFile(ctx context.Context, assistantID string, f
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -1091,7 +1139,11 @@ func (s *Assistants) GetAssistantFile(ctx context.Context, assistantID string, f
 
 // GetMessage - Retrieve a message.
 func (s *Assistants) GetMessage(ctx context.Context, messageID string, threadID string) (*operations.GetMessageResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getMessage"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getMessage",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetMessageRequest{
 		MessageID: messageID,
@@ -1111,12 +1163,12 @@ func (s *Assistants) GetMessage(ctx context.Context, messageID string, threadID 
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -1126,15 +1178,15 @@ func (s *Assistants) GetMessage(ctx context.Context, messageID string, threadID 
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -1178,7 +1230,11 @@ func (s *Assistants) GetMessage(ctx context.Context, messageID string, threadID 
 
 // GetMessageFile - Retrieves a message file.
 func (s *Assistants) GetMessageFile(ctx context.Context, fileID string, messageID string, threadID string) (*operations.GetMessageFileResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getMessageFile"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getMessageFile",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetMessageFileRequest{
 		FileID:    fileID,
@@ -1199,12 +1255,12 @@ func (s *Assistants) GetMessageFile(ctx context.Context, fileID string, messageI
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -1214,15 +1270,15 @@ func (s *Assistants) GetMessageFile(ctx context.Context, fileID string, messageI
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -1266,7 +1322,11 @@ func (s *Assistants) GetMessageFile(ctx context.Context, fileID string, messageI
 
 // GetRun - Retrieves a run.
 func (s *Assistants) GetRun(ctx context.Context, runID string, threadID string) (*operations.GetRunResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getRun"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getRun",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetRunRequest{
 		RunID:    runID,
@@ -1286,12 +1346,12 @@ func (s *Assistants) GetRun(ctx context.Context, runID string, threadID string) 
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -1301,15 +1361,15 @@ func (s *Assistants) GetRun(ctx context.Context, runID string, threadID string) 
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -1353,7 +1413,11 @@ func (s *Assistants) GetRun(ctx context.Context, runID string, threadID string) 
 
 // GetRunStep - Retrieves a run step.
 func (s *Assistants) GetRunStep(ctx context.Context, runID string, stepID string, threadID string) (*operations.GetRunStepResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getRunStep"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getRunStep",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetRunStepRequest{
 		RunID:    runID,
@@ -1374,12 +1438,12 @@ func (s *Assistants) GetRunStep(ctx context.Context, runID string, stepID string
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -1389,15 +1453,15 @@ func (s *Assistants) GetRunStep(ctx context.Context, runID string, stepID string
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -1441,7 +1505,11 @@ func (s *Assistants) GetRunStep(ctx context.Context, runID string, stepID string
 
 // GetThread - Retrieves a thread.
 func (s *Assistants) GetThread(ctx context.Context, threadID string) (*operations.GetThreadResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getThread"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getThread",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetThreadRequest{
 		ThreadID: threadID,
@@ -1460,12 +1528,12 @@ func (s *Assistants) GetThread(ctx context.Context, threadID string) (*operation
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -1475,15 +1543,15 @@ func (s *Assistants) GetThread(ctx context.Context, threadID string) (*operation
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -1527,7 +1595,11 @@ func (s *Assistants) GetThread(ctx context.Context, threadID string) (*operation
 
 // ListAssistantFiles - Returns a list of assistant files.
 func (s *Assistants) ListAssistantFiles(ctx context.Context, request operations.ListAssistantFilesRequest) (*operations.ListAssistantFilesResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "listAssistantFiles"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "listAssistantFiles",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/assistants/{assistant_id}/files", request, nil)
@@ -1546,12 +1618,12 @@ func (s *Assistants) ListAssistantFiles(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -1561,15 +1633,15 @@ func (s *Assistants) ListAssistantFiles(ctx context.Context, request operations.
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -1613,7 +1685,11 @@ func (s *Assistants) ListAssistantFiles(ctx context.Context, request operations.
 
 // ListAssistants - Returns a list of assistants.
 func (s *Assistants) ListAssistants(ctx context.Context, after *string, before *string, limit *int64, order *operations.QueryParamOrder) (*operations.ListAssistantsResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "listAssistants"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "listAssistants",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.ListAssistantsRequest{
 		After:  after,
@@ -1639,12 +1715,12 @@ func (s *Assistants) ListAssistants(ctx context.Context, after *string, before *
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -1654,15 +1730,15 @@ func (s *Assistants) ListAssistants(ctx context.Context, after *string, before *
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -1706,7 +1782,11 @@ func (s *Assistants) ListAssistants(ctx context.Context, after *string, before *
 
 // ListMessageFiles - Returns a list of message files.
 func (s *Assistants) ListMessageFiles(ctx context.Context, request operations.ListMessageFilesRequest) (*operations.ListMessageFilesResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "listMessageFiles"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "listMessageFiles",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/threads/{thread_id}/messages/{message_id}/files", request, nil)
@@ -1725,12 +1805,12 @@ func (s *Assistants) ListMessageFiles(ctx context.Context, request operations.Li
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -1740,15 +1820,15 @@ func (s *Assistants) ListMessageFiles(ctx context.Context, request operations.Li
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -1792,7 +1872,11 @@ func (s *Assistants) ListMessageFiles(ctx context.Context, request operations.Li
 
 // ListMessages - Returns a list of messages for a given thread.
 func (s *Assistants) ListMessages(ctx context.Context, request operations.ListMessagesRequest) (*operations.ListMessagesResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "listMessages"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "listMessages",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/threads/{thread_id}/messages", request, nil)
@@ -1811,12 +1895,12 @@ func (s *Assistants) ListMessages(ctx context.Context, request operations.ListMe
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -1826,15 +1910,15 @@ func (s *Assistants) ListMessages(ctx context.Context, request operations.ListMe
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -1878,7 +1962,11 @@ func (s *Assistants) ListMessages(ctx context.Context, request operations.ListMe
 
 // ListRunSteps - Returns a list of run steps belonging to a run.
 func (s *Assistants) ListRunSteps(ctx context.Context, request operations.ListRunStepsRequest) (*operations.ListRunStepsResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "listRunSteps"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "listRunSteps",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/threads/{thread_id}/runs/{run_id}/steps", request, nil)
@@ -1897,12 +1985,12 @@ func (s *Assistants) ListRunSteps(ctx context.Context, request operations.ListRu
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -1912,15 +2000,15 @@ func (s *Assistants) ListRunSteps(ctx context.Context, request operations.ListRu
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -1964,7 +2052,11 @@ func (s *Assistants) ListRunSteps(ctx context.Context, request operations.ListRu
 
 // ListRuns - Returns a list of runs belonging to a thread.
 func (s *Assistants) ListRuns(ctx context.Context, request operations.ListRunsRequest) (*operations.ListRunsResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "listRuns"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "listRuns",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/threads/{thread_id}/runs", request, nil)
@@ -1983,12 +2075,12 @@ func (s *Assistants) ListRuns(ctx context.Context, request operations.ListRunsRe
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -1998,15 +2090,15 @@ func (s *Assistants) ListRuns(ctx context.Context, request operations.ListRunsRe
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -2050,7 +2142,11 @@ func (s *Assistants) ListRuns(ctx context.Context, request operations.ListRunsRe
 
 // ModifyAssistant - Modifies an assistant.
 func (s *Assistants) ModifyAssistant(ctx context.Context, modifyAssistantRequest shared.ModifyAssistantRequest, assistantID string) (*operations.ModifyAssistantResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "modifyAssistant"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "modifyAssistant",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.ModifyAssistantRequest{
 		ModifyAssistantRequest: modifyAssistantRequest,
@@ -2076,12 +2172,12 @@ func (s *Assistants) ModifyAssistant(ctx context.Context, modifyAssistantRequest
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -2091,15 +2187,15 @@ func (s *Assistants) ModifyAssistant(ctx context.Context, modifyAssistantRequest
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -2143,7 +2239,11 @@ func (s *Assistants) ModifyAssistant(ctx context.Context, modifyAssistantRequest
 
 // ModifyMessage - Modifies a message.
 func (s *Assistants) ModifyMessage(ctx context.Context, modifyMessageRequest shared.ModifyMessageRequest, messageID string, threadID string) (*operations.ModifyMessageResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "modifyMessage"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "modifyMessage",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.ModifyMessageRequest{
 		ModifyMessageRequest: modifyMessageRequest,
@@ -2170,12 +2270,12 @@ func (s *Assistants) ModifyMessage(ctx context.Context, modifyMessageRequest sha
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -2185,15 +2285,15 @@ func (s *Assistants) ModifyMessage(ctx context.Context, modifyMessageRequest sha
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -2237,7 +2337,11 @@ func (s *Assistants) ModifyMessage(ctx context.Context, modifyMessageRequest sha
 
 // ModifyRun - Modifies a run.
 func (s *Assistants) ModifyRun(ctx context.Context, modifyRunRequest shared.ModifyRunRequest, runID string, threadID string) (*operations.ModifyRunResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "modifyRun"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "modifyRun",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.ModifyRunRequest{
 		ModifyRunRequest: modifyRunRequest,
@@ -2264,12 +2368,12 @@ func (s *Assistants) ModifyRun(ctx context.Context, modifyRunRequest shared.Modi
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -2279,15 +2383,15 @@ func (s *Assistants) ModifyRun(ctx context.Context, modifyRunRequest shared.Modi
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -2331,7 +2435,11 @@ func (s *Assistants) ModifyRun(ctx context.Context, modifyRunRequest shared.Modi
 
 // ModifyThread - Modifies a thread.
 func (s *Assistants) ModifyThread(ctx context.Context, modifyThreadRequest shared.ModifyThreadRequest, threadID string) (*operations.ModifyThreadResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "modifyThread"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "modifyThread",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.ModifyThreadRequest{
 		ModifyThreadRequest: modifyThreadRequest,
@@ -2357,12 +2465,12 @@ func (s *Assistants) ModifyThread(ctx context.Context, modifyThreadRequest share
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -2372,15 +2480,15 @@ func (s *Assistants) ModifyThread(ctx context.Context, modifyThreadRequest share
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -2424,7 +2532,11 @@ func (s *Assistants) ModifyThread(ctx context.Context, modifyThreadRequest share
 
 // SubmitToolOuputsToRun - When a run has the `status: "requires_action"` and `required_action.type` is `submit_tool_outputs`, this endpoint can be used to submit the outputs from the tool calls once they're all completed. All outputs must be submitted in a single request.
 func (s *Assistants) SubmitToolOuputsToRun(ctx context.Context, submitToolOutputsRunRequest shared.SubmitToolOutputsRunRequest, runID string, threadID string) (*operations.SubmitToolOuputsToRunResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "submitToolOuputsToRun"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "submitToolOuputsToRun",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.SubmitToolOuputsToRunRequest{
 		SubmitToolOutputsRunRequest: submitToolOutputsRunRequest,
@@ -2451,12 +2563,12 @@ func (s *Assistants) SubmitToolOuputsToRun(ctx context.Context, submitToolOutput
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -2466,15 +2578,15 @@ func (s *Assistants) SubmitToolOuputsToRun(ctx context.Context, submitToolOutput
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}

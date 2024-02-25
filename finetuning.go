@@ -29,7 +29,11 @@ func newFineTuning(sdkConfig sdkConfiguration) *FineTuning {
 
 // CancelFineTuningJob - Immediately cancel a fine-tune job.
 func (s *FineTuning) CancelFineTuningJob(ctx context.Context, fineTuningJobID string) (*operations.CancelFineTuningJobResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "cancelFineTuningJob"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "cancelFineTuningJob",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.CancelFineTuningJobRequest{
 		FineTuningJobID: fineTuningJobID,
@@ -48,12 +52,12 @@ func (s *FineTuning) CancelFineTuningJob(ctx context.Context, fineTuningJobID st
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -63,15 +67,15 @@ func (s *FineTuning) CancelFineTuningJob(ctx context.Context, fineTuningJobID st
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -119,7 +123,11 @@ func (s *FineTuning) CancelFineTuningJob(ctx context.Context, fineTuningJobID st
 //
 // [Learn more about fine-tuning](/docs/guides/fine-tuning)
 func (s *FineTuning) CreateFineTuningJob(ctx context.Context, request shared.CreateFineTuningJobRequest) (*operations.CreateFineTuningJobResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "createFineTuningJob"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "createFineTuningJob",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := url.JoinPath(baseURL, "/fine_tuning/jobs")
@@ -140,12 +148,12 @@ func (s *FineTuning) CreateFineTuningJob(ctx context.Context, request shared.Cre
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -155,15 +163,15 @@ func (s *FineTuning) CreateFineTuningJob(ctx context.Context, request shared.Cre
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -207,7 +215,11 @@ func (s *FineTuning) CreateFineTuningJob(ctx context.Context, request shared.Cre
 
 // ListFineTuningEvents - Get status updates for a fine-tuning job.
 func (s *FineTuning) ListFineTuningEvents(ctx context.Context, fineTuningJobID string, after *string, limit *int64) (*operations.ListFineTuningEventsResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "listFineTuningEvents"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "listFineTuningEvents",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.ListFineTuningEventsRequest{
 		FineTuningJobID: fineTuningJobID,
@@ -232,12 +244,12 @@ func (s *FineTuning) ListFineTuningEvents(ctx context.Context, fineTuningJobID s
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -247,15 +259,15 @@ func (s *FineTuning) ListFineTuningEvents(ctx context.Context, fineTuningJobID s
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -299,7 +311,11 @@ func (s *FineTuning) ListFineTuningEvents(ctx context.Context, fineTuningJobID s
 
 // ListPaginatedFineTuningJobs - List your organization's fine-tuning jobs
 func (s *FineTuning) ListPaginatedFineTuningJobs(ctx context.Context, after *string, limit *int64) (*operations.ListPaginatedFineTuningJobsResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "listPaginatedFineTuningJobs"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "listPaginatedFineTuningJobs",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.ListPaginatedFineTuningJobsRequest{
 		After: after,
@@ -323,12 +339,12 @@ func (s *FineTuning) ListPaginatedFineTuningJobs(ctx context.Context, after *str
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -338,15 +354,15 @@ func (s *FineTuning) ListPaginatedFineTuningJobs(ctx context.Context, after *str
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -392,7 +408,11 @@ func (s *FineTuning) ListPaginatedFineTuningJobs(ctx context.Context, after *str
 //
 // [Learn more about fine-tuning](/docs/guides/fine-tuning)
 func (s *FineTuning) RetrieveFineTuningJob(ctx context.Context, fineTuningJobID string) (*operations.RetrieveFineTuningJobResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "retrieveFineTuningJob"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "retrieveFineTuningJob",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.RetrieveFineTuningJobRequest{
 		FineTuningJobID: fineTuningJobID,
@@ -411,12 +431,12 @@ func (s *FineTuning) RetrieveFineTuningJob(ctx context.Context, fineTuningJobID 
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -426,15 +446,15 @@ func (s *FineTuning) RetrieveFineTuningJob(ctx context.Context, fineTuningJobID 
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}

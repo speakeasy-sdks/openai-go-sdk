@@ -100,7 +100,10 @@ func (u CreateSpeechRequestModel) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-// CreateSpeechRequestResponseFormat - The format to audio in. Supported formats are `mp3`, `opus`, `aac`, and `flac`.
+// CreateSpeechRequestResponseFormat - The format to return audio in.
+// Supported formats are `mp3`, `opus`, `aac`, `flac`, `pcm`, and `wav`.
+//
+// The `pcm` audio format, similar to `wav` but without a header, utilizes a 24kHz sample rate, mono channel, and 16-bit depth in signed little-endian format.
 type CreateSpeechRequestResponseFormat string
 
 const (
@@ -108,6 +111,8 @@ const (
 	CreateSpeechRequestResponseFormatOpus CreateSpeechRequestResponseFormat = "opus"
 	CreateSpeechRequestResponseFormatAac  CreateSpeechRequestResponseFormat = "aac"
 	CreateSpeechRequestResponseFormatFlac CreateSpeechRequestResponseFormat = "flac"
+	CreateSpeechRequestResponseFormatPcm  CreateSpeechRequestResponseFormat = "pcm"
+	CreateSpeechRequestResponseFormatWav  CreateSpeechRequestResponseFormat = "wav"
 )
 
 func (e CreateSpeechRequestResponseFormat) ToPointer() *CreateSpeechRequestResponseFormat {
@@ -127,6 +132,10 @@ func (e *CreateSpeechRequestResponseFormat) UnmarshalJSON(data []byte) error {
 	case "aac":
 		fallthrough
 	case "flac":
+		fallthrough
+	case "pcm":
+		fallthrough
+	case "wav":
 		*e = CreateSpeechRequestResponseFormat(v)
 		return nil
 	default:
@@ -180,7 +189,10 @@ type CreateSpeechRequest struct {
 	// One of the available [TTS models](/docs/models/tts): `tts-1` or `tts-1-hd`
 	//
 	Model CreateSpeechRequestModel `json:"model"`
-	// The format to audio in. Supported formats are `mp3`, `opus`, `aac`, and `flac`.
+	// The format to return audio in.
+	// Supported formats are `mp3`, `opus`, `aac`, `flac`, `pcm`, and `wav`.
+	//
+	// The `pcm` audio format, similar to `wav` but without a header, utilizes a 24kHz sample rate, mono channel, and 16-bit depth in signed little-endian format.
 	ResponseFormat *CreateSpeechRequestResponseFormat `default:"mp3" json:"response_format"`
 	// The speed of the generated audio. Select a value from `0.25` to `4.0`. `1.0` is the default.
 	Speed *float64 `default:"1" json:"speed"`
