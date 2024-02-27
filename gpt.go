@@ -162,9 +162,9 @@ func New(opts ...SDKOption) *Gpt {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2.0.0",
-			SDKVersion:        "4.2.2",
-			GenVersion:        "2.272.4",
-			UserAgent:         "speakeasy-sdk/go 4.2.2 2.272.4 2.0.0 github.com/speakeasy-sdks/openai-go-sdk",
+			SDKVersion:        "4.2.3",
+			GenVersion:        "2.272.7",
+			UserAgent:         "speakeasy-sdk/go 4.2.3 2.272.7 2.0.0 github.com/speakeasy-sdks/openai-go-sdk",
 			Hooks:             hooks.New(),
 		},
 	}

@@ -4,9 +4,9 @@ management:
   docChecksum: a69f499fa6cae6acc1c4d0e467f207d3
   docVersion: 2.0.0
   speakeasyVersion: internal
-  generationVersion: 2.272.4
-  releaseVersion: 4.2.2
-  configChecksum: b2be77629a7da1f940cdeacd6312d083
+  generationVersion: 2.272.7
+  releaseVersion: 4.2.3
+  configChecksum: 2921570875ef733f2b6672086480f0fd
   repoURL: https://github.com/speakeasy-sdks/openai-go-sdk.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/openai-go-sdk
@@ -18,7 +18,7 @@ features:
     deprecations: 2.81.1
     downloadStreams: 0.1.1
     flattening: 2.81.1
-    globalSecurity: 2.82.7
+    globalSecurity: 2.82.8
     globalServerURLs: 2.82.1
     unions: 2.85.3
 generatedFiles:
