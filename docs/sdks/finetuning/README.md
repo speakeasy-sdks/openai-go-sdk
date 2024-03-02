@@ -162,7 +162,7 @@ func main() {
 
     var after *string = openaigosdk.String("<value>")
 
-    var limit *int64 = openaigosdk.Int64(896841)
+    var limit *int64 = openaigosdk.Int64(20)
 
     ctx := context.Background()
     res, err := s.FineTuning.ListFineTuningEvents(ctx, fineTuningJobID, after, limit)
@@ -218,7 +218,7 @@ func main() {
 
     var after *string = openaigosdk.String("<value>")
 
-    var limit *int64 = openaigosdk.Int64(385496)
+    var limit *int64 = openaigosdk.Int64(20)
 
     ctx := context.Background()
     res, err := s.FineTuning.ListPaginatedFineTuningJobs(ctx, after, limit)

@@ -1020,9 +1020,9 @@ func main() {
 
     var before *string = openaigosdk.String("<value>")
 
-    var limit *int64 = openaigosdk.Int64(948776)
+    var limit *int64 = openaigosdk.Int64(20)
 
-    var order *operations.QueryParamOrder = operations.QueryParamOrderAsc.ToPointer()
+    var order *operations.QueryParamOrder = operations.QueryParamOrderDesc.ToPointer()
 
     ctx := context.Background()
     res, err := s.Assistants.ListAssistants(ctx, after, before, limit, order)
