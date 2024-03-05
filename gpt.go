@@ -83,7 +83,7 @@ type Gpt struct {
 	Images *Images
 	// List and describe the various models available in the API.
 	Models *Models
-	// Given a input text, outputs if the model classifies it as violating OpenAI's content policy.
+	// Given a input text, outputs if the model classifies it as potentially harmful.
 	Moderations *Moderations
 
 	sdkConfiguration sdkConfiguration
@@ -162,9 +162,9 @@ func New(opts ...SDKOption) *Gpt {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2.0.0",
-			SDKVersion:        "4.2.4",
+			SDKVersion:        "4.2.5",
 			GenVersion:        "2.277.0",
-			UserAgent:         "speakeasy-sdk/go 4.2.4 2.277.0 2.0.0 github.com/speakeasy-sdks/openai-go-sdk",
+			UserAgent:         "speakeasy-sdk/go 4.2.5 2.277.0 2.0.0 github.com/speakeasy-sdks/openai-go-sdk",
 			Hooks:             hooks.New(),
 		},
 	}

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: a162a3d3-f7ae-4b54-a83e-5eeaa086b6a3
 management:
-  docChecksum: a69f499fa6cae6acc1c4d0e467f207d3
+  docChecksum: 0f1a105489b43417f5ab6cd2c8614d36
   docVersion: 2.0.0
   speakeasyVersion: internal
   generationVersion: 2.277.0
-  releaseVersion: 4.2.4
-  configChecksum: a4312688270e55593dd94fadf073a9a1
+  releaseVersion: 4.2.5
+  configChecksum: b79c4182af1c97e2893f9b0e78e56537
   repoURL: https://github.com/speakeasy-sdks/openai-go-sdk.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/openai-go-sdk
@@ -147,9 +147,13 @@ generatedFiles:
   - /pkg/models/shared/modifythreadrequest.go
   - /pkg/models/shared/submittooloutputsrunrequest.go
   - /pkg/models/shared/createspeechrequest.go
-  - /pkg/models/shared/createtranscriptionresponse.go
+  - /pkg/models/shared/createtranscriptionresponsejson.go
+  - /pkg/models/shared/createtranscriptionresponseverbosejson.go
+  - /pkg/models/shared/transcriptionword.go
+  - /pkg/models/shared/transcriptionsegment.go
   - /pkg/models/shared/createtranscriptionrequest.go
-  - /pkg/models/shared/createtranslationresponse.go
+  - /pkg/models/shared/createtranslationresponsejson.go
+  - /pkg/models/shared/createtranslationresponseverbosejson.go
   - /pkg/models/shared/createtranslationrequest.go
   - /pkg/models/shared/createchatcompletionresponse.go
   - /pkg/models/shared/completionusage.go
@@ -256,7 +260,9 @@ generatedFiles:
   - docs/pkg/models/operations/submittoolouputstorunrequest.md
   - docs/pkg/models/operations/submittoolouputstorunresponse.md
   - docs/pkg/models/operations/createspeechresponse.md
+  - docs/pkg/models/operations/createtranscriptionresponsebody.md
   - docs/pkg/models/operations/createtranscriptionresponse.md
+  - docs/pkg/models/operations/createtranslationresponsebody.md
   - docs/pkg/models/operations/createtranslationresponse.md
   - docs/pkg/models/operations/createchatcompletionresponse.md
   - docs/pkg/models/operations/createcompletionresponse.md
@@ -411,14 +417,18 @@ generatedFiles:
   - docs/pkg/models/shared/createspeechrequestresponseformat.md
   - docs/pkg/models/shared/voice.md
   - docs/pkg/models/shared/createspeechrequest.md
-  - docs/pkg/models/shared/createtranscriptionresponse.md
+  - docs/pkg/models/shared/createtranscriptionresponsejson.md
+  - docs/pkg/models/shared/createtranscriptionresponseverbosejson.md
+  - docs/pkg/models/shared/transcriptionword.md
+  - docs/pkg/models/shared/transcriptionsegment.md
   - docs/pkg/models/shared/createtranscriptionrequestfile.md
   - docs/pkg/models/shared/createtranscriptionrequest2.md
   - docs/pkg/models/shared/createtranscriptionrequestmodel.md
   - docs/pkg/models/shared/createtranscriptionrequestresponseformat.md
   - docs/pkg/models/shared/timestampgranularities.md
   - docs/pkg/models/shared/createtranscriptionrequest.md
-  - docs/pkg/models/shared/createtranslationresponse.md
+  - docs/pkg/models/shared/createtranslationresponsejson.md
+  - docs/pkg/models/shared/createtranslationresponseverbosejson.md
   - docs/pkg/models/shared/createtranslationrequestfile.md
   - docs/pkg/models/shared/createtranslationrequest2.md
   - docs/pkg/models/shared/createtranslationrequestmodel.md

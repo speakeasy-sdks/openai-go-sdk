@@ -3,19 +3,85 @@
 package operations
 
 import (
+	"errors"
 	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/models/shared"
+	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/utils"
 	"net/http"
 )
+
+type CreateTranslationResponseBodyType string
+
+const (
+	CreateTranslationResponseBodyTypeCreateTranslationResponseJSON        CreateTranslationResponseBodyType = "CreateTranslationResponseJson"
+	CreateTranslationResponseBodyTypeCreateTranslationResponseVerboseJSON CreateTranslationResponseBodyType = "CreateTranslationResponseVerboseJson"
+)
+
+// CreateTranslationResponseBody - OK
+type CreateTranslationResponseBody struct {
+	CreateTranslationResponseJSON        *shared.CreateTranslationResponseJSON
+	CreateTranslationResponseVerboseJSON *shared.CreateTranslationResponseVerboseJSON
+
+	Type CreateTranslationResponseBodyType
+}
+
+func CreateCreateTranslationResponseBodyCreateTranslationResponseJSON(createTranslationResponseJSON shared.CreateTranslationResponseJSON) CreateTranslationResponseBody {
+	typ := CreateTranslationResponseBodyTypeCreateTranslationResponseJSON
+
+	return CreateTranslationResponseBody{
+		CreateTranslationResponseJSON: &createTranslationResponseJSON,
+		Type:                          typ,
+	}
+}
+
+func CreateCreateTranslationResponseBodyCreateTranslationResponseVerboseJSON(createTranslationResponseVerboseJSON shared.CreateTranslationResponseVerboseJSON) CreateTranslationResponseBody {
+	typ := CreateTranslationResponseBodyTypeCreateTranslationResponseVerboseJSON
+
+	return CreateTranslationResponseBody{
+		CreateTranslationResponseVerboseJSON: &createTranslationResponseVerboseJSON,
+		Type:                                 typ,
+	}
+}
+
+func (u *CreateTranslationResponseBody) UnmarshalJSON(data []byte) error {
+
+	createTranslationResponseJSON := shared.CreateTranslationResponseJSON{}
+	if err := utils.UnmarshalJSON(data, &createTranslationResponseJSON, "", true, true); err == nil {
+		u.CreateTranslationResponseJSON = &createTranslationResponseJSON
+		u.Type = CreateTranslationResponseBodyTypeCreateTranslationResponseJSON
+		return nil
+	}
+
+	createTranslationResponseVerboseJSON := shared.CreateTranslationResponseVerboseJSON{}
+	if err := utils.UnmarshalJSON(data, &createTranslationResponseVerboseJSON, "", true, true); err == nil {
+		u.CreateTranslationResponseVerboseJSON = &createTranslationResponseVerboseJSON
+		u.Type = CreateTranslationResponseBodyTypeCreateTranslationResponseVerboseJSON
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u CreateTranslationResponseBody) MarshalJSON() ([]byte, error) {
+	if u.CreateTranslationResponseJSON != nil {
+		return utils.MarshalJSON(u.CreateTranslationResponseJSON, "", true)
+	}
+
+	if u.CreateTranslationResponseVerboseJSON != nil {
+		return utils.MarshalJSON(u.CreateTranslationResponseVerboseJSON, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
+}
 
 type CreateTranslationResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
-	// OK
-	CreateTranslationResponse *shared.CreateTranslationResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
+	// OK
+	OneOf *CreateTranslationResponseBody
 }
 
 func (o *CreateTranslationResponse) GetContentType() string {
@@ -23,13 +89,6 @@ func (o *CreateTranslationResponse) GetContentType() string {
 		return ""
 	}
 	return o.ContentType
-}
-
-func (o *CreateTranslationResponse) GetCreateTranslationResponse() *shared.CreateTranslationResponse {
-	if o == nil {
-		return nil
-	}
-	return o.CreateTranslationResponse
 }
 
 func (o *CreateTranslationResponse) GetStatusCode() int {
@@ -44,4 +103,11 @@ func (o *CreateTranslationResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *CreateTranslationResponse) GetOneOf() *CreateTranslationResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.OneOf
 }

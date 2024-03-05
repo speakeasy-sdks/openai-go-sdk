@@ -2,11 +2,11 @@
 
 package shared
 
-type CreateTranscriptionResponse struct {
+type CreateTranslationResponseJSON struct {
 	Text string `json:"text"`
 }
 
-func (o *CreateTranscriptionResponse) GetText() string {
+func (o *CreateTranslationResponseJSON) GetText() string {
 	if o == nil {
 		return ""
 	}

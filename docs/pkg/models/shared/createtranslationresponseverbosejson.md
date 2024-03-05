@@ -1,0 +1,11 @@
+# CreateTranslationResponseVerboseJSON
+
+
+## Fields
+
+| Field                                                                               | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `Duration`                                                                          | *string*                                                                            | :heavy_check_mark:                                                                  | The duration of the input audio.                                                    |
+| `Language`                                                                          | *string*                                                                            | :heavy_check_mark:                                                                  | The language of the output translation (always `english`).                          |
+| `Segments`                                                                          | [][shared.TranscriptionSegment](../../../pkg/models/shared/transcriptionsegment.md) | :heavy_minus_sign:                                                                  | Segments of the translated text and their corresponding details.                    |
+| `Text`                                                                              | *string*                                                                            | :heavy_check_mark:                                                                  | The translated text.                                                                |

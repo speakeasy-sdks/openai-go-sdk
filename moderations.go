@@ -16,7 +16,7 @@ import (
 	"net/url"
 )
 
-// Moderations - Given a input text, outputs if the model classifies it as violating OpenAI's content policy.
+// Moderations - Given a input text, outputs if the model classifies it as potentially harmful.
 type Moderations struct {
 	sdkConfiguration sdkConfiguration
 }
@@ -27,7 +27,7 @@ func newModerations(sdkConfig sdkConfiguration) *Moderations {
 	}
 }
 
-// CreateModeration - Classifies if text violates OpenAI's Content Policy
+// CreateModeration - Classifies if text is potentially harmful.
 func (s *Moderations) CreateModeration(ctx context.Context, request shared.CreateModerationRequest) (*operations.CreateModerationResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

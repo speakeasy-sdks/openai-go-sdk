@@ -100,7 +100,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.CreateTranscriptionResponse != nil {
+    if res.OneOf != nil {
         // handle response
     }
 }
@@ -156,7 +156,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.CreateTranslationResponse != nil {
+    if res.OneOf != nil {
         // handle response
     }
 }

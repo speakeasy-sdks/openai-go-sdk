@@ -9,12 +9,13 @@ import (
 	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/utils"
 )
 
-// Code - One of `server_error` or `rate_limit_exceeded`.
+// Code - One of `server_error`, `rate_limit_exceeded`, or `invalid_prompt`.
 type Code string
 
 const (
 	CodeServerError       Code = "server_error"
 	CodeRateLimitExceeded Code = "rate_limit_exceeded"
+	CodeInvalidPrompt     Code = "invalid_prompt"
 )
 
 func (e Code) ToPointer() *Code {
@@ -30,6 +31,8 @@ func (e *Code) UnmarshalJSON(data []byte) error {
 	case "server_error":
 		fallthrough
 	case "rate_limit_exceeded":
+		fallthrough
+	case "invalid_prompt":
 		*e = Code(v)
 		return nil
 	default:
@@ -39,7 +42,7 @@ func (e *Code) UnmarshalJSON(data []byte) error {
 
 // LastError - The last error associated with this run. Will be `null` if there are no errors.
 type LastError struct {
-	// One of `server_error` or `rate_limit_exceeded`.
+	// One of `server_error`, `rate_limit_exceeded`, or `invalid_prompt`.
 	Code Code `json:"code"`
 	// A human-readable description of the error.
 	Message string `json:"message"`
