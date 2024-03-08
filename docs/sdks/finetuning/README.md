@@ -54,7 +54,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.FineTuningJob != nil {
         // handle response
     }
@@ -113,7 +112,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.FineTuningJob != nil {
         // handle response
     }
@@ -169,7 +167,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListFineTuningJobEventsResponse != nil {
         // handle response
     }
@@ -225,7 +222,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListPaginatedFineTuningJobsResponse != nil {
         // handle response
     }
@@ -280,7 +276,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.FineTuningJob != nil {
         // handle response
     }

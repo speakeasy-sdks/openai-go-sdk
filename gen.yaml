@@ -10,7 +10,7 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: false
 go:
-  version: 4.2.5
+  version: 4.3.0
   additionalDependencies: {}
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
@@ -26,3 +26,4 @@ go:
   maxMethodParams: 4
   outputModelSuffix: output
   packageName: github.com/speakeasy-sdks/openai-go-sdk
+  responseFormat: envelope

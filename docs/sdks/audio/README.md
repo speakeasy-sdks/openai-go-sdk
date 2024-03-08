@@ -43,7 +43,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.Stream != nil {
         // handle response
     }
@@ -99,7 +98,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.OneOf != nil {
         // handle response
     }
@@ -155,7 +153,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.OneOf != nil {
         // handle response
     }

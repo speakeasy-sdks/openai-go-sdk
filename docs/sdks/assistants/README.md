@@ -68,7 +68,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.RunObject != nil {
         // handle response
     }
@@ -119,7 +118,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.AssistantObject != nil {
         // handle response
     }
@@ -174,7 +172,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.AssistantFileObject != nil {
         // handle response
     }
@@ -231,7 +228,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.MessageObject != nil {
         // handle response
     }
@@ -287,7 +283,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.RunObject != nil {
         // handle response
     }
@@ -336,7 +331,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ThreadObject != nil {
         // handle response
     }
@@ -386,7 +380,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.RunObject != nil {
         // handle response
     }
@@ -437,7 +430,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.DeleteAssistantResponse != nil {
         // handle response
     }
@@ -490,7 +482,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.DeleteAssistantFileResponse != nil {
         // handle response
     }
@@ -542,7 +533,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.DeleteThreadResponse != nil {
         // handle response
     }
@@ -593,7 +583,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.AssistantObject != nil {
         // handle response
     }
@@ -646,7 +635,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.AssistantFileObject != nil {
         // handle response
     }
@@ -700,7 +688,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.MessageObject != nil {
         // handle response
     }
@@ -756,7 +743,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.MessageFileObject != nil {
         // handle response
     }
@@ -811,7 +797,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.RunObject != nil {
         // handle response
     }
@@ -867,7 +852,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.RunStepObject != nil {
         // handle response
     }
@@ -920,7 +904,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ThreadObject != nil {
         // handle response
     }
@@ -971,7 +954,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListAssistantFilesResponse != nil {
         // handle response
     }
@@ -1029,7 +1011,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListAssistantsResponse != nil {
         // handle response
     }
@@ -1084,7 +1065,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListMessageFilesResponse != nil {
         // handle response
     }
@@ -1135,7 +1115,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListMessagesResponse != nil {
         // handle response
     }
@@ -1187,7 +1166,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListRunStepsResponse != nil {
         // handle response
     }
@@ -1238,7 +1216,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListRunsResponse != nil {
         // handle response
     }
@@ -1291,7 +1268,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.AssistantObject != nil {
         // handle response
     }
@@ -1347,7 +1323,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.MessageObject != nil {
         // handle response
     }
@@ -1404,7 +1379,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.RunObject != nil {
         // handle response
     }
@@ -1459,7 +1433,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ThreadObject != nil {
         // handle response
     }
@@ -1520,7 +1493,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.RunObject != nil {
         // handle response
     }

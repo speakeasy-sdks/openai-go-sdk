@@ -44,7 +44,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.CreateModerationResponse != nil {
         // handle response
     }
