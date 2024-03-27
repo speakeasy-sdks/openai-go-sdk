@@ -503,3 +503,13 @@ Based on:
 - [go v4.3.2] .
 ### Releases
 - [Go v4.3.2] https://github.com/speakeasy-sdks/openai-go-sdk/releases/tag/v4.3.2 - .
+
+## 2024-03-27 00:35:26
+### Changes
+Based on:
+- OpenAPI Doc 2.0.0 https://raw.githubusercontent.com/openai/openai-openapi/master/openapi.yaml
+- Speakeasy CLI 1.227.0 (2.291.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v4.3.3] .
+### Releases
+- [Go v4.3.3] https://github.com/speakeasy-sdks/openai-go-sdk/releases/tag/v4.3.3 - .
