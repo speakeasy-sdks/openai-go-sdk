@@ -105,7 +105,10 @@ type CreateThreadAndRunRequest struct {
 	//
 	Metadata *CreateThreadAndRunRequestMetadata `json:"metadata,omitempty"`
 	// The ID of the [Model](/docs/api-reference/models) to be used to execute this run. If a value is provided here, it will override the model associated with the assistant. If not, the model associated with the assistant will be used.
-	Model  *string              `json:"model,omitempty"`
+	Model *string `json:"model,omitempty"`
+	// If `true`, returns a stream of events that happen during the Run as server-sent events, terminating when the Run enters a terminal state with a `data: [DONE]` message.
+	//
+	Stream *bool                `json:"stream,omitempty"`
 	Thread *CreateThreadRequest `json:"thread,omitempty"`
 	// Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis.
 	Tools []CreateThreadAndRunRequestTools `json:"tools,omitempty"`
@@ -137,6 +140,13 @@ func (o *CreateThreadAndRunRequest) GetModel() *string {
 		return nil
 	}
 	return o.Model
+}
+
+func (o *CreateThreadAndRunRequest) GetStream() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Stream
 }
 
 func (o *CreateThreadAndRunRequest) GetThread() *CreateThreadRequest {

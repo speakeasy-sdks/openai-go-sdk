@@ -1,6 +1,6 @@
 # CreateSpeechRequestResponseFormat
 
-The format to audio in. Supported formats are `mp3`, `opus`, `aac`, and `flac`.
+The format to audio in. Supported formats are `mp3`, `opus`, `aac`, `flac`, `wav`, and `pcm`.
 
 
 ## Values
@@ -11,3 +11,5 @@ The format to audio in. Supported formats are `mp3`, `opus`, `aac`, and `flac`.
 | `CreateSpeechRequestResponseFormatOpus` | opus                                    |
 | `CreateSpeechRequestResponseFormatAac`  | aac                                     |
 | `CreateSpeechRequestResponseFormatFlac` | flac                                    |
+| `CreateSpeechRequestResponseFormatWav`  | wav                                     |
+| `CreateSpeechRequestResponseFormatPcm`  | pcm                                     |

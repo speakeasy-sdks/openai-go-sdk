@@ -135,7 +135,7 @@ func (u CreateImageEditRequestModel) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-// CreateImageEditRequestResponseFormat - The format in which the generated images are returned. Must be one of `url` or `b64_json`.
+// CreateImageEditRequestResponseFormat - The format in which the generated images are returned. Must be one of `url` or `b64_json`. URLs are only valid for 60 minutes after the image has been generated.
 type CreateImageEditRequestResponseFormat string
 
 const (
@@ -205,7 +205,7 @@ type CreateImageEditRequest struct {
 	N *int64 `default:"1" multipartForm:"name=n"`
 	// A text description of the desired image(s). The maximum length is 1000 characters.
 	Prompt string `multipartForm:"name=prompt"`
-	// The format in which the generated images are returned. Must be one of `url` or `b64_json`.
+	// The format in which the generated images are returned. Must be one of `url` or `b64_json`. URLs are only valid for 60 minutes after the image has been generated.
 	ResponseFormat *CreateImageEditRequestResponseFormat `default:"url" multipartForm:"name=response_format"`
 	// The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.
 	Size *Size `default:"1024x1024" multipartForm:"name=size"`

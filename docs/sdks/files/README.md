@@ -55,7 +55,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.OpenAIFile != nil {
         // handle response
     }
@@ -106,7 +105,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.DeleteFileResponse != nil {
         // handle response
     }
@@ -157,8 +155,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.Res != nil {
+    if res.String != nil {
         // handle response
     }
 }
@@ -208,7 +205,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListFilesResponse != nil {
         // handle response
     }
@@ -259,7 +255,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.OpenAIFile != nil {
         // handle response
     }

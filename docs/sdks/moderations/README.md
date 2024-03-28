@@ -3,15 +3,15 @@
 
 ## Overview
 
-Given a input text, outputs if the model classifies it as violating OpenAI's content policy.
+Given a input text, outputs if the model classifies it as potentially harmful.
 
 ### Available Operations
 
-* [CreateModeration](#createmoderation) - Classifies if text violates OpenAI's Content Policy
+* [CreateModeration](#createmoderation) - Classifies if text is potentially harmful.
 
 ## CreateModeration
 
-Classifies if text violates OpenAI's Content Policy
+Classifies if text is potentially harmful.
 
 ### Example Usage
 
@@ -44,7 +44,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.CreateModerationResponse != nil {
         // handle response
     }

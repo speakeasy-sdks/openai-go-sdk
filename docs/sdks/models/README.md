@@ -40,7 +40,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.DeleteModelResponse != nil {
         // handle response
     }
@@ -88,7 +87,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListModelsResponse != nil {
         // handle response
     }
@@ -138,7 +136,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.Model != nil {
         // handle response
     }

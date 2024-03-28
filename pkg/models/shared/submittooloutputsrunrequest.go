@@ -24,8 +24,18 @@ func (o *ToolOutputs) GetToolCallID() *string {
 }
 
 type SubmitToolOutputsRunRequest struct {
+	// If `true`, returns a stream of events that happen during the Run as server-sent events, terminating when the Run enters a terminal state with a `data: [DONE]` message.
+	//
+	Stream *bool `json:"stream,omitempty"`
 	// A list of tools for which the outputs are being submitted.
 	ToolOutputs []ToolOutputs `json:"tool_outputs"`
+}
+
+func (o *SubmitToolOutputsRunRequest) GetStream() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Stream
 }
 
 func (o *SubmitToolOutputsRunRequest) GetToolOutputs() []ToolOutputs {

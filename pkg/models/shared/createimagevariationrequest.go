@@ -116,7 +116,7 @@ func (u CreateImageVariationRequestModel) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-// CreateImageVariationRequestResponseFormat - The format in which the generated images are returned. Must be one of `url` or `b64_json`.
+// CreateImageVariationRequestResponseFormat - The format in which the generated images are returned. Must be one of `url` or `b64_json`. URLs are only valid for 60 minutes after the image has been generated.
 type CreateImageVariationRequestResponseFormat string
 
 const (
@@ -182,7 +182,7 @@ type CreateImageVariationRequest struct {
 	Model *CreateImageVariationRequestModel `multipartForm:"name=model"`
 	// The number of images to generate. Must be between 1 and 10. For `dall-e-3`, only `n=1` is supported.
 	N *int64 `default:"1" multipartForm:"name=n"`
-	// The format in which the generated images are returned. Must be one of `url` or `b64_json`.
+	// The format in which the generated images are returned. Must be one of `url` or `b64_json`. URLs are only valid for 60 minutes after the image has been generated.
 	ResponseFormat *CreateImageVariationRequestResponseFormat `default:"url" multipartForm:"name=response_format"`
 	// The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.
 	Size *CreateImageVariationRequestSize `default:"1024x1024" multipartForm:"name=size"`

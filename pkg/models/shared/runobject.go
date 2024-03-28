@@ -9,12 +9,13 @@ import (
 	"github.com/speakeasy-sdks/openai-go-sdk/v4/pkg/utils"
 )
 
-// Code - One of `server_error` or `rate_limit_exceeded`.
+// Code - One of `server_error`, `rate_limit_exceeded`, or `invalid_prompt`.
 type Code string
 
 const (
 	CodeServerError       Code = "server_error"
 	CodeRateLimitExceeded Code = "rate_limit_exceeded"
+	CodeInvalidPrompt     Code = "invalid_prompt"
 )
 
 func (e Code) ToPointer() *Code {
@@ -30,6 +31,8 @@ func (e *Code) UnmarshalJSON(data []byte) error {
 	case "server_error":
 		fallthrough
 	case "rate_limit_exceeded":
+		fallthrough
+	case "invalid_prompt":
 		*e = Code(v)
 		return nil
 	default:
@@ -39,7 +42,7 @@ func (e *Code) UnmarshalJSON(data []byte) error {
 
 // LastError - The last error associated with this run. Will be `null` if there are no errors.
 type LastError struct {
-	// One of `server_error` or `rate_limit_exceeded`.
+	// One of `server_error`, `rate_limit_exceeded`, or `invalid_prompt`.
 	Code Code `json:"code"`
 	// A human-readable description of the error.
 	Message string `json:"message"`
@@ -290,7 +293,7 @@ type RunObject struct {
 	// The Unix timestamp (in seconds) for when the run was created.
 	CreatedAt int64 `json:"created_at"`
 	// The Unix timestamp (in seconds) for when the run will expire.
-	ExpiresAt int64 `json:"expires_at"`
+	ExpiresAt *int64 `json:"expires_at"`
 	// The Unix timestamp (in seconds) for when the run failed.
 	FailedAt *int64 `json:"failed_at"`
 	// The list of [File](/docs/api-reference/files) IDs the [assistant](/docs/api-reference/assistants) used for this run.
@@ -350,9 +353,9 @@ func (o *RunObject) GetCreatedAt() int64 {
 	return o.CreatedAt
 }
 
-func (o *RunObject) GetExpiresAt() int64 {
+func (o *RunObject) GetExpiresAt() *int64 {
 	if o == nil {
-		return 0
+		return nil
 	}
 	return o.ExpiresAt
 }
