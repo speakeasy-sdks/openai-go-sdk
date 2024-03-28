@@ -293,7 +293,7 @@ type RunObject struct {
 	// The Unix timestamp (in seconds) for when the run was created.
 	CreatedAt int64 `json:"created_at"`
 	// The Unix timestamp (in seconds) for when the run will expire.
-	ExpiresAt int64 `json:"expires_at"`
+	ExpiresAt *int64 `json:"expires_at"`
 	// The Unix timestamp (in seconds) for when the run failed.
 	FailedAt *int64 `json:"failed_at"`
 	// The list of [File](/docs/api-reference/files) IDs the [assistant](/docs/api-reference/assistants) used for this run.
@@ -353,9 +353,9 @@ func (o *RunObject) GetCreatedAt() int64 {
 	return o.CreatedAt
 }
 
-func (o *RunObject) GetExpiresAt() int64 {
+func (o *RunObject) GetExpiresAt() *int64 {
 	if o == nil {
-		return 0
+		return nil
 	}
 	return o.ExpiresAt
 }
