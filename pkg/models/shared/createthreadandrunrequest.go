@@ -108,10 +108,24 @@ type CreateThreadAndRunRequest struct {
 	Model *string `json:"model,omitempty"`
 	// If `true`, returns a stream of events that happen during the Run as server-sent events, terminating when the Run enters a terminal state with a `data: [DONE]` message.
 	//
-	Stream *bool                `json:"stream,omitempty"`
-	Thread *CreateThreadRequest `json:"thread,omitempty"`
+	Stream *bool `json:"stream,omitempty"`
+	// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+	//
+	Temperature *float64             `default:"1" json:"temperature"`
+	Thread      *CreateThreadRequest `json:"thread,omitempty"`
 	// Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis.
 	Tools []CreateThreadAndRunRequestTools `json:"tools,omitempty"`
+}
+
+func (c CreateThreadAndRunRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreateThreadAndRunRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *CreateThreadAndRunRequest) GetAssistantID() string {
@@ -147,6 +161,13 @@ func (o *CreateThreadAndRunRequest) GetStream() *bool {
 		return nil
 	}
 	return o.Stream
+}
+
+func (o *CreateThreadAndRunRequest) GetTemperature() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Temperature
 }
 
 func (o *CreateThreadAndRunRequest) GetThread() *CreateThreadRequest {

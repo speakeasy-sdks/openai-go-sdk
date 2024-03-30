@@ -274,6 +274,7 @@ func main() {
 
     createRunRequest := shared.CreateRunRequest{
         AssistantID: "<value>",
+        Temperature: openaigosdk.Float64(1),
     }
 
     var threadID string = "<value>"
@@ -376,6 +377,7 @@ func main() {
     ctx := context.Background()
     res, err := s.Assistants.CreateThreadAndRun(ctx, shared.CreateThreadAndRunRequest{
         AssistantID: "<value>",
+        Temperature: openaigosdk.Float64(1),
     })
     if err != nil {
         log.Fatal(err)

@@ -317,6 +317,8 @@ type RunObject struct {
 	StartedAt *int64 `json:"started_at"`
 	// The status of the run, which can be either `queued`, `in_progress`, `requires_action`, `cancelling`, `cancelled`, `failed`, `completed`, or `expired`.
 	Status RunObjectStatus `json:"status"`
+	// The sampling temperature used for this run. If not set, defaults to 1.
+	Temperature *float64 `json:"temperature,omitempty"`
 	// The ID of the [thread](/docs/api-reference/threads) that was executed on as a part of this run.
 	ThreadID string `json:"thread_id"`
 	// The list of tools that the [assistant](/docs/api-reference/assistants) used for this run.
@@ -435,6 +437,13 @@ func (o *RunObject) GetStatus() RunObjectStatus {
 		return RunObjectStatus("")
 	}
 	return o.Status
+}
+
+func (o *RunObject) GetTemperature() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Temperature
 }
 
 func (o *RunObject) GetThreadID() string {

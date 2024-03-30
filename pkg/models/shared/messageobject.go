@@ -235,7 +235,7 @@ type MessageObject struct {
 	Object MessageObjectObject `json:"object"`
 	// The entity that produced the message. One of `user` or `assistant`.
 	Role MessageObjectRole `json:"role"`
-	// If applicable, the ID of the [run](/docs/api-reference/runs) associated with the authoring of this message.
+	// The ID of the [run](/docs/api-reference/runs) associated with the creation of this message. Value is `null` when messages are created manually using the create message or create thread endpoints.
 	RunID *string `json:"run_id"`
 	// The status of the message, which can be either `in_progress`, `incomplete`, or `completed`.
 	Status MessageObjectStatus `json:"status"`

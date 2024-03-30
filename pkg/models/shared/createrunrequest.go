@@ -111,8 +111,22 @@ type CreateRunRequest struct {
 	// If `true`, returns a stream of events that happen during the Run as server-sent events, terminating when the Run enters a terminal state with a `data: [DONE]` message.
 	//
 	Stream *bool `json:"stream,omitempty"`
+	// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+	//
+	Temperature *float64 `default:"1" json:"temperature"`
 	// Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis.
 	Tools []CreateRunRequestTools `json:"tools,omitempty"`
+}
+
+func (c CreateRunRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreateRunRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *CreateRunRequest) GetAdditionalInstructions() *string {
@@ -155,6 +169,13 @@ func (o *CreateRunRequest) GetStream() *bool {
 		return nil
 	}
 	return o.Stream
+}
+
+func (o *CreateRunRequest) GetTemperature() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Temperature
 }
 
 func (o *CreateRunRequest) GetTools() []CreateRunRequestTools {
