@@ -51,6 +51,9 @@ type ListMessagesRequest struct {
 	// Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order.
 	//
 	Order *ListMessagesQueryParamOrder `default:"desc" queryParam:"style=form,explode=true,name=order"`
+	// Filter messages by the run ID that generated them.
+	//
+	RunID *string `queryParam:"style=form,explode=true,name=run_id"`
 	// The ID of the [thread](/docs/api-reference/threads) the messages belong to.
 	ThreadID string `pathParam:"style=simple,explode=false,name=thread_id"`
 }
@@ -92,6 +95,13 @@ func (o *ListMessagesRequest) GetOrder() *ListMessagesQueryParamOrder {
 		return nil
 	}
 	return o.Order
+}
+
+func (o *ListMessagesRequest) GetRunID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RunID
 }
 
 func (o *ListMessagesRequest) GetThreadID() string {
