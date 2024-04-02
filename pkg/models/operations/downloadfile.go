@@ -26,7 +26,7 @@ type DownloadFileResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	Res *string
+	String *string
 }
 
 func (o *DownloadFileResponse) GetContentType() string {
@@ -50,9 +50,9 @@ func (o *DownloadFileResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *DownloadFileResponse) GetRes() *string {
+func (o *DownloadFileResponse) GetString() *string {
 	if o == nil {
 		return nil
 	}
-	return o.Res
+	return o.String
 }

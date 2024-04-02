@@ -213,7 +213,7 @@ type Results struct {
 	Categories Categories `json:"categories"`
 	// A list of the categories along with their scores as predicted by model.
 	CategoryScores CategoryScores `json:"category_scores"`
-	// Whether the content violates [OpenAI's usage policies](/policies/usage-policies).
+	// Whether any of the below categories are flagged.
 	Flagged bool `json:"flagged"`
 }
 
@@ -238,7 +238,7 @@ func (o *Results) GetFlagged() bool {
 	return o.Flagged
 }
 
-// CreateModerationResponse - Represents policy compliance report by OpenAI's content moderation model against a given input.
+// CreateModerationResponse - Represents if a given text input is potentially harmful.
 type CreateModerationResponse struct {
 	// The unique identifier for the moderation request.
 	ID string `json:"id"`

@@ -128,7 +128,7 @@ func (e *Quality) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// CreateImageRequestResponseFormat - The format in which the generated images are returned. Must be one of `url` or `b64_json`.
+// CreateImageRequestResponseFormat - The format in which the generated images are returned. Must be one of `url` or `b64_json`. URLs are only valid for 60 minutes after the image has been generated.
 type CreateImageRequestResponseFormat string
 
 const (
@@ -230,7 +230,7 @@ type CreateImageRequest struct {
 	Prompt string `json:"prompt"`
 	// The quality of the image that will be generated. `hd` creates images with finer details and greater consistency across the image. This param is only supported for `dall-e-3`.
 	Quality *Quality `default:"standard" json:"quality"`
-	// The format in which the generated images are returned. Must be one of `url` or `b64_json`.
+	// The format in which the generated images are returned. Must be one of `url` or `b64_json`. URLs are only valid for 60 minutes after the image has been generated.
 	ResponseFormat *CreateImageRequestResponseFormat `default:"url" json:"response_format"`
 	// The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024` for `dall-e-2`. Must be one of `1024x1024`, `1792x1024`, or `1024x1792` for `dall-e-3` models.
 	Size *CreateImageRequestSize `default:"1024x1024" json:"size"`

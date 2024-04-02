@@ -72,6 +72,56 @@ func (u MessageObjectContent) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
+// Reason - The reason the message is incomplete.
+type Reason string
+
+const (
+	ReasonContentFilter Reason = "content_filter"
+	ReasonMaxTokens     Reason = "max_tokens"
+	ReasonRunCancelled  Reason = "run_cancelled"
+	ReasonRunExpired    Reason = "run_expired"
+	ReasonRunFailed     Reason = "run_failed"
+)
+
+func (e Reason) ToPointer() *Reason {
+	return &e
+}
+
+func (e *Reason) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "content_filter":
+		fallthrough
+	case "max_tokens":
+		fallthrough
+	case "run_cancelled":
+		fallthrough
+	case "run_expired":
+		fallthrough
+	case "run_failed":
+		*e = Reason(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Reason: %v", v)
+	}
+}
+
+// IncompleteDetails - On an incomplete message, details about why the message is incomplete.
+type IncompleteDetails struct {
+	// The reason the message is incomplete.
+	Reason Reason `json:"reason"`
+}
+
+func (o *IncompleteDetails) GetReason() Reason {
+	if o == nil {
+		return Reason("")
+	}
+	return o.Reason
+}
+
 // MessageObjectMetadata - Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maxium of 512 characters long.
 type MessageObjectMetadata struct {
 }
@@ -129,10 +179,43 @@ func (e *MessageObjectRole) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// MessageObjectStatus - The status of the message, which can be either `in_progress`, `incomplete`, or `completed`.
+type MessageObjectStatus string
+
+const (
+	MessageObjectStatusInProgress MessageObjectStatus = "in_progress"
+	MessageObjectStatusIncomplete MessageObjectStatus = "incomplete"
+	MessageObjectStatusCompleted  MessageObjectStatus = "completed"
+)
+
+func (e MessageObjectStatus) ToPointer() *MessageObjectStatus {
+	return &e
+}
+
+func (e *MessageObjectStatus) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "in_progress":
+		fallthrough
+	case "incomplete":
+		fallthrough
+	case "completed":
+		*e = MessageObjectStatus(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for MessageObjectStatus: %v", v)
+	}
+}
+
 // MessageObject - Represents a message within a [thread](/docs/api-reference/threads).
 type MessageObject struct {
 	// If applicable, the ID of the [assistant](/docs/api-reference/assistants) that authored this message.
 	AssistantID *string `json:"assistant_id"`
+	// The Unix timestamp (in seconds) for when the message was completed.
+	CompletedAt *int64 `json:"completed_at"`
 	// The content of the message in array of text and/or images.
 	Content []MessageObjectContent `json:"content"`
 	// The Unix timestamp (in seconds) for when the message was created.
@@ -141,6 +224,10 @@ type MessageObject struct {
 	FileIds []string `json:"file_ids"`
 	// The identifier, which can be referenced in API endpoints.
 	ID string `json:"id"`
+	// The Unix timestamp (in seconds) for when the message was marked as incomplete.
+	IncompleteAt *int64 `json:"incomplete_at"`
+	// On an incomplete message, details about why the message is incomplete.
+	IncompleteDetails *IncompleteDetails `json:"incomplete_details"`
 	// Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maxium of 512 characters long.
 	//
 	Metadata *MessageObjectMetadata `json:"metadata"`
@@ -148,8 +235,10 @@ type MessageObject struct {
 	Object MessageObjectObject `json:"object"`
 	// The entity that produced the message. One of `user` or `assistant`.
 	Role MessageObjectRole `json:"role"`
-	// If applicable, the ID of the [run](/docs/api-reference/runs) associated with the authoring of this message.
+	// The ID of the [run](/docs/api-reference/runs) associated with the creation of this message. Value is `null` when messages are created manually using the create message or create thread endpoints.
 	RunID *string `json:"run_id"`
+	// The status of the message, which can be either `in_progress`, `incomplete`, or `completed`.
+	Status MessageObjectStatus `json:"status"`
 	// The [thread](/docs/api-reference/threads) ID that this message belongs to.
 	ThreadID string `json:"thread_id"`
 }
@@ -159,6 +248,13 @@ func (o *MessageObject) GetAssistantID() *string {
 		return nil
 	}
 	return o.AssistantID
+}
+
+func (o *MessageObject) GetCompletedAt() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.CompletedAt
 }
 
 func (o *MessageObject) GetContent() []MessageObjectContent {
@@ -189,6 +285,20 @@ func (o *MessageObject) GetID() string {
 	return o.ID
 }
 
+func (o *MessageObject) GetIncompleteAt() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.IncompleteAt
+}
+
+func (o *MessageObject) GetIncompleteDetails() *IncompleteDetails {
+	if o == nil {
+		return nil
+	}
+	return o.IncompleteDetails
+}
+
 func (o *MessageObject) GetMetadata() *MessageObjectMetadata {
 	if o == nil {
 		return nil
@@ -215,6 +325,13 @@ func (o *MessageObject) GetRunID() *string {
 		return nil
 	}
 	return o.RunID
+}
+
+func (o *MessageObject) GetStatus() MessageObjectStatus {
+	if o == nil {
+		return MessageObjectStatus("")
+	}
+	return o.Status
 }
 
 func (o *MessageObject) GetThreadID() string {

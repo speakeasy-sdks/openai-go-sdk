@@ -43,7 +43,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.Stream != nil {
         // handle response
     }
@@ -99,8 +98,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.CreateTranscriptionResponse != nil {
+    if res.OneOf != nil {
         // handle response
     }
 }
@@ -155,8 +153,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.CreateTranslationResponse != nil {
+    if res.OneOf != nil {
         // handle response
     }
 }

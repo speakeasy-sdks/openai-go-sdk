@@ -68,7 +68,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.RunObject != nil {
         // handle response
     }
@@ -119,7 +118,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.AssistantObject != nil {
         // handle response
     }
@@ -174,7 +172,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.AssistantFileObject != nil {
         // handle response
     }
@@ -231,7 +228,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.MessageObject != nil {
         // handle response
     }
@@ -278,6 +274,7 @@ func main() {
 
     createRunRequest := shared.CreateRunRequest{
         AssistantID: "<value>",
+        Temperature: openaigosdk.Float64(1),
     }
 
     var threadID string = "<value>"
@@ -287,7 +284,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.RunObject != nil {
         // handle response
     }
@@ -336,7 +332,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ThreadObject != nil {
         // handle response
     }
@@ -382,11 +377,11 @@ func main() {
     ctx := context.Background()
     res, err := s.Assistants.CreateThreadAndRun(ctx, shared.CreateThreadAndRunRequest{
         AssistantID: "<value>",
+        Temperature: openaigosdk.Float64(1),
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.RunObject != nil {
         // handle response
     }
@@ -437,7 +432,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.DeleteAssistantResponse != nil {
         // handle response
     }
@@ -490,7 +484,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.DeleteAssistantFileResponse != nil {
         // handle response
     }
@@ -542,7 +535,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.DeleteThreadResponse != nil {
         // handle response
     }
@@ -593,7 +585,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.AssistantObject != nil {
         // handle response
     }
@@ -646,7 +637,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.AssistantFileObject != nil {
         // handle response
     }
@@ -700,7 +690,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.MessageObject != nil {
         // handle response
     }
@@ -756,7 +745,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.MessageFileObject != nil {
         // handle response
     }
@@ -811,7 +799,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.RunObject != nil {
         // handle response
     }
@@ -867,7 +854,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.RunStepObject != nil {
         // handle response
     }
@@ -920,7 +906,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ThreadObject != nil {
         // handle response
     }
@@ -971,7 +956,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListAssistantFilesResponse != nil {
         // handle response
     }
@@ -1020,16 +1004,15 @@ func main() {
 
     var before *string = openaigosdk.String("<value>")
 
-    var limit *int64 = openaigosdk.Int64(948776)
+    var limit *int64 = openaigosdk.Int64(20)
 
-    var order *operations.QueryParamOrder = operations.QueryParamOrderAsc.ToPointer()
+    var order *operations.QueryParamOrder = operations.QueryParamOrderDesc.ToPointer()
 
     ctx := context.Background()
     res, err := s.Assistants.ListAssistants(ctx, after, before, limit, order)
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListAssistantsResponse != nil {
         // handle response
     }
@@ -1084,7 +1067,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListMessageFilesResponse != nil {
         // handle response
     }
@@ -1135,7 +1117,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListMessagesResponse != nil {
         // handle response
     }
@@ -1187,7 +1168,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListRunStepsResponse != nil {
         // handle response
     }
@@ -1238,7 +1218,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ListRunsResponse != nil {
         // handle response
     }
@@ -1291,7 +1270,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.AssistantObject != nil {
         // handle response
     }
@@ -1347,7 +1325,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.MessageObject != nil {
         // handle response
     }
@@ -1404,7 +1381,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.RunObject != nil {
         // handle response
     }
@@ -1459,7 +1435,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ThreadObject != nil {
         // handle response
     }
@@ -1520,7 +1495,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.RunObject != nil {
         // handle response
     }

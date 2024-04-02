@@ -59,7 +59,7 @@ const (
 	CreateTranslationRequestModelTypeCreateTranslationRequest2 CreateTranslationRequestModelType = "CreateTranslationRequest_2"
 )
 
-// CreateTranslationRequestModel - ID of the model to use. Only `whisper-1` is currently available.
+// CreateTranslationRequestModel - ID of the model to use. Only `whisper-1` (which is powered by our open source Whisper V2 model) is currently available.
 type CreateTranslationRequestModel struct {
 	Str                       *string
 	CreateTranslationRequest2 *CreateTranslationRequest2
@@ -120,7 +120,7 @@ type CreateTranslationRequest struct {
 	// The audio file object (not file name) translate, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
 	//
 	File CreateTranslationRequestFile `multipartForm:"file"`
-	// ID of the model to use. Only `whisper-1` is currently available.
+	// ID of the model to use. Only `whisper-1` (which is powered by our open source Whisper V2 model) is currently available.
 	//
 	Model CreateTranslationRequestModel `multipartForm:"name=model"`
 	// An optional text to guide the model's style or continue a previous audio segment. The [prompt](/docs/guides/speech-to-text/prompting) should be in English.

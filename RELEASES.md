@@ -433,3 +433,113 @@ Based on:
 - [go v4.2.1] .
 ### Releases
 - [Go v4.2.1] https://github.com/speakeasy-sdks/openai-go-sdk/releases/tag/v4.2.1 - .
+
+## 2024-02-25 00:09:10
+### Changes
+Based on:
+- OpenAPI Doc 2.0.0 https://raw.githubusercontent.com/openai/openai-openapi/master/openapi.yaml
+- Speakeasy CLI 1.193.4 (2.272.4) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v4.2.2] .
+### Releases
+- [Go v4.2.2] https://github.com/speakeasy-sdks/openai-go-sdk/releases/tag/v4.2.2 - .
+
+## 2024-02-27 00:11:32
+### Changes
+Based on:
+- OpenAPI Doc 2.0.0 https://raw.githubusercontent.com/openai/openai-openapi/master/openapi.yaml
+- Speakeasy CLI 1.194.0 (2.272.7) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v4.2.3] .
+### Releases
+- [Go v4.2.3] https://github.com/speakeasy-sdks/openai-go-sdk/releases/tag/v4.2.3 - .
+
+## 2024-03-02 00:09:35
+### Changes
+Based on:
+- OpenAPI Doc 2.0.0 https://raw.githubusercontent.com/openai/openai-openapi/master/openapi.yaml
+- Speakeasy CLI 1.200.0 (2.277.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v4.2.4] .
+### Releases
+- [Go v4.2.4] https://github.com/speakeasy-sdks/openai-go-sdk/releases/tag/v4.2.4 - .
+
+## 2024-03-05 00:09:04
+### Changes
+Based on:
+- OpenAPI Doc 2.0.0 https://raw.githubusercontent.com/openai/openai-openapi/master/openapi.yaml
+- Speakeasy CLI 1.200.1 (2.277.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v4.2.5] .
+### Releases
+- [Go v4.2.5] https://github.com/speakeasy-sdks/openai-go-sdk/releases/tag/v4.2.5 - .
+
+## 2024-03-08 00:12:56
+### Changes
+Based on:
+- OpenAPI Doc 2.0.0 https://raw.githubusercontent.com/openai/openai-openapi/master/openapi.yaml
+- Speakeasy CLI 1.204.1 (2.279.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v4.3.0] .
+### Releases
+- [Go v4.3.0] https://github.com/speakeasy-sdks/openai-go-sdk/releases/tag/v4.3.0 - .
+
+## 2024-03-13 00:14:52
+### Changes
+Based on:
+- OpenAPI Doc 2.0.0 https://raw.githubusercontent.com/openai/openai-openapi/master/openapi.yaml
+- Speakeasy CLI 1.207.1 (2.280.6) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v4.3.1] .
+### Releases
+- [Go v4.3.1] https://github.com/speakeasy-sdks/openai-go-sdk/releases/tag/v4.3.1 - .
+
+## 2024-03-20 00:31:23
+### Changes
+Based on:
+- OpenAPI Doc 2.0.0 https://raw.githubusercontent.com/openai/openai-openapi/master/openapi.yaml
+- Speakeasy CLI 1.213.0 (2.283.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v4.3.2] .
+### Releases
+- [Go v4.3.2] https://github.com/speakeasy-sdks/openai-go-sdk/releases/tag/v4.3.2 - .
+
+## 2024-03-27 00:35:26
+### Changes
+Based on:
+- OpenAPI Doc 2.0.0 https://raw.githubusercontent.com/openai/openai-openapi/master/openapi.yaml
+- Speakeasy CLI 1.227.0 (2.291.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v4.3.3] .
+### Releases
+- [Go v4.3.3] https://github.com/speakeasy-sdks/openai-go-sdk/releases/tag/v4.3.3 - .
+
+## 2024-03-28 00:09:55
+### Changes
+Based on:
+- OpenAPI Doc 2.0.0 https://raw.githubusercontent.com/openai/openai-openapi/master/openapi.yaml
+- Speakeasy CLI 1.228.1 (2.292.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v4.3.4] .
+### Releases
+- [Go v4.3.4] https://github.com/speakeasy-sdks/openai-go-sdk/releases/tag/v4.3.4 - .
+
+## 2024-03-30 00:11:23
+### Changes
+Based on:
+- OpenAPI Doc 2.0.0 https://raw.githubusercontent.com/openai/openai-openapi/master/openapi.yaml
+- Speakeasy CLI 1.228.1 (2.292.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v4.3.5] .
+### Releases
+- [Go v4.3.5] https://github.com/speakeasy-sdks/openai-go-sdk/releases/tag/v4.3.5 - .
+
+## 2024-04-02 00:10:24
+### Changes
+Based on:
+- OpenAPI Doc 2.0.0 https://raw.githubusercontent.com/openai/openai-openapi/master/openapi.yaml
+- Speakeasy CLI 1.231.1 (2.295.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v4.3.6] .
+### Releases
+- [Go v4.3.6] https://github.com/speakeasy-sdks/openai-go-sdk/releases/tag/v4.3.6 - .
